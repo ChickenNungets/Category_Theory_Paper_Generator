@@ -1,0 +1,192 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{Co-Algebras: Why Do They Exist?}
+\author{Max Vazquez}
+\maketitle
+
+
+\section*{Motivation} Coalgebras are a key building block for algebraic structures such as monoids and groups that can be used to model topological quantum systems. These coalgebras also capture the underlying structure of an object in the category of categories. However, they do not provide a way to compose coalgebras into one another using composition maps. Thus, it is essential for quantum mechanics applications to have a well-defined composition map between their coalgebras. This has many practical applications, but when it comes to representing states or functions within these algebras, it would be very useful to provide a way to represent those functions in the same manner. Here, we consider how to do so.
+
+Coalgebras were first introduced by Hamiltonians on 2-manifolds in \cite{Hamiltonian_On_2Manifolds}, where two objects representing vectors on a manifold are linked by a (possibly infinite) chain map $d$ that sends the vector from the source to the target. The Hamiltonian then describes the motion through space induced by the particles as an ordinary algebra, i.e., a $\RR$ field, which we denote $\CA(M)$ for its coalgebra. We thus obtain a natural way to specify the algebra of 2-manifolds with all morphisms being the chains. As a consequence, the algebras themselves could be any algebra over a field of characteristic zero. However, this has significant advantages over considering the standard tensor product of a commutative semiring over a field and having a fixed coalgebra. In particular, coalgebras can describe a class of functions on the real line, provided they are associative up to some characteristic. The advantage is that there is no need to keep track of which operations exist on what inputs; we can instead treat the function as a normal algebra without needing to know about associativity of the product. This approach also provides the same type of rich structure on the real line, enabling one to work with higher-dimensional spaces directly and reason about them much more easily. 
+
+The problem with this approach is that although the structure itself should be transparently specified, one cannot associate operations to specific variables. For example, if we were only given a function $f : \RR \to [0,1]$ whose components are the coefficients of the linear relation on a sphere, we could not yet associate the operator $f$ with any variables on our surface. One could however define a $\RR$-valued coalgebra structure on $\RR^2$, where each component is a function $c(x,y) = f(x,y)$. This could then represent a generalized function on a plane: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.8]{example2.png}
+    \caption{Example for describing functions on a plane.}
+    \label{fig:function}
+\end{figure}
+
+We therefore want to add a new structure to the picture above that allows us to have a coalgebra describing an elementary operation involving vectors:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.75]{coalgebra2.png}
+    \caption{Coalgebras for an arbitrary operation on surfaces.}
+    \label{fig:coalg2}
+\end{figure}
+
+Given these new structure, we can write $f$ in terms of our coalgebra $C^{\RR}_f$, as shown below, meaning we can take the quotient of $C^{\RR}_f$ by the projection onto the plane $D$. This may seem counterintuitive, but the idea is that while the domain of $f$ is a plane with coordinates $(x,y)$, $C^{\RR}_f$ represents a surface with coordinates $(x/p,y/q)$. Then, taking the quotient by the projection on the plane gives us another function which represents a new set of operators $C^\RR_{(f(x),f(y))}$. This is similar to defining a coalgebra for polynomials using the Cartesian product: 
+
+\begin{equation}
+    C^\RR_p(q) = C^\RR_{\prod_{i=1}^n p^i}(p^q).
+\end{equation}
+
+These are the algebras we will use in the rest of this section to capture operators in both types of algebras.
+
+To provide a concrete example of a coalgebra for functions on surfaces, let's consider functions like Figure~\ref{fig:function}. While this is easy enough to construct as shown, a complex algebra structure on $\RR^2$ does not allow us to express the $f$ as described above. Note that the function itself takes four input variables $$(x,y,p,q)$$ and returns a scalar $f(x,y)$. Since all elements of the quotient are surjective, we get a function $\pi_f : C^{\RR}_f \to C^\RR_{(f(x),f(y))}$. When we then multiply our quotients by $\pi_f$, we obtain a function $g : D \to C^\RR_{(g(x/p), g(y/q))}$. It is clear that since $\pi_f$ is injective, it is equal to $g \circ C^\RR_f$. So we would like to describe the operation by a function $C^\RR_f \to D$ that acts on four parameters, $(x,y,p,q)$. To do so, we would like to associate an output variable to each $(x,y,p,q)$, but unfortunately, since we have only two possible outputs at a time, we cannot do so. We can only apply $C^\RR_f$ as a map to an object in $\RR^2$, but this is not sufficient to describe all the different ways that a function might behave in different ways. There are therefore additional operations we want to consider on the surface $g(x/p) \otimes g(y/q)$, but since these two objects aren't even related, we cannot assign them distinct coalgebras.
+
+Therefore, it would be helpful for us to generalize operations across multiple points in the parameter space simultaneously. We can do so by providing coalgebras for multiple points, so that when composing these algebras together, we are essentially obtaining a coalgebra on the resulting surface as well.
+
+In this section, we address this issue. Instead of describing an operation as a function on a surface once and then defining its coalgebra only once, we introduce an explicit coalgebra for surfaces, which we call a \textit{coalgebra structure} for surfaces. While it is still possible to compute functions using the tensor product, we recommend avoiding doing so because it makes the operation difficult to interpret. Moreover, it requires the addition of additional data to each point so that these algebras can be expressed in a consistent fashion. In this article, we consider only one variable per point. This simplifies things significantly as we can then write down only the operations which act on a single coordinate. 
+
+First, we must introduce some terminology. A \textit{point} in a surface is a tuple $(x,y)$ with $x,y$ being pairs of points in $S$. If $m$ is a surface and $x,y \in S$ are points along this surface, we denote the point corresponding to each surface element $[(m,x),(m,y)]$ with $m$ the vertex associated to $[(m,x),(m,y)]$ and $x,y$ the other vertices associated to it. This is equivalent to specifying a $\RR$-field structure on the real line, with points $[(m,x),(m,y)]$ belonging to $\RR^2$, while a pair $(x,y)$ belongs to $\RR^1$.
+
+A surface $S$ is said to be \textit{orthogonal} to each other if for every point $[(m,x),(m,y)]$, we have that $[(m,x),(m',y')] \neq [(m,x'),(m',y')]$. Let $F$ be an open subset of $S$. Then, we say that $F$ is \textit{projective} to $S$ if for every point $[(m,x),(m,y)]$, we have that $[(m,x),(m',y')] \subseteq [(m',x),(m',y')]$. We also say that $F$ is \textit{injective} to $S$ if for every point $[(m,x),(m,y)]$, we have that $[(m,x),(m',y')] \subseteq [(m,x'),(m',y')]$ or that $[(m,x),(m',y')] \subseteq [(m',x),(m',y')]$. Together, this means that $F$ is a \textit{equivariant} subset of $S$. Similarly, we say that $F$ is \textit{reflective} to $S$ if for every point $[(m,x),(m,y)]$, we have that $[(m,x),(m',y')] \subseteq [(m',x'),(m',y')]$ or that $[(m,x),(m',y')] \subseteq [(m,x'),(m',y')]$ or that $[(m,x),(m',y')] \subseteq [(m',x),(m',y')]$. Together, this means that $F$ is a \textit{irreducible} subset of $S$. Finally, we say that $F$ is \textit{regular} to $S$ if it satisfies the following axioms:
+
+\begin{align*}
+F &= \{[(m,x),(m',y')] | F((m,x),(m')^*) = F((m,x'),(m'')^*)\}\\
+&= \{[(m,x),(m',y')] | F((m',x),(m')^*) = F((m,x'),(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m,x'),(m'',y')^*) = F((m,x',')(m'')^*)\}\\
+&= \{[(m,x),(m',y')] | F((m',x),(m'',y')^*) = F((m,x',')(m'')^*)\}\\
+&= \{[(m,x),(m',y')] | F((m',x),(m'',y')^*) = F((m'',x),(m',y')^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\)\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m'y)^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m'^y)^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x','")(m'^y)^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x','")(m'^y)^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x','")(m'^y)^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x','")(m'^y)^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x','")(m'^y)^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x','")(m'^y)^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x','")(m'^y)^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x','")(m'^y)^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x','")(m'^y)^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x','")(m'^y)^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x','")(m'^y)^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x','")(m'^y)^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,
+\end{document}
+x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',y')^*) = F((m,x',')(m''^*)\}\\
+&= \{[(m,x),(m',y')] | F((m'',x),(m',

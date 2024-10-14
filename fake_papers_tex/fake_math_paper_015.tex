@@ -1,0 +1,261 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{The Sheaffification of Finite Groups}
+\author{Max Vazquez}
+\maketitle
+
+
+\begin{abstract}
+    We investigate the sheafification of finite groups that are closed under finite direct sums and products. For a given element $x$ in an abelian group, we introduce the notion of a \textit{closed subgroup}, which is simply a quotient of the set of all subgroups of $A$ by $x$. Our results show how the sheafification of finite groups can be computed using a reduction result called the \textit{finite sheafification theorem}. 
+
+\end{abstract}
+
+%\section*{Introduction}
+%\label{sec:introduction}
+
+%We will consider a group $G$, where each object is an element (e.g., a point or a line) and the set of all elements of $G$ is denoted as $G^\ast$. In this paper we will also consider an algebra $A$ over $G$, such that $A^\ast$ is a commutative monoid with multiplication $m$, and a ring $R$ over $G$, such that $R^\ast$ is a commutative unital monoid with identity $0$, which is naturally equipped with an associator $(ab)c = acb$. The following definitions will be important to our discussion.
+
+
+
+%Every abelian group $A$ has finite products; this is a property of $A^\ast$. Hence, every linearly ordered abelian group $A$ has finite direct summands, i.e.,  there exists some element $x$ in $A$ such that $A^\ast \times_A A^\ast \cong A^\ast$ and $x + x = 0$.  Thus $A^\ast$ is the direct sum of the direct products of all its elements.  
+
+%Furthermore, every group is equivalently defined as a product of its quotients. However, since the composition of two subgroups is determined by their quotients, the quotient may not be a direct sum of a single element. This leads us to the following example.
+
+%\vspace{2cm}
+%\begin{figure}[H]
+%\includegraphics[width=\textwidth]{A.png}
+%\caption{\label{fig:intro}A group $A$ is analogous to a product of its quotients if and only if it is a quotient of itself.}
+%\end{figure}
+
+%\begin{definition}[$\text{Direct Sum}^\ast$}
+%    Let $\mathbb{Z}_n$ be an arbitrary abelian group, then $\mathbb{Z}_n^\ast$ is a direct sum of all elements $n \in \mathbb{Z}$.
+%\end{definition}
+
+%Let $A \subseteq G$ be an abelian group, then $A^\ast$ is a direct sum of all its elements. Moreover, the identity element of $A^\ast$ is an isomorphism.  Note that when $A = \mathbb{Z}_n$, then the direct sum of any two elements $x, y \in A$ forms a direct product with $x \otimes_{A} y \in A$. Thus, if $A$ is a direct product, then so is $A^\ast$.
+
+%We have seen that every abelian group has finite products, thus $A$ is just a product of its quotients. However, many abelian groups do not have finite products.  One example is the usual group $G = \mathbb{C}$: any finite group does not have finite direct summands (this is usually written $G^* = \mathbb{Q}^*$).  However, for example, $\mathbb{Q}$ does have finite direct summands (see Figure \ref{fig:q}), so there are two examples:
+
+%\begin{figure}[H]
+%\includegraphics[width=\textwidth]{q.png}
+%\caption{\label{fig:q}Example of a group that does not have finite direct summands}
+%\end{figure}
+
+
+
+
+
+
+
+
+
+%Let $\mathcal{S}$ be the abelian group of finite sequences. The abelian group $\mathcal{S}$ is not a direct sum of any finite sequence, but rather contains the full quotient of a finite sequence by some element (i.e., some finite element in $\mathcal{S}$).  The abelian group $\mathcal{S}$ is thus not just the direct sum of all its elements, but also contains all its elements.  We will use this definition whenever possible.  The quotient of a finite sequence by $x$ is just its first few terms.  A simple example of a quotient is $G$ consisting of finitely many distinct elements.
+
+%Let $M$ be the abelian group of natural numbers. The abelian group $M$ contains three natural numbers, so it forms a direct sum (i.e.,  contains $M^*\in M$) and hence is again a direct product of all its elements. Thus, if $M$ is a direct product, then so is $M^*$ (see Figure \ref{fig:intro}).
+
+%Let $X \cap Y$ be the intersection of two abelian groups, where the elements of $X$ and $Y$ form a direct product (i.e.,  they contain all elements of both $X$ and $Y$). Then $X$ and $Y$ are also a direct product, as well as all its elements. Thus, if $X$ and $Y$ are both direct products, then so are all of them.
+
+%The following result is standard to characterize finite products and direct sums in abelian groups.
+
+%\begin{theorem}
+%    Any abelian group $A$ is equivalently defined as a direct sum of the direct products of all its elements, and $A$ is then a direct product of all its elements (i.e.,  each element is contained in at most one direct product).
+%\end{theorem}
+
+%To prove the theorem above, it is necessary to compute the sheafification of finite groups (which we now do).  Recall that any abelian group $G$ is closed under finite direct products and direct sums, so it makes sense to consider how to take the sheafification of these groups.  
+%It follows immediately from the above discussion that every finite product forms a direct product of finite sums.  
+%In other words, a finite product of $n \in \mathbb{N}$ elements is the direct sum of $n$ elements of each finite product ($n \in \mathbb{N}^n$), and this is also the direct sum of all elements in each finite product.  Using this fact, the following result tells us exactly how to take the sheafification of finite groups. 
+
+%Recall that the direct sum of $m \geq 1$ elements $x_1, \ldots, x_m \in A^\ast$ corresponds to the direct sum of the $m$ elements $x_1, \ldots, x_m$ together with the element $0 \in A^\ast$.  From the above discussion, this direct sum corresponds to the direct product of $m$ elements with a zero element. 
+
+%So, as in Figure \ref{fig:intro}, we can take the sheafification of finite groups to give a direct sum $0$ of a finite number of elements with $n$ elements.  
+%Since each finite product forms a direct product of finite sums, $0 = (m+1)$ elements are given by the $n$ elements obtained by combining the elements from the $m$ elements. 
+
+%So now let $G^\ast$ be the direct sum of all elements of the abelian group $G$.  By applying Lemma \ref{lem:directsum}, we know that each element $x \in G^\ast$ corresponds to a direct product of $m$ elements $x_1, \ldots, x_m$.  Then, for each element $x \in G^\ast$, the direct product of the $m$ elements is the direct sum of the $m$ elements obtained by combining the $m$ elements of $x$.
+
+%Thus, since $G^\ast$ is finite-dimensional, each element $x \in G^\ast$ corresponds to a direct sum of $m$ elements $x_1, \ldots, x_m$.  Therefore, the sheafification of $G^\ast$ consists of $n$ elements, where $n = m+1$. In other words, a sheafification of a finite group is a direct sum of $n$ elements with $m$ elements, and each element corresponds to a finite direct sum of all of the $m$ elements.
+
+%The element corresponding to the sheafification of finite groups consists of $n$ elements, where $n = m+1$. In other words, a sheafification of a finite group is a direct sum of $n$ elements with $m$ elements, and each element corresponds to a finite direct sum of all of the $m$ elements.  Now the following fact is standard to compute the sheafification of finite groups, which we will now apply to the case of finite groups $G^\ast = \mathbb{Q}^*$ discussed in this paper. 
+
+%\begin{theorem}
+%    Let $G^\ast = \mathbb{Q}^*$ be the direct sum of all elements of $\mathbb{Q}$, then the sheafification of $G^\ast$ is isomorphic to the direct sum of $m$ elements $x_1, \ldots, x_m$ where $x_1 = x$ and $x_j = 0$ for some $j > 1$ and $m = 1$, for some $1 \leq j \leq m$.
+%\end{theorem}
+
+
+
+%Before we begin, recall that the sheafification of finite groups is a direct sum of a finite number of elements with a single element. Indeed, recall that a finite direct sum of $n$ elements $x_1, \ldots, x_m \in A^\ast$ corresponds to the direct sum of $n$ elements of $A$ together with an element $x = \bigoplus_{i=1}^n x_i$. 
+
+%Using the previous result, we now define a sheafification of a finite group $G^\ast$ as a direct sum of $m$ elements, where $x_1 = x$ and $x_j = 0$ for some $j > 1$ and $m = 1$, for some $1 \leq j \leq m$. 
+
+%To see this definition, it is sufficient to compute the following formula:
+
+%\begin{equation}\label{eq:sheaf}
+%    G^\ast = \bigoplus_{i=1}^m \mathbb{Q}^{m - i}
+%\end{equation}
+
+
+
+%The formula in Equation \ref{eq:sheaf} gives the value of the sheafification of $G^\ast$.  To establish this value, note that if $x_1 = x = g$, then $x_2 = 0$ and $x_3 = 0$.  Moreover, if $j \geq 1$, then $x_i \cdot x_{i-1} = 0$ for all $i > 1$.  So $x_1 \cdot x_{j+1} = 0$ holds for all $j > 1$ and we have that $G^\ast$ is isomorphic to the direct sum of all $n$ elements $x_1, \ldots, x_n$.  
+%
+%However, suppose that $x_1 \cdot x_j = 0$ holds for $j > 1$.  Since $x_1 \cdot x_{j-1} = 0$ holds for all $j > 1$, we have that $x_{j+1} \cdot x_{j-1} = 0$, which proves $x_{j+1} = x$.  Similarly, $x_j \cdot x_1 = 0$ for $j > 1$.  Therefore, $x_j = x$ for $j > 1$.  So $G^\ast$ is isomorphic to the direct sum of $n$ elements $x_1, \ldots, x_n$.  
+%
+%Moreover, considering a sheaf $f$ on $G^\ast$, we compute the following formula:
+%
+%\begin{equation}\label{eq:sheaf_f}
+%    f(G^\ast) = \bigoplus_{i=1}^m f(\mathbb{Q}^{m - i})
+%\end{equation}
+
+
+
+%We also use this formula in Equation \ref{eq:sheaf_f} to deduce that $f(G^\ast) = G^\ast$.
+
+
+%This means that, after applying Equation \ref{eq:sheaf_f}, the value of $G^\ast$ reduces to the direct sum of all elements $x_1, \ldots, x_n$, with the element corresponding to $x = g$ equal to the direct sum of all elements $x_1, \ldots, x_j$ with $x_1 = g$, for $j = 1$, $2$, and so on until $x_n = g$.  This concludes the proof of the theorem.
+
+%Note that we already established that $G^\ast = \bigoplus_{i=1}^m \mathbb{Q}^{m - i}$ is isomorphic to the direct sum of all elements of $G^\ast$.  Thus, by applying Lemma \ref{lem:directsum}, the elements $x_1, \ldots, x_n$ are indeed isomorphic to the direct sum of all elements of $G^\ast$.  
+
+
+%So we have the following result: 
+
+
+%Note that, as in Figure \ref{fig:intro}, the element corresponding to the sheafification of finite groups is the direct sum of $m$ elements $x_1, \ldots, x_n$ with the element corresponding to the sheafification of finite groups equal to the direct sum of all elements of $G^\ast$ with $x_1 = g$, for $j = 1$, $2$, and so on until $x_n = g$, where $g$ is an element of $G^\ast$.
+
+
+%The sheafification of finite groups is equivalently defined as a direct sum of $m$ elements $x_1, \ldots, x_n$ with $x_1 = g$ and $x_j = 0$ for some $j > 1$ and $m = 1$, for some $1 \leq j \leq m$. As mentioned previously, the direct sum of elements in $G^\ast$ is the direct product of all elements.  
+
+
+%In particular, by Lemma \ref{lem:directproduct}, the direct product of all elements of $G^\ast$ is the direct product of all elements.  
+%So the following is equivalent to the direct product of all elements of $G^\ast$:
+
+%The element corresponding to the sheafification of finite groups is the direct product of $m$ elements with $x_1 = g$ and $x_j = 0$ for some $j > 1$ and $m = 1$, for some $1 \leq j \leq m$.  
+%Similar to the previous case, $f(G^\ast) = G^\ast$. 
+
+
+
+%We end this section by showing how the sheafification of finite groups can be computed using a reduction result called the \textit{finite sheafification theorem}. For a finite group $G^\ast$ and a finite number $n$, we define a \textit{finite subset} of $G^\ast$ as the direct sum of $n$ elements, with each element corresponding to each finite subset having the value $g$.  Moreover, there is a function between finite sets $G^\ast \to \{0,1\}$ that sends a finite subset of $G^\ast$ to its corresponding finite subset of $G^\ast$.  Thus, if a finite subset $x \subseteq G^\ast$ is the direct sum of $n$ elements, then $x = \bigoplus_{i=1}^n x_i$, with $x_i$ being the element corresponding to the sheafification of finite $n$-subsets of $G^\ast$. 
+
+%Now, we show that the sheafification of finite groups is equivalent to the direct sum of $n$ elements, with each element corresponding to the sheafification of finite $n$-subsets of $G^\ast$. 
+
+%It is easy to check that the sheafification of finite groups is the direct sum of $n$ elements with $x_1 = g$ and $x_j = 0$ for some $j > 1$ and $m = 1$, for some $1 \leq j \leq m$. 
+
+%So for a finite group $G^\ast$, the sheafification of finite groups is equivalent to the direct sum of $n$ elements with $x_1 = g$ and $x_j = 0$ for some $j > 1$ and $m = 1$, for some $1 \leq j \leq m$.  
+
+%\begin{corollary}
+%    Let $G^\ast$ be a finite group and $n$ be an integer, then the sheafification of $G^\ast$ is isomorphic to the direct sum of $n$ elements with $x_1 = g$ and $x_j = 0$ for some $j > 1$ and $m = 1$, for some $1 \leq j \leq m$.
+%\end{corollary}
+
+
+
+
+
+
+%To finish this section, we use several different calculus.  First, we show that the hereditary quotient group of finite groups, $\mathbb{S}_{/G^\ast}$, has finite products.  Using the results in Section \ref{sec:S}, Proposition \ref{prop:S}, and Theorem \ref{th:quotientprod}, we obtain the following proposition.  We also show that the hereditary quotient group of finite groups, $\mathbb{S}_{/G^\ast}$, is closed under finite direct sums and direct products.
+
+%Finally, we describe the notion of a \textit{closed subgroup}, which is simply a quotient of the set of all subgroups of $A$ by an element $x$.  We show that if $x$ is an element of $\mathbb{S}_{/G^\ast}$, then $\mathbb{S}_{/G^\ast}$ is isomorphic to the direct sum of all elements $x_i$ such that $x_i = x$.  We also show that if $x$ is an element of $\mathbb{S}_{/G^\ast}$, then $x$ is isomorphic to the direct product of all elements $x_i$ such that $x_i = x$.   
+
+%\vspace{2cm}
+%\begin{figure}[H]
+%\includegraphics[width=\textwidth]{S.png}
+%\caption{\label{fig:intro}The hereditary quotient group of finite groups is the same as a direct sum of all elements $x_i$ such that $x_i = x$.}
+%\end{figure}
+
+%\begin{proposition}
+%    Let $G^\ast$ be a finite group, then $\mathbb{S}_{/G^\ast}$ has finite products.
+%\end{proposition}
+%\begin{proof}
+%    The product of $m$ elements $x_1, \ldots, x_m$ with $x_1 = g$ and $x_j = 0$ for some $j > 1$ and $m = 1$, for some $1 \leq j \leq m$, has the value $\bigoplus_{i=1}^m \mathbb{Q}^{m - i}$.
+%
+%    Suppose that $G^\ast$ has finite products, then we may define a function $\Phi : \mathbb{S}_{/G^\ast} \to [1,2)$:
+%        \[
+%        \Phi(x_1) := x_1,
+%        \quad
+%        \Phi(x_2) := x_2 + 1,
+%        \quad
+%        \Phi(x_i) := \Phi(x_i) + 1,
+%        \]
+%        where $x_1 = g$ for $x_1 = 0$ and $x_2 = 0$ and $x_3 = 0$.  We have defined $1 \in [1,2]$ using $\Phi(x_1) = 0$ and $\Phi(x_2) = 1$.  The function $\Phi$ satisfies the conditions of Theorem \ref{th:Sphi}.  
+%
+%    It follows that $\Phi$ defines a map from $\mathbb{S}_{/G^\ast}$ to the function $[1,2)$.
+%    Let $x \in \mathbb{S}_{/G^\ast}$.  If $x_1 = 0$ and $x_2 = 0$, then $x_3 = 0$; therefore, $x_3 = \Phi(x_1)$.  Otherwise, if $x_i$ has value $1$, then $x_i \cdot x_{i-1} = 0$ for all $i > 1$; therefore, $x_i \cdot x_{i-1} = x_i$.
+%    Therefore, $x_3 \cdot x_{3-1} = x_3$; therefore, $x_3 = x$; because $\Phi(x_3) = 1$, it follows that $x = \bigoplus_{i=1}^n x_i$, with $x_i$ being the element corresponding to the sheafification of finite $n$-subsets of $G^\ast$.
+%
+%    Conversely, for $y \in \mathbb{S}_{/G^\ast}$, if $y_1 = 0$ and $y_2 = 0$, then $y_3 = 0$.  Therefore, $y_3 = \Phi(y_1)$.  Otherwise, if $y_i$ has value $1$, then $y_i \cdot y_{i-1} = 0$ for all $i > 1$; therefore, $y_i \cdot y_{i-1} = y_i$.
+%    Therefore, $y_3 \cdot y_{3-1} = y_3$.
+%    Therefore, $y = \bigoplus_{i=1}^n y_i$, with $y_i$ being the element corresponding to the sheafification of finite $n$-subsets of $G^\ast$.    
+%\end{proof}
+
+%The next few sections will illustrate the sheafification of finite groups using this approach.  
+
+
+
+
+%Before we start our analysis, let us review some terminology about abelian groups.  Let $G^\ast$ be an abelian group, and let $x,y,z \in G^\ast$.  We say that $x$ is an \textit{element} of $G^\ast$, and we call $y,z$ elements of $G^\ast$.  If $x \in G^\ast$ and $y \in G^\ast$, we will call $y$ \textit{below $x$} and $x$ \textit{above $y$}.  If $x$ is an element, then we will denote by $x^{\ast}$ the associated element of the abelian group $G^\ast$.  
+%If $G^\ast$ has finite direct products, then we say that $x$ is \textit{productwise below} $y$ if $y^{\ast} \leq x^{\ast}$, and similarly we say that $x$ is \textit{productwise above} $y$ if $x^{\ast} \geq y^{\ast}$.  These axioms correspond to the following properties:
+%\begin{align*}
+%\prod_{n \in \mathbb{N}}x_n \leq y \leq x_n \\
+%\prod_{n \in \mathbb{N}}x_n \geq z \geq x_n
+%\end{align*}
+%Let $G$ be an abelian group. The set of objects of $G$ is an abelian group.  The sets of all objects of $G$ are an abelian group and we write $G^{\ast}$ for the direct product of all elements of $G$.  The sets of direct products of $G$ are finite, as illustrated in Figure \ref{fig:intro}.  
+
+%\begin{figure}[H]
+%\includegraphics[width=\textwidth]{A.png}
+%\caption{\label{fig:intro}The set of all elements of $G$ is isomorphic to the product of all its direct products, $\prod_{n \in \mathbb{N}}G^{n}$}
+%\end{figure}
+
+%As noted in the introduction, $G$ may not be a direct product of all elements of $G$, and it is possible to have multiple such products.  On the other hand, by taking the product of $G$ and a finite sequence of $k$ elements, we get a finite sequence of $G$ which we denote by $x_1, \ldots, x_k$.  A \textit{$k$-term sequence} of $G$ is a finite sequence of $k$ elements where each term appears either as a direct product of several elements, or has a direct product of a single element.  This construction allows us to compute the sheafification of finite groups and define the notions of subgroup and subspace.
+
+
+%Let $G^\ast$ be an abelian group, and let $x \in G^\ast$.  Then an element $y$ in $G$ is said to be \textit{admissible} if $y = x^{\ast}$ for some element $x$.  That is, $x$ is admissible if it is an element of $G^\ast$ that is the direct product of elements of degree at least one less than its index.  An element $y$ is said to be \textit{accessible} if $y^{\ast} \geq x^{\ast}$ for some element $x$.  That is, $y$ is admissible if it is the direct product of elements of degree at least one greater than its index.  An element $y$ is \textit{bounded below} $x$ if $x$ is admissible and $y = x^{\ast}$.  
+%An element $y$ is said to be \textit{bounded above} $x$ if $y = x^{\ast}$.
+%An element $y$ is said to be \textit{disjoint} from $x$ if $x$ is not a product of two elements of degree at least one less than its index.  Also, elements of degree $-1$ are said to be \textit{zero}es and elements of degree $0$ are said to be \textit{one}es. 
+
+
+%To explain these notions, we first define some basic notions.  Before we proceed, it helps to restate what was defined above.  
+
+%To define the set of objects, we will define an inclusion of elements into the set $\{x \in G^\ast : x^{\ast} = x \}$.  The set of objects of $G^\ast$ is an $\infty$-group, since the product of all elements of $G^\ast$ equals $x$.  
+
+%Consider the following diagram: 
+%\[\begin{tikzcd}
+    %1 \arrow[r] & 2 \arrow[r] & 3 \arrow[r] & 4 \arrow[r] & 5 \arrow[r] & 6 \arrow[r] & 7 \arrow[r] & 8 \arrow[r] & 9 \arrow[r] & 10, 
+    %%\[ x_2, \qquad x_2 + x_1, \qquad x_2 + x_2, \qquad x_2 + x_3, \qquad x_2 + x_4, \qquad x_2 + x_5, \qquad x_2 + x_6 \]
+    %\]
+    %The leftmost square is a direct product, and thus a direct sum.  The rightmost square is a direct sum of the elements $x_i$, with $x_i$ being the element corresponding to the sheafification of finite $n$-subsets of $G^\ast$.  
+    %
+    %By construction, $x_i^{\ast} = x_i$. 
+    %
+    %Therefore, each element $x_i$ is a direct sum of elements of degree at least one less than its index.  By Lemma \ref{lem:directsum}, $x$ is isomorphic to the direct product of those elements.  
+    %
+    %For the map $\Phi$, let $x_1 = x$ and $x_j = 0$ for $j > 1$ and $m = 1$, for some $1 \leq j \leq m$, and let $x_j^{\ast} = x_j$.  Then the following condition is satisfied:  $\Phi(x_1) = 0$ and $\Phi(x_2) = 1$.  We have defined $\Phi$ via Theorem \ref{th:Sphi}.  
+%\end{tikzcd}\]
+%
+%Each element $x_i$ is a direct product of elements of degree at least one less than its index, so $x$ is isomorphic to the direct product of those elements.  Thus, there is no way to include $x$ into $G^\ast$ directly.  To show $G^\ast$ has finite products, we may choose a suitable basis to take.  
+%
+%Take $A^\ast \subseteq G$ as an abelian group, and let $\mathrm{B}(A)^\ast = A^\ast \cap \mathrm{dom}(\Phi)^*$ be the direct product of all elements of $A$.  Consider the quotient of $G$ by $x$, i.e., $G \coloneqq \mathbb{S}_{/A^\ast}$ with the elements given by the elements $x$, $y$, and $z$ in $\mathrm{B}(A)^\ast$ that are admissible and accessible.  Notice that the elements $x, y, z$ form a product of elements in $A$ with indices less than $k$, and the elements $u, v, w$ form a product of elements in $A$ with indices greater than $k$.  
+%
+%To construct the elements of $A^\ast$ that satisfy these properties, we choose pairs of elements $u,v,w$ to place in $\mathrm{B}(A)^\ast$ so that they form a direct sum.  The first element in the direct sum is always placed in $u$, while the second element in the direct sum is always placed in $v$.  
+%
+%In total, there are $k - 1$ elements of $G^\ast$ left to choose from, each containing $u$ and $v$, such that each of $u, v, w$ contains another element of degree at least $1$.  
+%
+%We will use the notation $\Delta_i$ to indicate the element of $A^\ast$ corresponding to a $i$-step of the following product of $x_i$ and $x_{i-1}$.  
+%
+%Now, let $x_j^{\ast} = x_{j-1}$.  Since $\mathrm{B}(A)^\ast = A^\ast \cap \mathrm{dom}(\Phi)^*$ is finite, we have that $\mathrm{B}(A)^\ast$ contains a product of elements $x_i$ for some $i$ and some $j$ with indices smaller than $k$.  Since the first element in $\mathrm{B}(A)^\ast$ has been chosen, the second element in $\mathrm{B}(A)^\ast$ must be a product of elements of degree at least $i$, and the third element in $\mathrm{B}(A)^\ast$ must be a product of elements of degree at least $i + 1$.  Thus, we will have $x_i$ be the direct product of elements of degree at least $i$, $x_j$ be the direct product of elements of degree at least $j$, and $x_{j-1}$ be the direct product of elements of degree at least $j - 1$.  
+%
+%Now, for each element $x_i$ and $x_{i-1}$ with indices smaller than $k$, we may choose a direct sum of two elements such that $x_{i} = x_i$ and $x_{i-1} = x_{i-1}$; we will put in the second element of the direct sum the element corresponding to the sheafification of finite $n$-subsets of $A$.  
+%
+%Now, consider the map $\Phi$.  Suppose that $\Phi(x_1) = 0$ and $\Phi(x_2) = 1$.  
+%Now, $\Phi(x_1) = x_2 + 1$ and $\Phi(x_2) = x$.  We wish to compute a $k - 1$ step
+\end{document}
+ in the $k$ steps in the diagram above in the direction opposite to that of the direction in which $\Phi$ maps each $x_i$ to $x_{i-1}$.  For instance, if $\Phi$ maps $x_1$ to $x_{i-1}$ and $x_2$ to $x_{i-2}$, then we will put in $x_3$ the element corresponding to the sheafification of the first $j - 2$ subsets of $A$.  We now compute $x_4$ and $x_5$ such that these $k - 1$ steps follow each other in the opposite directions as illustrated in the following picture: 
+%
+%\begin{figure}[H]
+%\includegraphics[width=\textwidth]{I.png}
+%\caption{\label{fig:intro}The map $\Phi$ preserves $k$ steps and the order of computation}
+%\end{figure}
+
+
+
+%The following result shows us how to reduce the sheafification of finite groups that have no nonzero elements to the sheafification of finite subsets of $G$.  
+%
+%\begin{theorem}
+%    Let

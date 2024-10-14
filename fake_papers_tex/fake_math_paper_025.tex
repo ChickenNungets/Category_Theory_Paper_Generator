@@ -1,0 +1,202 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{Topological Manifolds: A Categorical Perspective}
+\author{Max Vazquez}
+\maketitle
+
+
+\begin{abstract}
+As a starting point for studying topological manifolds in general (not only Cartesian) geometry, we will look at the category of regular $R$-manifolds and its homotopy categories that can be used to organize the information in each such manifold. The topology of these categories allows us to prove certain interesting geometric properties, which are not present in the literature as well as some useful tools for constructing them.
+We will show how to combine the information from homotopies with the information from cohomology to yield new geometric insights into the properties of a topological manifold in our framework. This paper is an introduction to the theory of topological manifolds, and a summary of the previous papers with associated mathematical concepts and results; however, we believe that the reader should carefully review this paper before beginning to explore the world of topological manifolds.
+\end{abstract}
+
+
+\section*{Introduction} \label{sec:intro}
+
+Let $\mathbb C$ be a Cartesian space and let $\mathbb N$ be the usual ring of integers. A \emph{$\mathbb C$-algebra} or simply a \emph{linear algebra} consists of a set of objects $A$, for example $A=\mathbb R$, $A=\Z$, and so on. We say that two $A$-modules $M$ and $N$ are \emph{isomorphic} if there exists an identity map $i:A\to N$ that satisfies associativity and unitality conditions such that for any $p_0,\dots,p_n\in M$, we have
+\[
+i(pa_{i}(q_{j}(r))\otimes p_{k}(a_{j}(b)))=pa_{i}(q_{j}(r)\otimes b).
+\]
+For a linear algebra to be said to be \emph{additive}, it must have finite products and be left-action-preserving. In our work we expect many applications require that a category admits products that satisfy some noncommutative equations called \emph{commutativity equations}. These equations can help to introduce a new concept: \emph{topological manifolds}. Topologists sometimes use the term ``topolgy'' in place of ``topology'', but they mean different things here. As a first step in organizing and analyzing topological structures, most applications require the existence of topological structures, so it is natural to ask whether there exists another type of structure that is topologically relevant. In fact, there is nothing more surprising than this question -- the \emph{category of topological manifolds} can be defined to include all the relevant topological structures -- by means of a variety of geometric tools known as \emph{cohomology}, which we recall shortly. 
+
+Another important aspect of topological manifolds is that they are still relevant today, i.e., they still need to exist in order to construct a correct construction of (possibly infinite) topological systems. The situation is even worse when one starts to think about the fact that manifolds are not necessarily finite (e.g., in some circles). In fact, every finite space has a unique representation that can always be obtained by putting a lot of points at a fixed point. That makes sense because it can be shown to be the same space as every other point in that space (assuming we have a finite number of points!), but it is not obvious if that is the case in general. 
+
+In this work we consider several approaches to remedying the problem of thinking about finite spaces as uncountable. One approach is to change the definition of ``finite space'' to be something that is really just an arbitrary sequence of points instead of just a finite sequence. In particular, we take $\text{Fin}$ to denote the class of $n$-tuples of elements of some finite set. More generally, we may assume that every $n$-tuple of points of length less than $n$ also belongs to $\text{Fin}$, though this does not appear to make much difference to our purposes. Our conjecture then is that if $\mathbb C$ is a Cartesian space and there is a (possibly infinite) sequence of points $x_0,\dots,x_{m}$, we may define a continuous map $\chi: \mathbb C\times \text{Fin}\to \mathbb Z$ between the Cartesian space $A$ and $\mathbb Z$. Then, if $A$ is not infinite, then $\chi$ is a continuous map if and only if $\chi^*(x_0)=0$ and $\chi^{*}(\dots,\chi^{-1}(x_{m}))=0$. If this holds true, then $m$ equals the length of the sequence of points, and hence $\mathbb Z/|x_{i}|=|x_i|$ for all $0\leq i<m$. 
+
+The reason why this is convenient is that, like with $n$-tuples of points, $\mathbb Z/|x_{i}| = |x_i|$ for all $0\leq i<m$, and by construction of $\chi$, it follows that for any $x_0,\dots, x_m\in \mathbb C^m$, we have that $\chi(x_0,\dots,x_m)=x_0+\dots+x_m$. We can define another notation for this. Let $\Delta\subseteq A$ denote the subset consisting of those elements of $A$ that lie within some $r\in\mathbb C$ with $|x_i|<r$, i.e., all $x_i\in\Delta$ with $|x_i|>r$ for all $i<m$. Then we obtain $\text{Fin}/\Delta=\text{Fin}/\{\Delta\}$. Note that $\mathbb Z/r|\cdot|$ is equivalent to $\text{Fin}/{\Delta}/\mathcal{O}(\{0\})$ where $\mathcal{O}(\{0\})$ is the open cover of $\Delta$ under the finite union of finite paths $f_{i}:x_i\hookrightarrow x_{i+1}$ for $i\geq 0$ and $x_0$ such that $\chi(x_0,x_i)<\infty$ for all $i$. This construction also has a canonical inverse. To see this further, note that $\mathbb C/\Delta|\cdot=0$ and $\text{Fin}/\Delta|\cdot>0$. However, since $\chi$ is a continuous map and we know that $\mathbb C/\Delta|\cdot\in\{0,\infty\}$ and $\text{Fin}/\Delta|\cdot\in\{0,1\}$ respectively, we see that $\Delta\setminus \{\infty\}\subseteq \text{Fin}/\Delta$. Therefore, for any $x_0,\dots, x_m\in \mathbb C^m$, we have $x_0+\cdots+x_m|\in\mathbb C/\Delta$ and $\text{Fin}/\Delta|\cdot>0$, so $\chi$ is continuous up to a maximum of constant. 
+
+This perspective leads to many different kinds of constructions for topological manifolds: they include cohomology, the groupoid of connected components, the $n$-manifold (see e.g.,~\cite{ClementinaGeometria,KellerTopologia,LambertTopologia}), the Hilbert series and the $m$-dimensional Dold--Kan filtration~\cite{DoldKanTopos}. However, all of these constructions have drawbacks that we shall discuss now. For a more detailed discussion of these, we refer the reader to \cite{WilliamsTopologyBook,Sutter}. 
+
+One reason why we do not want to wait until we can actually describe topological manifolds in general is that, in general, it is quite costly to compute the corresponding topological structures on infinite sequences of points in $\mathbb C^n$. However, we can get away without such problems by having a fixed topology on $\mathbb C^n$, which implies that topological structures can be computed exactly and directly (up to some constant given in \cref{def:topo}). 
+
+To give a concrete idea of what we would like to achieve in this paper, we provide the following result.
+
+\begin{theorem}\label{thm:topological}
+Let $\mathbb C$ be a Cartesian space. There is a continuous map $\chi:\mathbb C\times \text{Fin}\to \mathbb Z$ that satisfies $\chi(x_0,\dots,x_m)=x_0+\cdots+x_m|\in\mathbb C/\Delta$ and $\chi^{*}(x_0)=0$ and $\chi^{\ast}(x_0)+\chi^{\ast}(x_1)\dots+\chi^{\ast}(x_{m})=0$. Furthermore, we assume that for any $x_0,\dots,x_m\in\mathbb C^m$, we have $\chi(x_0,\dots,x_m)$ is either positive or negative. If this holds true, then $\chi^*(\chi^*\mathbb C)=\chi^{*}(\mathbb C)$ and $\chi^{\ast}(\chi^{\ast}C)=\chi^{\ast}(\mathbb C)$. 
+\end{theorem}
+
+
+In general, $\mathbb C$ can be thought of as a space whose boundary is closed with respect to some topology $\partial$, that is, a neighborhood (as opposed to an open ball). Then we can think of $\mathbb C$ as a set of points $x_0,\dots,x_n$, and each point $x_0$ lies inside the set of points of a $\partial$-open ball around each point $x_0$. So, using a fixed topology, the space $\mathbb C^n$ is determined by the collection of all $\partial$-open balls around each point $x_0$. By assumption, we will define a continuous map $\chi:\mathbb C\times \text{Fin}\to\mathbb Z$ to be a $\partial$-open ball centered around each point $x_0$. Then, if $x_0$ lies in the closed set, then $\chi(x_0,\dots,x_m)\in\mathbb C/\Delta$ for all $0\leq m<n$, and similarly for $x_m$. Now, this provides a way to assign values to the points of the manifold, namely, if $x_0\in\mathbb C^n$ and $x_0\in\text{Fin}/\Delta$, then $\chi(x_0,\dots,x_m)\neq 0$. 
+
+\subsection{Example 1: Cohomology} \label{subsec:cohomology}
+
+Recall that a \emph{cohomology spectrum} $\Phi:\text{Fin}\to \mathbb Z$ is a function that assigns to a $n$-tuple of points $x_0,\dots,x_n$ the value $|\langle x_0,\dots,x_m\rangle|\in\mathbb Z$, and that is a continuous map from $\mathbb Z/|\mathbb C|$ to $\mathbb Z/|\mathbb C|$. For instance, if $\text{Fin}$ is the class of all finite points, then we can define $\Phi$ as follows. Let $a\in\mathbb Z/|\mathbb C|$ and let $x_0,\dots,x_m\in\mathbb C^n$. We write $x_{0,a},\dots,x_{m,a}$ for the unique elements of $\mathbb C^m$ containing the point $x_0$ and such that $|\langle x_0,\dots,x_m\rangle|=\min(|x_0|,|x_1|,\dots,|x_{m-1}|)$. Thus, $\Phi(x_0,\dots,x_m)=\frac{\sum_{i=0}^m (-1)^i|x_i|-\max(|x_i|,|x_{i+1}|)}{2}$. Then, as any continuous map from a domain to a codomain is continuous on $\mathbb Z/|\mathbb C|$, the continuity of $\Phi$ follows from that of the continuous maps from $\mathbb Z/|\mathbb C|$ to itself (since the domain does not depend on the codomain). It follows that $\Phi$ is continuous on $\mathbb Z/|\mathbb C|$. It remains to show that $\Phi$ satisfies the property that $|\Phi(x_0,\dots,x_m)|=|\sum_{i=0}^m |x_i|^2|\phi_{a}(x_i)||x_{i+1}|^2$. Since the sum over $i=0^m$ is over $0\leq j\leq n$ with $\phi_{a}(x_i)$ the minimal element $x_j$, it follows that $|\phi_{a}(x_j)|=|\langle x_0,\dots,x_{j+1}\rangle|=\min(|x_0|,|x_1|,\dots,|x_{j+1}|)$. Finally, we will note that we can find a nice relation between the values $|\langle x_0,\dots,x_m\rangle|$ and $|\Phi(x_0,\dots,x_m)|$ by using the following relations (this is not difficult to verify):
+
+\[
+|\langle x_0,\dots,x_m\rangle|=|\sum_{j=0}^m |\phi_{a}(x_j)||\langle x_0,\dots,x_{j+1}\rangle|.
+\]
+
+Using the previously mentioned relations, we can replace the infinite sums over $i=0^m$ with finite sums over $j=0^n$. The following result shows that this relation is preserved under functions that take a finite set of points to a finite set of points.  
+
+\begin{theorem}\label{thm:coherence}
+Let $\mathbb C$ be a Cartesian space. For each $n$-tuple of points $x_0,\dots,x_n$ we have $\Phi(x_0,\dots,x_m)=|\Phi(x_0)\rangle+\sum_{j=1}^{m-1}|x_0||\phi_{a_j}(x_j)||x_j|$ for all $n$-tuples $a_j$ (including $a_0$). Then, for each $m$-tuple of points $x_0,\dots,x_m$, we have
+\[
+|\Phi(x_0,\dots,x_m)|=|\Phi(x_0)\rangle+\sum_{j=1}^{n-1}|x_0||\phi_{a_j}(x_j)||x_j|$ for all $m$-tuples $a_j$.
+\]
+\end{theorem}
+
+To show that $\Phi$ is continuous on $\mathbb Z/|\mathbb C|$, we can define another function $\alpha\colon \mathbb Z/|\mathbb C| \to \mathbb Z/|\mathbb C|$ by writing $\alpha(a)=|a|$ for each $a\in\mathbb C$ and $|\alpha(a)|=-1$. Then, the continuous map $\chi: \mathbb C\times \text{Fin}\to \mathbb Z$ becomes a continuous map with $\chi(x_0,\dots,x_m)=\frac{1}{\sqrt{n}}\sum_{\substack{\substack{i=0\\ i<j}}} \alpha(a_j)x_{j-1}$. Then, $(\alpha_{n},\alpha_{m})\colon (\mathbb Z/|\mathbb C|)\to (\mathbb Z/|\mathbb C|)$ sends the tuple $x_0,\dots,x_m$ to the tuple $(x_0,x_{n-1},\dots,x_n)$. 
+
+Using the above result together with the assumption on the topology, we see that $\chi$ is continuous on $\mathbb Z/|\mathbb C|$.
+
+In terms of combinatorics, we can also state that cohomology spectra are a very important object in mathematics: if you write $n$ for the number of points in your diagram, then you can construct a cohomology spectrum by adding points according to the formula (here $x_0,\dots,x_n$ corresponds to $\mathbb C^n$)
+\[
+|\langle x_0,\dots,x_n\rangle|=n+|x_0|+\dots+|x_{n-1}|,
+\]
+and assigning a value $0\leq a_j\leq n$ to each $a_j$ (for each $j=0,\dots,m-1$).
+
+Combining this with the fact that $\chi(x_0,\dots,x_m)$ is continuous on $\mathbb Z/|\mathbb C|$ yields the following result.
+
+\begin{corollary}\label{cor:coho}
+Let $\mathbb C$ be a Cartesian space. Let $n$ be the number of points in your diagram. Then there exists a cohomology spectrum $k:\mathbb C\times \text{Fin}\to\mathbb Z$ such that for each $j=0,\dots,m-1$, $k(x_0,\dots,x_j)=|x_0||\phi_{a_j}(x_j)||x_j|$ for all $m$-tuples $a_j$ and $0\leq a_j<n$.
+\end{corollary}
+
+Now we return to the case of cohomology. For each $j=0,\dots,m-1$ we know from Lemma~\ref{lem:cohprop} that 
+\[
+|\langle x_0,\dots,x_m\rangle|=n+|x_0|+\dots+|x_{m-1|}+\sum_{i=1}^{m-1}|a_i|{x_{i}-\overline{x}_{i-1}}.
+\]
+Using the previous result, we know from Proposition~\ref{prop:topos} that the cohomology spectrum $k$ restricts uniquely to a continuous map $k:\mathbb C\times \text{Fin}\to\mathbb Z$ satisfying
+\[
+k(x_0,\dots,x_n)=\frac{1}{n^m}\sum_{i=1}^{n}\alpha(a_i)x_i,
+\]
+where we took $m=n^2$ in our proof (using $a_j=0$ for $j<m$). Using this result and the assumption that the domain does not depend on the codomain, we see that $k$ is continuous on $\mathbb Z/|\mathbb C|$ (which can be verified analogously to Theorem~\ref{thm:coho} except that $\alpha$ is a function). 
+
+We can also combine this result with the fact that $\chi(x_0,\dots,x_m)=0$ implies that for each $i=0,\dots,m-1$, the sum
+\[
+|\chi(x_0,\dots,x_m)|=\sum_{i=0}^{m}\left||\Phi(x_0,x_{i})|+|\phi_{a_i}(x_{i})| -|\phi_{a_i}(x_{i}-\overline{x}_{i-1})|
+\right|.
+\]
+can be replaced with
+\[
+|\chi(x_0,\dots,x_m)|=\frac{1}{n^m}\sum_{j=1}^{m-1}\alpha(a_j)x_j.
+\]
+From this result, we see that $\chi$ is continuous on $\mathbb Z/|\mathbb C|$.
+
+\section{Cohomology in 2d} \label{subsec:2d}
+
+Let $\mathbb C$ be a Cartesian space, and let $x_0,x_1,\dots,x_n$ be arbitrary points of $\mathbb C$. Note that in 2d, all points lie on a plane and this plane contains all the points of $\mathbb C^2$. When we work in 3d, points may lie in any cuboid and in 4d even larger cuboids that contain all the points. Hence, we can move our coordinate system in 2d to get a Cartesian cube $\mathbb C^3$ and then shift this space down to get a Cartesian space $\mathbb C^4$ via translation along the axis directions. Replacing all the coordinates of points $x_0,\dots,x_n$ in $\mathbb C^3$ with the coordinate $y_0,y_1,\dots,y_n$ in $\mathbb C^4$ and making translations along the axes we obtain the Cartesian cube $\mathbb C^4$.
+
+Considering Cartesian cubes, the cohomology spectrum is again a continuous map. 
+To understand how we can combine the cohomology spectrum with the cohomologies that exist in a 2d Cartesian cube, we apply Lagrangian duality for the cartesian product of $C^{3}$ and $C^{4}$. Here $C^{3}$ is defined as the space generated by $x_0=y_0$, $x_1=(x_0-y_0),y_1=(x_1-y_0),$ $x_2=(x_0-y_0)(x_1-y_0),$ and finally $x_3=x_0+x_1+x_2$. Since $\mathbb C=\mathbb R^2$ (or any vector space, possibly of dimension zero), the cohomology spectrum is the real part of the quotient complex $\mathbb C/C^{3}$: $C^{3}\cong \mathbb R^2/(x_0\mid \mid x_1+x_2).$ So, to complete the proof of Theorem~\ref{thm:coho}, we need to complete the cohomology spectrum of the coproduct $C^{3}\prod_{i=1}^4 C^{4}=\mathbb C$. That is, we need to add the cohomology $k$ as the first component of the quotient $C^{3}\prod_{i=1}^4 C^{4} = \mathbb C$.
+
+With the cohomology spectrum applied, we may proceed to consider cohomology of each individual $C^{3}\prod_{i=1}^4 C^{4}=\mathbb C$. The resulting cohomology spectrum can then be understood as the composition of the cohomology of the product and the cohomology of the product product with itself, giving rise to the product cohomology $C^{3}/C^{3}\prod_{i=1}^4 C^{4}/C^{4}$. Finally, by taking the limit over $m=5$ as discussed in Subsection~\ref{subsec:coho}, we obtain the following result.
+
+\begin{theorem}\label{thm:coho2}
+Let $\mathbb C$ be a Cartesian space. For any $n$-tuple of points $x_0,\dots,x_n$ and any $m$-tuple of points $x_0,\dots,x_m$, we have
+\[
+|\langle x_0,\dots,x_m\rangle|=n+\sum_{j=0}^{m-1}|x_j|+|x_{j-1}||\phi_{a_j}(x_{j-1})|-(|x_{j}||\phi_{a_{j-1}}(x_{j-1})|).
+\]
+\end{theorem}
+
+We can use the cohomology spectrum $\Phi:\text{Fin}\to \mathbb Z$ as a discrete topology on $\mathbb C^n$ by defining 
+\[
+|\phi_{a_j}(x_j)|=|x_{j}||\phi_{a_{j-1}}(x_{j-1})|,
+\]
+for each $j=0,\dots,m-1$. It is clear that this function satisfies $\phi_{a_0}(x_0)=0$. From the cohomology spectrum $\Phi$, we can also apply Lagrangian duality to determine the cohomology of each individual $C^{n}$ via the following formula:
+\[
+|\phi_{a_j}(x_j)|=\int \phi_{a_j}(x_j)/|\langle x_0,\dots,x_m\rangle|\,dx_j.
+\]
+Hence, the following result states what happens when we take the limit over $n=m$ as discussed earlier.
+
+\begin{theorem}\label{thm:coho3}
+Let $\mathbb C$ be a Cartesian space. For each $n$-tuple of points $x_0,\dots,x_n$ and any $m$-tuple of points $x_0,\dots,x_m$, we have
+\[
+|\langle x_0,\dots,x_m\rangle|=n+\sum_{j=0}^{m-1}|x_j|+|x_{j-1}||\phi_{a_j}(x_{j-1})|-(|x_{j}||\phi_{a_{j-1}}(x_{j-1})|) \quad \text{for all $m\leq 5$}.
+\]
+\end{theorem}
+
+
+
+\subsection{Cohomological Space of Hausdorff Manifolds} \label{subsec:haus}
+
+In this subsection, we briefly recall the category of topological manifolds, and consider various properties of the category $\mathcal{H}aus$. 
+
+The category $\mathcal{H}aus$ is a coproduct of various categories $\mathcal{M}_k$ with $\mathcal{M}_k$ a subcategory of $\mathcal{H}aus$ which is stable under colimits of maps of spaces. In particular, the objects of $\mathcal{H}aus$ are the topological manifolds and maps of manifolds between them. In particular, a map of manifolds $\phi\colon M\to N$ is a continuous map $\tau\colon N\to M$ in $\mathcal{H}aus$ whenever $\tau\circ\phi=\id$. So, the objects of $\mathcal{H}aus$ are precisely the topological manifolds that we call \emph{Hausdorff manifolds}. 
+
+Thus, to understand the cohomology spectrum, we need to formulate it as a measure on the coproduct $C^{3}\prod_{i=1}^4 C^{4}=\mathbb C$. To do so, we consider the mapping space $P=\bigcup_{j=1}^{m}C^{3}\prod_{i=1}^4 C^{4}=\mathbb C$. Then, to characterize the cohomology spectrum of $P$, we begin with a $n$-tuple of points and then perform the following steps iteratively for each value of $m$:
+\begin{enumerate}[(a)]
+    \item Construct a discrete topology on $P$. 
+    \item Apply the discrete topology to $C^{3}\prod_{i=1}^4 C^{4}$ and identify all $n$-tuples of points of $P$ that are contained in the topology with the $n$-tuples of points that are contained in the discrete topology. 
+    \item Form a function $\alpha\colon P\to P$ that takes the $n$-tuple of points of $P$ to a function $x\mapsto \langle x_0,\dots,x_m|\cap P$. 
+    \item Define $\chi\colon P\times \text{Fin}\to\mathbb Z$ by taking $|\phi_{a_j}(x_j)|$ to be the number of times the $x_j$ are contained in the topology of $P$. 
+    \item Use Lemma~\ref{lem:cohprop} and $\chi$ to find an integer function $\alpha'$ on $P$ such that $|\phi_{a_j}(x_j)|=\frac{1}{\sqrt{n}}\sum_{j=1}^{m-1}\alpha'(x_{j})$. 
+    \item Form a function $\gamma\colon P\to P$ that takes $m$-tuples of points of $P$ to functions $\alpha'\colon P\to P$ that takes $m$-tuples of points of $P$ to $1$ if they are contained in the discrete topology of $P$, and $0$ otherwise. 
+\end{enumerate}
+Note that $|\phi_{a_j}(x_j)|\approx |\langle x_0,\dots,x_m\rangle|$ for some $j$. In particular, for a large enough $n$, we get
+\[
+\int \phi_{a_j}(x_j)/|\langle x_0,\dots,x_m\rangle|\,dx_j\approx \frac{1}{n^m}\sum_{j=1}^{m-1}|\langle x_0,\dots,x_m\rangle|\cap P|\approx \frac{1}{n^m}\sum_{j=1}^{m-1}\sum_{p\in P}|x_{p-1}||\phi_{a_{j-1}}(x_{p-1})|(|x_{p}||\phi_{a_{j-1}}(x_{p})|).
+\]
+Using this formula, we can easily see that $\chi\approx \int \chi(x_j)/|\langle x_0,\dots,x_m\rangle|\,dx_j$.
+
+If $m\leq 5$, then Step~(ii) has already been shown that the function $\alpha'$ satisfies
+\[
+|\langle x_0,\dots,x_m\rangle|=n+\sum_{j=0}^{m-1}|x_j|+|x_{j-1}||\phi_{a_j}(x_{j-1})|-(|x_{j}||\phi_{a_{j-1}}(x_{j-1})|) \quad \text{if } m\leq 5.
+\]
+On the other hand, we get
+\[
+|\langle x_0,\dots,x_m\rangle|=n+\sum_{j=0}^{m-1}|x_j|+|x_{j-1}||\phi_{a_j}(x_{j-1})|-(|x_{j}||\phi_{a_{j-1}}(x_{j-1})|) \quad \text{otherwise} \quad \text{if } m\leq 5.
+\]
+Step~(iii) and Step~(iv) are done analogously.
+
+\begin{remark}\label{rem:coho}
+The above steps all involve the same analysis of a continuous map that generates the discrete topology of the space $P$. However, while both steps are not exhaustive in the cases of $m=n$, their behaviour converges rapidly. Hence, we can state that the calculation is in general expensive, so we will not bother explaining the steps of this analysis here. However, the steps involved are essentially repetitive and therefore are very easy to follow. Moreover, even if we did explain all the steps of this analysis here, we still believe it will be helpful to learn some things about cohomology spectrum so that we can use them later for other constructions.
+\end{remark}
+
+
+
+
+
+
+
+
+
+There are many aspects of our cohomology theory that we would like to explore. As stated in Subsection~\ref{subsec:2d}, there is a Cartesian cube $\mathbb C^3$ and we may translate it down to an arbitrary Cartesian space $\mathbb C^4$. To summarize the relevant aspects, we observe that $\mathbb C^3$ encodes an arbitrary map of spaces $(X,-)_r$ that is related to the linear map 
+\[
+X_0\to X_0+(r(x_1)-r(x_0))*X_1+\dots+(r(x_{n-1}-r(x_{n-2}))+r(x_{n-2}))*X_{n-2}
+\]
+with each $x_0,x_1,\dots,x_n\in \mathbb C$ and $r\in [0,1]$. For $i=0,1$ we get the map $X_0\to X_0\times X_{i}$, and we now consider the map 
+\[
+\int \phi_{a_j}(x_j)/|\langle x_0,\dots,x_m\rangle|\,dx_j\to \sum_{j=0}^{m-1}|\phi_{a_{j-1}}(x_{j-1})|\left(\frac{1}{|\langle x_0,\dots,x_m\rangle|\}\right).
+\]
+Here, the $i$-th entry is the function $\alpha_{i}$. Similarly, the function $\gamma_{i}$ gives rise to the map $\gamma_{i}\colon P\to P$. It is worth mentioning that $X_0\times X_{0}$ is equipped with the discrete topology given by the function $\alpha_{0}\colon X_0\times X_0\to X_0$ that takes two points $x_{0},x_{1}$ to the point $x_{0}\oplus x_{1}$. It is now worth showing that the cohomology spectrum of $P$ is independent of the choice of $\alpha$. 
+In other words, $\alpha$ is only a discrete function $\alpha\colon P\to P$ if $P$ consists of $m$-tuples of points and $0\leq a_j
+\end{document}
+<n$ for $j=0,\dots,m-1$ and if $\alpha_{0}\colon X_0\times X_0\to X_0$ is a discrete function on $P$ that is invariant under colimits. In particular, there is a continuous map
+\[
+\chi:\mathbb C^3\times \text{Fin}\to\mathbb Z
+\]
+such that
+\[
+|\phi_{a_j}(x_j)|=|\langle x_0,\dots,x_m\rangle| \quad \text{if } m\leq 5.
+\]
+Similarly, the map $\chi$ is invariant under colimits if $\alpha_{0}$ is a discrete function on $P$. Theorem~\ref{thm:coho3} therefore gives the following remark, which may come in handy in future work:
+
+\begin{remark}
+It might seem counterintuitive that a continuous map
+\[
+\chi:\mathbb C^3\times \text{Fin}\to\mathbb Z
+\]
+on a Cartesian cube will generate a discrete topology on a Cartesian space. However, it turns out that if $\mathbb C

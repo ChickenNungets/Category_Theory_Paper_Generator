@@ -1,0 +1,324 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{Solving Every Open Problem In Math With Category Theory}
+\author{Max Vazquez}
+\maketitle
+
+
+\section{Introduction}
+\label{sec:intro}
+Solving computational problems is often challenging since there are so many different tools to solve the same problem in different contexts. There exist many different ways of thinking about solving computational problems and how to make sense of these solutions. Examples of categories have been discussed at length by various authors such as \cite{Friedlander2023,Rozenblythe2018}, \cite{Freed2020,Haugseng2018}, and \cite{Scholze1977}. Categories were studied by Gabriel Friedlander in 1966 \cite{Friedlander1966}, but the proof for this result was not found, although it seems that Friedlander has shown its existence in an article called \textit{Categories of Operations for Computing and Information Science} (COMSIS) in 1977 by taking inspiration from a variety of other mathematical fields.
+
+In this paper, we provide some helpful tools for working with category theory that will allow us to solve computations much easier than when we deal directly with open problems. We provide two major ideas for solving open problems: \textit{lax functors} (also known as \textit{strong monoidal functors}) and \textit{pseudo-monads}. These generalize the usual methods of thinking to situations where categories exist or are expected to exist, like those in statistics or algebraic topology.
+
+For purposes of this paper, let $\mcC$ be a full subcategory of the category $Set$. Let $\mathcal{O}$ be the category of objects of $\mcC$, that is, the set of all morphisms of $\mcC$-objects. Let $\mathcal{M}$ be the category of morphisms of $\mcC$-objects and functions from $\mathcal{O}$ to $\mathcal{O}$, such that the following conditions hold:
+\begin{enumerate}[label=(\roman*)]
+	\item[(i)] A morphism of $\mcC$-objects $f : c \to d$ consists of a map $\varphi : e \to f(c)$ and a function $\gamma : O \to M(\varphi)$.
+	\item[(ii)] For any morphism $g : c' \to c$, if $g \circ \id_{e} = g'$ for some map $\varphi : e \to c',$ then $(g \circ \id_{e})^{\ast} = (g')^{\ast}$ for any map $\gamma : O \to M(\varphi)$.
+\end{enumerate}
+
+A \textit{pseudo-monad} on $\mcC$ is a monad $\mD$ on $\mcC$ which admits a functor $\mD(-,d)$ for each object $d$. Pseudo-monads on $\mcC$ may also be thought of as \textit{monoids on $\mcC$} with the addition being that we define $\mD(-,-) = -$ and $\mD(c,-) = c$ for each object $c$.
+
+Pseudo-monads on $\mcC$ are sometimes referred to as \textit{categories}. This is because the categories in the notation do not always correspond to functors, but rather to \textit{pseudo-functors}. More precisely, given a pseudo-monad $\mD$ on $\mcC$, a category $E$ is said to be \textit{closed} if there is a natural transformation $\pi : E \Rightarrow \mD(c,d)$ such that $\pi^*\mD(c,d) = d$ whenever $d$ exists for some object $c$. The notation $\mD(c,d)$ stands for the composition
+\[
+	\mD(c,\mD(-,d)) \cong E \xrightarrow{\pi} \mD(c,d).
+\]
+The term \textit{pseudo-functor} refers to a \textit{pseudo-functor} if it is defined via the equation $\alpha : m \Rightarrow \beta$ such that $\alpha^* = \pi^\ast$ whenever $\pi : c \Rightarrow d$ exists and $\beta : m \Rightarrow k$ whenever $\beta \circ \alpha : m \Rightarrow d$ exists and satisfies $\pi \circ \alpha = \beta$. It is well established that one can consider pseudo-monads instead of categories for general monads.
+
+A pseudo-functor $X : \mcC \to \Cat$ corresponds to a function $\pi : \mcC \to \Cat$ from $\mcC$ to the category $\Cat(X,-)$. Note that this does not necessarily coincide with the \textit{pseudo-functor} or \textit{pseudo-natural transformation} we previously mentioned for a functor $X$ itself, but rather to the \textit{pseudo-functor} or \textit{pseudo-transformation} in the category $\Cat(X,-)$. In fact, we will often refer to the latter as a \textit{pseudo-functor} or a \textit{pseudo-transformation}. Pseudo-monads also provide another way of dealing with computing; in fact, they provide another way of representing programs.
+
+We now describe two of our main tools: \textit{lax functors} and \textit{pseudo-functors}. Lax functors are simply functions that satisfy certain axioms. These axioms are essentially what is required to establish the properties of a lax functor. However, most of these axioms do not seem to apply very efficiently for solving problems using categories. So, using these tools, we can make the use of categories more productive and practical. This section will serve as the central place for discussing these tools, providing examples of lax functors and pseudo-functors in practice.
+
+
+\subsection{Lax Functors}
+
+We begin by reviewing the terminology of lax functors.
+
+\begin{definition}
+	Let $\mcC$ be a category. A \textit{left adjoint} of a function $f : x \to y$ is a map $t : y \to x$ such that $tf = t$. Similarly, let $\mcC$ be a category. A \textit{right adjoint} of a function $f : x \to y$ is a map $u : x \to y$ such that $uf = u$. An adjunction is said to be \textit{bijective} if the corresponding left and right adjoints exist.
+	
+	\begin{equation}\label{def:bijective_adjunction}
+		\begin{tikzcd}[row sep=small]
+			& X \\
+			Y & 
+		\end{tikzcd}
+	\end{equation}
+	
+	An adjunction is said to be \textit{strict} if both left and right adjoints are invertible. If these constructions hold, a \textit{lax functor} between categories is a natural transformation between functors from the opposite category. In other words, a \textit{lax functor} in $\mcC$ is a natural transformation 
+	\[
+		f : \overline{X} \to Y
+	\]
+	from the opposite category $\mcC^{\op}$ and a lax functor between categories in $\mcC$ to a strict natural transformation that is also a lax functor.
+\end{definition}
+
+Before we give an example of a lax functor, we note a few definitions.
+
+\begin{definition}
+	A \textit{function} from an arbitrary category $\mcC$ to itself is called a \textit{lax functor}. A \textit{morphism} in $\mcC$ is said to be a \textit{lax morphism} if it is compatible with all of the lax functors on $\mcC$.
+	
+	A \textit{functor} over a category $\mcC$ is a natural transformation $\eta : X \Rightarrow \mcC$ from the identity functor $X$ to the lax functors. It is well established that one can consider functors instead of lax functors for general functors.
+\end{definition}
+
+Next, we discuss the use of lax functors to solve a class of common computational problems.
+
+\begin{example}[Computational Geometry]\label{eg:cg}
+	Consider a function $g : \mathbb{R}^{3} \to \mathbb{R}^{2}$ whose domain is the complex plane $P = \{(x,y)\in \mathbb{R}^{3} : x^2 + y^2 \leq 1\}$. Then, the lax morphism that sends $P$ to $Q = \{g(p)=g(q)\mid p,q \in P\}$ induces a lax functor $g : P \to Q$, namely the function $g : \mathbb{R}^{3} \to \mathbb{R}^{2}$.
+	
+	To see why the lax morphism induced by $g$ is an lax functor, it suffices to show that both sides are compatible with $g$. Given a function $\alpha : P \to Q$, let $h : \mathbb{R}^{2} \to \mathbb{R}^{2}$ be the unique morphism such that $\alpha(h(x)) = \alpha(h(y))$ whenever $x,y \in P$. So, if $x \in P$, then
+	\begin{align*}
+		\alpha(h(x)) & = (\alpha(x), \alpha(y)),\\
+		& = \alpha(xh),\\
+		& = g(hx).
+	\end{align*}
+	If $y \in Q$, then
+	\begin{align*}
+		\alpha(h(x))(y) & = \alpha(xy),\\
+		& = \alpha(xh)y,\\
+		& = gh(y),\\
+		& = \alpha(y).
+	\end{align*}
+	Therefore, $g$ induces a lax morphism $g : P \to Q$. The fact that both sides are compatible with $g$ follows easily from applying $g$ twice to a function $f : Q \to P$ that takes $x,y \in Q$ to $\alpha(x)y$.
+\end{example}
+
+One can also consider different kinds of lax functors. Here is a short list of examples.
+
+\begin{definition}
+	Let $\mcC$ be a category. An object of $\mcC$ is said to be a \textit{$n$-cell} if it is an object of $\mcC^{(n)}$. An object in $\mcC$ is said to be \textit{$k$-colimit} if it is a limit of length at most $k$.
+	
+	A function $f : X \to Y$ is said to be \textit{unique} if for every $x \in X$ the function $f(x) \in Y$ also exists and $f(x) = g(x)$ whenever $x \in X$.
+	
+	Let $n \in \N$ be an integer and let $k$ be an integer greater than or equal to $n$. A function $f : X^{(k)} \to Y^{(k)}$ is said to be \textit{strongly unique} if for every object $y \in Y^{(k)}$, the unique function $gf : X^{(k)} \to Y$ that makes the following diagram commute for every $x \in X^{(k)}$:
+	\[
+		\begin{tikzcd}
+			f(x) \ar[rr, "g"] \ar[dr, "f(x)"'] & & f(gx) \\
+			& g(x) \ar[dd, "g(x)"] \\
+			&& gf(x)
+		\end{tikzcd}
+	\]
+\end{definition}
+
+There are many other examples of lax functors used to solve problems involving computations, including polynomials, tensor products, tensors of matrices and other things. However, we will not be concerned with them here.
+
+\subsection{Pseudo-Functors}
+
+Once again, we start by recalling the terminology of pseudo-functors.
+
+\begin{definition}
+	Given a category $\mcC$ and objects $c,d,e \in \mcC$, a \textit{pseudo functor} $G : \mcC^{n+1} \times \mcC^{m+1} \to \mcC^{n+m}$ is a function $h : \mcC^{n+1} \times \mcC^{m+1} \to \mcC^{n+m}$ such that $h^{-1}(c) = c$ and $h^{-1}(d) = \bar{c}$ and $h^{-1}(e) = \bar{cd}$ for all $c,d,e \in \mcC^{n+m}$. It is well established that one can consider pseudo-functors instead of functors for general functors.
+\end{definition}
+
+This definition only describes the structure of a \textit{pseudo functor}. In order to give a concrete example, we define pseudo-functors to be lax functors.
+
+
+\begin{definition}[Pseudo-Lax Functor]\label{def:pseudo-lax-functor}
+	Let $\mcC$ be a category. A \textit{pseudo-lax functor} from $X$ to $Y$ is a natural transformation $\alpha : X \Rightarrow Y$ from the identity natural transformation to a lax functor from $X$ to $Y$. The term \textit{pseudo-lax functor} refers to a \textit{pseudo-lax functor} if it is a lax functor that is compatible with all pseudo functors. If these constructions hold, a \textit{pseudo-functor} from $X$ to $Y$ is a natural transformation $\theta : \alpha ^*$ from the identity natural transformation to a strong functor $\alpha : X \to Y$.
+\end{definition}
+
+This definition only describes the structure of a pseudo-functor. To get a concrete example, we define pseudo-functors to be pseudo-lax functors.
+
+\begin{definition}[Pseudo-Lax Pseudo-Functor]\label{def:pseudo-lax-pseudo-functor}
+	Let $\mcC$ be a category. A \textit{pseudo-lax pseudo-functor} from $X$ to $Y$ is a natural transformation $\alpha : X \Rightarrow Y$ from the identity natural transformation to a pseudo-lax functor from $X$ to $Y$. The term \textit{pseudo-lax pseudo-functor} refers to a \textit{pseudo-lax pseudo-functor} if it is a pseudo-lax functor that is compatible with all pseudo functors. If these constructions hold, a \textit{pseudo-lax functor} from $X$ to $Y$ is a natural transformation $\theta : \alpha ^*$ from the identity natural transformation to a strong pseudo-lax functor $\alpha : X \to Y$.
+\end{definition}
+
+As before, this definition only describes the structure of a pseudo-functor. To get a concrete example, we define pseudo-functors to be pseudo-lax pseudo-functors.
+
+\begin{definition}[Pseudo-Lax Pseudo-Natural Transformation]\label{def:pseudo-lax-pseudo-natural-transformation}
+	Let $\mcC$ be a category. A \textit{pseudo-lax pseudo-natural transformation} from $F : X \Rightarrow Y$ to $G : Y \Rightarrow Z$ is a natural transformation $\phi : F \Rightarrow G$ such that $\phi(0) = F(0)$, $0 \in X^{n+1}$ and $\phi^*\psi = \psi$ whenever $\psi$ exists for all $n \geq 0$. The term \textit{pseudo-lax pseudo-natural transformation} refers to a \textit{pseudo-lax pseudo-natural transformation} if it is a pseudo-natural transformation that is compatible with all lax pseudo functors. If these constructions hold, a \textit{pseudo-functor} from $X$ to $Y$ is a natural transformation $\theta : \alpha ^*$ from the identity natural transformation to a pseudo-lax pseudo-functor $\alpha : X \to Y$.
+\end{definition}
+
+We will be interested in several examples of pseudo-lax pseudo-natural transformations. First, let us first look at some particular cases:
+
+\begin{proposition}
+	Suppose that $\mcC$ is a category with enough finite limits. Suppose that $F : X \to Y$ is a natural transformation satisfying $F(0) = F(0)$, that is, $F(x) = 0$ for all $x \in X$. If $G : X \to Z$ is a natural transformation that is compatible with all pseudo-functors, then $\theta : F \Rightarrow G$ is a pseudo-lax pseudo-natural transformation.
+\end{proposition}
+
+It remains to establish that the lax functor $\theta$ restricts to a pseudo-lax pseudo-natural transformation in this case. Given a pseudo-lax natural transformation $\phi : F \Rightarrow G$, we would like to see how it acts on morphisms $f : z \to b$ of the form
+\[
+	\begin{tikzcd}
+		x \ar[r] \ar[d, "\alpha"] & y \ar[d, "\gamma"] \\
+		z \ar[r] & b
+	\end{tikzcd}
+\]
+where $\alpha$ is a lax natural transformation and $\gamma$ is a pseudo-lax natural transformation. From the fact that $\alpha$ is a lax natural transformation, we know that there exists a unique lax natural transformation $\delta : G(x) \to Y(x)$ such that $\phi^*\delta = \delta \circ F$. By setting $G(x) := \gamma^{-1}(G(x)) = Y(x)$, we know that $\phi^*\delta$ is a pseudo-lax natural transformation. Conversely, suppose $\phi^*\delta$ exists. Since $F(z) = \phi^*\delta$, we have
+\[
+	\begin{tikzcd}
+		F(x) \ar[r] \ar[d, "\alpha"'] & F(y) \ar[d, "\gamma"] \\
+		Z(x) \ar[r] & G(x)
+	\end{tikzcd}
+\]
+so we could similarly view $\phi : F \Rightarrow G$ as a pseudo-lax natural transformation from $F$ to $G$, as an instance of the general result. The same argument works for $G$.
+
+\begin{remark}[Proof of Proposition~\ref{prop:lax-preservation-of-lax-natural-transformations}]
+	Recall that the existence of a lax natural transformation $\Delta : F \Rightarrow G$ as a special case of $\psi$ in Proposition~\ref{prop:lax-preservation-of-pseudo-natural-transformations} follows from the fact that the following diagram commutes:
+	\[
+		\begin{tikzcd}
+			Fx \ar[r] \ar[d, "\delta"'] & Fz \ar[d, "\gamma"] \\
+			Gy \ar[r] & Gz
+		\end{tikzcd}
+	\]
+	where $\delta : Fz \Rightarrow Gz$ is a lax natural transformation. The assumption that $\gamma$ is a pseudo-lax natural transformation also follows from Proposition~\ref{prop:lax-preservation-of-pseudo-natural-transformations}.
+\end{remark}
+
+We can also construct two versions of the above result.
+
+\begin{proposition}
+	Suppose that $\mcC$ is a category with enough finite limits. Suppose that $F : X \to Y$ is a natural transformation satisfying $F(0) = F(0)$, that is, $F(x) = 0$ for all $x \in X$. Suppose that $G : Y \to Z$ is a natural transformation that is compatible with all pseudo-functors. Then $\theta : F \Rightarrow G$ is a pseudo-lax pseudo-natural transformation. 
+\end{proposition}
+
+By constructing pseudo-lax natural transformations, we obtain pseudo-natural transformations between pseudo-functors from a lax functor and a pseudo-functor. The following result is obtained by composing the two results above.
+
+\begin{theorem}[Composition of Natural Translations]
+	Suppose that $\mcC$ is a category with enough finite limits. Suppose that $F : X \to Y$ is a natural transformation satisfying $F(0) = F(0)$, that is, $F(x) = 0$ for all $x \in X$. Suppose that $G : Y \to Z$ is a natural transformation that is compatible with all pseudo-functors. Then $\theta : F \Rightarrow G$ is a pseudo-lax pseudo-natural transformation. Then, the \textit{composition} of the two results above produces a natural transformation $\beta : \theta \Rightarrow \phi$ between pseudo-natural transformations between pseudo-functors from $F$ to $G$. 
+\end{theorem}
+
+We will now explain how these results work in the context of the notion of a \textit{pseudo-lax natural transformation} between pseudo-functors.
+
+\begin{definition}[Pure Composition]
+	Let $\mcC$ be a category with enough finite limits. A \textit{pure composition} of natural transformations $\alpha : X \to Y$ and $\beta : Y \to Z$ is a natural transformation $\rho : X \to Z$ such that $\alpha \cdot \rho = \beta \circ \alpha$, i.e.
+	\[
+	\begin{tikzcd}
+		x \ar[r, "\alpha"'] \ar[d, "\alpha"] & z \ar[d, "\beta"] \\
+		y \ar[r, "\beta"] & z
+	\end{tikzcd}
+	\]
+\end{definition}
+
+We call the pure composition of two natural transformations $\alpha : X \to Y$ and $\beta : Y \to Z$ a \textit{composite of natural transformations}. The result below states how this construction relates to the lax natural transformation $\alpha \otimes \rho : X \otimes Y \to Y$ from the diagram below
+
+\begin{equation}\label{eq:lax-preservation-on-diagrams}
+	\begin{tikzcd}
+		Fx \ar[r] \ar[d, "\alpha"'] & Fz \ar[d, "\rho"] \\
+		Fy \ar[r] & Gz
+	\end{tikzcd}
+	=
+	\begin{tikzcd}
+		X(x) \ar[r, "\alpha(x)"] \ar[d, "\alpha(x)"] & Y(x) \ar[d, "\rho(x)"] \\
+		Y(y) \ar[r] & Z(y)
+	\end{tikzcd}
+\end{equation}
+
+We will often also refer to this construction as a \textit{commutativity} between the underlying functors of $\alpha : X \to Y$ and $\beta : Y \to Z$. Another alternative construction of the lax natural transformation $\alpha \otimes \rho : X \otimes Y \to Y$ is presented below
+
+\begin{equation}\label{eq:lax-preservation-on-other-diagrams}
+	\begin{tikzcd}
+		Fx \ar[r] \ar[d, "F(\alpha)"'] & Fz \ar[d, "F(\rho)"] \\
+		Fy \ar[r] & Gz
+	\end{tikzcd}
+	=
+	\begin{tikzcd}
+		X(x) \ar[r, "\alpha(x)"] \ar[d, "\alpha(x)"] & Y(x) \ar[d, "Y(\alpha)(x)"] \\
+		Z(x) \ar[r] & Z(y)
+	\end{tikzcd}
+\end{equation}
+
+From the above description, we deduce that the lax natural transformation in this category is represented as a diagram of natural transformations.
+
+In order to compute composition in a lax natural transformation, we need to compute the counit $\kappa : X \to \mcC$ of $\alpha : X \to Y$ and the co unit $\mu : Y \to \mcC$ of $\beta : Y \to Z$. By taking their dot product, we can easily compute $\alpha \otimes \rho$ and $\beta \otimes \rho$ using the following naturality diagrams
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics{lax-nat-composition}
+\end{figure}
+
+Note that the co unit of $\beta$ is computed by the following diagram, which gives us the definition of a composite of natural transformations.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics{lax-nat-composition-diagram}
+\end{figure}
+
+\begin{definition}[Composed Natural Transformations]
+	Let $\mcC$ be a category with enough finite limits. A \textit{composed natural transformation} from $F : X \to Y$ and $G : Y \to Z$ is a natural transformation $\psi : F \circ G \Rightarrow H$ such that $\psi(0) = \alpha(0) = G(0) = \rho(0) = H(0)$. The term \textit{composed natural transformation} refers to a \textit{composed natural transformation} if it is a natural transformation that is compatible with both functors. If these constructions hold, a \textit{lax natural transformation} from $F$ to $G$ is a composed natural transformation and a \textit{lax natural transformation} from $F$ to $G$ is a natural transformation that is compatible with all functors. If these constructions hold, a \textit{pseudo-natural transformation} from $F$ to $G$ is a composed natural transformation and a \textit{pseudo-natural transformation} from $F$ to $G$ is a natural transformation that is compatible with all functors.
+\end{definition}
+
+\begin{definition}[Category of Monoidal Functor]\label{def:monoidal-functor-cat}
+	Let $\mcC$ be a category. A functor $F : \mcC^{n+1} \times \mcC^{m+1} \to \mcC^{n+m}$ is called a \textit{monoidal functor} if it preserves the image under composition and preserves the coproducts and the zero morphism. Note that this applies in either case whether one considers functors or natural transformations.
+\end{definition}
+
+Here are some examples of monoidal functors:
+
+\begin{example}[Tensor Product]
+	For any two categories $\mcA$ and $\mcB$, a functor $H : \mcA \times \mcB \to \mcA \times \mcB$ is a monoidal functor if and only if it preserves the coproduct of objects and preserves the images under the tensor product $\otimes : \mcA \times \mcB \to \mcA$. The natural transformation between two monoidal functors is called the \textit{tensor product} of the two functors.
+\end{example}
+
+\begin{example}[Tensor Product Preserving Left Kan Extension]
+	Suppose that $\mcA$ is a category with enough finite limits. For any two functors $F : X \to Y$ and $G : Y \to Z$ together with a natural transformation $\epsilon : F \Rightarrow G$, we say that $F \circ \epsilon : X \otimes G \Rightarrow Z$ is \textit{left Kan extension} if the following diagram commutes:
+	\[
+		\begin{tikzcd}
+			F(x) \ar[r] \ar[d, "Ff"'] & F(x) \otimes G(x) \ar[d, "\beta(\epsilon)(F(x),G(x))"] \\
+			Fg(x) \ar[r] & F(Gf(x))
+		\end{tikzcd}
+	\]
+	that is, if for every $x \in X$ the diagram commutes,
+	\[
+		\begin{tikzcd}
+			Fq \ar[r] \ar[d, "F(\epsilon)(q)"] & F(x) \otimes G(x) \ar[d, "\beta(\epsilon)(F(x),G(x))"] \\
+			Gg(x) \ar[r] & F(Gf(x))
+		\end{tikzcd}
+	\]
+\end{example}
+
+\begin{example}[Tensor Product Preserving Right Kan Extension]
+	Suppose that $\mcA$ is a category with enough finite limits. For any two functors $F : X \to Y$ and $G : Y \to Z$ together with a natural transformation $\epsilon : F \Rightarrow G$, we say that $G \circ \epsilon : F(Y) \to Z$ is \textit{right Kan extension} if the following diagram commutes:
+	\[
+		\begin{tikzcd}
+			Gf(x) \ar[r] \ar[d, "Gf(x) \otimes G"'] & F(G(x)) \ar[d, "Ff"] \\
+			Fy(x) \ar[r] & G(Gq(x)).
+			\end{tikzcd}
+	\]
+	That is, if for every $x \in X$ the diagram commutes,
+	\[
+		\begin{tikzcd}
+			Ff(x) \ar[r] \ar[d, "Ff"] & F(x) \otimes G(x) \ar[d, "G(\epsilon)(F(x),G(x))"] \\
+			Gy(x) \ar[r] & G(Fy(x)).
+			\end{tikzcd}
+	\]
+\end{example}
+
+\begin{example}[Monoidal Sum]
+	For any two categories $\mcA$ and $\mcB$, a functor $H : \mcA \times \mcB \to \mcA \times \mcB$ is a monoidal functor if and only if it preserves the products and coproducts and preserves the zero morphism. The natural transformation between two monoidal functors is called the \textit{monoidal sum} of the two functors.
+\end{example}
+
+\begin{example}[Unit]
+	For any two categories $\mcA$ and $\mcB$, a functor $U : \mcA \times \mcB \to \mcA$ is a monoidal functor if and only if it preserves the zero morphism. The natural transformation between two monoidal functors is called the \textit{unit} of the two functors.
+\end{example}
+
+\begin{example}[Counit]
+	For any two categories $\mcA$ and $\mcB$, a functor $C : \mcA \times \mcB \to \mcB$ is a monoidal functor if and only if it preserves the coproducts and preserves the coimage under the counit $\mu : \mcB \to \mcA$ that is the identity functor. The natural transformation between two monoidal functors is called the \textit{counit} of the two functors.
+\end{example}
+
+\begin{example}[Product]
+	For any two categories $\mcA$ and $\mcB$, a functor $P : \mcA \times \mcB \to \mcB$ is a monoidal functor if and only if it preserves the coproducts and preserves the images under the product $\otimes : \mcA \times \mcB \to \mcB$. The natural transformation between two monoidal functors is called the \textit{product} of the two functors.
+\end{example}
+
+\subsection{Monoidal Transforms}
+
+Now that we have a basic understanding of the concept of lax natural transformations between functors, we can rephrase the idea of a monoidal transform as requiring that it preserve the units. This is exactly the idea behind the following diagram, which we will call \textit{monoidality} for simplicity.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics{nat-transforms-diagram}
+\end{figure}
+
+\begin{theorem}[Monoidal Transforms]
+	Suppose that $X$ and $Y$ are categories. Suppose that $f : X \to Y$ and $g : Y \to Z$ are natural transformations. Then, $f \circ g$ is a natural transformation.
+\end{theorem}
+
+\begin{proof}[Proof of Proposition~\ref{prop:lax-preservation-of-lax-
+\end{document}
+natural-transformations}]
+	Notice that the following square is commutative.
+	\[
+		\begin{tikzcd}
+			Fx \ar[r] \ar[d, "fg"'] & Fy \ar[r] & Fz \\
+			Gy \ar[r] & Gz \ar[d, "gg"]
+		\end{tikzcd}
+	\]
+	Since $f$ is a natural transformation, we have $fg = fg \circ f$. Also, this follows from Proposition~\ref{prop:lax-preservation-of-pseudo-natural-transformations}. Moreover, since the naturality of $f$ is $fg = g \circ fg$ by Proposition~\ref{prop:lax-preservation-of-pseudo-natural-transformations}, $g$ is a natural transformation.
+\end{proof}
+
+\begin{remark}[Lemma~\ref{lem:left-Kan-extension-pseudo-natural}]
+	The following proposition implies that $F \circ g : X \otimes G \to Y \otimes Z$ is left Kan extension in $\mcC$.

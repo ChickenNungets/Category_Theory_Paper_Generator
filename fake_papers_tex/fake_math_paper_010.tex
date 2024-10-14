@@ -1,0 +1,175 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{Functorialization Of Higher Topos And Their Geometry}
+\author{Max Vazquez}
+\maketitle
+
+
+{\scshape Note: This paper was compiled for a seminar course titled ``The Theory of Topos''. As such there is no guarantee it will be complete or accurate. However, some aspects of the study may still make sense in context and in situations where they cannot.}
+
+\vspace{-0.2cm}
+\noindent{\huge An Introduction To Topological Data Structures For Functorialization}
+\vskip 3.5cm
+
+\begin{abstract}
+    We begin by showing that a high level categorical structure is functorializable when it has all of its underlying topological structures. In particular, we establish that any category with a universal high topology is functorialized by a certain structure having a unique universal topology. Then, we also establish that if $M$ is an object of a category with a universal topology $T$, then any object $N$ can be recovered from $M$ via the universal topology of $N$. A topological space is considered as an object of a category with a universal topology if every subspace of $M$ contains an element that belongs to its topology. It is well-known that we do not have universal topologies for all higher dimensional spaces. For instance, a non-compactly smooth manifold $K$ may have a compact open and closed interval, but $\mathcal{O}(K)$ may not have a compact open and compact closed topology. In order to prove this result we first provide a model of manifolds in which the topology is an open interval topology on each coordinate. Next, we show how the category of spaces defined by these manifolds is a topos. Finally, given a topological space $X$, we describe how a diagram of manifolds can be recovered from it using the fundamental property of a subspace that is local to $X$. This work provides two new models of topological data structures that are natural to use when describing the maps between them. First, our understanding of the fundamental properties of subspaces of topological spaces is formalised as a lemma of Hartshorne (see \cref{lem:Hartshorne}). Second, we define a model of topology on a topological space in terms of a preorder and an inclusion into the full subcategory of topological spaces that encodes the preorder of that space. Finally, in order to construct a functor from this model to a model of topology, we introduce several categories and their morphisms which we call Homotopy Spaces and Homotopy Transforms. Using this approach, we obtain a model of Homotopy Spaces and its associated natural functors. 
+\end{abstract}
+
+\vspace{-0.2cm}
+
+
+\tableofcontents
+
+\section*{Acknowledgments}
+We would like to thank Max Vazquez, Matthew Neymott, and Joost Engel, all of whose work throughout this paper has led to a much broader insight into this topic. 
+
+\section{Introduction}
+Given a topological space $X$, what is the point of a map between two points of $X$? What kind of information does this give us about the shape of the space and where this information is represented? The answer is that the space is in fact the space itself, but the underlying points and directions are not the same. However, a map from one space to another could be represented as an entire neighborhood around the desired point, which might be a point $x_0 \in X$ or multiple points of $X$. These are known as the "points" of the space. As a result, it becomes possible to represent maps as points which do not necessarily coincide with the space's physical representation. Such an example is illustrated below.
+
+\medskip
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale =.7]{figure/simpsonian-simpsonian-geometry.png}
+    \caption{Simpsonian geometry}
+    \label{fig:simpsonian-simpsonian-geometry}
+\end{figure}
+
+A typical example is the construction of Simpsonian geometry, defined as follows: If we take a point $x_i$ in a simplex of the space and a simplex of the space around it, we can construct a sequence of vertices that makes up the simplex:
+
+\[
+(x_0, x_1, x_2), (x_1, x_2, x_3), (x_2, x_3, x_0) \textstyle,\qquad 
+\]
+as shown in Figure~\ref{fig:simpsonian-simpsonian-geometry}. Now imagine that these vertices form a triangular manifold and we consider a submanifold of the space. Then this manifold is the intersection of two triangles $T_1$ and $T_2$ which are in turn connected by a triangle $T_3$. Recall that a triangle $T$ consists of three vertices $(t_1, t_2, t_3) \in T$, and thus contains a number of points of $X$ in such a way that there exist $n+1$ consecutive points $x_{i_1}, x_{i_2}, \cdots, x_{i_n} \in X$ such that the following relation holds: 
+
+\[
+x_{i_k} = t_k
+\]
+for all $k < n$, or equivalently, 
+
+\[
+t_1 + \cdots + t_n = t_{n+1}
+\]
+and $i_k \in [n+1]$, then the triangle $T$ forms a submanifold of $X$. Then we can define the topology of $X$ by the following definition: Given a finite submanifold $Z$ and a function $\varphi : Z \to [n+1]$ taking values in $[0, 1]$. We define the topology of $X$ as follows: Each point $x_i$ lies in $Z$ and the $t$-th term in $\varphi(x_{i})$ lies in $[0, 1]$ for all $t \in [n+1]$ such that
+
+\[
+x_{i_t} = \frac{\varphi(x_{i_t})}{t!},
+\]
+for all $t$, or equivalently, $t \in [n+1]$ and $i_t \in [n+1]$, i.e., we say that $x_i$ lies in the region of $Z$ which has height at least equal to $t$. Then we define the topology of $X$ as follows: Let $t_i$ be the height of the vertex at $x_i$. Then the order of vertices satisfying $t_i \leq t_j$ determines the equivalence class of vertices. 
+
+If one considers this ordering and the set of vertices $X$, then the order of the vertices is completely determined by the underlying set of the points, and so it must satisfy the triangle identity: every triple $(x_1, x_2, x_3)$ can be decomposed as follows: a pair $(x_1, x_3)$ and a pair $(x_2, x_3)$, and a pair $(x_1, x_2)$. Then $x_1$ is above $x_2$ if and only if $x_2$ is above $x_3$. Furthermore, every pair $(x_1, x_3)$ satisfies the triangle identity: if $x_1$ and $x_2$ lie above $x_3$, then $(x_1, x_2, x_3)$ lies above $x_1$ and above $x_3$. Moreover, every pair $(x_2, x_3)$ satisfies the triangle identity: if $x_2$ and $x_1$ lie above $x_3$, then $(x_1, x_2, x_3)$ lies above $x_1$ and above $x_3$. Therefore, we are able to define our topology of $X$ as follows: Every point $x_i$ belongs to either the vertex at position $1$ (the position corresponding to the edge with endpoints at $1$ and $2$) or the vertex at position $2$ (the position corresponding to the edge with endpoints at $2$ and $1$). In other words, we say that $x_i$ lies at the edge of vertices at positions $1$ and $2$. Thus, every point $x_i$ lies in exactly one of the sets of vertices in $X$. 
+Now suppose that the function $\varphi : Z \to [n+1]$ admits a codomain value of a preorder $C$. Since each vertex in the codomain has height greater than or equal to $t$, we define the topology of $X$ as follows: Let $t_i$ be the height of the vertex at $x_i$. Then the order of vertices satisfying $t_i \geq t_j$ determines the equivalence class of vertices. Then let $Y = [x_i | i = 1, \ldots, n]$ be the set of all vertices of $X$, and then we define the topology of $X$ as follows: Let $t_i$ be the height of the vertex at $x_i$. Then the order of vertices satisfying $t_i = t_j$ determines the equivalence class of vertices. 
+
+Thus, the order of the edges is entirely determined by the underlying preorder of vertices in the codomain of the function $\varphi$. For instance, the order of the vertices of $X$ determined by the preorder on $C$ defines the ordering of the edges in $X$. In this way, for $x_0$ and $x_1$ such that $x_0 = t_0$ and $x_1 = t_1$, the order of the edges in $X$ can be determined by $\varphi(x_1) = \varphi(x_0)$. Also note that $x_1$ comes before $x_0$ in the vertices of $X$, and we can conclude that the topology of $X$ is a preorder.
+%
+One might argue that $X$ should be defined based on preorders instead of sets, but if one considers the set of vertices, then $X$ would actually be a space, since the set of vertices represents what the underlying function on the points would output, and therefore there is no preorder required. Nevertheless, we will see why in the discussion below.  
+%
+%
+In summary, when $X$ is a space, then there exists an open subset $U$ of $X$ which contains $x_0$ and $x_1$ and both belonging to $U$. If there is no such open subset of $X$, then the topology of $X$ is open closed topological spaces, and it simply follows from the order of vertices determining the equivalence class of vertices of $X$.
+%
+It is worth saying that this strategy should be interpreted as a modification of the previous strategy. We have assumed that $X$ is a preorder in the codomain of the function $\varphi$. Our goal is to assume that $X$ is a topological space in the codomain of the function $\varphi$. That said, $X$ could also be seen as a preorder on vertices of the preorder on $C$, and hence we can safely assume that $X$ is a topological space if one assumes that $X$ is a topological space in the codomain of $\varphi$. However, our strategy gives the same results without assuming that $X$ is a preorder.
+%
+This assumption is crucial for our purposes because it allows us to build our data structures more effectively and simply. For instance, while we could use a preorder to determine the order of edges in $X$, we can also do so by determining the orientation of edges in $X$. We have discussed in detail how preorders affect topological spaces in the previous section, and it follows directly from this that a preorder in the codomain of the function $\varphi$ determines the equivalence class of vertices of $X$. But, as mentioned above, $X$ could indeed be a topological space, even though it is not necessarily a preorder in the codomain of the function $\varphi$. 
+
+It should be noted that $U$ should not be assumed to contain $x_0$ or $x_1$. Consider the following example: Let $C = C(x_0, x_1)$ be the set of points which lie in the domain of $\varphi$. Assume that $C$ is closed under all possible inclusions of points in $X$. Indeed, if $x_0$ lies in $C$ and $x_1$ lies in $C$ then $x_0 = x_1$ in $C$. Moreover, if $x_0$ is in $C$ then $x_1$ is also in $C$. Therefore, $U$ should not contain $x_0$ and $x_1$ unless $U = C(x_0, x_1)$ is empty. This is illustrated in Figure~\ref{fig:simple-open-closed-topology}. Notice that all $U$ which contains $x_0$ and $x_1$ are contained in $C$; therefore, the preorder in the codomain of the function $\varphi$ defines the equivalence class of all $U$ which contains $x_0$ and $x_1$. From the discussion above, this implies that $C$ should be the set of all points which lie above the point $x_0$ and below the point $x_1$, respectively, in $X$. On the other hand, $U$ could still contain $x_0$ and $x_1$, and there would again be a preorder in the codomain of the function $\varphi$. Since we assume that $C$ is closed under all possible inclusions of points in $X$, we know that $U$ contains $x_0$ and $x_1$. However, $U$ does not need to be empty, since neither $x_0$ nor $x_1$ is in $C$. Therefore, if $U$ was not empty, we would have chosen an equivalence class $U'$ that contained no two points in $C$. Even worse, a point in $C$ could not lie above or below $x_0$ or $x_1$ in $X$, or perhaps even lie in $C$ but lie above or below $x_0$ but not $x_1$, in which case $U$ would contain both $x_0$ and $x_1$ because $C$ is closed under all possible inclusions. 
+
+We next recall the fundamental property of a subspace of $X$. First, we want to state this fundamental property in light of the geometric framework. Suppose that we are given a finite subset $X_1$ of $X$ such that $x_1 \notin X_1$. In this situation, there are two choices between two subsets of $X$ which contain $x_1$: one contains $x_1$, and the other does not. A solution for this problem involves two problems:
+
+First, we want to find an inclusion of two subsets $V_1$ and $V_2$ such that $x_1 \notin V_1$ and $x_1 \notin V_2$. One might think that this is easy because $V_1$ and $V_2$ have no common points except possibly $x_1$, however, this is incorrect. 
+
+Second, we want to find a map from $X_1$ to $X_2$. A standard example of this problem is finding a map from an open set $X_1$ to the interior of a disc centered at $x_1$. Unfortunately, there are many possible maps. One simple method would be to consider those maps which preserve the intersection, or a special case is to consider those maps which preserve the union. However, in our case, a special case is easily achieved by selecting the simplest method. In fact, for an open set $X_1$, the smallest subset $X_2 = \{x_1\}$ of $X$ containing $x_1$ is always a map from $X_1$ to $X_2$. Hence, we can view $X_2$ as being an open set containing $x_1$ rather than a closed set. On the other hand, this is a good generalisation of the previous problem. 
+
+When we consider maps between finite subsets of $X$, we will not always be interested in the subset of $X$ that contains $x_1$. When this happens, we can just think of the map as a regular function $f: X_1 \to X_2$, which has the property that if the output function $f$ preserves the intersection, then $f$ also preserves the union. This means that if $f$ preserves the intersection, then $f$ preserves the union. However, the result is clearly not true if $f$ preserves the union. This means that the fundamental property of a subspace of $X$ does not depend upon whether the function preserves the intersection or the union, but on whether the map is a regular function.  
+
+More precisely, suppose that $X = M \times N$ where $M$ and $N$ are finite subsets of $X$. Then the map $f: M \times N \to X$ has the property that if the output function $f$ preserves the intersection, then $f$ preserves the union. If $f$ preserves the union, then we cannot apply this map to two objects $m \in M$ and $n \in N$ whose maps $f(m,n): M \times N \to X$ act on both $m$ and $n$ independently. On the other hand, if $f$ preserves the intersection, then we are essentially doing nothing if $f(m,n)(m,n) = f(m',n')$, meaning that $f$ does not behave differently on $m$ and $n$. Thus, we can apply the map to any two objects $m \in M$ and $n \in N$ independent of their relative direction. If $X$ were a space, this is possible. However, $M$ and $N$ can be thought of as a small space with zero length, and the map does not behave differently when applied to two points $m \in M$ and $n \in N$. 
+
+So far, we have focused on the situation where we are given a subset of $X$ which contains $x_1$, but we are not sure whether we are looking at a subspace or a whole space. We want to state the following fundamental property of a finite subset $X$ in light of the geometric framework: if $X$ is a finite subset of some space $S$, then $X$ is the largest open subset of $S$ which contains $x_1$. However, $S$ does not usually contain $x_1$, which means we have now found the smallest subset of $S$ which contains $x_1$. One could think of $S$ as a function from open space $X$ to open space $S$ with the property that $f: X \to S$ preserves the intersection. Then the function $f$ has the property that if $f(x_1) = g(x_1)$ for all $x_1 \in X$, then $f(x_1) = g(x_1)$ for all $x_1 \in S$. But this does not hold if $f$ preserves the union. 
+
+Finally, we will be interested in subsets of the geometric framework. Let $X$ be a finite subspace of a space $S$. By assumption, $S$ does not contain $x_1$, and so we have identified a closed space $S'$ that contains $x_1$. Furthermore, $S'$ does not always contain $x_1$, but sometimes it will. One could ask whether we could identify subspaces of $S'$ that contain $x_1$ and $x_2$. Unfortunately, this is not possible.
+%
+Thus, we wish to understand why we can't say anything about subspaces of $S$ that include $x_1$ or $x_2$. Indeed, we want to reason through the geometric framework in light of what we have learned so far. In light of this, we can now understand how to classify subsets of $S$ which contain $x_1$ and $x_2$, namely, we can talk about subsets $R_1$ and $R_2$ of $S$ containing $x_1$ and $x_2$. Suppose that there are a finite number of points in $S$ that all lie in a single open subset $R$ of $S$. As we saw above, $R$ is an open subset of $S$ that contains $x_1$ and $x_2$. We claim that this subset is an image of $R$ in $S$, and we now show this statement for a few examples. 
+
+%
+\begin{example} 
+    Consider the open subset $R = (x_1, \cdots, x_6)$. Consider a map from $R$ to an open subset $S$ such that $x_3 \notin R$ and $x_4 \notin R$ and that $x_3, x_4 \in S$. Now consider another open subset $S'$ of $S$ such that $x_2 \in S'$. We are left with two options for choosing $x_1$ and $x_2$ individually. If $f: R \to S'$ preserves the intersection and we choose $x_1$, then $f(x_1,x_2) = f(x_3,x_4) = f(x_3,x_2) = f(x_4,x_2)$. However, if $f: R \to S'$ preserves the union, then we cannot choose $x_1$ and $x_2$ individually. It seems reasonable for us to say that if $f: R \to S'$ preserves the intersection, then we can choose $x_1$ and $x_2$ separately. We have therefore obtained a closed subset of $S$ that contains $x_1$ and $x_2$, called $R'_1$ and $R'_2$, respectively, as shown in Figure~\ref{fig:simple-open-closed-topology}. This shows that $R'_1$ is an image of $R$ in $S'$.
+\end{example}
+
+%
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=.6]{figure/simple-open-closed-topology.png}
+    \caption{An Open Closed Subset Example}
+    \label{fig:simple-open-closed-topology}
+\end{figure}
+
+
+
+%
+%
+\medskip
+
+Let us go ahead and state the following fundamental property of a finite subset of $X$ in light of the geometric framework: if $X$ is a finite subset of some space $S$, then $X$ is the largest open subset of $S$ which contains $x_1$. As we will discuss later, it is easy enough to show that $X$ is the largest open subset of $S$ which contains $x_1$ because the union of the point and the face $x_1$ is the same as $x_1$. However, when $X$ is a finite set of points in some space $S$, we want to focus on the intersection of $S$ and $X$, as illustrated in Figure~\ref{fig:simple-open-closed-topology-intersection}. So we have obtained $X$ consisting of a finite subset $X_1$ of $S$ together with a subset $X_2$ of $S$ which contains $x_1$, and the intersection of $S$ and $X$ is also a finite subset of $X$. If $X_2$ is large enough to be a closure of the closure of $X$, then $X_1$ is also a closure of $X$, and if $X_1$ is small enough to be a closure of $X$, then $X_2$ is also small enough to be a closure of $X$. 
+
+%
+\begin{example}[Intersection]
+    Consider the intersection of two closed intervals $I$ and $J$, denoted $I \cap J$. Then $I \cap J = \bigcup_{x \in I} J$. We can interpret this as saying that the points in $I \cap J$ are in a continuous chain in $X$, such that $x_1 \in I$ and $x_2 \in I$, and $y_1 \in J$ and $y_2 \in J$ for some $x \in I$ such that $x_1 \leq y_1$ and $y_1 \leq x_2$ and $x \in I \cap J$, where we omit the possibility of a tie.
+    %
+    Suppose that $I$ and $J$ are open intervals that are disjoint in $X$, denoted by $I \vee J$. Then $I \vee J$ is an open interval in $X$. If $I \vee J$ is connected by a triangle, then $I$ and $J$ are both connected by a triangle, and thus a continuous chain $x_1, x_2 \in I \vee J$ together with a continuous chain $y_1, y_2 \in I \vee J$ together with a continuous chain $z_1, z_2 \in I \vee J$ together with a continuous chain $w_1, w_2 \in I \vee J$ together with continuous chains $u_1, u_2 \in I \vee J$ together with continuous chains $v_1, v_2 \in I \vee J$. Then if $u_1 + u_2 = v_1 + v_2$, then $I \vee J = I \cap J$. Then $X$ consists of a finite set of points of a space $S$. Therefore, by Lemma~\ref{lem:maximal-open-subsets}, there is a closed subspace $R$ of $X$ which includes $x_1$ and $x_2$, and thus $X$ is a finite subset of $S$.
+    %
+    As a result, by Lemma~\ref{lem:maximal-open-subsets}, we have obtained $R$ the greatest open subset of $S$ that includes $x_1$ and $x_2$. This completes the proof that $X$ is a finite subset of $S$.
+\end{example}
+
+\medskip
+
+Thus, we have established that the maximal open subset $X$ of a space $S$ which contains $x_1$ can be identified with the largest open subset of $S$ which contains $x_1$, provided that $S$ does not contain $x_1$. In particular, $X$ is a finite subset of $S$ if $S$ does not contain $x_1$.
+
+%
+\begin{example}
+For an open subset $U \subseteq X$ we will say that $X$ is a subset of the geometric framework of $X$. This has already been explained briefly in \cref{ex:topological-spaces-with-union-preserves-closure-of-image}, and we now explain the relation between this and the fundamental property of a subspace of $X$ which we will use in future work. Let $X$ be a finite subset of a space $S$ which does not contain $x_1$. Since $S$ does not contain $x_1$, then $S$ is open and bounded above, and as such it is a subset of the geometric framework. However, if $U$ is open and covers the whole space, then we say $U$ is a closed subset of $X$ of the geometric framework, and $X$ is the smallest closed subset of $X$ which includes $x_1$.
+
+    \medskip
+    
+    %
+    There is a standard argument for this: if $U$ is open and covers the whole space, then $U$ is not covering $X$. However, we now state what this implies. Let $M$ be the maximal open subset of $S$ that does not contain $x_1$ which has no points included in $S$. If $S$ covers $X$, then $M$ will not be open as a closed subset. However, if $M$ is open and contains some points $x_i$ such that $x_1 \in M$ and $x_i \in S$, then this opens a closed interval in $S$. Now if $U$ covers the whole space, then $U$ is a closed subset of $M$ and $M$ contains $x_1$ and no point in $X$. It follows that $U$ is a closed subset of $X$. In particular, $X$ is the smallest closed subset of $X$ which contains $x_1$ which is an open subset of $X$.
+    %
+\end{example}
+
+\begin{proposition}[Maximal Open Subsets] \label{prop:maximal-open-subsets}
+    If $X$ is a finite subset of a finite space $S$ and $X$ is open, then $X$ is the maximal open subset of $S$ which does not contain $x_1$.
+    %
+    We shall write $\max_{R \in X} R$ to indicate that $R$ is the maximal open subset of $X$ which does not contain $x_1$.
+
+    \begin{proof}
+        To show that $X$ is the maximal open subset of $S$, note that, because $S$ does not contain $x_1$, we have to find a maximal open subset of $X$ that contains $x_1$ and $x_2$ for $S$ not containing $x_1$. A standard argument for this is that the maximal open subset of a finite set of points can be identified with the maximal open subset of a closed subset of a finite set of points. We shall now show that $X$ is the maximal open subset of $S$ if $X$ is open.
+        
+        If $X$ is open, then $X$ is the maximum open subset of $X$ which does not contain $x_1$. As we have already identified $X_1$ and $X_2$ containing $x_1$ together with a maximal open subset $R$ of $X$ which does not contain $x_1$ such that $R$ is open, then it suffices to show that $X_1$ and $X_2$ are open. It is clear that $X_1$ and $X_2$ are open if and only if $X_1$ and $X_2$ contain $x_1$ and $x_2$ themselves, which means $R$ is open.
+
+        If $X$ is open, then $R$ is an open subset of $X$ such that $R \subseteq X$. Then, we can use a straightforward argument to show that $R \cap X$ is also open, so that $R$ is open. We shall now state that $X$ is the maximal open subset of $S$ if $R \cap X$ is also open.
+
+        If $R \subseteq X$ is open, then it is sufficient to show that $R$ contains $x_1$. This immediately follows by observing that $X$ is open, which means that $R \cap X$ contains $x_1$, and so $X$ is the maximal open subset of $S$.
+    \end{proof}
+\end{proposition}
+
+\begin{corollary}
+    If $X$ is a finite subset of a finite space $S$ and $X$ is open, then $X$ is a maximal open subset of $S$ which does not contain $x_1$.
+\end{corollary}
+
+\begin{definition}[Topological Space]
+    Let $X$ be a finite subset of a finite space $S$. A topological space $X$ consists of a finite set of points $X$ together with a finite set of edges $E = {(x_i, x_{i+1}), x_0 \leq x_1, x_2 \leq x_3}$ with $x_0 \leq x_1, x_2 \leq x_3$ for all $i \in [n]$, with $x_i \in X$ and all other $x_{i+1} \in X$ ordered in increasing order, such that all elements in $E$ are connected by edges. The topology of $X$ consists of a preorder on $E$. In addition, let $Z := X \setminus E$.
+\end{definition}
+
+\begin{example}
+    If $S$ is the space of finite sets, then $S$ is a topological space.
+
+    %
+    In this situation, there is no preorder on the edges, as there are no two points connected by two different paths between them. Thus, $S$ cannot have a preorder on the edges. In contrast, if $S$ is the set of countable sets, then $S$ is a topological space.
+    %
+\end{example}
+
+\begin{remark}
+    A topological space is not necessarily finite. Suppose that $S$ is a finite topological space. Take the open set $U$
+\end{document}
+ of $S$ together with the preorder that determines its topology. Then $U$ is open and bounded above. As such, it is a topological space. However, if $R$ is a bounded open subset of $S$ such that $R \subseteq U$, then $R$ contains $x_1$ and $x_2$. Now consider a point $x$ in $R$ which lies between $x_1$ and $x_2$, $x \in R$, and $x_1, x_2 \in U$. Suppose $R \subseteq U$ contains $x$. Then it will not necessarily be possible to draw a line connecting $x_1$ and $x$ due to a length constraint. We have proved in \cref{def:topological-space} that $R$ is a bounded open subset of $U$. However, if $R \subseteq U$ does not contain $x$, then we cannot connect $x$ and the boundary of $R$, and so there is no way to draw a line connecting $x_1$ and $x$ as illustrated in Figure~\ref{fig:simple-open-closed-topology}.

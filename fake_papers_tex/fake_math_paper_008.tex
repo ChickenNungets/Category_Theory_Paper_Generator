@@ -1,0 +1,144 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{The Sheaffification of Finite Groups}
+\author{Max Vazquez}
+\maketitle
+
+
+We will show that any finite group is equivalently characterised as a local finite field \cite{KellyGroup}. We describe the sheafification of a finite group in terms of a group sheaf. This allows us to recover some of the structure of the groups, such as the subgroup completion and cohomology, which are not explicitly described by sheaves, but they do appear as local fields, with an additional structure called the sheafification. 
+
+\section*{Motivation}
+A finite group is the category of functions between real numbers. One can define a sheaf for a finite group by extending the action of its base set onto the space of functions, so the sheaf is precisely a space consisting of functions $f: X \rightarrow Y$. However, it is not clear how to recover this from a classical perspective. Indeed, there are two distinct methods for recovering this. First, it appears directly from the definition, as the base map and the constant map, respectively. 
+
+For example, consider the group $\mathbb S$, which we call a \emph{finite} group. Then the base map of $\mathbb S$ is simply the trivial function, and the constant map is the one defined by:
+\[
+0 = 0_x \text{ if } x \in \{0,\dots,n-1\}, and 
+-1 = 1_{n+1}
+\]
+for all $n \in \N$. Moreover, this defines a sheaf on $\mathbb S$ by the usual convention that the elements of the sheaf are just called ``symbols''.
+
+Next, consider the group $G(n)$ of order $n$. Since $G(n)$ is the finite group obtained by addition of the integer powers of itself up to order $n$, we know that each element of $G(n)$ corresponds to an object of the finite group $G(n)$. Each action of $G(n)$ on $G(m)$ produces a product $G(m)G(n)$, where $G(m)$ denotes a base group, and $G(n)$ denotes a cohomology ring. It follows that every element of $G(n)$ is a direct summand of a product $G(m)G(n)$ which is the coproduct of two elementary coproducts (as illustrated in Figure~\ref{fig:subgroup}).  
+
+\begin{figure}[h!]
+\centering
+\includegraphics{subgroup_diagram}
+\caption{The sheafification of a finite group.}
+\label{fig:subgroup}
+\end{figure}
+
+It can be seen that, by analogy with the sheafification of a finite vector space or a finite manifold, the finite group $G(n)$ is a \emph{sheaf} on $G(n)$. Such a sheaf consists of an arbitrary set of objects in $G(n)$ and morphisms that commutes with products and coproducts, such as the one shown in Figure~\ref{fig:subgroup}, and which preserve the actions of $G(n)$ on themselves. 
+These are referred to as \emph{sheaves} \cite{KellyGroup}. For an infinite group $G(n)$, this means that the sheaf on $G(n)$ is just a space with an arrow associated to each element of $G(n)$ which preserves all associativity of the sheaf, except when they are in the image of the constant map. The following is a classical example of this construction.
+
+We will also look at the category of finite groups $\FG_{\mathcal{Z}}(\mathcal{C})$ for a finite symmetric monoidal closed category $\mathcal{C}$ such that $\mathcal{C}$ has enough non-identity morphisms; see Section~\ref{sec:category} below. As our first focus, let us take $\FG_{\mathcal{Z}}(\mathcal{C})$ for our example. If $\mathcal{C}$ is a Cartesian closed category, then the categories $\FG_{\mathcal{Z}}(\mathcal{C})$ and $\FG_{\mathcal{Z}}(\mathcal{C}^{\oplus})$ have the same objects and morphisms and this implies that the categories $\FG_{\mathcal{Z}}(\mathcal{C})$ and $\FG_{\mathcal{Z}}(\mathcal{C}^{\oplus})$ have isomorphic compositions and cofibrations, respectively. 
+
+Thus if $\mathcal{C}$ is a Cartesian closed category, the canonical maps from $\mathcal{C}$ to $\FG_{\mathcal{Z}}(\mathcal{C})$ are endowed with a sheaf structure induced by the categories $\mathcal{C}$ and $\mathcal{C}^{\oplus}$. Note that the resulting sheaf on an object $X$ in $\FG_{\mathcal{Z}}(\mathcal{C})$ can be recovered by taking the category $\mathcal{C}/\{X\}$ which contains only those objects $Y$ for which the morphism
+\[
+x \otimes Y \rightarrow Y \otimes x
+\]
+is an identity for some object $x \in X$ is an equivalence. These maps are endowed with the same sheaf structure, with isomorphic compositions and cofibrations as before.
+
+As another example, if $\mathcal{C}$ is a category with enough non-identity morphisms then the category $\FG_{\mathcal{Z}}(\mathcal{C})$ has more than two possible compositions and cofibrations, and moreover the sheaf on an object in $\FG_{\mathcal{Z}}(\mathcal{C})$ can be recovered by taking the category $\mathcal{C}^{\mathbb{S}}$ which contains only those objects whose induced morphism $Y \rightarrow X$ is an equivalence.
+
+We will now consider the case in which $\mathcal{C}$ is a category with finite total orders. Let us first recall the following terminologies. An object in a category $C$ is said to be \emph{small} if, for all objects $X$ and $Y$ in $C$, the canonical inclusion $C/X \hookrightarrow C/Y$ is an equivalence. A map in a category is said to be \emph{dense} if the underlying function of the embedding is surjective and the domain and codomain of the embedding are the same (for all objects $X$ and $Y$ in $C$). We say that an object in a category $C$ is small if it is small in every object in $C$. 
+
+Note that, as explained above, if an object in $\mathcal{C}$ is small then it must have a codomain, i.e., the domain of its codomain must be an object in $C$, so that the objects in $\mathcal{C}$ form a category. 
+
+If the cohomology ring $H(C)$ of an object $X$ in $\mathcal{C}$ is the group of finite dimensional vectors $V(X)$ over the $C$-algebra of $X$, then a map of objects in $\mathcal{C}$ is said to be \emph{injective} if it is an equivalence in the category $\mathcal{C}$, so that the functor $\mathcal{C}/\{X\} \rightarrow \mathcal{C}/\{X\}$ is a fibration. 
+
+For an object $X$ in $\mathcal{C}$ we write $\mathcal{C}(X)$ for the category of objects in $\mathcal{C}$ corresponding to $X$. There exists a canonical map of categories $\mathcal{C}^{\mathbb{S}}\rightarrow \mathcal{C}$. Its target is the category $\mathcal{C}/\{X\}$. We refer to $\mathcal{C}$ as the \emph{cohomology ring} of $X$, and we write $\mathcal{C}^{\mathcal{Z}}(X)$ for the category of objects in $\mathcal{C}/\{X\}$ corresponding to $X$. Note that $\mathcal{C}/\{X\} \cong \mathcal{C}^{\mathbb{S}}$ by Proposition~\ref{proposition:iso-cat-cohomology-ring}. Note also that if $\mathcal{C}$ is a Cartesian closed category, then the natural inclusion of this category into the category $\mathcal{Z}(\mathcal{C})$ is also a fibration, and hence a sheaf. 
+
+The sheaf structure on $X$ corresponds to the sheaf $H^{\times}(X)$. Given an object $X$ in $\mathcal{C}$, the sheaf $H^{\times}(X)$ of $X$ is the sheaf with two objects and two arrows, that is, $H^{\times}(X)_0 = \{0\}\times X$ and $H^{\times}(X)_1 = \{1\}\times X$, and an arrow from $0$ to $1$ in $H^{\times}(X)$ is given by an arrow in $H(V(X))$ between the complex $V(X)$. 
+
+This map is well-known, namely that, for all objects $Y$ and $Z$ in $\mathcal{C}$, the map
+\[
+H^{\times}(Y) \times_{H^{\times}(Z)} H^{\times}(X) \rightarrow H^{\times}(X)
+\]
+is an isomorphism. Therefore the sheaf on $X$ is called the \emph{sheafification} of $X$. The construction of a sheafification in $\mathcal{C}$ is given in Lemma~\ref{lemma:sheafization}. 
+
+In light of the above definitions and notation, we may now look at the category $\FS(\mathcal{C})$. As explained above, this is the category of sheaves on $\mathcal{C}$. As mentioned earlier, as we did for the Cartesian closed category, a sheaf is obtained as a space consisting of all spaces equipped with an arrow that commutes with coproducts. Moreover, the sheafification is taken as the composition $X \mapsto \mathcal{Z}(\mathcal{C}(X))$. Note that this construction is essentially the same as the Cartesian closed category construction of Proposition~\ref{proposition:cartesian-closed-cat}. 
+
+We recall again that an object of $\FS(\mathcal{C})$ is a sheaf on an object $X$ in $\mathcal{C}$. Then, an object of $\FS(\mathcal{C})$ is a sheaf on $X$ if, for all objects $Y$ and $Z$ in $\mathcal{C}$, the category $\mathcal{C}/\{Y\} \times_{H^{\times}(Z)}\mathcal{C}/\{X\}$ is an equivalence, and the sheaf on $X$ is the quotient $\FS(\mathcal{C}/\{Y\} \times_{H^{\times}(Z)}\mathcal{C}/\{X\})$. So, given a sheaf on $X$, the object of $\FS(\mathcal{C})$ is a sheaf on $X$. 
+
+Using these results, we proceed to construct the sheafification for a finite group $G(n)$, which we denote by $G_\sheaf(n)$, or simply $G$. To find the sheafification of $G$, we will use the fact that the category of finite groups with a total order is Cartesian closed. This is true because, since each element of $G(n)$ is a direct summand of a product $G(m)G(n)$, the category $\FG_{\mathcal{Z}}(\mathcal{C})$ has enough non-identity morphisms. Thus $\FS(\mathcal{C})$ has enough non-identity morphisms. 
+
+The sheafification of $G(n)$ can be easily constructed using Proposition~\ref{proposition:iso-cat-cohomology-ring}. We now consider the subcategory of finite groups with a total order such that $\mathcal{C}$ has enough non-identity morphisms. From Proposition~\ref{proposition:cartesian-closed-cat}, we can conclude that the category $\FG_{\mathcal{Z}}(\mathcal{C})$ has enough non-identity morphisms, and so it follows that the category $\FS(\mathcal{C})$ has enough non-identity morphisms. Thus, we obtain the category $\FS(\mathcal{C})$ as the category of sheaves on $\mathcal{C}$.
+
+Let us now consider the case in which $\mathcal{C}$ is a Cartesian closed category with finite total orders. Let us first observe that, as explained above, if an object in $\mathcal{C}$ is small then it must have a codomain, i.e., the domain of its codomain must be an object in $C$, so that the objects in $\mathcal{C}$ form a category. We know that $\mathcal{C}^{\mathbb{S}}$ is a Cartesian closed category. Note that $\mathcal{C}^{\mathbb{S}}$ has enough non-identity morphisms, and so $\FS(\mathcal{C})$ has enough non-identity morphisms. 
+
+Let $X$ be the object of $\FS(\mathcal{C})$. It follows from the discussion above that $X$ is small in $\mathcal{C}^{\mathbb{S}}$ and therefore the sheafification $G_\sheaf(n)$ of $G(n)$ of an object $X$ in $\mathcal{C}^{\mathbb{S}}$ is simply $\mathcal{C}(X)$. Hence, for all objects $Y$ and $Z$ in $\mathcal{C}$, the category $\mathcal{C}/\{Y\} \times_{H^{\times}(Z)}\mathcal{C}/\{X\}$ is an equivalence and the sheaf on $X$ is the quotient $\FS(\mathcal{C}/\{Y\} \times_{H^{\times}(Z)}\mathcal{C}/\{X\}$.
+
+\subsection*{Construction}
+Let us now study the category of finite groups and their sheafifications. We begin by constructing the category $\FG_{\mathcal{Z}}(\mathcal{C})$.
+
+Suppose that $\mathcal{C}$ is a Cartesian closed category with finite total orders. Let us note that, as explained above, if an object in $\mathcal{C}$ is small then it must have a codomain, i.e., the domain of its codomain must be an object in $C$, so that the objects in $\mathcal{C}$ form a category. Furthermore, we know that $\mathcal{C}^{\mathbb{S}}$ is a Cartesian closed category with finite total orders. We are going to consider the subcategory of finite groups with a total order such that $\mathcal{C}$ has enough non-identity morphisms. 
+
+If $\mathcal{C}$ is a Cartesian closed category with finite total orders, then the category $\mathcal{Z}(\mathcal{C})$ is Cartesian closed, and the equivalence class diagram
+\[
+\xymatrixcolsep{.2pc}\xymatrix{(G_{\sheaf}(\mathcal{C}) \ar[r]^-{h} & \mathcal{C}^{\mathcal{Z}}(\mathcal{C})}
+\]
+can be decomposed as follows. Suppose that the arrows $f: G(n) \rightarrow G(m)$ and $g: G(m) \rightarrow G(n)$ are both equivalences, so that they commute with coproducts. If $f \circ g$ is an identity function, then the corresponding map
+\[
+\xymatrixcolsep{.5pc}\xymatrix@C=2.3pc{G(n)\ar@{-->}[d]_{\pi^{*}f} & G(n) \ar@{|->}[d]^{f}\\ & G(n) \times_{H^{\times}(G(n))} G(m)} \ar@{|->}[d]_{\pi^{*}\circ f} \\ & G(n) \times_{H^{\times}(G(n))} G(n)} \ar@{|->}[d]^{g \times_{H^{\times}(G(n))} G(n)} \\ & G(n)}
+\]
+is an equivalence, and hence the desired map can be identified with the map $f \times_{H^{\times}(G(n))} g \times_{H^{\times}(G(n))} f$. It remains to prove that this identification gives a map $G(n) \times_{H^{\times}(G(n))} G(n) \rightarrow G(n)$ which is an equivalence, i.e., $f \circ g$ is an identity.
+
+Because of the observation that $H^{\times}(G(n))$ and $G(n)$ have finite coproducts, the equivalence class diagram above can be viewed as a square diagram. But let us first note that the map $G(n) \times_{H^{\times}(G(n))} G(n) \rightarrow G(n)$ commutes with coproducts and is thus also an equivalence. Thus we see that $h$ is an equivalence. It follows that the map $h$ sends all coproducts of a coproduct of arrows to zero, so that the class diagram above is indeed a square diagram.
+
+Assume that $f$ and $g$ commute with coproducts, i.e., that $f \circ g$ is an identity function. Since $f \circ g$ sends all coproducts of a coproduct of arrows to zero, then $h$ sends all coproducts of a coproduct of arrows to zero as well. Thus the bottom row of the square diagram is a pullback. Hence, the bottom row of the square diagram is a pullback of a pushout of the previous rows, as indicated by the dotted line appearing above the diagram. Now let us identify each edge of the diagram with an arrow in $\mathcal{C}$ and say that $h$ sends the coproduct of arrows to zero.
+
+Now let $\epsilon := h^{-1}$ and $t := f^{-1}$. Assume that the two edges of the square diagram are identified by maps $a: G(n) \rightarrow G(n + 1)$ and $b: G(n) \rightarrow G(n + 1)$, so that the two maps $a$ and $b$ commute with coproducts. Note that for a pair of arrows $a$ and $b$ that are in the same class of morphisms, the morphism $a \times_{H^{\times}(G(n))} b$ is an equivalence. We need to show that this identification of arrows between classes of arrows uniquely determines a map $f \times_{H^{\times}(G(n))} g$. Let us assume that $f \times_{H^{\times}(G(n))} g$ does not commute with coproducts. Let us suppose further that $c := h^{-1}$ and $t' := f^{-1}$. Then $c$ is an equivalence since $c \circ t$ is an identity function as we know that $t$ and $t'$ are equivalences and hence $f \times_{H^{\times}(G(n))} g$ is an identity function. However, since $h$ sends all coproducts of a coproduct of arrows to zero, there are no coproducts in $G(n)$. Thus, the top row of the square diagram is a pushout of the lower rows of the square diagram. 
+
+In fact, let $c := h^{-1}$ and $t' := f^{-1}$. Then by definition of $G(n)$, $t' \circ f$ is an identity function. By definition of the map $h$, $c \circ t'$ is also an identity function. By definition of the map $h$, $c \circ t \circ t'$ is also an identity function. Thus $c \circ t \circ t'$ is also an identity function. Therefore, $t' \circ f$ is an identity function as well. Thus, the class diagram above is indeed a pushout of squares that we have already dealt with. Since $c := h^{-1}$, we get that $h$ sends all coproducts of a coproduct of arrows to zero, so that the bottom row of the diagram is also a pushout of the lower rows of the square diagram. And since the square diagram is a pushout of squares that we have already dealt with, it follows that $h$ is an equivalence. Thus we have established that $h$ sends all coproducts of a coproduct of arrows to zero. 
+
+Since all arrows are in the same class of morphisms, we can identify the rightmost arrow in the square diagram with an arrow in $\mathcal{C}$, so that the top row of the diagram is a pushout of squares. Since $f$ is an identity function, the left vertical morphism in the lower right corner of the square diagram is an identity, so that it is also a pushout of squares. So, we see that the square diagram is a pullback. Finally, let $t := f^{-1}$, $c := h^{-1}$ and $t' := f^{-1}$. Then by definition of $G(n)$, $t'$ is an identity function. As in the proof of Proposition~\ref{proposition:iso-cat-cohomology-ring}, we have that the map $h$ sends all coproducts of a coproduct of arrows to zero, so that the bottom row of the square diagram is a pushout of the lower rows of the square diagram. Finally, let $d := h^{-1}$ and $v := f^{-1}$. Then $c = d$ and $t' = v$. Since $f \times_{H^{\times}(G(n))} g$ is an identity function, $h \circ t'$ is also an identity function and therefore the top row of the square diagram is a pullback. Moreover, let $u := h^{-1}$ and $w := f^{-1}$. Then $c \circ u = d \circ w$ and $t' = v \circ u$. Therefore, since $h$ sends all coproducts of a coproduct of arrows to zero, the upper horizontal morphism in the lower right corner of the square diagram is an identity, so that it is also a pushout of squares. So, we see that the square diagram is a pullback.
+
+We now prove the condition that $f$ and $g$ commute with coproducts. Let us assume that $f$ and $g$ commute with coproducts. Let $a$ and $b$ be two objects in $\mathcal{C}$, which are of the same class of morphisms. We want to show that for any two objects $c$ and $d$ in $\mathcal{C}$, there exists a unique arrow $e: c \rightarrow d$ such that $fe \circ e = ge$. To see this, it suffices to check that $e \circ f = ge$ holds whenever $f$ is an identity function. This follows from the square diagram being a pullback, as we know that the left vertical arrow in the lower right corner of the square diagram is an identity. Let $c$ be such an object. Then, let $p := h^{-1}$, $q := h^{-1}$, $r := f^{-1}$, $s := f^{-1}$, and $t' := f^{-1}$. Thus $t' \circ f = fe$, where the second equality follows from the first equality since $f$ is an identity function.
+
+Similarly, we prove that $h \circ t = h^{-1}$, and similarly for the rightmost arrow in the square diagram. We begin by showing that $e \circ f = ge$. We will show this by proving that the map $h$ sends the coproduct of arrows to zero. The map $h$ sends all coproducts of a coproduct of arrows to zero, so that the bottom row of the diagram is a pullback. Next, consider $v := h^{-1}$, and let's suppose that $e \circ v = ge$. Then the upper horizontal morphism in the lower right corner of the diagram above sends all coproducts of a coproduct of arrows to zero, as well. As $h$ sends all coproducts of a coproduct of arrows to zero, there are no coproducts in $G(n)$. Therefore, the bottom row of the diagram is a pushout of squares that we have already dealt with. So, we see that the diagram is a pullback. The proof completes the proof of Proposition~\ref{proposition:iso-cat-cohomology-ring}.
+
+We have established the condition that $f$ and $g$ commute with coproducts. Note that the next result shows that, for any arrow $f$ and $g$, there exists a unique map $e: G(m) \rightarrow G(n)$ which makes the diagram $f \circ e$ and $g \circ e$ commute with coproducts. 
+
+Let $b$ be the object of $\FS(\mathcal{C})$. We are going to make a diagram like the following:
+\[
+\xymatrixcolsep{.3pc}\xymatrix@R=3.8pc@C=3pc{(G_{\sheaf}(\mathcal{C}) \ar[r]^-{h} & \mathcal{C}^{\mathcal{Z}}(\mathcal{C})}
+\]
+commutes with coproducts. Let $X$ be the object of $\FS(\mathcal{C})$. Consider the pushout of squares like the diagram above. Let $i:= h^{-1}$ and let's suppose that the diagonal edges of the pushout are identified with arrows $f$ and $g$, so that the diagonal edges of the pushout are identified by arrows $a$ and $b$. Then $a \circ i = bi$ and $b \circ i = ai$. This shows that we have achieved the desired result.
+
+To conclude, it remains to show that $\FS(\mathcal{C})$ is a category. Observe that $\mathcal{Z}(\mathcal{C})$ is the subcategory of $\mathcal{C}^{\mathcal{Z}}(\mathcal{C})$ consisting of objects that are of the same class of morphisms, i.e., the class of all functions which act on the same domain. Let us consider the right vertical map in the square diagram. Let us start by considering $f$, $e$, and $g$ being the same class of morphisms, so that $h$ sends the coproduct of arrows to zero. Then $f$ acts on $G(n)$ by sending an $n$-tuple $(x_1,\dots,x_k)$ to $(x_1, \dots, h(x_1), \dots, h(x_k))$. Similarly, $g$ acts on $G(n)$ by sending an $n$-tuple $(x_1,\dots,x_k)$ to $(h(x_1), \dots, h(x_k), x_1)$, so that $h$ sends the coproduct of arrows to zero. Thus, $\FS(\mathcal{C}^{\mathcal{Z}}(\mathcal{C}))$ is the subcategory of $\FS(\mathcal{C}^{\mathcal{Z}}(\mathcal{C}))$ consisting of the objects that are of the same class of morphisms. 
+
+Note that $\FS(\mathcal{C})$ is a Grothendieck category because for every object $Y$ of $\mathcal{C}$, the category $\mathcal{C}/\{Y\} \times_{H^{\times}(G(n))} \mathcal{C}/\{X\}$ is a Grothendieck category, where $\mathcal{C}/\{Y\} \times_{H^{\times}(G(n))} \mathcal{C}/\{X\}$ is a category with finite total orders. Therefore, the category $\mathcal{Z}(\mathcal{C})$ is Grothendieck. 
+
+Observe that $\mathcal{C}^{\mathcal{Z}}(\mathcal{C})$ is also a Grothendieck category, as follows. Suppose that $f: G(n) \rightarrow G(m)$ and $g: G(m) \rightarrow G(n)$ are two functors of $\mathcal{C}$ with finite total orders. We want to prove that, for all objects $Y$ in $\mathcal{C}$, the maps $\pi^{*}(f): \mathcal{C}/\{Y\} \rightarrow \mathcal{C}/\{X\}$ and $\pi^{*}(g): \mathcal{C}/\{Y\} \rightarrow \mathcal{C}/\{X\}$ are mutual inverse to each other. They follow immediately from the fact that $\pi^{*}$ preserves the identity on each level.
+
+So, let $X$ be an object of $\FS(\mathcal{C})$. The category $\mathcal{C}/\{X\}$ is also a Grothendieck category, with a natural fibration $\pi^{*}(g)$. Let us fix a point $y: X \rightarrow Y$. Then, $g$ acts on $X$ by sending the tuple $(x_1,\dots,x_k)$ to the tuple $(x_1,h(x_1), \dots, h(x_k))$, which is then a tuple consisting of three tuples, as follows:
+\[
+\begin{array}{ccccl}
+x_1&=&h(x_1)\\
+&\vdots&\\
+x_k&=&h(x_k)
+\end{array}
+\]
+This is clearly a tuple consisting of $n$-tuples with all the same elements, so that it cannot have more than $n$ elements. As before, the unit arrow $\pi^{*}(f) = \id$ and the composition arrow $\pi^{*}(g) = \pi^{*}((f \times_{H^{\times}(G(n))} g) \times_{H^{\times}(G(n))} f)$ is the identity. Moreover, since $h$ sends the coproduct of arrows to zero, so that the top row of the square diagram is a pushout of the lower rows of the square diagram, we see that the diagram is a pullback. Therefore, we have proven that the diagram above is a pullback, and hence, the left vertical arrow in the lower right corner of the square diagram is an identity. Therefore, $g$ sends the coproduct of arrows to zero, so that the top row of the square diagram is a pullback of the lower rows of the square diagram. On the other hand, $\pi^{*}(f) = \id$ and $\pi^{*}(g) = \pi^{*}((f \times_{H^{\times}(G(n))} g) \times_{H^{\times}(G(n))} f)$. As before, this shows that the diagram above is a pullback, and hence, the left vertical arrow in the lower right corner of the square diagram is an identity. Thus, we can conclude that the unit arrow $\pi^{*}(f)$ and the composition arrow $\pi^{*}(g)$ are the identity functors. Thus, $\FS(\mathcal{C})$ is a Grothendieck category. 
+
+It remains to show that the category $\FS(\mathcal{C})$ is an additive category. Consider a sheaf on $X$ in $\mathcal{C}^{\mathcal{Z}}(\mathcal{C})$. Let's first notice that the map $\pi^{*}(g) \times_{H^{\times}(G(n))} \pi^{*}(f)$ is an isomorphism. We will show this by proving that $\pi^{*}(g) \times_{H^{\times}(G(n))} \pi^{*}(f)$ sends the coproduct of arrows to zero. Let us first consider the identity morphism. Since $h$ sends the coproduct of arrows to zero, the two morphisms are equal. Thus, this shows that $\pi^{*}(g) \times_{H^{\times}(G(n))} \pi^{*}(f)$ is an isomorphism. Now let $a,b: G(n) \rightarrow G(n + 1)$ be two morphisms such that $ab = a^{-1}b$. We want to prove that, for all objects $Y$ in $\mathcal{C}$, the morphisms $\pi^{*}(ab): \mathcal{C}/\{Y\} \times_{H^{\times}(G(n))} \mathcal{C}/\{X\} \rightarrow \mathcal{C}/\{Y\} \times_{H^{\times}(G(n))} \mathcal{C}/\{X\}$ are mutually inverse to each other. As noted above, they preserve the identity on each level.
+
+From the discussion above, we have proved that if $a$ and $b$ are two morphisms, then the following equalities hold, where $c := h^{-1}$, $d := h^{-1}$, $e: G(n) \rightarrow G(n + 1)$ and $f: G(n + 1) \rightarrow G(n)$ are identities.
+\[
+\begin{array}{ccccl}
+a \circ c &= ab & d \circ b &= cd & e \circ d &= fe & f \circ e &= af
+\end{array}
+\]
+So, $\pi^{*}(ab) \circ c = a^{-1} \circ c = ab \circ c$ and $\pi^{*}(ad) = ad$. Now consider the diagram like the diagram above. Let $X$ be an object of $\FS(\mathcal{C})$. Let us fix a point $y: X \rightarrow Y$.
+
+There is a pushout of squares along the diagonal edges like the diagram above. The vertical arrow is identified with the unit map $\pi^{*}((f \times_{H^{\times}(G(n))} g) \times_{H^{\times}(G(n))} f)$. Hence, we can identify the vertical arrow with an arrow in $\mathcal{C}$. For each edge in the lower right corner of the diagram, let us identify it with an arrow in $\mathcal{C}$. We will now
+\end{document}
+ investigate the identification between these identifications.
+
+In the first row, the diagonal edge of the pushout represents an isomorphism between two objects of the pullback. We want to identify them. Let $i$ be an object of $\mathcal{C}$ and let $j$ be another object in $\mathcal{C}$. Then we have an arrow $f \times_{H^{\times}(G(n))} g$ in $\mathcal{C}/\{X\}$, which is clearly a morphism. 
+
+In the second row, the diagonal edge of the pushout represents an isomorphism between two objects of the pushout of the diagram. We want to identify them. Let $k$ be an object of $\mathcal{C}$ and let $l$ be another object in $\mathcal{C}$. Then we have an arrow $g \times_{H^{\times}(G(n))} f$ in $\mathcal{C}/\{X\}$, which is clearly a morphism.
+
+On the other hand, we have an arrow $f \times_{H^{\times}(G(n))} g$ in $\mathcal{C}/\{X\}$, which is clearly a morphism. Hence, we have identified the right

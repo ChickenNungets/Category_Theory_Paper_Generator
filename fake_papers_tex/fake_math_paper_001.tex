@@ -1,0 +1,153 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{The Sheaffification of Finite Groups}
+\author{Max Vazquez}
+\maketitle
+
+
+In this article we introduce the sheafification theorem for finite groups. This is a classical result which combines a result from  group theory and an algorithm to prove that if a finite group $G$ is finite over a finite field $\mathcal{F}$, then every subgroup $H$ of $G$ has the form $\mathcal{F}^{d}$. We follow two approaches in order to derive the sheafification of finite groups: the first approach is based on the sheafification of finite abelian groups and proves the formula for any finite group. The second approach uses Frobenius embeddings and proves that all sheaves have finite homology when viewed as a sheaf. In particular, the second approach allows us to verify the sheafification of a finite group which can be used to verify various other results such as Tambara--Venkateswari quotient theorems or the existence of subgroups of finite groups that are closed under direct summands. 
+
+
+
+
+We begin by introducing the sheafification theorem: it states that if a finite group $G$ is finite over a finite field $\mathcal{F}$ then there exists an injective sheaf $S:\mathcal{F}\rightarrow \Aut(G)$ such that $H^0(\mathcal{F}^d)=S^0(\mathcal{F}^d)$. To state the main result of our paper, we need to explain how finite groups are generated and related to these finite abelian groups. In Section \ref{sec:defining_finite_groups}, we describe finite groups as finite abelian groups with the property that they consist of a finite number of direct summands up to a given degree. Among them are the regular abelian groups $\Z/n$, $\Z/2$, $\Z$, $\mathbb{N}/\Z$. 
+
+Let us define the sheafification of a finite group $\mathcal{G}$. First of all, we define it by simply assigning its base field $\mathbb{R}^{\leq k}$ to itself and making it a finite abelian group. Then, let $G$ be a finite group over a field $\mathcal{F}$ equipped with an embedding $\mathcal{F}\hookrightarrow \mathcal{G}$. Using the Frobenius group structure on $\mathcal{F}$, we can write $H^0(\mathcal{F}^d)=S^0(\mathcal{F}^d)$. Thus, the base field of $\mathcal{F}^d$ is defined as follows. For $\tilde{i}< \tilde{k}$, we define $|H^0(\mathcal{F}^d)_{\tilde{i}}|=|H^0(\mathcal{F}^d)|_{\tilde{i}}$ and $|H^0(\mathcal{F}^d)_{\tilde{i}}\cup_{n \in \mathbb{N}} H^0(\mathcal{F}^d)|_{\tilde{i}}$. We call the base field of $\mathcal{G}$ the {\em fixed point of} $\mathcal{F}^d$, denoted $|D_{d,\tilde{i}}^{\tilde{i}|}.$ Let $\tau_i$ denote the subgroup of $\mathcal{F}^d$ consisting of $|D_{d,\tilde{i}}^{\tilde{i}|}$ for all $\tilde{i}< i$. Since $\mathcal{G}$ is finite, for each $\tilde{j}\leq i$, we have $\tau_i=\tau_j.$ It remains to show that $H^0(\mathcal{F}^d)^{\geq \tau_{i-1}+1}=S^0(\mathcal{F}^d)^{\geq \tau_{i-1}+1}$ for all nonnegative integers $i\geq 1.$ This amounts to showing that the only direct summands in $|D_{d,\tilde{j}}^{\tilde{i}-1}|$ are ones with $|D_{d,\tilde{j}}^{\tilde{j}+1}-|D_{d,\tilde{j}}^{\tilde{j}-1}$ negative signs. If so, we know that $|\tau_j|\leq |\tau_i|$ and $|H^0(\mathcal{F}^d)_{\tau_i}|=\pm |H^0(\mathcal{F}^d)|_{\tau_i},$ where $|D_{d,\tau_i}|$ is the direct summand of $\mathcal{F}^d$ having positive sign. However, the fact that $|H^0(\mathcal{F}^d)|_{\tau_i}$ is always zero is easily seen by applying the fact that $|H^0(\mathcal{F}^d)|=|H^0(\mathcal{F}^d)^d|$ using $\theta=\frac{\sqrt{-1}}{\sqrt{-1}}$. Therefore, we see that $|H^0(\mathcal{F}^d)|_{\tau_i}=0$ if and only if $|\tau_i|>|\theta|^{-1}$ (see e.g.~\cite[Section~5.3]{Pries:AbelianGroups}). This implies that every term appearing in the representation $S^0(\mathcal{F}^d)^{\geq \tau_{i-1}+1}$ is exactly $|D_{d,\tilde{j}}^{\tilde{i}-1}|\times |D_{d,\tilde{j}}^{\tilde{j}+1}|.$ By using the factorisation of the representation of $|H^0(\mathcal{F}^d)|$ in terms of the two distinct positive integers, we see that $|D_{d,\tilde{j}}^{\tilde{i}-1}| = |D_{d,\tilde{j}}^{\tilde{j}+1}| \mid |D_{d,\tilde{j}}^{\tilde{j}+1}|-\mid = 2$ and that $|D_{d,\tilde{j}}^{\tilde{j}+1}|= |D_{d,\tilde{j}}^{\tilde{i}+1}|.$ 
+
+It remains to show that $H^0(\mathcal{G})$ is an injective sheaf $\hat{S}: \Aut(G)\rightarrow \mathbb{R}^{\leq k}$. Observe that $H^0(\mathcal{G})$ admits a left adjoint $L(\hat{S}):\mathbb{R}^{\leq k}\rightarrow \Aut(G)$ by applying $L(\hat{S})_n:=H^0(\mathcal{G}_n)$ for every $n\in\mathbb{N}$ (where $H^0(\mathcal{G}_n)$ is the product of $H^0(\mathcal{G})$ up to truncation). On the other hand, it follows that for any field $\mathcal{F}$ equipped with a Frobenius group embedding $\mathcal{F}\hookrightarrow \mathcal{G}$, $L(\hat{S})_{\omega}(\mathbb{Q})=\sum_{r \geq 0} \left(\sum_{t=0}^{r} c_{tr}(-1)^{r+1}\right)^{r}$.  Also, $L(\hat{S})_{\omega}(\mathbb{C})=\prod_{r \geq 0} \left(\prod_{t=0}^{r} c_{trc}(-1)^{r+1}\right)^{r},$ where $c_{tr}(-1)^{r+1}=(c_{tr})^{-1}(r),$ $c_{trc}(-1)^{r+1}=(c_{trc})^{-1}(r)$ are respectively constant matrices whose entries $c_{tr}(i)$ correspond to the entries $c_{tr}(-1)^{r+1}$ for all $i\geq 0$ and $c_{trc}(-1)^{r+1}=(c_{trc})^{-1}(r)$ corresponds to the entry $c_{trc}(r)$. 
+
+As before, using the fact that $S^0(\mathcal{F}^d)^{\geq \tau_{i-1}+1}=S^0(\mathcal{F}^d)^{\geq \tau_{i-1}+1}_{[0]}\subseteq H^0(\mathcal{F}^d)$ and by applying $\theta=\frac{\sqrt{-1}}{\sqrt{-1}}$ it remains to show that $\hat{S}$ is an injective sheaf. To do this, we must first prove that $L(\hat{S})_{\omega}(\mathbb{Q})=\sum_{r \geq 0} \left(\sum_{t=0}^{r} c_{tr}(-1)^{r+1}\right)^{r}$ is an injective sheaf over $q_{\omega}$ such that $L(\hat{S})_{\omega}(\mathbb{Q})=\sum_{r \geq 0} \left(\sum_{t=0}^{r} c_{tr}(-1)^{r+1}\right)^{r}$, where $c_{tr}(-1)^{r+1}=(c_{tr})^{-1}(r),$ $c_{trc}(-1)^{r+1}=(c_{trc})^{-1}(r)$ are respectively constant matrices whose entries $c_{tr}(i)$ correspond to the entries $c_{tr}(-1)^{r+1}$ for all $i\geq 0$ and $c_{trc}(-1)^{r+1}=(c_{trc})^{-1}(r)$ corresponds to the entry $c_{trc}(r)$. This is easy to check since $L(\hat{S})_{\omega}(\mathbb{Q})=\sum_{r \geq 0} L(\hat{S})_{\omega}(\mathbb{Q})_{\{r \geq 0\}}=0$. Moreover, this statement holds because every term appearing in $S^0(\mathcal{F}^d)^{\geq \tau_{i-1}+1}$ is exactly $|D_{d,\tilde{j}}^{\tilde{i}-1}| \times |D_{d,\tilde{j}}^{\tilde{j}+1}|,$ where $|D_{d,\tilde{j}}^{\tilde{i}-1}| = |D_{d,\tilde{j}}^{\tilde{j}+1}| \mid |D_{d,\tilde{j}}^{\tilde{j}+1}|-\mid = 2$ and that $|D_{d,\tilde{j}}^{\tilde{j}+1}|= |D_{d,\tilde{j}}^{\tilde{i}+1}|.$ 
+
+
+Next, we want to show that $L(\hat{S})$ is an injective sheaf over $q_{\omega}$ such that $L(\hat{S})=\sum_{r \geq 0} \left(\sum_{t=0}^{r} c_{tr}(-1)^{r+1}\right)^{r}$ is an injective sheaf. The last statement is immediate by Proposition \ref{prop:injective_sheaf}. Let $y:\Aut(G)^*\rightarrow q_\omega$ be an injective sheaf over $q_{\omega}.$ For $x:\Aut(G)\rightarrow q_\omega$ we define $y_x: G\rightarrow S(x)$ by sending $(n,x_{k})$ to $(\sigma_{\partial n},\alpha_n^{-1} x_k)$, where $\sigma_{\partial n}:=\sum_{q=1}^{n+1} (-1)^{r_{\partial n}}  \sum_{p=0}^{q} \id_r_{p}\cdots \id_r_{r}$ is the $q$-partial sequence and $\alpha_n^{-1} x_k$:=$\left(\id_{n+1} + \sum_{q=1}^{n+1} (-1)^{r_k} \sum_{p=1}^{q} - \sum_{p=0}^{q} \id_r_{p}\cdots \id_r_{r}\right)(n,x_{k}),$ where $\id_{n+1}$ is the $n$th identity matrix with $\sum_{q=1}^{n+1} (-1)^{r_k} \sum_{p=1}^{q} (-1)^p\id_{r_{q}}\cdots (\id_{n+1}+\sum_{p=1}^{n+1} (-1)^{r_{q-1}})x_{k} $. We also define $\hat{y}:\Aut(G)\rightarrow \mathbb{R}^{\leq k}$ by $\hat{y}(n,x_{k}):=|y_x|_{\sigma_{\partial n}},$ where $|y_x|_{\sigma_{\partial n}} := \sum_{p=0}^{r_k} y_px_k.$ 
+
+
+Finally, we show that $L(\hat{y})\circ S\sim S^{-1}$ for any injective sheaf $X:\Aut(G)\rightarrow q_\omega$ such that $S^{-1}X=\sum_{r \geq 0} \left(\sum_{t=0}^{r} c_{tr}(-1)^{r+1}\right)^{r}$ is an injective sheaf over $q_{\omega}.$ Notice that in order to obtain this we need to compute a direct sum of terms in the representation of $S(x)$ that will end up being $x_{k}y_x.$ Recall that $Y=\sum_{r \geq 0} \left(\sum_{t=0}^{r} c_{tr}(-1)^{r+1}\right)^{r}$ is an injective sheaf over $q_\omega$ such that $\mathcal{L}(\hat{y})=Y$ and hence  $y=\sum_{r \geq 0} \mathcal{L}(\hat{y})_{\{r \geq 0\}},$ where $\mathcal{L}(\hat{y})_{\{r \geq 0\}} = \left(\sum_{r \geq 0} \left(\sum_{t=0}^{r} c_{tr}(-1)^{r+1}\right)^{r}\right)^{-1},$ where $\mathcal{L}(\hat{y})_{\{r \geq 0\}}=\left(\sum_{r \geq 0} \left(\sum_{t=0}^{r} c_{tr}(-1)^{r+1}\right)^{r} - \sum_{r \geq 0} \mathcal{L}(\hat{y})_{\{r \geq 0\}},$ where $\mathcal{L}(\hat{y})_{\{r \geq 0\}}=(\id_{r}+ \sum_{r \geq 0} (-1)^r c_{rt} +\sum_{r \geq 0} \mathcal{L}(\hat{y})_{\{r \geq 0\}},$ where $c_{rt}=-c_{t}c_{r}$ and $\mathcal{L}(\hat{y})_{\{r \geq 0\}}=\sum_{r \geq 0} (-1)^r(r+1)c_{rt} + \sum_{r \geq 0} \mathcal{L}(\hat{y})_{\{r \geq 0\}}$. Now, since $\mathcal{L}(\hat{y})_{\{r \geq 0\}}$ is invertible, the product $(\id_{r}+ \sum_{r \geq 0} (-1)^r c_{rt} + \sum_{r \geq 0} \mathcal{L}(\hat{y})_{\{r \geq 0\}})$ equals $x_{ky}.$ Using the Frobenius embedding $\mathcal{F}\hookrightarrow \mathcal{G}$ and by applying $L(\hat{y})_{\{r \geq 0\}}=Y$ above it now shows that $Y=X$ where $S^{-1}X=X$ for any injective sheaf $X$ over $q_\omega.$  
+\end{proof}
+
+
+In particular, if $\mathcal{F}$ has a finite number of direct summands up to degree $r\geq 1$, then the direct summands of $S^0(\mathcal{F}^d)$ that are not part of $H^0(\mathcal{F}^d)$ are called the {\em sheaf terms.} If the number of sheaf terms is odd, then the direct summands in $S^0(\mathcal{F}^d)$ are even; otherwise they are odd. The number of sheaf terms is equal to the number of direct summands minus one.\footnote{Recall that a polynomial ring $M$ is said to be {\em a commutative ring} if the number of factors of any element in $M$ by both the multiplicities of its coefficients are equal to 1.}
+
+The first step we take in order to use the sheafification theorem is to generalize the construction of subgroups of finite groups into abelian groups: taking their representation in $k$-dimensional vector space where the space of elements is $\mathbb{R}^{\geq r+1}$ for some $r>0$. So, it turns out to be a relatively simple task to construct a sheaf for finite abelian groups over a finite field $\mathcal{F}$ with finite number of direct summands. If $\mathcal{F}$ has a finite number of direct summands, the resulting $\mathcal{F}^*$ abelian group has a finite number of direct summands. Indeed, note that for all $r$ and $m>0$, the direct summands of $S^0(\mathcal{F}^d)^{\geq m}$ are exactly the $r$-th degree terms, i.e. all the representations $S^0(\mathcal{F}^d)^{\geq m}=\left(e^{-\frac{r}{m}\phi(r)},x_{r-1}\right)$ for $r>0,\phi(r):=\frac{r}{m},$ for all $r>0,\phi(r)>0.$ In particular, we get the following result.
+
+
+
+\begin{corollary}\label{cor:sheaf_over_field}
+If $\mathcal{F}$ has a finite number of direct summands then the $\mathcal{F}^*$ abelian group has a finite number of direct summands.
+\end{corollary}
+
+
+The next step in the proof involves using the sheafification theorem in order to establish the existence of finite sheaves over a finite field which are injective over $\mathbb{R}$. We begin with the simplest case of finite fields. Consider a finite field $\mathcal{F}$. For a finite group $G$ over $\mathcal{F}$, the canonical sheafification of $G$ is equivalent to the sheaf over $\mathcal{F}$. We now consider finite fields that admit a finite number of direct summands up to degree $r\geq 1$. 
+
+\begin{lemma}
+The category of finite fields with finite number of direct summands is equivalent to the category of finite groups over a finite field which is equivalent to the category of finite abelian groups.
+\end{lemma}
+
+\begin{proof}
+Let $\mathcal{F}$ be a field with finite number of direct summands and suppose that for all $r>0$ we have
+$$
+X^r=\sum_{s>0}x^{\sum_{t=0}^{s} t}-\sum_{t=0}^{r}x^{\sum_{s=0}^{t} s}.
+$$
+Therefore, there is a unique sheaf over $\mathcal{F}$ $X^{n}:=\sum_{s=0}^nx^{\sum_{t=0}^{s} t},$ for all $n$. 
+
+By the induction hypothesis on $r$, we know that $X^{n}$ has enough direct summands for $n>0$. Consider now a direct summand of $X^{n}$. Since $X^{n}$ has $n$ direct summands, we have $\sum_{t=0}^{n-1}x_{t+1}=0$ and thus $x_{n}=0.$ Therefore, we must have $n=0.$ 
+
+So far, the induction step showed that $X^{n}$ has enough direct summands. Since $\mathcal{F}$ has a finite number of direct summands, by using the definition of an injective sheaf on $\Aut(G)$, we may make the assumption that the number of direct summands in $X^{n}$ is exactly $n-1.$ Now, the sum of the direct summands in $X^{n}$ is exactly $0$ and therefore $x_{n}=0.$ 
+
+This completes the proof. 
+\end{proof}
+
+Since finite fields with finite number of direct summands are equivalent to finite groups over finite fields, there is a bijection between finite sheaves on finite fields and finite abelian groups.
+
+\begin{lemma}\label{lem:injection_functor_on_sheaves}
+If $\mathcal{F}$ is a finite field with finite number of direct summands then the functor
+\[
+S: \Mod(\mathcal{F})\rightarrow \Mod_{\mathcal{F}}(\mathbb{Z})
+\]
+is an injection. 
+\end{lemma}
+
+\begin{proof}
+Take $E=S(X)$ where $X:\mathcal{F}\rightarrow \mathbb{Z}$. Let $A=\colim_{n \geq 0}X^{n},$ so that $A\subseteq E$. By the previous lemma, this gives rise to a functor $S: \Mod(\mathcal{F})\rightarrow \Mod_{\mathcal{F}}(\mathbb{Z})$ such that $S^{-1}(A)=A.$ Since $X$ is injective and $S$ is an equivalence, it follows that $S^{-1}(A)\subseteq A.$ By the definition of a sheaf on a finite field, this is precisely the same as saying that $S^{-1}(A)$ is injective. 
+\end{proof}
+
+Let us now discuss some other examples of injective sheaves which are more natural than finite sheaves. 
+
+\begin{lemma}\label{lem:injective_sheaf_on_prime_fields}
+If $\mathbb{P}$ is a prime field, then $S: \Mod(\mathbb{P})\rightarrow \Mod_{\mathbb{P}}(\mathbb{Z})$ is an injection.
+\end{lemma}
+
+\begin{proof}
+Take $E=S(X)$ where $X:\mathbb{P}\rightarrow \mathbb{Z}$ is the complex of a finite field with infinite direct summands, such that $X^{0}=0.$ Since $X$ is injective, this gives rise to a functor $S: \Mod(\mathbb{P})\rightarrow \Mod_{\mathbb{P}}(\mathbb{Z})$ such that $S^{-1}(A)=A$ for all finite abelian groups $A$. So $S^{-1}(A)\subseteq A$.
+\end{proof}
+
+
+\section{Finite Groups and Sheaves Over finite Fields}
+
+We now turn to the application of the sheafification theorem. In fact, we should be able to show this by first preforming the algebraic geometry of finite fields. The main difficulty is that finite groups form an algebraically closed category. A direct translation to vector space is not possible because of finite number of direct summands up to degree $0$. We use the sheafification theorem on finite fields instead. More generally, we consider finite fields which are connected via a finite number of linear forms. We say that such finite fields are {\em injective.} The next result is related to the results of the second author:
+
+\begin{proposition}\label{prop:infinite_projective}
+Let $\mathcal{F}$ be a finite field with finite number of direct summands up to degree $r>0$ with nonzero elements. Then the sheaf over $\mathcal{F}$ has a finite number of direct summands up to degree $r$. 
+\end{proposition}
+
+\begin{proof}
+We are going to prove the claim using a different method. Suppose $\mathcal{F}$ has no zero elements. That means for all $r$, we have $X^{r}=0$ whenever $X^{\infty}=0$. Take $r'=\infty+r$ and assume that all nonzero elements of $X$ are zeros except the $0$th element. Then the only element of $X$ which has nonzero coefficient is $\frac{x^{r'}x^r}{r}$ where $x$ is a nonzero element. More precisely, $x^{r'}=\sum_{k=1}^m p_ik$ for some $m$ and $p_ij\in\mathbb{P}$. Consider the linear combination of the $r'$ terms of $X$ which includes the element of $\mathbb{P}$ and the corresponding linear combination of the zero terms of $X$. Thus, we conclude that the linear combinations of the $r'$ terms of $X$ and those of $X$ themselves are zero. Therefore, $r'=r$. 
+
+Note that since $X$ is injective, we can take $r=r'$ without any additional assumptions. It turns out to be quite hard to work with finite groups due to the difficulty of representing in a vector space. Therefore, in this section we concentrate on injective sheaves on finite fields. For the purposes of this chapter, we fix a finite field $\mathcal{F}$ which has finite number of direct summands up to degree $r$. This assumption ensures that we can represent in a vector space $V$ of basis vectors $v^{(n)}$ for some $n>0$ in $\mathcal{F}^n$ without any additional assumptions. We then have $\mathcal{F}\hookrightarrow V$ and $\Aut(G)$ is the automorphism group for the finite group $G$ over $\mathcal{F}$, with the direct summands of $\mathcal{F}$ being taken to be real numbers. 
+
+For a finite group $G$ over a field $\mathcal{F}$, we can use the Frobenius group structure on $\mathcal{F}$ to define its autonomous representation $\mathcal{F}^d$ by taking its power series $S(\mathcal{F}^d)=\sum_{r \geq 0} \left(\sum_{s=0}^{r} x^s\right)^{r}$. If the representation of $S(\mathcal{F}^d)$ consists of the product of direct sums of the elements of $\mathcal{F}^d$, then $S(\mathcal{F}^d)=\prod_{r \geq 0} S(\mathcal{F}^d)_r$ and hence we have $S(\mathcal{F}^d)=\sum_{r \geq 0} S(\mathcal{F}^d)_r$ where we used the fact that $|H^0(\mathcal{F}^d)|=\sum_{r \geq 0} |\mathcal{F}^d_|_{\tau_r}$ for some $\tau_r>\epsilon.$ In particular, we have $S(\mathcal{F}^d)=\sum_{r \geq 0} \left(\sum_{s=0}^{r} x^s\right)^{r}.$ Moreover, the direct summands of $S(\mathcal{F}^d)$ form a full subcategory of $H^0(\mathcal{F}^d)$. 
+
+Now, we let $r<\infty+r'$ and assume that for all $n\geq 0$ the element $X_{n}:=\sum_{k=0}^{n} x_{k}v^{(k)}$ has nonzero coefficient $x_{n}$. We wish to show that the image of $X_{n}$ over $\mathcal{F}$ is a finite group $\mathcal{G}$ over $\mathcal{F}$ which is generated by the $n$ direct summands of $X_{n}$. In order to do this, we need to find a basis for $\mathcal{F}^d$ of the form $\prod_{k=0}^{n} v^{(k)}.$ We first observe that the sum of all $p_i$ is exactly $1.$ As an argument of the previous lemma, since $\mathcal{F}$ is a finite field, this equation follows from the assumption that $x_{0}$ is a primitive root of unity and that $v^{(0)}$ is an integer multiple of $p_{0}$ for all $0<n\leq r'.$ 
+
+To see why this works, notice that $X_{n}$ is a finite group which contains only the products of elements of $\mathcal{F}^d$ over $X$ since the direct summands of $X_{n}$ are the direct sums of $X$ over $X$ and hence $\prod_{k=0}^{n} x_{k}v^{(k)}=X_{n}$. Thus, if we consider a linear combination of $r'$ elements in $X$, these include $x_{n}$ and so they are all nonzero and hence we are done.
+\end{proof}
+
+The reason that such large categories have finite number of direct summands is that $S(\mathcal{F}^d)=\prod_{r \geq 0} S(\mathcal{F}^d)_r$ for all finite groups $G$ over $\mathcal{F}$. From the previous proof we can immediately deduce that the representation of $S(\mathcal{F}^d)$ is a product of direct sums of elements of $\mathcal{F}^d$. Thus, one can take the Frobenius embedding $\mathcal{F}\hookrightarrow \mathcal{F}^d$ and apply the sheafification theorem again. This gives rise to the following result:
+
+\begin{theorem}\label{thm:sheafify_finite_groups}
+For any finite group $G$ over a finite field $\mathcal{F}$ we obtain a sheaf over $\mathcal{F}$ over $\mathbb{Z}$, called the sheafification of $G$ over $\mathcal{F}$, with finite number of direct summands up to degree $r>0$. In particular, for any finite group $G$ over a finite field $\mathcal{F}$ we obtain a sheaf over $\mathcal{F}$ over $\mathbb{Z}$, called the sheafification of $G$ over $\mathcal{F}$.
+\end{theorem}
+
+We briefly recall the concept of a sheaf and sheaf theory, which were introduced in \cite{Shulman:3851091}. The authors introduce the idea of a {\em finite sheaf} or {\em finite topology} on an abelian category. They say that a sheaf $X:\mathcal{A}\rightarrow \mathcal{B}$ is a finite topology on an abelian category $\mathcal{A}$ if for every compact projective object $X(0)$ the image of $X$ along $\mathbb{Z}$ is a finite group over $\mathbb{Z}.$
+
+Let $\mathcal{F}$ be a field with finite number of direct summands. The {\em Frobenius group of finite group $G$} over $\mathcal{F}$ is defined by $\mathcal{F}^G=\left\{k\in \mathbb{Z}\mid k^2 \equiv 1\right\}=\left\{k\in \mathbb{Z}\mid k\cdot k = 1\right\}.$ One needs to ensure that $\mathcal{F}^G=\left\{k\in \mathbb{Z}\mid k^2 \equiv 1\right\}$ is a perfect field since the field $k\cdot k$ has no inverse element. Let us also note that $k\cdot k\neq 1$ for all $k\in \mathbb{Z}$, which means that $\mathcal{F}^G$ is not an injective field. 
+
+
+
+\subsection{Sheaves on finite fields and finite groups over a finite field}
+
+In this section, we investigate the relationship between finite sheaves and finite groups over a finite field $\mathcal{F}$ and prove that the sheafification of finite groups is independent of the choice of the base field $\mathcal{F}$ and the choice of the linear group $\mathbf{G}$. Let us first introduce a few basic concepts to simplify our analysis:
+
+\begin{definition}\label{def:sheaf}
+A {\em finite sheaf} on a category $\mathcal{A}$ is a functor
+\[
+\begin{tikzcd}[column sep=scriptsize]
+\mathcal{A} & \mathcal{A}^{op} \\
+\mathcal{A}^{\mathrm{op}} & \mathcal{A}^{\mathrm{op}}\text{.}
+\arrow["{\iota}"', from=1-1, to=1-2]
+\arrow["{\bar{S}}"', from=1-2, to=2-2]
+\arrow["{\pi_1}", from=1-1, to=2-1]
+\arrow["{\pi_0}"', from=1-2, to=2-2]
+\end{tikzcd}
+\]
+which sends morphisms in $\mathcal{A}$ to the map
+\[
+\begin{tikzcd}[column sep=scriptsize]
+\iota\circ \bar{S}\colon \mathcal{A} & \mathcal{A} \\
+& \mathcal{A}^{\mathrm{op}}.
+\arrow["{\langle\alpha,\beta\rangle}"', from=1-1, to=2-1]
+\arrow["{\alpha\otimes\beta}", dashed, from=1-1, to=1-2]
+\arrow["{\eta}", dotted, from=
+\end{document}
+1-2, to=2-2]
+\arrow["{S\circ \iota}", dashed, from=1-1, to=2-1]
+\end{tikzcd}
+\]
+Moreover, for any $f:X\rightarrow Y$ in $\mathcal{A}$, the pair $(\alpha,\beta)$ is the pair $((S\circ f)^*(\alpha))\circ S$, i.e. we set $((\alpha,\beta))=(\alpha,\beta,\alpha\otimes\beta)$, and the {\em hereditary kernel} of $f$ is given by $(S\circ f)^{-1}.$ 
+\end{definition}
+
+\begin{example}
+Consider the category of finite groups over $\Z/2$ with cohomology group $H^0(\Z/2)^{\mathbb{Z}_2}$. When $\Z/2$ has finite number of direct summands up to degree $2$, the objects of $\mathcal{G}$ are the elements of the field $k^2 = 1$ where $k$ is an element of $\Z/2$ which are not the coefficients of $\

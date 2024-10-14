@@ -1,0 +1,209 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{Functorialization Of Higher Topos And Their Geometry}
+\author{Max Vazquez}
+\maketitle
+
+
+\section*{Abstract}
+We give a presentation of an important theory in mathematics: the geometry of functors and natural transformations that appears in many modern toposes: topologies, categories, etc.
+The goal of this article is to present our results on the subject of geometry. We will be looking at some basic facts about functors, their group actions, and more broadly how functors arise as geometric objects in topological structures. Finally, we will take a look at our main result, which concerns topological sets and its categorical applications to combinatorics.
+
+The most prominent paper I've found in this direction in my research has been by \textit{Lemay}. This paper shows that an algebraic structure $\mathcal S$ determines a space $\mathbb 1_{\mathcal S}$ (one with infinite elements). In other words, $\mathbb 1_{\mathcal S}$ is a \textit{cocycle} for the commutative semigroup $S = \Coh(\mathbb Z)$ with the group structure determined by the $\mathcal S$ structure. Therefore, a co-algebraic theory $\mathcal T$ encodes information about the relations between the $n$-dimensional spaces. By co-algebraic theory, I mean the same thing as a functorial theory.
+%
+In the context of this paper, $\mathcal T$ could represent the category of finite semisimple $k$-modules and the commutative semigroup $k$. An example of this could be any combinatorial structure $(A, \mu, \nu)$ such that the monoidal unit $I(A) = (0, 0)$.
+In fact, $\mathcal T$ is a category with a bicategory structure defined similarly to a symmetric monoidal category. Furthermore, we will need to make use of the following extra notion of morphism:
+%
+\begin{definition}[Morphisms]
+  A morphism $f : A \to B$ in a category $K$ consists of three data: its input object $A$, its output object $B$, and a function $\mu_{A,B} : A \otimes_K B \to B$.
+\end{definition}
+
+Now, given a space $X$, we can define the cohomology of $X$ via the following definition:
+\begin{definition}[Cohomology]
+	For a topological space $X$, denote by $\mathcal H_X(X)$ its \textit{cohomology}, or simply, its \textit{cohomology class}, whose basis vectors are pairs $(x,y)$ where $x, y$ are linearly independent points in $X$.
+\end{definition}
+
+The most important feature of functors that we need to understand is that they have a ``group action'' associated to them. These are pairs $(\eta_1, \eta_2) \in \Hom_{\mathcal S}(f, g)$ such that the map $h : A \to B$ induces a map of functors
+\[
+\eta_{A \times X} : \Hom_{\mathcal S}(A \times X, B) \to \Hom_{\mathcal S}(A, B).
+\]
+
+We call these two maps being induced by the coalgebra $\mathcal T$ and that we also refer to this as a \textit{coaction}. Since coactions are essentially the same as natural transformations, the name should be understood to correspond to these concepts and will therefore not be used. To help us understand the properties of the action, it might be useful to look at the cohomology in the classical case where the group is denoted by $\mathcal G_\bullet(X)$ for any finite base vector. In general, the cohomology of the space $X$ may differ from the cohomology of another space $Y$. However, the cohomology of $X$ is the cohomology of its quotient $\mathcal S/X$, which is a space without the additional structure of a cohomology class. It is easy to see that the cohomology of $X$ is a quotient of its quotient. Therefore, the cohomology of a space $X$ does not depend on its cohomology of its quotient space, even if one exists. This gives us the notion of a topological space as the coquotient of $X$ itself. Thus, it follows from the properties of the cohomology class that, whenever a space $X$ can be represented by its coquotient of itself (which in the classical setting corresponds to taking its cohomology), then so can all spaces which can be represented by their quotient. The category of coquotients of a category $K$ can be considered as an instance of the category of groups, since it acts like the group actions of a category over itself.
+%
+Furthermore, since the coquotient of a space can be thought of as a space $X \cong K^*$ which is equipped with the same structure of a cohomology class, there exists a canonical map $\iota_{X} : \coker(\iota_{\mathcal C}) \to X$ of spaces which makes it into a coaction.
+%
+Let $\mathcal C := \bigsqcup_{C \in C(k)} C$ be a commutative semigroup, and let $\mathcal S = \mathcal G_\bullet(k)$ be the cohomology class of $k$. Let $X \in K$ be a space, and define $\widetilde{X} = \iota_{X} * \mathcal C$ to be the quotient of $X$ by the coquotient cohomology. Then, $\widetilde{X}$ is a subspace of $X$. Furthermore, note that any coaction of a coquotient of a coquotient is a coaction of the coquotient of the coquotient. Thus, it follows that $\iota_{\mathcal C}^* \widetilde{X} = \iota_{\mathcal C} * X$. Moreover, the map $\iota_{X} : \coker(\iota_{\mathcal C}) \to X$ is uniquely determined by its image under this map.
+%
+Similarly, if $C$ is a commutative commutative semigroup, let $\mathcal C := \bigsqcup_{C \in C(k)} C$ be a commutative semigroup, and let $\mathcal S = \mathcal G_\bullet(k)$ be the cohomology class of $k$. Consider the map $j: S \rightarrow \mathrm{Ker}(\widetilde{\iota})$ corresponding to the map $\iota_{S} * \mathcal C$. Using this, we can now consider the map $\mathcal C \rightarrow \mathcal C$ corresponding to the map $j^{-1}: \mathrm{Ker}(\widetilde{\iota}) \rightarrow S$. In summary, the map $j^{-1}$ defines a map $\mathcal C \to S$ in the sense of \cite{lemay} and the coaction $\iota_{\mathcal C}^{*} * j^{-1}: \mathcal C \rightarrow S$ is the same as the coaction of the map $\iota_{\mathcal C} * j$. The definition of coquotients is entirely left up to the reader, but, conceptually speaking, they provide a way to formulate a \textit{topological factorization system} and we can think of the cohomology class as providing an overall picture of what the space $X$ looks like, from a geometric perspective.
+
+\subsection{Generalized Cohomology}
+In this paper, we focus on functors and their group actions. But first, we begin by recalling some common concepts and concepts needed later in this section. To keep things brief, we omit the details of every concept that we do understand. It is straightforward to learn those concepts when they are very necessary for our purposes.
+
+The notion of a space of functions over a space $X$ has been introduced in \cite{Leary}. This paper assumes that $X$ is a space and that the semigroup $S = \Coh(\mathbb Z)$ has a group action.
+In other words, for any pair of points $x, y$ in $X$, the $S$-module $x,y : X$ is said to be \textit{commutative} if, for any pair of linearly independent points $u,v$ in $X$ and the linear function $h: x \to y$, the following diagram commutes:
+\[\xymatrix@R=5mm@C=5mm{
+	x \ar@{<-} [r]^-{h} & u \\
+	x \ar@{<-} [r]^-{h} & v
+}\]
+However, in the more general setting where there is no explicit choice for $h$ in terms of the commutativity of the two points $x,y$, one can still interpret $x,y$ as a set. In fact, this can even be interpreted as the cohomology class of the coproduct
+\[
+\coprod_{k=0}^{\infty} \{x_i, y_i\}.
+\]
+By now, you probably already know that any two such sets have the same cohomology class because they are equivalent. However, we can interpret $x$ and $y$ as $X$ and $Y$, respectively. In the more general setting where $S$ has an explicit choice for $h$, there is no need to know that the two sets have the same cohomology class. Indeed, this is not possible unless $x,y$ are points of the same type that appear in the map $y_i - x_j$ or $x_i + y_j$ for some $j < i$ for arbitrary $j \neq i$. Therefore, one needs to be careful in interpreting $x$ and $y$.
+
+Therefore, the notion of commutativity comes down to the following two key constructions:
+
+\begin{construction}[Cohomology Class]
+	Given two spaces $X, Y$ in a category $\mathcal C$, the \textit{cohomology class of $X \times Y$} $\mathcal H(X \times Y)$ is given by the set $\mathcal H(X \times Y) := \{e : X \times Y \to S \mid h \mapsto e \circ_X h\}$.
+\end{construction}
+
+For $X, Y \in \mathcal C$, we say that a point $x$ in $X \times Y$ is called an \textit{embedding} if it has a linear function $h$ with counit $e$ that maps $x$ to $x$ and $y$ to $y$, while an \textit{injection} is defined similarly. In particular, if $x$ and $y$ are embeddings, then $x \cdot y$ is an injection, whereas if $x$ and $y$ are injective, then $x \cdot y$ is an embedding. If $X \subseteq Y$ is a subset of $\mathcal C$, we write $X \times Y$ for the space of \textit{linear combinations} of $X$ and $Y$, just as in \cite{Leary}. Note that the notion of embeddings can be seen as a classical characterization of the intersection of two sets of linear functions. For example, given a family of functions $f_{0} : X \to Y, f_{1} : X' \to Y$, a point $x$ in $X \times Y$ that embeds in $X'$ is said to be \textit{compatible with $f_{0}$} if it lies in $X \setminus X'$. The notions of embeddings and compatible with $f_{0}$ are then formalized by a cohomology class (or coalgebra structure) $\mathcal H(X \times Y)$ for $X \times Y$.
+
+Our previous construction is essentially analogous to the classical description of the classical cohomology of a space in terms of its cohomology classes: we just use the cohomology of each set rather than of its union. The main difference is that the points that lie in a cohomology class are interpreted as a point $x$ for $x$ in $X$; in particular, if a point $x$ lies in multiple cohomology classes, then so is its composite of components. Indeed, we now have the following:
+\begin{corollary}[Classical Cohomology Definition]
+	Let $\mathcal C := \bigsqcup_{C \in C(k)} C$ be a commutative semigroup. Let $X$ be a space, and define $\mathcal H_{\mathcal C}(X)$ to be the cohomology class of the coproduct $\coprod_{C \in C(k)} X$.
+\end{corollary}
+
+The reason we need this differentiation is that, depending on the choice of the maps $h$ in $X \times Y$, we could have $x \cdot y$ an embedding but not vice versa. For example, if $X = \{0, 1\}$, and $Y = \{a, b\}$ (where $a$ and $b$ are two disjoint subsets of $\mathbb Z$) then $x \cdot y$ is an injection if and only if the $a, b$ elements intersect in either $x$ or $y$, because $y \cap x = \emptyset$. If we instead consider $X = \mathbb{Z}_{\le n}$ where $n \ge 3$, then $y \cdot x$ is an injection if and only if $a$ and $b$ both contain $x$; this would imply that $a$ and $b$ both contain $y$. As a result, this observation provides a different choice of the maps $x \to y$ from the original ones.
+
+To get back to what we wrote in the introduction, a space $X$ is said to be \textit{simple} if, for any two points $x, y \in X$ such that $x \cdot y = 1$, then so is $x \cdot y$. Similarly, a space is said to be \textit{infinite} if it is simple and finite. It follows easily that the category of simple spaces $\mathcal C^{\bullet}(\mathbb{Z}_{\le n})$ is the category of spaces equipped with a cohomology class, with a well-defined map $\coprod_{C \in C(k)} X \to \mathcal H_{\mathcal C}(X)$, where we added the brackets and dropped the $[$$ \ddots $$ $]].
+
+For $X \in \mathcal C^{\bullet}(\mathbb{Z}_{\le n})$, we have a map of $\mathbb{Z}_{\le n}$-modules
+\[
+I(X) = (0, 0), \quad (x, y) \mapsto (x, y),
+\]
+and a map of groups
+\[
+f_0 : I(X) \to I(Y), \quad (x, y) \mapsto (-x, y).
+\]
+In particular, $f_0$ is a group element and the action of $f_0$ on the group element $x$ is $y$. Moreover, note that $f_0$ is an element of the group $G \langle x \rangle$ for some $x \in I(X)$.
+%
+With these definitions and maps, we can now understand the cohomology class for $X \times Y$ as its coproduct, which coincides with its cohomology. Hence, we can use \textit{generalized cohomology} to understand the classical cohomology for a category $\mathcal C$. We will be interested in understanding generalized cohomology for $S = \Coh(\mathbb Z)$, specifically $S = \Coh(\mathbb Z)_{\le n}$. With these definitions and maps, we can now understand the cohomology class for $X \times Y$ as its coproduct, which coincides with its cohomology. 
+
+As before, the notion of groups provides an instance of the classical description of the cohomology of a space as its cohomology class:
+\begin{lemma}
+	For any group $\mathcal G$ and a finite base vector $b$, the cohomology class of $\langle b \rangle : S = \Coh(G)^{\op}$ consists of exactly $|b|$ base vectors.
+\end{lemma}
+\begin{proof}
+	This is true because, for any finite base vector $b$ and any element $x \in S^n$, $d(b, x) = |b|$. If $x = b$, then $x - b = 0$. So the formula for the cohomology class of $\langle b \rangle : S = \Coh(G)^{\op}$ is $d(b, x) = |\{x| \in S^n\}$. On the other hand, we have the cohomology class $\langle b \rangle := d(b, x) = 1$.
+\end{proof}
+
+It should also be noted that this construction extends to the category of finite sets $S^n$ as a category. Note that the following lemma applies to all $S$-modules, in particular $S^n \simeq \mathbf{N}(\mathbb{Z}_{\le n})$.
+\begin{lemma}
+	If $x$ is a point in $X$, then for any finite base vector $b$, the cohomology class of $\langle b \rangle : S = \Coh(S^n)^{\op}$ consists of exactly $|b|$ base vectors.
+\end{lemma}
+\begin{proof}
+	When $x = b$, it follows from Lemma~\ref{classicalcohomologydef}, that $b = 0$, so $d(b, x) = |\{x| \in S^n\}$ and we have $|\{x| \in S^n\} = |b|$. When $x \neq b$, we have $d(b, x) \neq 1$ by the symmetry of the base vectors of $\Coh(S^n)^{\op}$, but $|\{x| \in S^n\} = |b|$, so $|b| = 1$.
+\end{proof}
+
+We have thus proved the above statement for a finite set $S = \Coh(S^n)^{\op}$. In other words, generalized cohomology provides a very useful tool for thinking about the cohomology class of a category as a product of its cohomology classes. This allows us to construct geometries of the category and hence the classical cohomology class of a category. Moreover, in the following section we show how generalized cohomology can be used to construct generalized cohomology for a category of finite spaces, as a special case of generalized cohomology for all groups. Our discussion of generalized cohomology will be based on the notion of topological factorization systems. 
+
+\subsection{Generalized Cohomology For All Groups}
+We now turn to considering generalized cohomology for a category of finite sets. Before doing so, however, we first review some common notions related to finite sets that will be useful later.
+
+\subsubsection{Euclidean Space}
+A space is said to be an \textit{euclidean space} if it has a unique projective representation. In general, an euclidean space $X$ is said to be \textit{projective} if its dimension $\dim(X) = 1$. Here we denote the dimension of a projective space by $d(X) = \dim(X)$.
+
+An \textit{additive space} is a space $X$ such that the Euclidean distance of any pair of points $x, y$ in $X$ is zero. We denote the space with a single point by $\mathbb{R}_+$ or simply $\mathbb{R}$. Any space with an additive space of the form $X$ is called a \textit{metric space}, and is sometimes written as $X = \mathbb{R}_+$. The space $\mathbb{R}_+$ has an euclidean distance of zero. For example, $\mathbb{R}_+$ is the space consisting of a single point. A space is said to be \textit{nonnegative} if all nonzero values in its domain are positive. One also denotes a space by $\mathbb{Z}_+$ if all zero values in its domain are positive. If $X$ is an additive space, the \textit{codim} of $X$ is the minimal integer value $m(X) \geq 0$. For example, the space of $R$-valued complex numbers $X$ has the codimension of one if $X = R$ and zero otherwise. Similarly, the space of rationals $\mathbb{Q}_+ = \mathbb{R}/\frac{1}{2}$ has the codimension of one if $X = \mathbb{Q}_+$ and zero otherwise.
+
+An $n$-dimensional space $\mathbb{R}^n$ is said to be an \textit{$(n+1)$-vector space} if it is a summand of a nonnegative space satisfying an equation:
+\[
+\sum_{i=1}^n |x_i|^2 \leq 1.
+\]
+Note that $X = \sum_{i=1}^n X_i$, where $X_i$ denotes the $i^{th}$ component of $X$ for $i \in \{1,..., n\}$. Any additive space is said to be an $(n+1)$-vector space. Nonnegative vectors have an euclidean distance of $0$ and vectors of size one have an euclidean distance of $1$. If $X$ is an $(n+1)$-vector space, then the \textit{$n$-th homogeneous matrix} $M_n = \begin{pmatrix} x_1 & \dots & x_n \end{pmatrix}$ with entries $m_ij \in |X_i|^2$ is an $(n+1)$-vector space if, for all $i, j$,
+\begin{align}
+    m_ij &= \left \| \sum_{i=1}^n x_ix_j \right \|^2 - \sum_{i=1}^n |x_ix_j|^2\\
+            &= \sum_{i=1}^n m_{ij} x_ix_j - \sum_{i=1}^n |x_ix_j|,
+\end{align}
+for all $i, j$.
+%
+Here we used the notation of the metric space $\mathbb{R}_+$.
+
+A group $G$ is said to be an \textit{abelian group} if it is an Abelian group or an idempotent group. We denote the space of elements of the abelian group as $\mathbb{Z}^G$. An $m$-module is said to be an \textit{abelian module} if it is an Abelian module or an idempotent module.  An $m$-ring is said to be an \textit{abelian ring} if it is an Abelian ring or an idempotent ring. We denote the space of elements of the abelian ring as $\mathbb{Q}^G$. If $m \in \mathbb{Q}^G$, then we also denote the ring of integers as $\mathbb{Z}^G$. If $m \not \in \mathbb{Q}^G$, we denote the ring of rational coefficients $\mathbb{R}^G$ as $\mathbb{R}$. Any ring $R$ is said to be an \textit{operad} if it is an operadic ring or idempotent ring. If $R$ is an operad, we denote the ring of integers as $\mathbb{Z}^R$ and the ring of rational coefficients as $\mathbb{R}^R$.
+
+We also note that an $m$-module $M$ is said to be an \textit{operadic} if it is an idempotent module or an Abelian module, which are both classes of elements in the opposite subgroups of $R$. A ring $R$ is said to be an \textit{operadic ring} if it is an operad ring.
+
+An $m$-module $M$ is said to be an \textit{operad} if $R = \mathbb{Q}^M$, $R = \mathbb{R}^M$, or $R = \mathbb{Z}^M$ and $M$ is an operad module. More generally, any $m$-module is said to be an \textit{operadic module} if it is an operad module or an additive module. An operad $R$ is said to be an \textit{operadic operad} if it is an operad ring or operadic module.
+
+One often uses the term \textit{operad} in place of the more specific term \textit{operadic ring} or \textit{operadic module}.
+
+%
+
+%\subsubsection{Modules Over Spaces}
+
+Let us now define a new notion of coherent module: the module of coherent modules over a space $X$. A coherent module is defined as follows:
+%
+\begin{definition}[Module of Coherent Modules Over A Space]
+	Let $M := \{x_i\}_{i \in I(X)}$ be a collection of vectors for a space $X$. The \textit{module of coherent modules over $X$} $X$ is given by the sum of $m$ operations
+	\[
+	M = M_0 + \sum_{i=0}^m m_{x_i, x_j} (x_i - x_j).
+	\]
+	If $x, y \in X$ are vectors for the same space, then we call $m_{x,y} : M \otimes M \to M$ a \textit{coherence operation}.
+	An $n$-vectory $x$ is said to be \textit{coherent} if it is a summand of a module over $X$ whose coherent component $M_n := \{x_i\}_{i \in I(X)}$ is coherent.
+	Then, the module of coherent modules over $X$ is the coproduct of the $n$-vectories in $M$ ordered as follows:
+	\[
+	X \oplus (M_n).
+	\]
+	We denote the \textit{coherent module} over $X$ by $M^{coher}$, and the \textit{coherent module over $X$} by $M^{coh}X$.
+\end{definition}
+
+We now show that if a space $X$ is an abelian group, the module of coherent modules over $X$ is a coherent group.
+
+\begin{example}
+	Let $X = \mathbb{R}_+$ be an euclidean space with a single point, and let $G = \mathbb{Z}_+$ be an abelian group. Then the module $M^{coh}X$ of coherent modules over $X$ is a coherent group $G$. Indeed, any vector $x \in M^{coh}X$ has the same dimension as a point $x$. Indeed, it is an additive space and the only map that comes from any point $x \in M^{coh}X$ to any other point $y$ is $1_x$, so $M^{coh}X = \mathbb{Z}_+$.
+\end{example}
+
+Let us also prove that if we pick a finite base vector $b$ for some group $G$, then the coherent module of coherent modules over $X$ is isomorphic to $G^{coh}X$.
+
+\begin{theorem}
+	Let $X = \mathbb{R}_+$ be an euclidean space with a single point, and let $G = \mathbb{Z}_+$ be an abelian group. If $b$ is any finite base vector of $G$, then the coherent module of coherent modules over $X$ is isomorphic to $G^{coh}X$.
+\end{theorem}
+
+\begin{proof}
+	Since every finite base vector of $G$ can be written as a direct sum of elements of $G$, we obtain $b \in G^{coh}X$ such that $m_{b, x} = |x|$. Note that $x = b \oplus |b|$, where $|x|$ denotes the length of $x$. It therefore follows that $m_{b, x} = 0$ for all $x \in G^{coh}X$ whose $b$-component equals $x$. So $m_{b, x} = |x|$.
+	
+	It remains to show that for all vectors $x, y \in X$ such that $b \oplus |b| = |\{x,y\}|$, there exist elements $u, v \in G^{coh}X$ such that $m_{b, x} = m_{b, y}$ and $u \cdot v = x \cdot y$. Since $m$ is a commutative operation and $x \cdot y = x + y$ implies $b \oplus |b| = |\{x,y\}|$, we must check that $m_{b, x} = m_{b, y}$ for all $u, v \in G^{coh}X$ that satisfy $m_{b, x} = m_{b, y}$. So $m_{b, x} = |x| + |y|$.
+	
+	It suffices to show that, for $x, y, z \in X$ such that $b \oplus |b| = |\{x,y,z\}|$, there exists $w \in G^{coh}X$ that satisfies $m_{b, x} = m_{b, y} + m_{b, z}$ and $m_{b, w} = 0$. Since $m$ is a commutative operation and $x + y + z = x \cdot y \cdot z$ implies $b \oplus |b| = |\{x,y,z\}|$, we must check that $m_{b, x} = m_{b, y} + m_{b, z}$ for $u, v, w \in G^{coh}X$ that satisfy $m_{b, x} = m_{b, y} + m_{b, z}$ and $m_{b, w} = 0$. Now by the property of being a direct sum of elements of $G$ and the length of each vector, $m_{b, x} = |x| + |y| + |z|$ and therefore $m_{b, w} = 0$. So $m_{b, w} = 0$ and since $m_{b, x} = m_{b, y} + m_{b, z}$ we must find $w \in G^{coh}X$ such that $m_{b, w} = 0$.
+\end{proof}
+
+\begin{remark}
+	A coherent module over $X$ is said to be \textit{equivariant} if it is a coherent module for all points $x \in X$. Thus, this means that $x$ is an injection in $M^{coh}X$.
+\end{remark}
+
+%
+
+We now discuss the coherent module of coherent modules over $X$.
+
+\begin{proposition}
+	Let $M := \{x_i\}_{i \in I(X)}$ be a collection of vectors for a space $X$. The module of coherent modules over $X$ is isomorphic to
+	\[
+	M^{coh}X := \{x \in M^{coher}X \mid x = m_{x,y} \text{ for all } x \in X \otimes X \} \iso M.
+	\]
+\end{proposition}
+
+\begin{proof}
+	Suppose that $x \in X \otimes X$ with $m_{x,y} \text{ is a coherence operation}$. It follows from Proposition~\ref{coherenceoperation} that $x \cdot y$ is a coherent component of the module $M^{coher}X$. Therefore, we have
+	\[
+	x \cdot y = x \cdot (y \cdot (x \cdot y)) = x \cdot (y \cdot x) + x \cdot (y \cdot y).
+	\]
+	Thus, we can rewrite $x \cdot y = x \cdot x \cdot y + x \cdot y \cdot y$ as $x \cdot (y \cdot y) = x \cdot x \cdot (y \cdot y) + x \cdot y \cdot y$ which is equal to $x \cdot (y \cdot y)$. It follows that $x \cdot y = x \cdot x \cdot y + x \cdot y \cdot y$ holds by applying the equivalence of coherent modules. Therefore, we are done with the proof.
+\end{proof}
+
+We will discuss this proof more generically in \cref{prop:coherentmoduleofcoherentmodules}.
+
+We now show that if $X$ is an additive space, then $X \oplus (M^{coher}X)$ is an additive space.
+
+\begin{lemma}
+	Let $X$ be an additive space, and let $M := \{x_
+\end{document}
+i\}_{i \in I(X)}$ be a collection of vectors for a space $X$. Then the space $X \oplus (M^{coher}X)$ is an additive space.
+\end{lemma}
+
+\begin{proof}
+	By Corollary~\ref{coherenceoperation} the coherent component $M^{coher}X$ is also an additive space. Furthermore, it follows from Theorem~\ref{equivariance} that the product map $m_{X,Y} : X \times Y \to X \times Y$ is an isomorphism for all $X \in I(X)$.
+	Since $M$ is additive, it follows from Lemma~\ref{additivestructure} that there exists $k > 0$ such that the collection of vectors $M_k := \{x_i \mid x_i \in M^{coher}X \}$ is isomorphic to $X \otimes X$. Note that, for any vector $x \in X \otimes X$, the coherent component of $M_k$ is the same as $x$.
+	So

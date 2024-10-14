@@ -1,0 +1,279 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{Topological Manifolds: A Categorical Perspective}
+\author{Max Vazquez}
+\maketitle
+
+
+\begin{abstract}
+    In this work we define a topological perspective for the study of topological manifolds and their connected components. The connection between topology and manifold topology is often referred to as the categorical perspective; it has recently received a great importance in understanding topological quantum field theory. 
+    This paper discusses some of the relevant aspects of the categorical perspective by highlighting some of the many examples that have been developed and demonstrated in recent years \cite{AbelianManifoldTheory, TopologicalModuliFunctions, TopologicalQuantumFieldTheories}. 
+
+    We focus on some examples of topological manifolds with topological interfaces defined using a categorical perspective. Such examples include the manifolds $A_k$, the $\mathbb{R}^{n+1}$-manifold $V_1$, and the $\mathbb{R}^n$-manifold $M^0$. 
+    We also discuss how the categorical perspective allows us to combine topological and manifold topology in a natural way. 
+\end{abstract}
+
+%--- Headings --- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Categorical methods, which have emerged from modern statistical mechanics, allow one to combine both data structures and mathematical models to solve problems. As such, they offer a very flexible methodology for combining models and data from different domains into a single object.
+
+In particular, many categorical methods can be applied to topological problem solving and mathematics. For instance, they are known to have several advantages over classic ones. Some examples of such methods are
+\begin{enumerate}[label=(\roman*)]
+    \item The first is topological methods: these include discrete probability measures and topological maps (e.g., $P_1$). This is because topological systems include more structure than other types of systems. 
+    \item The second is topological geometry. The idea here is that there are many physical phenomena that arise when working with topological systems, including, but not limited to, topological maps and topological spaces. This is because the two ideas are complementary, and even there they are not in harmony.
+    \item The third is nonlinear dynamics. Linear dynamical systems include non-linear equations. These non-linear systems include dynamical systems or models, such as Markov kernels, and the relationships between them include, but not limited to, maps between dynamical systems. This is because topological systems include models, which are not only continuous (for example, an equation), but also non-linear, which is also non-linear (such as time-evolving linear models). 
+    \item The fourth is non-linear programming. Non-linear programming includes computing (and programming) by means of programs. Non-linear programming often involves building a model based on some information about the inputs, and then trying to predict what the output should be. Non-linear programming allows one to understand systems better, and thus makes sense to consider in a category. 
+\end{enumerate}
+
+One prominent example of a topological approach to statistical mechanics is the theory of (non-commutative) manifolds \cite{AbelianManifoldTheory}, where the categories are defined by manifolds, and a morphism from a manifold to another is called a topological map. 
+
+Another interesting feature of topological manifolds is that topological manifolds can be viewed as spaces, i.e., manifolds encompassing an arbitrary number of spaces in $\R^n$. However, this view does not hold true if $n$ is not fixed, i.e., if there is a manifold $X$ of dimension at most $n$. Therefore, some topological manifolds are referred to as {\em non-topological manifolds} instead. One of the most common examples is the manifold $\mathbb{R} = \{0, \infty\}$, which denotes the space of all real numbers. While such a manifold may have a large number of connected components, our examples will primarily use a categorical perspective:
+\begin{enumerate}[label=(\roman*)]
+    \item Let us say that a manifold $X$ is \emph{$n$-dimensional} if there exists a topological map $\phi: X \to \{0,\infty\}^n$ such that $\phi(x) \in X^n$. 
+    \item Let us say that a manifold $X$ is \emph{$n$-continuous} if the topological map $\phi: X \to \{0,\infty\}^n$ satisfies the Einstein sum identities for every element $x$. 
+    \item Let us say that a manifold $X$ is \emph{$n$-topologically flat} if the topological map $\phi: X \to \{0,\infty\}^n$ is the identity function.
+\end{enumerate}
+This gives us a perspective in which the homotopy categories of manifolds and topological manifolds are related by many axioms that can be used to relate manifolds and topological manifolds: 
+\begin{enumerate}[label=(\roman*)]
+    \item A manifold $X$ has no intersection with its boundary. 
+    \item If $m$ is a continuous manifold then each intersection $x \cap y = \emptyset$ if and only if $x$ lies in the interior of $y$ and vice versa. 
+    \item If $X$ is continuous and topologically flat then each boundary face of $X$ is a submanifold. 
+    \item If $f: X \to Y$ is continuous then $f(x)$ and $f(y)$ lie in the same boundary face of $X$ if and only if $f(x) \leq f(y)$ (i.e., if $x$ and $y$ intersect in some direction). 
+    \item If $X$ and $Y$ share the same boundary then $\bigcup_{x \in X} \left\{ x \cap y \right\} = \emptyset$. 
+    \item If $X$ has multiple faces then $X \cap Y = \emptyset$ if and only if either $X$ and $Y$ have no intersection or their intersections do not contain any points that lie in either of $X$ or $Y$. 
+    \item If $X$ has multiple degeneracy maps then $X \cap Y = \emptyset$ if and only if there is a topological map $u: X \to \{0,\infty\}^n$ such that for all $x,y \in X$ there exists $t \in X$ such that $ut = x - y$. 
+    \item If $X$ and $Y$ are disconnected, then $\bigcap_{x \in X} \left\{ y \cap x \right\} = \emptyset$ if and only if $X$ and $Y$ are connected. 
+\end{enumerate}
+These axioms are quite standard, especially since topological manifolds have been shown to satisfy many other axioms as well. These results hold whenever a topological map is continuous. One can even use these axioms to prove converse results about topological manifolds. 
+
+However, these results are not sufficient to obtain a categorical perspective for many fields. For instance, the category of finite dimensional manifolds was defined in \cite{Kriz_2016}, but the axioms it defines do not satisfy all other axioms mentioned above. As a result, topological manifolds were found to have a very high level of complexity. Furthermore, a notion of topology on a topological manifold was never formalized, and thus many classes of topological manifolds do not form a topological manifold (see e.g., \cite{Johnson-Freyd_2013}). 
+
+On the other hand, it is possible to derive a categorical perspective from topological manifolds \cite{ToposSpaceCategories}, where a manifold is considered as a topological space. This paper discusses a few of the main aspects of the categorical perspective that we believe are important. 
+
+\subsection*{Notations and Concepts} 
+We start off with some notations and concepts. We fix notation, like the color red below, to represent continuous functions on $\R$, so that the name of the function is clear. 
+
+
+\begin{definition}[A manifold]
+    An object of a topological space $(X,\mathcal{F})$ is said to be \emph{manifold} if $\mathcal{F}: [0,1]^{n} \to X$ is continuous and $|F| \le 1$.
+\end{definition}
+
+As a topological space $(X,\mathcal{F})$, we refer to its \emph{boundary face} and the \emph{simplex boundary} (or simply \emph{boundary}). Let us briefly recall this convention before discussing the categorical perspective: 
+
+\begin{lemma}[\cite{Cisinski_2018}] 
+    A manifold $X$ is said to be \emph{topologically flat} if $X^2 = \mathbb{R}^n$ where $n$ is some positive integer.
+\end{lemma}
+
+\begin{lemma}[\cite{Zhuang_2017}] 
+    If a manifold $X$ is topologically flat, then it is said to have \emph{total order} with respect to the topological map $h: \{0,\infty\}^n \to X$ where $n$ is some positive integer.  
+\end{lemma}
+
+\begin{lemma}[\cite{Gabriel_2019}] 
+    If $X$ is topologically flat then for any pair of consecutive faces of $X$, $x,y \in X$, there exist only equivalence classes $f_1(x), f_2(y)$ such that $f_1(x) < f_2(y)$ and 
+    \[ 
+        \begin{tikzcd}
+            x \ar[r, "f"] & x \\
+            y \ar[r, "f'"] & y
+        \end{tikzcd}
+    \]
+    is a simple path in $X$.   
+\end{lemma}
+
+Let us give examples of topological manifolds and their boundary faces. 
+
+\begin{example} 
+    The boundary face of $X = \mathbb{R} = \{0,\infty\}^n$ is given by $x + \lambda x^{n-1} \in [0,\infty]$. Note that $x^2 = 0$. 
+
+    The simplex boundary of $X = \mathbb{R} = \{0,\infty\}^n$ is given by $\bigoplus_{k=0}^n \bigl( x + \lambda x^k \bigr)$. 
+    \begin{itemize}
+        \item The simplex boundary of the $\mathbb{R} = \{0,\infty\}^n$ manifold is just the constant function with value 0. 
+        \item The simplex boundary of the $\mathbb{R}^2$ manifold is given by 
+        \[\begin{tikzcd}
+            0 \ar[r] & x + \lambda x^1 \ar[r] & x + \lambda x^2 \ar[r] & \dots \ar[r] & x + \lambda x^n \ar[r] & 0
+        \end{tikzcd}\] 
+        Since $n = 2$, there are only two equivalence classes of faces of $\mathbb{R}^2$. 
+        \item The simplex boundary of the $\mathbb{R}^3$ manifold is given by 
+        \[\begin{tikzcd}
+            0 \ar[r] & x + \lambda x^1 \ar[r] & x + \lambda x^2 \ar[r] & \dots \ar[r] & x + \lambda x^3 \ar[r] & 0
+        \end{tikzcd}\] 
+        Similarly, there are only three equivalence classes of faces of $\mathbb{R}^3$. 
+    \end{itemize} 
+\end{example}
+
+For the next example, let us restrict the definition of a topological manifold to the boundary face $x$ of $X$. 
+We define the \emph{distance measure} $d_x: X \to X$ on a point $x \in X$ by 
+\[
+    d_x(x) = |x - x| < 1.
+\]
+This says that $x$ is away from $x$ by at most 1. Since $\sum_x d_x(x) = 1$, we define $f: X \to \{0,\infty\}^n$ as follows: 
+\[
+    f(x) = x - x. 
+\]
+Then we get the following. 
+
+\begin{lemma}[\cite{Zhuang_2017}]
+    If $X$ is topologically flat, then it is said to have total order with respect to the topological map $h: \{0,\infty\}^n \to X$.
+\end{lemma}
+
+\begin{proof}
+    The proof is similar to that of Lemma \ref{Zhuang_2017}. It suffices to show that the distance measure is a strict partial order. 
+    First, suppose $f: X \to \{0,\infty\}^n$ is continuous. Then there exists $z \in [0,\infty]$ such that $z < f(x)$. This implies that $f'(z) < 0$. Hence, $h$ is continuous and there exists $w_j \in \{0,\infty\}^n$ such that $w_j > z$. Moreover, if $w_i = w_j$, then $0 \leq h(w_i)$ for $i \neq j$. So, since $f(w_i) > z$, we see that $0 \leq f'(w_j)$. Thus, we get the distance measure being a strict partial order, as desired. 
+\end{proof}
+
+\begin{example}
+    The boundary face of $\mathbb{R}^n$ is $x^{n-1} = \frac{x}{n-1}$.
+
+    The simplex boundary of $\mathbb{R}^n$ is given by 
+    \[\begin{tikzcd}
+        0 \ar[r] & x^{n-1} \ar[r] & x^{n-2} \ar[r] & \dots \ar[r] & x^{n-1} \ar[r] & 0
+    \end{tikzcd}\]
+    Thus, the distance measure is total order with respect to the topological map $h: \{0,\infty\}^n \to \mathbb{R}^n$. 
+\end{example}
+
+For the following example, we take the boundary face of $X = \mathbb{R}^n$ to be the function $g: \{0,\infty\}^n \to \mathbb{R}^n$. 
+The distance measure on points $x,y \in X$ is defined on $x \coloneqq x^{-1} + y^{-1}$ and $y \coloneqq x + y$. We therefore set $f(x) = g(x) = x - x$. Note that $g(x^{-1}) = g(x) = 0$ and $g(y) = y$. Since $|x| = |y| = 1$, it remains to show that $f(y) < f(x)$. This amounts to showing that $h(g(x)) < 0$ implies that $g(x) < h(g(x))$, as required. 
+We know that $\mathcal{L}(h): \{0,\infty\}^n \to \mathbb{R}^n$ is continuous and $\mathcal{L}(h)(z) = \frac{g(z)}{|\mathbf{Z}_{\epsilon}|}$. If $h(z) < 0$, then it must be $-\infty$ or $\infty$, i.e., $h(z) = z + |\mathbf{Z}_{\epsilon}|$. In other words, $g(z) = g(z + |\mathbf{Z}_{\epsilon}|)$, which contradicts $g(z) < h(g(z))$. To see this, observe that $x^{-1} < z$. Therefore, we must have $g(z) < h(g(z))$, which contradicts $g(z) < h(g(z)) = g(z)$. Therefore, we get that $g(z) < h(g(z))$. 
+
+In this case, $g(z) = g(z + |\mathbf{Z}_{\epsilon}|$. Similarly, we must have $h(g(z)) = g(z)$. However, this implies that $h(g(z)) < g(z)$, which contradicts $h(g(z)) = g(z)$. This implies that $h(g(z)) = g(z + |\mathbf{Z}_{\epsilon}| - |\mathbf{Z}_{\epsilon}| = g(z + |\mathbf{Z}_{\epsilon}|) - g(z)$, which contradicts $g(z) < h(g(z))$. 
+
+Hence, $h(g(z)) < g(z)$. Now, $g(z)$ is not the same as $z$. Using the distance metric on $x$ and $y$, we obtain that $f(y) < f(x)$. This holds since $\sigma(x)$ and $\sigma(y)$ are equal. 
+\end{example}
+
+\begin{example} 
+    The boundary face of $\mathbb{R}^n$ is given by $\frac{x}{n-1} = x^{n-1}$.
+    
+    The simplex boundary of $\mathbb{R}^n$ is given by 
+    \[\begin{tikzcd}
+        0 \ar[r] & x^{n-1} \ar[r] & x^{n-2} \ar[r] & \dots \ar[r] & x^{n-1} \ar[r] & 0
+    \end{tikzcd}\]
+
+    The distance metric on $x$ and $y$ is total order with respect to the topological map $h: \{0,\infty\}^n \to \mathbb{R}^n$. 
+\end{example}
+
+\begin{example} 
+    The boundary face of $\mathbb{R}^n$ is $x^{n-1} = \frac{x}{n-1} + c^n$. 
+    
+    The simplex boundary of $\mathbb{R}^n$ is given by 
+    \[\begin{tikzcd}
+        0 \ar[r] & x^{n-1} \ar[r] & x^{n-2} \ar[r] & \dots \ar[r] & x^{n-1} \ar[r] & 0
+    \end{tikzcd}\]
+
+    The distance metric on $x$ and $y$ is total order with respect to the topological map $h: \{0,\infty\}^n \to \mathbb{R}^n$. 
+\end{example}
+
+\begin{example} 
+    The boundary face of $\mathbb{R}$ is given by $x = x + \lambda x^1$ and $\lambda x^1 = 0$. 
+    
+    The simplex boundary of $\mathbb{R}$ is given by $\bigoplus_{k=0}^n \bigl( x + \lambda x^k \bigr)$. 
+
+    The distance metric on $x$ and $y$ is total order with respect to the topological map $h: \{0,\infty\}^n \to \mathbb{R}$. 
+\end{example}
+
+\subsection*{Examples} 
+Next, we illustrate some examples of topological manifolds that we wish to illustrate the categorical perspective on. 
+
+\begin{example}
+    \label{fig:top-manifold}
+    Suppose that we want to define the space of topological manifolds. We set $\mathcal{T} = \{A_k, V_1, M^0\}$. The objects in $\mathcal{T}$ are manifolds together with the topological maps, called $B$, $M$ and $V$ respectively. Let us introduce the following notation. Consider the set $\mathcal{L}(A_k): \{0,\infty\}^k \to A_k$ for all $k \in \mathbb{N}$, which we denote by $\mathcal{L}(A_k)$. In other words, $\mathcal{L}(A_k)(x) = \{ x - \sqrt{1-\lambda x^2}, x + \sqrt{1-\lambda x^2}\}$. Then $B$ is the topological map given by $B = \mathcal{L}(A_k)^{-1} + h: B \to A_k$ for some constant $h$. 
+\end{example}
+
+\begin{example}
+    Suppose that we want to define the space of topological manifolds. We set $\mathcal{T} = \{A_k, V_1, M^0\}$. The objects in $\mathcal{T}$ are manifolds together with the topological maps, called $B$, $M$ and $V$ respectively. Let us introduce the following notation. Consider the set $\mathcal{L}(V_1): \{0,\infty\}^k \to V_1$ for all $k \in \mathbb{N}$, which we denote by $\mathcal{L}(V_1)$. In other words, $\mathcal{L}(V_1)(x) = \frac{x - \lambda x}{2 + \lambda x^2}$. Then $V$ is the topological map given by $V = \mathcal{L}(V_1)^{-1} + h: V \to V_1$ for some constant $h$. 
+\end{example}
+
+\begin{example}
+    Suppose that we want to define the space of topological manifolds. We set $\mathcal{T} = \{A_k, V_1, M^0\}$. The objects in $\mathcal{T}$ are manifolds together with the topological maps, called $B$, $M$ and $V$ respectively. Let us introduce the following notation. Consider the set $\mathcal{L}(M^0): \{0,\infty\}^k \to M^0$ for all $k \in \mathbb{N}$, which we denote by $\mathcal{L}(M^0)$. In other words, $\mathcal{L}(M^0)(x) = \frac{x + \lambda x}{2 + \lambda x^2}$. Then $M$ is the topological map given by $M = \mathcal{L}(M^0)^{-1} + h: M \to M^0$ for some constant $h$. 
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Topology in Manifolds and Topological Quantum Field Theory} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+This section presents various examples of manifold topologies in which we can mix topological and manifold topology, but this is not unambiguous. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Manifold Topology}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Before talking about manifold topology, we review several definitions.
+
+\begin{definition}[A topological space $(X,E)$]
+    A topological space $(X,E)$ is a collection of elements $x \in X$ and sets $x, x', x'' \in X$ together with some family of functions $x \to x''$ satisfying the following axioms:
+    \begin{enumerate}[label=(\alph*)]
+        \item Each function $x \to x'$ in $E$ takes values in $X$.
+        \item Every equivalence class of elements of $X$ belongs to exactly one equivalence class of elements of $E$.
+        \item The family of functions $x \to x''$ is a monotonic function.
+        \item The functions $x \to x''$ commute with their composites.
+        \item The function $x \mapsto \frac{x - x'}{\tau} \in E$ commutes with the functions $x \mapsto x - \frac{x - x'}{\tau}$ and $x \mapsto x + \frac{x - x'}{\tau}$ taking values in $X$. 
+    \end{enumerate}
+    A topological space $(X,E)$ is called a \emph{metric space} if all functions in $E$ admit a measurable interpretation.    
+\end{definition}
+
+Suppose that the objects of a topological space are finite. For the sake of simplicity, we set $X = \{0,1\}^2$. Any continuous function $f: \mathbb{R} \to \mathbb{R}$ is interpreted as a function $f: X \times X \to \mathbb{R}$.
+
+\begin{lemma}[\cite{Abelian_2006}]
+    Suppose $x, y \in X$ and $f: X \to X$ is a continuous function. Then for every $u \in E(x,y)$, there exists a unique measure $p_1(u)$ and a unique measure $p_2(u)$. Then for every element $x', y' \in X$ the following holds:
+    \[ p_1(\varphi(u)) = p_2(\varphi(v)) \text{ for all } u, v \in E(x',y').\]
+    Furthermore, for every $x, y \in X$ there exists an unique element $\varphi(x)$ such that $x \to \frac{x' - x}{\mu} = f(x')$, $x' \in X$.
+\end{lemma}
+
+\begin{proof}
+    The proof uses the fact that if $f(x) \geq f(y)$, then $f(x) \in \ker(\phi)$. But this follows since $f$ is continuous. 
+\end{proof}
+
+The key advantage of the topological space $\mathcal{T}$ described in this paragraph is that every element of $\mathcal{T}$ has a corresponding topological function which acts on the set of elements of $\mathcal{T}$. That is, for every element $x \in X$, there exists a unique function $\phi(x) : X \to \{0,1\}$. Let us give examples of manifold topologies that involve topological maps. 
+
+\begin{definition}[\cite{Baez_2015}]
+    We say that a topological space $(X,E)$ is \emph{connected} if for every $x, y \in X$ there is a topological map $f: X \to Y$ such that $x \to \frac{x - y}{\delta}$ and $y \to \frac{y - x}{\delta}$ are topological inverses. 
+\end{definition}
+
+\begin{example}
+    When $X = \{0,1\}$, the topological space $E = \{x \mapsto \frac{x - 0.5}{1.5}, x \mapsto \frac{x + 0.5}{1.5}\}$ is called \emph{unipolar} and $\{x \mapsto \frac{x - 0.5}{1.5}\}$ is called the \emph{bipolar} space. This topology is known to be the same as that of the topology of a poset $\{1,2\}$, where the posets are equipped with a binary operation and hence have a closed topology.
+\end{example}
+
+We describe a topological manifold $X$ by its \emph{boundary face} $F: X \to X$ and the \emph{simplex boundary} $\delta: F \to X$ defined as follows. The boundary face $F$ takes a set $S$ to the union of elements of $S$. We denote the union of elements of $S$ by $S + S$ and the inclusion of an element $x \in S$ by $x - 1$. The simplex boundary is given by 
+\[
+    \begin{tikzcd}
+        0 \ar[r] & x \ar[r] & x + 1 \ar[r] & \dots \ar[r] & x \ar[r] & 0
+    \end{tikzcd}.
+\]
+The difference map $\delta: F \to X$ has the property that $d_\delta(x) = x - 1$ and that if $f: X \to Y$ is a function such that $\delta(f)(x) = f(x)$ then $f(x) \to f(x')$. Moreover, if $f: X \to Y$ is a continuous function such that $d_\delta(f)(x) = g(x)$ then $\delta(f)(x) \to g(f(x))$ for all $x \in X$. 
+
+By Lemma \ref{Abelian_2006}, we can write the function $f: X \to Y$ as $f(x) = p_1(u) + p_2(v)$. This is easily seen from the fact that the function $p_1$ is continuous and the function $p_2$ is also continuous. 
+
+The topological space $X$ is called a \emph{metric space} if it is connected and is contained in the unipolar, bipolar, or topologically flat topological spaces respectively. A metric space is called a \emph{complete metric space} if it is connected and contains all other metric spaces.
+
+Let us talk about the notion of a topological map $f: X \to Y$ as follows. The basic idea behind the notion of a topological map is that, given $u$ in $E(x,y)$, there exists a unique measure $q_1(u)$ and a unique measure $q_2(u)$. A topological map $f: X \to Y$ is called a \emph{monotone} if the measure $q_1(u)$ is less than or equal to the measure $q_2(u)$. 
+
+There are many topological maps from a topological space to another topological space. A few examples of these maps are given below: 
+
+\begin{definition}[\cite{Choi_2015}]
+    A topological map $f: X \to Y$ is called \emph{continuous} if it is continuous and sends the simplex boundary of $Y$ to the simplex boundary of $X$. 
+\end{definition}
+
+\begin{definition}[\cite{Aguilera_2019}]
+    A topological map $f: X \to Y$ is called \emph{strict monotone} if it is continuous and sends the simplex boundary of $Y$ to the simplex boundary of $X$. Moreover, if $f: X \to Y$ is strictly monotone then it is called a \emph{topology map} and will generally be called a \emph{topological map}. 
+\end{definition}
+
+It is important to note that continuous maps from manifold to manifold form an additive family. Specifically, continuous maps $f: X \to Y$ from a manifold $X$ to a manifold $Y$ are those which are continuous and then continuously converge to $f$. As such, the topology of $X$ is equivalent to the topology of $Y$. 
+
+\begin{lemma}[\cite{Lukas_2019}]
+    Suppose that $f: X \to Y$ is a continuous map. Then, for every element $x, y \in X$ there exist $u_x, u_y \in E(x,y)$ such that $\delta_f(u_x) = q_1(u_y) - q_2(u_y)$. 
+\end{lemma}
+
+\begin{proof}
+    Let us begin by examining the topological map $f: X \to Y$ that takes $x \mapsto x + 1$ and $y \mapsto y + 1$. Clearly, $u_x = u_y$. This demonstrates that continuousity of $f$ is equivalent to keeping track of whether the current state $x$ equals the current state $y$ after adding a new state. 
+
+    We now assume that $f: X \to Y$ is continuous. Let us then define a sequence of states $s_0, s_1 \in X$ along the continuity of $f$. Let $s_0' = f(s_0)$ and $s_1' = f(s_1)$ and let $s_0'' = f(s_0')$ and $s_1'' = f(s_1')$ in $X$ such that $s_0''' = s_1''' = f(s_0'')$ and $s_1''' = s_0'''. If $s_1'$ is greater than $s_0''$, then the sequence of states $s_0'', s_1'', s_0''',s_1'''$ converges to the same state $s_0'$. However, if $s_1'$ is less than $s_0''$, then $s_0''$ cannot ever equal $s_1'$ and
+\end{document}
+ so $f(s_0'') = f(s_0'') = s_1''$ rather than $s_0''$ which would imply that $f(s_0'') = s_0'$ unless $f$ is continuous (for example, when $f$ is continuously interpolating between points). 
+
+    From this observation, we see that $f$ continues to be continuous. By the proof of Lemma \ref{Abelian_2006}, it follows that every element of $E(x,y)$ is associated with a measurable function $p_1(u)$ and a measurable function $p_2(u)$. The sequence of states $s_0'', s_1'', s_0''',s_1'''$ converges to the same state and so $p_1(u)$ converges to $q_1(u) - q_2(u)$. Conversely, let us show that $f$ is continuous. 
+
+    Let $x, y \in X$ such that $f(x) \leq f(y)$. We need to show that $f(s_0'') = f(s

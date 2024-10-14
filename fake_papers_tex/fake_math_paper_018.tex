@@ -1,0 +1,293 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{Topological Manifolds: A Categorical Perspective}
+\author{Max Vazquez}
+\maketitle
+
+
+In this paper, we discuss how topological manifolds play a crucial role in geometric mathematics. Recall that a topological manifold is a finite-dimensional space with additional structure of topological orders. The most obvious example of a topological manifold is the space $S$ itself (so called the $k$-manifold). Given a point $x \in S$, its neighborhood has a total ordering. In the present paper, we show that we have two key theorems that relate these two types of topological manifolds: (1) the topology on the set of points in a topological manifold can be reduced to the set of elements that are contained in any topology order on the space; and (2) topological manifolds are defined as spaces equipped with a topology (and thus a topology-preserving inclusion functor). Topologists commonly think of manifolds as objects for their topology, whereas mathematicians, on the other hand, believe that manifolds are data for their topology.
+
+
+A more concrete, more detailed perspective on topological manifolds will be presented in Section 3, where we construct an extended category of manifolds, which we call $\Man_{\infty}$ and show how it plays a role in geometric theory. We then make use of this construction to provide new results concerning manifolds. For instance, we introduce a class of topological manifolds, known as $\Equiv_{\infty}$, that we characterize by a property analogous to that of equivalences in various categories; and we prove the following result:
+
+\begin{theorem}[{\cite[Theorem 6.17]{FritzSchommerLambeck2020}}]\label{thm:toplogical_equivalence}
+    If a set $X$ is equivariant, then so are its images. More precisely, let $X$ be a subspace of a topological manifold and suppose that the image of its base point contains every element of $X$. Then $X$ is equivalent to any subset of the image.
+\end{theorem}
+
+
+Recall that a manifold $(M, d)$ is equivalent to its connected product if the connected component containing each vertex in $M$ is a finite $n$-manifold. Recall that $n$ is the number of vertices in $M$. For each edge $(u,v)$ in $M$, its connected component $\C(u, v) \subseteq M$ can be regarded as being a subspace of $M$. Furthermore, given two topological edges $(u,v)$ and $(w,x)$ in $M$, we say that $(w,x)$ belongs to $(u,v)$ if there exists a common vertex $(y)$ such that $(w,x)= (y,v)$. This gives a notion of topological intersection:
+
+\begin{definition}\label{def:topological_intersection}
+    Let $(M, d)$ be a topological manifold. An edge in $M$ is said to belong to $M$ if for any $y \in M$ and any $x \in \C(u,v)$, $x \leq y$. Thus, an edge $f$ in $M$ intersects $(M_{f},d_{f})$ if for any $y \in M_{f}$ and any $x \in \C(u,v)$, there exists $z \in M$ such that $f = y \cup z$, i.e.,
+    \[
+        f = y \cup z \text{ and } x \leq y.
+    \]
+    A pair $(M, d)$ and $(M', d')$ are said to be topologically intersected if $(M', d') = (M, d) \cap (M', d')$.
+\end{definition}
+
+
+Let $M$ be a topological manifold. Given a topological edge $(u,v)$ in $M$, define its intersection $(u',v')$ as follows:
+
+\[
+    u' := min\{ (x : \C(u', v)) \mid x \in \C(u,v) \}.
+\]
+
+This edge is said to be a {\em co-topological edge} if the intersection edge is a co-topology. For example, let $M=\R^*_{3,2}$ be the regular triangle manifold. There are two co-topological edges $(0,1)$ and $(1,2)$, which correspond to co-edge labels of the form $(i+j) mod n$. Note that co-edges have no special meaning in this diagram. Let $x=0$ be the co-topology of the regular triangle $M$. By definition, $x$ is a maximal co-edge of $(0,1)$ since $(0,1)$ lies in the co-topology of the regular triangle $M$. However, $(0,1)\subseteq M$ is a co-topological edge because $M$ is a regular triangle manifold. Moreover, $(0,1) = (0,1)\cup (1,2)$, so that $x$ is a maximal co-edge of $(0,1)\cup (1,2)$, too. Hence, we get the following definitions:
+
+\begin{itemize}
+    \item $\Equiv(M,\Equiv(M')) \cong \Equiv(M')$ if $M$ and $M'$ are topologically equivalent;
+    \item $\Equiv_{\infty}(M, \Equiv_{\infty}(M', d_{f})) \cong \Equiv_{\infty}(M', d_{f})$ if the intersection $M \cap M'$ is topologically equivalent;
+    \item $M$ is a topological manifold if it has only one co-edge;
+    \item $M$ is {\em complete} if for all $u,v \in M$ there exists a co-edge $(u',v')$ between them, satisfying $u'\leq v'$ and $(u',v') \in x$ for some co-topology $x$.
+\end{itemize}
+
+In order to define the topology of manifolds as a field, we recall the following lemma from \cite[\S 5.3]{BourkeWilliamson1984}.
+
+\begin{lemma}
+    If $M$ is a topological manifold, then the induced $\R$-linear field of the space of points of $M$ forms a manifold over $\R^n$.
+\end{lemma}
+
+\begin{proof}
+    The map $m: \R^n \to M$ is defined as follows:
+
+    \[
+        m(x) := x.
+    \]
+
+    Since $M$ is a topological manifold, every point of $M$ is a point of $M$. Therefore, a point is a point of $M$ if and only if it lies in the domain of $m$. Thus, if $m$ is well-defined and sends a point $x$ to a point of $M$, then $x$ belongs to $M$. In particular, $\Equiv_{\infty}(M, M') \cong \Equiv_{\infty}(M')$. Hence, this map is a field homomorphism.
+\end{proof}
+
+We define the set $\C^{E_\infty}(M, \R)$ as the set of cohomology groups over $\R$ obtained by projecting onto $M$ induced by the equivalence classes $\C(u,v) \subseteq M$ of co-topological edges. The cohomology group $\C^{E_\infty}(M, \R)$ is a {\em localizing cohomology group}, a generalization of the {\em Laplacian cohomology group}. It is always a compact object in the category $\Man_{\infty}$.
+
+\begin{proposition}\label{prop:localizing_cohomology_group}
+    Let $M$ be a topological manifold. The map $\C^{\infty}_{E_\infty}(M, \R) \to \R$ is an isometry, i.e., the following condition holds: for any $x \in M$, if $x \in \C^{\infty}_{E_\infty}(M, \R)$, then $x \in M$.
+\end{proposition}
+
+\begin{proof}
+    Given $M$ and $x \in M$, define
+    \[
+        \alpha_x := \lim_{y \in \C^{\infty}_{E_\infty}(M, \R)} (-1)^r \int_{\C^{\infty}_{E_\infty}(y, \R)} d\R^nx \,,
+    \]
+    where $r$ is the integer root of the number of points in $M$ satisfying $x \in \C^{\infty}_{E_\infty}(M, \R)$ and $\alpha_x = \frac{1}{N}$. Denote by $z \geq 0$ the largest element such that $\alpha_z > 0$. As $x$ belongs to the set of points of $M$, it suffices to prove that $\alpha_z < 0$.
+
+    For this, note that $\R^n \subseteq M$ consists of $N$ points, and so, by construction, $\alpha_z = -1$. This proves the claim.
+\end{proof}
+
+Note that a globalizing cohomology group is in fact a locally localizing cohomology group. Indeed, if $M$ and $N$ are both localizing cohomology groups and there exists an inverse mapping $m: N \to M$ such that $M = \C^{\infty}_{E_\infty}(N, \R) = \C^{\infty}_{E_\infty}(M, \R)$, then the inverse mapping $m$ defines a unique mapping $m': M \to N$ as follows:
+
+\[
+    m'(x) = \begin{cases}
+        0 & x \notin \C^{\infty}_{E_\infty}(M, \R) \\
+        x & x \in \C^{\infty}_{E_\infty}(M, \R).
+    \end{cases}
+\]
+
+In particular, we obtain the following result:
+
+\begin{corollary}\label{cor:topol_localizing_cohomology_group}
+    Let $M$ be a topological manifold. The $\R$-linear map
+    \[
+        \C^{\infty}_{E_\infty}(M, \R) \to \R
+    \]
+    is an inverse isometry of the space $\C^{\infty}_{E_\infty}(M, \R)$, i.e., the following conditions hold: for any $x \in M$, if $x \in \C^{\infty}_{E_\infty}(M, \R)$, then $x \in M$.
+\end{corollary}
+
+In order to show the result above, it is necessary to define the maps $\alpha_x$ for all $x \in M$ below.
+
+\begin{notation}
+    Let $M$ be a topological manifold. Consider the map $\delta_{\infty}(M): M \to M$ as defined above, taking limits along all cohomology groups in $\C^{\infty}_{E_\infty}(M, \R)$.
+\end{notation}
+
+\begin{lemma}
+    Suppose $M$ is a topological manifold and $x \in M$. Then, for any $n \ge 0$, the map $\delta_{\infty}(M)$ is a continuous monotone function, that is,
+    \[
+        \delta_{\infty}(M)(n) \leq \frac{1}{\sqrt{n!}} \sum_{i=1}^{n} \delta_{\infty}(\C(i, j))(x) \,.
+    \]
+\end{lemma}
+
+\begin{proof}
+    This is simply a summation using Lemma \ref{lem:delta_R_n}.
+\end{proof}
+
+Since $\delta_{\infty}(M)$ is a monotone function, we define the following map $\alpha_x$ to be the limit:
+
+\[
+    \alpha_x := \lim_{y \in \C^{\infty}_{E_\infty}(M, \R)} (-1)^r \int_{\C^{\infty}_{E_\infty}(y, \R)} d\R^xn \,.
+\]
+
+This is just the limit for the standard limit:
+
+\[
+    \lim_{y \in \C^{\infty}_{E_\infty}(M, \R)} (-1)^r \int_{\C^{\infty}_{E_\infty}(y, \R)} d\R^xn \leq \lim_{y \in \C^{\infty}_{E_\infty}(M, \R)} \left(\frac{1}{\sqrt{n!}} \sum_{i=1}^{n} \delta_{\infty}(\C(i, j))(x) \right) \leq \frac{1}{\sqrt{n!}} \sum_{i=1}^n \delta_{\infty}(\C(i, j))(x) \leq \frac{1}{\sqrt{n!}} \delta_{\infty}(M)(n) \leq \frac{1}{\sqrt{n!}} \delta_{\infty}(M)(n),
+\]
+
+since $\delta_{\infty}(M)(n) \leq \frac{1}{\sqrt{n!}} \delta_{\infty}(\C(n, n)) = 1$ for all $n \ge 1$.
+
+Finally, we establish the following result:
+
+\begin{theorem}
+    Let $M$ be a topological manifold. The map $\alpha_x$ is a continuous monotone function, that is,
+    \[
+        \alpha_x(n) \leq \frac{1}{\sqrt{n!}} \sum_{i=1}^n \delta_{\infty}(\C(i, j))(x) \,.
+    \]
+\end{theorem}
+
+\begin{proof}
+    The argument above applies directly to the set of all points in $M$.
+\end{proof}
+
+The following observation shows us that a topological manifold is a complete manifold if and only if it contains no co-edges. 
+
+\begin{remark}
+    It is clear that $\C^{\infty}_{E_\infty}(M, \R)$ is a compact object in the category $\Man_{\infty}$.
+\end{remark}
+
+If $M$ is a topological manifold and $\C^{\infty}_{E_\infty}(M, \R)$ is a compact object in $\Man_{\infty}$, then $\C^{\infty}_{E_\infty}(M, \R)$ is an exact manifold, a topological manifold is an exact manifold, and the map $\alpha_x$ is a continuous function.
+
+\begin{theorem}
+    Let $M$ be a topological manifold. $\C^{\infty}_{E_\infty}(M, \R)$ is an exact manifold. Moreover, the map $\alpha_x$ is a continuous function.
+\end{theorem}
+
+\subsection{Definitions, Notations and Conventions}
+
+We fix an initial base point $a$ of $M$. The set $\C(a)$ is denoted by $\mathcal{P}_M = \{ p \in M | \C(p, a) = 0 \}$. Note that there is exactly one base point for each $M$. 
+
+Given an edge $e$ in $M$, the set $\C(e)$ is denoted by $\mathcal{E}_M(e)$. Note that, for each vertex $v \in M$, there exist only one nonzero edge connecting $v$ with any other vertex. That is, $\C(v, w) = 0$ for all $v,w \neq v$. Similarly, the set $\C(e)$ is also denoted by $\mathcal{E}_M(e)$.
+
+To denote the topological space $\C^{\infty}_{E_\infty}(M, \R)$, we employ the symbol $\Omega$ to indicate that the set of objects does not include the identity element $\Iota$; and we adopt the notation $\Omega^*$ to indicate that the set includes the identity element $\Iota$.
+
+In the case where $M$ is a topology of $S$ and $S$ is a subspace of $M$, we shall write $S \subseteq \C^{\infty}_{E_\infty}(M, \R)$. In this way, we refer to the subspace $\C^{\infty}_{E_\infty}(M, \R)$ as the {\em canonical subspace} of $M$. Indeed, the set $\C^{\infty}_{E_\infty}(M, \R)$ is equivalent to the full subcategory consisting of the objects of the form $\Equiv(M,\R)$. 
+
+To emphasise the difference between $\C^{\infty}_{E_\infty}(M, \R)$ and $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}$ in terms of the definition of the full subcategory $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}$, which we abbreviate as $C^{\infty}_{E_\infty}(M, \R)^{\Omega}$. For each point $a$ of $M$, $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}(a)$ is the set of closed curves containing $a$. Using these definitions, we may write the equivalence relation as follows:
+
+\begin{definition}
+    If $\Equiv(M,\R) \subseteq C^{\infty}_{E_\infty}(M, \R)^{\Omega}$, then the relations $> \sim$ and $< \sim$ between $p \sim q$ means
+    \begin{equation}
+        \tikzmath{
+            \filldraw [thick](0,-.65) circle (.05);
+            \filldraw [-stealth, fill=\stealthColor] (-.65,0)--(.65,0);
+            \filldraw [thick, fill=\stealthColor] (.35,-.65) circle (.05);
+            \filldraw [-stealth, fill=\stealthColor] (.65,-.65)--(-.65,-.65);
+            
+            %labeling
+            \node at (.4,-.3) {$(p \sim q)$};
+            \node at (-.4,-.3) {$<$};
+        }
+        =
+        \begin{cases}
+            \text{for } p > q \text{ and } p \text{ is a closed curve containing $a$};\\
+            \text{for } q \text{ is a closed curve containing $a$};\\
+            0 & otherwise.
+        \end{cases}
+    \end{equation}
+\end{definition}
+
+Thus, the space of open curves containing $a$ is denoted by $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}(a)$. Note that $\mathcal{E}_M(e) = \mathcal{E}_M(e \cup e^{-1})$.
+
+Recall that the space of morphisms in $\C^{\infty}_{E_\infty}(M, \R)$ is denoted by $\Delta_{\infty}(M)$ or simply $\Delta(M)$. This space is a family of functions $\omega: \C^{\infty}_{E_\infty}(M, \R) \to \R$, such that $\omega(p) \leq \omega(q)$ if $p < q$. The morphisms are denoted by $\omega^{(0)}$ and $\omega^{(1)}$. Recall that, for each $n \ge 0$, $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}$ is a space of compact objects, hence the set of morphisms in $\Delta_{\infty}(M)$ is the same as the set of morphisms in $\C^{\infty}_{E_\infty}(M, \R)$ since, for any $n \ge 0$, $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}$ is a compact object. Moreover, the canonical inclusion functor is an inclusion of spaces. 
+
+It is natural to ask whether the class $\Omega \times M$ of functions $\omega^{(i)}$ is the class of functions in $\Omega$ (respectively $\Omega$). To do so, let $M$ be a topology of $S$ and $S$ is a subspace of $M$. Assume that there is an inverse map $m: \Omega \times M \to \Omega$ such that $\Omega = \C^{\infty}_{E_\infty}(M, \R)^{\Omega}$. We then define the class of functions $\omega^{(0)}: \Omega \to \R$ such that $m^{-1}(x) \leq x$ for all $x \in M$. Define $\omega^{(1)}: \Omega \times M \to \R$ by $\omega^{(1)}(y) := \omega^{(0)}(m^{-1}(y))$. Clearly, $\omega^{(1)}(x) \leq \omega^{(0)}(x)$ for all $x \in M$, and clearly $\omega^{(1)}(y) \leq m(x)$ for all $y \in \Omega$. Using the definitions, we obtain a family of functions $\omega: \C^{\infty}_{E_\infty}(M, \R)^{\Omega} \to \R$ such that
+
+\[
+    \omega^{(0)} = \omega^{(0)}^\prime + \epsilon,
+\]
+where $\omega^{(0)}^\prime$ is the restriction to $\Omega$ of the $i$-th projection to $\Omega$, $\epsilon = (\omega^{(1)} - \omega^{(0)})^{-1}$. The restriction of a $2$-morphism $\phi: y \to x$ to $\Omega$ corresponds to choosing the $2$-morphism $\phi' = \phi^{-1}: \Omega^2 \to M$ such that $\phi' \circ \id_M = m$. From here on, we shall say that $\omega^{(i)}$ is a morphism. By convention, we use $\omega^{(0)}^\prime$ to denote the projection map $\omega^{(0)}^\prime: \Omega \times M \to \Omega$, and $\omega^{(1)}^\prime$ for the inclusion map $m^{-1}$. 
+
+The class of functions $\omega^{(0)}$ and $\omega^{(1)}$ defined above are defined by defining the morphisms $\omega^{(i)}$ in $\Delta_{\infty}(M)$:
+
+\[
+    \omega^{(i)} = \begin{cases}
+        \omega^{(i)}^\prime & \text{if } i < 1, \\
+        \omega^{(i-1)}^\prime \circ \phi + \epsilon & \text{otherwise.}
+    \end{cases}
+\]
+
+We shall often consider the set of functions $\omega^{(0)}$ and $\omega^{(1)}$ in $\Delta_{\infty}(M)$ together with the following relation:
+
+\begin{theorem}
+    For any $x \in \C^{\infty}_{E_\infty}(M, \R)^{\Omega}$, the function $\omega: \C^{\infty}_{E_\infty}(M, \R)^{\Omega} \to \R$ is an isometry, i.e., for all $n \ge 0$, $\omega(n) = \omega(n)^\prime$.
+\end{theorem}
+
+\begin{proof}
+    The argument is similar to Proposition \ref{prop:localizing_cohomology_group}.
+\end{proof}
+
+Similar to $\Omega$, we often use the symbol $\Omega^*$ to indicate that the set of objects does not include the identity element $\Iota$; and we adopt the notation $\Omega^*$ to indicate that the set includes the identity element $\Iota$. In particular, we must define $\Delta_{\infty}(M)$ as the intersection of $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}$ with the set of points of $M$. Recall that the set of points of $M$ is the closure under the inclusion functor $\C^{\infty}_{E_\infty}(M, \R)^{\Omega} \to M$ of every $\mathcal{P}_M \in \C^{\infty}_{E_\infty}(M, \R)$ into $M$. Note that, for each $n \ge 0$, $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}(n) \subseteq M$. This set is also denoted by $\mathcal{P}_M$. 
+
+Recall that a topological manifold is a (unique) topology of its base point $a$ in the sense of \cite[Definition 1.4]{BourkeWilliamson1984}.
+
+In this section, we will define $\C^{\infty}_{E_\infty}(M, \R)$ as an exact category, which consists of the set of functions $\omega^{(0)}$ and $\omega^{(1)}$ that are compatible with the following assumptions:
+
+\begin{enumerate}
+    \item $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}$ is a compact object in $\Man_{\infty}$. In particular, every base point of $M$ has a fixed topology.
+    
+    \item The map $\alpha_x: \C^{\infty}_{E_\infty}(M, \R)^{\Omega} \to \R$ is a continuous function for all $x \in \C^{\infty}_{E_\infty}(M, \R)^{\Omega}$.
+\end{enumerate}
+
+As before, let us define the function $\omega: \C^{\infty}_{E_\infty}(M, \R)^{\Omega} \to \R$ by choosing the map $\omega^{(0)}$ to be the restriction of $\id_M$ to $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}$, and $\omega^{(1)}$ to be the restriction of $\id_M$ to $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}$. 
+
+\begin{definition}
+    Let $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}$ be a compact object in $\Man_{\infty}$. Its objects are pairs $(M, d)$ of a topological manifold $M$ and a topology $d: M \times M \to \R$. We call $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}$ an \emph{$E_\infty$-ring}. We call a map of $E_\infty$-rings $(f,g) : (M, d) \to (N, d')$ an \emph{$E_\infty$-morphism}.
+\end{definition}
+
+For $x \in \C^{\infty}_{E_\infty}(M, \R)^{\Omega}$, we let $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}(x)$ be the set of functions $\omega^{(0)}$ and $\omega^{(1)}$ corresponding to the topology of $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}(x)$.
+
+\begin{remark}\label{rem:exact_category}
+    It is clear that the class $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}$ of functions in $\C^{\infty}_{E_\infty}(M, \R)$ is again an exact category. But note that, when $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}$ is a compact object in $\Man_{\infty}$, the objects are called topological manifolds instead of $E_\infty$-rings, while the morphisms are called $E_\infty$-morphisms.
+\end{remark}
+
+\subsection{An Exact Category of Topological Manifolds}
+
+Given a topological manifold $M$, we would like to obtain its exact topology. The set of functions $\omega^{(0)}$ and $\omega^{(1)}$ is exactly what is required for this goal, and the only thing that needs to be determined is the topology.
+
+First, we define the topology of $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}$.
+
+Let $\varphi$ be a morphism of $E_\infty$-rings. Then, we have the following:
+
+\begin{proposition}\label{prop:subspace_exact_topology}
+    Let $\varphi$ be a $E_\infty$-morphism between $E_\infty$-rings. Let $\omega: \C^{\infty}_{E_\infty}(M, \R)^{\Omega} \to \R$ be a continuous function. Then, $\varphi \mapsto \omega(n)$, $n \in \R$, is a continuous monotone function in $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}$.
+\end{proposition}
+
+\begin{proof}
+    Since, for any $n \ge 0$, the function $\omega(n)$ is a continuous monotone function, $\varphi \mapsto \omega(n)$ is a continuous monotone function. However, if $n \le 0$, then $\omega(n)$ is never a continuous monotone function. On the contrary, $\varphi \mapsto \omega(n)$ is always a continuous monotone function. This implies that for all $n \le 0$, $\omega(n) = 0$. Hence, $\omega^{(0)}$ is either zero, or it is continuous, and hence a continuous monotone function.
+\end{proof}
+
+Recall that, by definition, the function $\omega^{(0)}: \Omega \times M \to \R$ is a localizing cohomology map, that is,
+\[
+    \omega^{(0)}(\C(i,j)) = \omega(i) \omega(j) \,.
+\]
+
+However, we could be more specific about the function $\omega^{(0)}: \Omega \times M \to \R$ since, for each $i,j \in M$, $\omega(i) \omega(j) = 0$ if and only if $i < j$. For the moment, we shall just write $\omega^{(0)}$ for convenience. Hence, the function $\omega^{(0)}$ is the usual map $\omega^{(0)}: \Omega \to \R$, but we will omit the notation for clarity.
+
+\begin{proposition}\label{prop:basepoint_exact_topology}
+    Let $M$ be a topological manifold. For each point $x \in \C^{\infty}_{E_\infty}(M, \R)^{\Omega}$, the function $\omega^{(0)}(x)$ is a continuous function. Furthermore, for each $n \ge 0$, the function $\omega^{(0)}(n)$ is continuous.
+\end{proposition}
+
+\begin{proof}
+    If $n \le 0$, then $\omega^{(0)}(n) = 0$. So, by the previous result, $\omega^{(0)}(x) = 0$ for all $x \in M$. Further, since $\omega^{(0)}$ is a continuous monotone function, for all $n \le 0$, the function $\omega^{(0)}(n)$ is also continuous, which is shown by Proposition \ref{prop:subspace_exact_topology}. For the contrary, if $n \gt 0$, then $n \in \Omega$, and therefore $\omega^{(0)}(n) = 0$, which is shown by the previous result.
+\end{proof}
+
+Next, we proceed to define the topology of $\C^{\infty}_{E_\infty}(M, \R)^{\Omega}$. Recall that a function $\omega: \C^{\infty}_{E_\infty}(M, \R)^{\Omega} \to \R$ is a continuous monotone map if its value on $x \in \C^{\infty}_{E_\infty}(M, \R)^{\Omega}$ satisfies the following equations:
+
+\begin{enumerate}
+    \item $\omega(n) \leq \frac{1}{n!} \sum_{i=0}^n (-1)^{i+1} \delta_{\infty}(M)(x)$ for all $x \in \C^{\infty}_{E_\infty}(M, \R)^{\Omega}$;
+    
+    \item $\omega(n) \leq \frac{1}{\sqrt{n!}} \sum_{i=0}^{n-1} \delta_{\infty}(M)(x)$ for all $x \in \C^{\infty}_{E_\infty}(M, \R)^{\Omega}$;
+    
+    \item $\omega(n) \leq \frac{1}{\sqrt{n!}} \sum_{i=1}^{n-1} \delta_{\infty}(\C(i,j))(x)$ for all $x \in \C^{\infty}_{E_\infty}(M, \R)^{\Omega}$.
+\end{enumerate}
+
+Now we shall see that the function $\omega$ is continuous monotone, and we should therefore have the following two properties:
+
+\begin{theorem}\label{thm:exact_topology}
+    Let $\omega: \C^{\infty}_{E_\infty}(M, \R)^{\Omega} \to \R$ be a continuous monotone function. Then, the function $\omega$ is continuous monotone.
+\end{theorem}
+
+\begin{proof}
+    Let $x \in \C^{\infty}_{E_\infty}(M, \R)^{\Omega}$. First, by the previous result, there is only one base point $
+\end{document}
+a \in \C^{\infty}_{E_\infty}(M, \R)^{\Omega}$ for which $\omega(n) \leq \frac{1}{n!} \sum_{i=0}^n (-1)^{i+1} \delta_{\infty}(M)(x)$. Since $x \in \C^{\infty}_{E_\infty}(M, \R)^{\Omega}$, we know that $x \in M$. We now compute the function $\omega^{(0)}(x)$.
+    Let $n \ge 0$ and $p \in M$, and suppose that $i < j$, so that $i \leq j$ by definition. Then, as $n \ge 0$, $\omega^{(0)}(n) = \frac{1}{n!} \sum_{i=0}^n (-1)^{i+1} \delta_{\infty}(\C(i,j))(x)$. Thus, $\omega^{(0)}(n) \leq \frac{1}{n!} \sum_{i=0}^{n-1} \delta_{\infty}(\C(i,j))(x)$, and hence $\omega^{(0)}(n)

@@ -1,0 +1,279 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{Solving Every Open Problem In Math With Category Theory}
+\author{Max Vazquez}
+\maketitle
+
+
+{\Large
+We are all equipped with a $2$-category with finite limits and small colimits: it has a finite product (called coproduct), finite coproducts, and a collection of induced maps between them.  Since every $\infty$-category is $2$-small, we may expect that most functions on categories will be those of $2$-smallness.  
+
+A natural generalization of the concept of $2$-small categories can be found in \cite{johnson2009}.  An interesting example of such an $2$-category would be a category of $n$-fold matrices for some $n$.   It is well-known that there exists an explicit description of these matrices as functors from $\mathbb{Z}/n$ to $\mathbb{N}$, where the underlying functor takes values in the set of matrices in $\mathbb{N}^n$, and the category of matrices is given by the collection of matrices such that $\prod_i \coprod_{j\in I(i)} A_j^{ij} = B^{ij}$.  If a matrix $A$ fits into the following diagram in terms of their underlying functors:
+\[
+\xymatrix@C=5pc{
+& I \ar[r]^-{ij} & & B^i \ar@{>>}[d]_-{\alpha_i}^{ij} \\
+I \ar[r]_-{ij} & & B^i \ar@{>>}[d]^-{\alpha_i}^{ij} & & A^j \ar@{>>}[d]^-{\beta_j}^{ij}
+}
+\]
+then we call it a \emph{product matrix} or a \emph{$n$-fold matrix}, if we can formulate this description as a category structure on a category with finite products.  For instance, if one wants to find the products of 3 different $n$-fold matrices, then one needs to define three sets: the set of elements corresponding to the product of $A_i$ and $B_j$, the set of elements corresponding to the product of $A_i$ and $B_j$, and the set of elements corresponding to the product of $A_i$ and $B_j$. 
+
+Similarly, since $\mathbb{Z}/n$ is $2$-small and we know that the underlying $2$-category of a product of $m$-sized matrices must have a finite product (recall that there is an explicit description of such a matrix as a functor from $m\times n$ to $m$), we can imagine the same problem for $\mathbb{Z}/n$-matrices.  When viewed as a category of functions between $\mathbb{Z}$ and $\mathbb{N}$, one might expect that there would exist a certain ``global'': for instance, a map between $\mathbb{Z}/n$ and itself.  We can therefore think of the $2$-categories we have just defined above as not having enough global information (in particular, our original problems with infinite products wouldn't work).
+
+}
+
+
+\section{The $2$-categorical Setting}
+
+There are many mathematical structures that are related to $\infty$-categories.  Here we show how some of them relate to $\infty$-categories and prove the results about the $2$-smallness of $\infty$-categories.  Some interesting applications of the $2$-categorical theory can be found in \cite{johnson2009}, and \cite{JohnsonHellerNicolas2} for generalizations of $2$-categories.
+
+
+\subsection{Categories of Sets}\label{subsec:Sets}
+
+In \cite{johnson2009}, Johnson and Heller introduce a new categorical setting for categories of sets.  This is well known due to Leinster \cite{leinster2006thesis}.  The first thing that we want to do is translate what we saw in the first section of \ref{subsec:infinite-cat} to something similar to what we saw in \cite{johnson2009}: if one wanted to work with categories of sets and let $\mathsf{Set}$ be the $\infty$-category of sets, then we could consider the data of a category of $2$-dimensional points over the cartesian plane.  To make this concrete, consider the two nondegenerate lines of space with endpoints $(x,y)$ and $(z,w)$.  Their intersection at any point is the line $l = (z+w,x)$.  Then we say that the two lines intersect when there is an orientation $\theta$, where the first intersection coincides with the left intersection of $z+w$ and $l$; and the second intersection coincides with the right intersection of $z+w$ and $l$.  The data of a $2$-dimensional point $P=\left({x_1},{y_1}\right) \in \mathsf{Set}(P,\mathsf{Set}(P',P'))$ consists of: 
+
+
+\begin{enumerate}[label={(\roman*):(\arabic*)}]
+\item for any $s,t \in P$ the \emph{intersections $\{s,t\}_{s,t\in P}$};
+\item for each $s,t,s',t'\in P$ an element $\alpha \in \mathbb{R}$, denoting the distance between $\{s,t\}_{s,t\in P}$ and the intersection $\{s',t'\}_{s,t\in P}$;
+\item for each $i \in I(\{s,t\})$ a $2$-dimensional vector $v = \{v_i\}_{i\in I(\{s,t\})}$ of dimension $2$ satisfying $v\cdot u = \alpha v\in P$ whenever $\alpha > 0$ and $v_i\neq 0$, for all $i\in I(\{s,t\})$;
+\end{enumerate}
+
+
+
+Such a $2$-dimensional point is called a \emph{point}.  From now on, we will use $\mathsf{Set}$ to refer to the $\infty$-category of sets.   However, one might prefer to simply think of this category as a category of \emph{points}, and think of all categories as containing points and all arrows as points-to-points.   
+
+A single point might also be thought of as a $2$-dimensional space or point -- even though in fact it might not have a representation in the $\infty$-category of sets.    Another way that we might think of $2$-dimensional spaces or points is as a continuous sequence of points.  That is, a sequence of points $P_0,P_1,\ldots,P_{n-1},P_n$ (together with a sequence of oriented line segments $\{s_0,\ldots,s_{n-1}\}_{\gamma \in R}$) forms a \emph{sequence of points}.  
+
+It follows from the definition of a sequence of points that for each point $P$ there is a unique set of morphisms from $P$ to $P'$ that have the same intersection as $s_0,\ldots,s_{n-1}$.  Such a morphism is called a \emph{homomorphism} from $P$ to $P'$.  As you will see below, such a homomorphism should satisfy a few requirements in order to be a morphism of sequences of points.  
+
+
+\subsection{Sequences of Points}\label{subsec:sequence}
+
+If we suppose $\mathsf{Set}$ is just the $\infty$-category of sets, then its homomorphisms need only satisfy four conditions: 
+
+\begin{itemize}[label={(\alph*):(\Roman*)}]
+\item the homomorphism needs to have a unique interpretation for each point of the sequence,
+\item the homomorphism needs to preserve intersections,
+\item the homomorphism needs to preserve unique points,
+\item the homomorphism needs to preserve idempotent homomorphisms.
+\end{itemize}
+
+
+If we suppose that there are no intersections among $s_0,\ldots,s_{n-1}$ and for each $s\in P_i$ the set of points $\{s_i\}_{i\in I(s)}$ is empty, then there is no interruption and there can be only one point.  That is, there can only be $n$ distinct points of the sequence.  Therefore, for any sequence $\left({s_0,\ldots,s_{n-1}}\right)_{i\in I(s)}$ there is a unique homomorphism from $\left({s_0,\ldots,s_{n-1}}\right)$ to $\left({s_0,\ldots,s_{n-1}}\right)$ of the form $f(s)=\left({s_0,\ldots,s_{n-1}}\right)$.
+
+For more details on these definitions, see \cite[Section 1.2.7]{johnson2009}.
+
+This can be further simplified.  Let us make a slight change: in the above proof that a sequence of points is a homomorphism, we are talking about homomorphisms between sequences of points; but in the proofs of \cite[Section 1.2.7]{johnson2009}, it was mentioned that for any sequence $\left({s_0,\ldots,s_{n-1}}\right)_{i\in I(s)}$ there are a sequence of points $\left({s_0,\ldots,s_{n-1}}\right)_{i\in I(f(s))}$ as well.  Hence, it becomes clear that a sequence of points corresponds to a homomorphism between sequences of points.
+
+One of the main goals of this paper is to study homomorphisms between sequences of points of different sizes.  However, as mentioned before, such a homomorphism cannot be used to identify points at the ends.  In fact, some of the criteria listed above (including those above which imply that the homomorphism is an idempotent homomorphism) may not hold.  For this reason, we require homomorphisms to satisfy additional conditions involving interruptions among points.
+
+When these conditions were stated in \cite{johnson2009}, this works because they assume the category $\mathsf{Set}$ has finite coproducts.  While not true in general, it means that for each sequence $\left({s_0,\ldots,s_{n-1}}\right)_{i\in I(s)}$ there is a pair of objects $P_i$ and $Q_i$ together with a function $p_{i,j}=(s_i-s_j)$ that defines a new map $\left({s_0,\ldots,s_{n-1}}\right)_{i\in I(f(s))} \rightarrow \left({s_0,\ldots,s_{n-1}}\right)_{i\in I(f(s))}$ whenever the sequence is not empty.  Moreover, $p_{i,j} = s_j - s_i$ implies that $s_j>s_i$.
+
+Recall that the $p_{i,j}$ function defined above satisfies the condition that $s_i-s_j <0$ whenever the sequence does not contain any point that intersects $s_i$ and $s_j$.   Now, if we fix some other pair of points $(S_1,\{s_1,\ldots,s_{n-1}\})$ and another sequence $(T_1,\{s'_1,\ldots,s_{n_1}\})$ of points, that satisfies the conditions above, then the interruptions among the points can be identified with $s_0<s'_1<s_1<\cdots<s_{n_1}$.  If we then take a homomorphism $\left({s_0,\ldots,s_{n-1}}\right) \rightarrow T_1$, this means that $\left({s_0,\ldots,s_{n-1}}\right)$ intersects the points $S_1$.  But, this does not happen if there is no interruption among $s_0$, $s'_1$, $s_1$, etc.  This gives us a very long chain of equalities of interruptions, one which cannot be replaced by the equation $s_i=s'_j$.  On the other hand, it turns out that $p_{i,j}$ is always nonzero whenever $s_i \not= s'_j$; hence, it can always be replaced by some other equation involving $s_i$.  
+%For each point $(s_i)_{i\in I(s)}$ the equation $s_i=s'_j$ gives rise to an interruption among $(s_i)_j$ as illustrated in figure \ref{fig:example}.  
+%Figure \ref{fig:example} shows the equation describing the interruptions between the points in Figure~\eqref{eq:interruptions} below.  
+
+\begin{figure}[ht]
+\centering
+\includegraphics{examples.jpg}
+\caption{Examples of equations which cause interruptions in $\left({s_0,\ldots,s_{n-1}}\right)$.}
+\label{fig:example}
+\end{figure}
+
+
+So, in order for a sequence to be a homomorphism, we need to specify equations that are equivalent under interruptions.  In this case, we may also need to give new equations that are impossible to obtain under interruptions.  The goal of this section is to show that the conditions listed above in a more general form yield equations that are not difficult to write down and will generate a sequence of homomorphisms.  
+
+
+
+
+\subsection{Definitions of Sequences of Points and Sequences of Morphisms}\label{def:sequences}
+
+Let $M=\left({\xi_0,\ldots,\xi_n}\right)$ be a sequence of $2$-dimensional points over the interval $[0,1]$ (or equivalently, a sequence of points over the line $L$).  A \emph{$M$-structure} is a pair $(S,\nu)$ consisting of a set $S$ of points such that $\nu(\xi_0,\ldots,\xi_n)\subseteq S$, and an operation $(\circ_\nu)$ satisfying the property that $\nu \circ_\nu (\xi_0,\ldots,\xi_n) =\xi_{n}$, with $\xi_i\in S$.
+
+When we view $M$ as a sequence of points, there is a structure $M^\nu$ that makes $M$ a sequence of $2$-dimensional curves.  Let $S=\{s_0,\ldots,s_n\}$ and $T=\{t_0,\ldots,t_m\}$ be two sequences of points, with $\nu(s_0,\ldots,s_n)=(t_0,\ldots,t_m)$.  Let $(S^\nu,\nu^\prime)$ be the $M^\nu$ structure whose composition $\nu^\prime$ is described in terms of morphisms in $S^\nu$, and the property that $\nu^\prime \circ_{\nu^\prime}(\xi_0,\ldots,\xi_n)=\xi_n$.  Now we want to construct a morphism $f_S : M^\nu \rightarrow T^\nu$ that satisfies the axioms (1)-(4) above.  If the sequences of points $S_i$ and $T_i$ are not empty, then for each $i$, we have $f_{S_i} \in T_i$ whenever $t_i \in S_i$.  By the previous results, the $M^\nu$ structure is equivalent to the $S^\nu$ structure.
+
+To simplify things, let us view $M$ as a sequence of points, as described above.  The construction described above already tells us that $M^\nu$ is indeed equivalent to $S^\nu$.  But, we can simplify things.  We choose to instead consider the $\nu$ structure that is defined by taking the intersection of $M$ and $T$, and using the $M^\nu$ structure.   This has the advantage that we are able to replace equations in the axioms above by equations involving just the intersection of $M$ and $T$.  We will denote the resulting morphisms by $f_S$ and $g_T$.
+
+
+If $S_i$ and $T_i$ are both empty, then $f_{S_i}=g_{T_i}=\id_{T_i}$.   Otherwise, as $S_i\cup T_i$ contains some point $t\in M$, we have $f_{S_i}\cap f_{T_i}\neq g_{T_i}\cap f_{S_i}$.  Hence, $f_S=g_T$.   Similarly, if $S_i$ and $T_i$ are both nonempty, then $f_{S_i} \neq g_{T_i}$ for every $i$.  In particular, there are morphisms $f_{S_i} \rightarrow f_{S_i}\cap f_{T_i}$, $g_{S_i}\rightarrow g_{S_i}\cap g_{T_i}$, and $\id_{T_i} \rightarrow \id_{T_i}$ for every $i$, so that $f_S \cap g_T \neq f_T\cap g_S$.  These can be replaced by equations involving the intersection of $M$ and $T$; see Figure \ref{fig:example}.  We can simplify the notation: let $S_i$ and $T_i$ be sets of points, respectively, and let $f_{S_i}$ be a map from $S_i$ to $S_i\cap f_{T_i}$ and let $g_{S_i}$ be a map from $S_i$ to $S_i\cap g_{T_i}$ (see figure \ref{fig:example}).  
+
+\begin{figure}[ht]
+\centering
+\includegraphics{examples.jpg}
+\caption{Morphisms involved in the axioms described above.}
+\label{fig:example}
+\end{figure}
+
+As a result, we may define the morphisms of $S^\nu$ and $T^\nu$ as follows:
+
+\begin{equation*}
+\begin{tikzcd}[column sep=1cm]
+(S_i)\cap f_{T_i} \arrow[r,"f_S"] \arrow[d,"g_{S_i}\cap g_{T_i}",swap]
+& (S_i) \arrow[d,"f_{S_i}"swap]  \\
+& T_i
+\end{tikzcd}
+\quad \text{and} \quad
+\begin{tikzcd}[column sep=1cm]
+(S_i)\cap g_{T_i} \arrow[r,"g_S"] \arrow[d,"f_{S_i}\cap f_{T_i}",swap]
+& (S_i) \arrow[d,"g_{S_i}"swap]  \\
+& T_i
+\end{tikzcd}
+\end{equation*}
+
+Note that in particular, this means that we have $f_S = g_T$ for every $i$, which is equivalent to saying that the morphisms $f_S$ and $g_T$ are constant.   It follows that $S^\nu$ and $T^\nu$ are equivalent (up to homotopy) to the $S^\nu$ and $T^\nu$ structure described above.
+
+For the next section, we will show that the $M^\nu$ structure gives rise to the sequence of points $\left({s_0,\ldots,s_n\right)_{i\in I(s)}$ by replacing all occurrences of $s_i$ with $\{s_{S_i}\}_{\{s_{S_i}\in S_i\}}$.  The aim is to check that the morphisms $f_S$ and $g_T$ induce an inclusion $i : M^\nu \hookrightarrow T^\nu$.  This involves two steps.  First, recall that a map $f : M^\nu \rightarrow T^\nu$ from $M^\nu$ to $T^\nu$ induces a map $i : M^\nu \hookrightarrow T^\nu$ induced by $\mu : (S_i)\cap f_{T_i} \rightarrow (S_i)\cap f_{T_i}$ and an equivalence relation $\sim : T_i \cong S_i$ such that:
+
+\begin{itemize}
+    \item $\mu$ is surjective, 
+    \item $\nu(f_{S_i}) = \nu(f_{S_i}\cap f_{T_i})$.
+    \item $\nu(g_{S_i}) = \nu(g_{S_i}\cap g_{T_i})$.
+\end{itemize}
+
+
+These conditions are satisfied by the fact that $\nu$ is a partial function.  By considering the pullback of $f_S$ along the $M^\nu$-map, it follows that $(S_i)\cap f_{T_i} \cong f_{S_i}$ and so $(S_i)\cap g_{T_i} \cong g_{S_i}$ for every $i$.
+
+By proving that $i$ induces an inclusion of sequences of points, we are done with the proof.  The next step is to check that the maps $f_S$ and $g_T$ are indeed surjective maps.  Again, we consider the following map of sequences of points:
+
+\begin{align*}
+\textstyle f_S \longrightarrow \textstyle f_{S_i} \cap f_{T_i}\\
+\textstyle g_T \longrightarrow \textstyle g_{S_i}\cap g_{T_i}
+\end{align*}
+
+We also note that:
+
+\begin{align*}
+\textstyle f_S\cap g_{T_i} &= g_{S_i} \cap g_{T_i}\\
+\textstyle g_S\cap f_{T_i} &= f_{S_i} \cap f_{T_i}
+\end{align*}
+
+hence that the maps $f_S$ and $g_T$ are surjective maps.  Finally, we compute the equality of the image of $i$ with $S$:
+
+\begin{align*}
+i(f_S\cap g_{T_i}) &= i(g_S\cap f_{T_i})\qquad \text{where} \qquad 
+\textstyle f_{S_i} = \bigsqcup_{s_i\in S_i} S_{s_i}\setminus \{s_i\} \cup (S_i)_{s_i} \qquad \text{(which we have verified by inspecting $f_S$) }\\
+& \textstyle g_{S_i} = \bigsqcup_{s_i\in S_i} S_{s_i} \cup (S_i)_{s_i} \setminus \{s_i\}\\
+& \textstyle i(f_{S_i})\cap g_{T_i} = \bigsqcup_{s_i\in S_i} g_{S_i} \cup (S_i)_{s_i} \cap g_{T_i}\\
+& \textstyle i(f_{S_i}) \cap g_{T_i} = f_{S_i} \cap g_{T_i}\qquad \text{which we also have verified}
+\end{align*}
+
+Hence, $i$ induces an inclusion of sequences of points.  Now, as the homomorphism $i : M^\nu \hookrightarrow T^\nu$ is surjective, it suffices to check that $f_S\cap g_{T_i}=f_T \cap g_S$ as a sequence of points.  First, we verify this equality for $s_i$ (the second statement).   By assumption, $(S_i)\cap f_{T_i} \cong f_{S_i}$ and so $(S_i)\cap g_{T_i} \cong g_{S_i}$.  Second, we prove that $f_T \cap g_S$ is nonempty (the third statement).  Thus, if $\{s_i\}_{i\in I(s_1)}$ and $\{t_i\}_{i\in I(s_2)}\in T$, then $\{s_1\}\cap f_{T}\cap\{s_2\} = \{s_1\}\cap f_{T}\cap\{t_1,t_2\}$.  Moreover, if $s_1,s_2\in S$, then there exists $u\in T$ such that $s_i\in s_1\cap\{s_2\}$ and $t_i\in t_1\cap\{t_2\}$.  Using the previous result, we compute the following:
+
+\begin{align*}
+i(f_{S_1}\cap g_{T_1}) &= \bigsqcup_{s_1\in S_1} i(f_{S_i}) \text{ and} \qquad
+i(f_{S_1}\cap g_{T_2}) &= i(f_{S_2})\cap g_{T_i}
+\end{align*}
+
+Thus, $f_T \cap g_S$ is nonempty.  Note that the following are equivalent:
+
+\begin{align*}
+f_S &= \bigsqcup_{s_1\in S_1} g_{S_1} \cup (S_1)_{s_1} \\
+f_S &= \bigsqcup_{s_1\in S_1} \nu(s_1) \cap f_{T_1} \\
+i(f_S) &= i(f_{S_1}) \cap g_{T_1}
+\end{align*}
+
+Finally, using the fact that $f_S$ and $g_T$ are surjective, it remains to show that the commutativity of the following square is satisfied:
+
+\begin{equation*}
+\begin{tikzcd}[column sep=1cm]
+i(f_{S_i}\cap g_{T_i}) \arrow[r,"i(f_{S_i}\cap g_{T_i})"] \arrow[d,"\nu(\nu(f_{S_i})\cap f_{T_i})"]
+& i(f_{S_i}) \cap g_{T_i} \arrow[d,"\nu(\nu(f_{S_i})\cap g_{T_i})"] \\
+i(f_{S_1}\cap g_{T_1}) & i(f_{S_1}) \cap g_{T_2}
+\end{tikzcd}
+\end{equation*}
+
+However, this is also satisfied:
+
+\begin{align*}
+i(f_{S_i}\cap g_{T_i}) &= i(f_{S_i})\cap g_{T_i}\qquad \text{and} \qquad
+i(f_{S_1}\cap g_{T_1}) &= i(f_{S_1})\cap g_{T_2}
+\end{align*}
+
+
+We will see that this leads us to the desired conclusion.  Given a sequence of points $\left({s_0,\ldots,s_{n-1}}\right)_{i\in I(s)}$ of size $n$, we will construct a sequence of morphisms between $M^\nu$ and $T^\nu$ described by $f_S = f_{S_i}$ for every $i$.
+
+We begin by defining a family $\nu : [0,1]\rightarrow [0,1]$.  It takes the value $0$ if and only if $s_i=s_j$ for every $i,j$.  It takes the value $1$ otherwise.  We define the function $-\in [0,1]$ by:
+
+\begin{equation*}
+\textstyle \nu(s_0,s_1) := \frac{1}{n}\qquad\text{and}\qquad
+\textstyle \nu(s_0,s_2) := 0 \quad\text{and}\quad
+\textstyle \nu(s_0,s_3) := 0\quad\text{and}\quad
+\textstyle \nu(s_0,s_4) := 0
+\end{equation*}
+
+Similarly, we define a function $\phi : [0,1]\rightarrow [0,1]$.  Its value is the same as $\nu(s_0,s_1)$.
+
+We will note that the operations $\nu$ and $\phi$ are injective, and so can be viewed as a map $\nu : [0,1]\rightarrow \left[0,\infty\right]$.  We will show this below.
+
+Since $f_S = g_T = f_{S_i} = g_{T_i}$, we may use $\nu : [0,1]\rightarrow [0,1]$ to define $-\in [0,1]$ and $\phi : [0,1]\rightarrow [0,1]$ for $s_i=s_{S_i}$.  First, the $M$-structures are now defined by $M^\nu = S^\nu$ and $M^\phi = T^\phi$.  Then, we can define the corresponding structures on $T^\nu$ as follows:
+
+
+\begin{equation*}
+\begin{tikzcd}[column sep=1cm]
+(S_i)\cap f_{T_i} \arrow[r,"f_S"] \arrow[d,"g_{S_i}\cap g_{T_i}",swap]
+& (S_i) \arrow[d,"f_{S_i}"swap]  \\
+& T_i
+\end{tikzcd}
+\quad \text{and} \quad
+\begin{tikzcd}[column sep=1cm]
+(S_i)\cap g_{T_i} \arrow[r,"g_S"] \arrow[d,"f_{S_i}\cap f_{T_i}",swap]
+& (S_i) \arrow[d,"g_{S_i}"swap]  \\
+& T_i
+\end{tikzcd}
+\end{equation*}
+
+Then, we can define the associated structures on $T^\phi$ as follows:
+
+\begin{equation*}
+\begin{tikzcd}[column sep=1cm]
+(S_i)\cap f_{T_i} \arrow[r,"f_S"] \arrow[d,"g_{S_i}\cap g_{T_i}",swap]
+& (S_i) \arrow[d,"f_{S_i}"swap]  \\
+& T_i
+\end{tikzcd}
+\quad \text{and} \quad
+\begin{tikzcd}[column sep=1cm]
+(S_i)\cap g_{T_i} \arrow[r,"g_S"] \arrow[d,"f_{S_i}\cap f_{T_i}",swap]
+& (S_i) \arrow[d,"g_{S_i}"swap]  \\
+& T_i
+\end{tikzcd}
+\end{equation*}
+
+Thus, $T^\nu$ and $T^\phi$ are equivalent.
+
+
+%Let us define $\nu$ and $\phi$ as shown above.  We will note that the operations $\nu$ and $\phi$ are injective, and so can be viewed as a map $\nu : [0,1]\rightarrow \left[0,\infty\right]$.  We will show this below.
+
+\subsection{Surjections of Sequences of Points}\label{surj:sequences}
+
+Next, we will investigate whether the $M^\nu$ and $T^\nu$ structures on $M^\nu$ and $T^\nu$ induce surjections of sequences of points.  Surjections correspond to functors $\pi : T^\nu \rightarrow M^\nu$ that preserve interruptions.  Any such map must also preserve interruptions: we must ensure that we can define $\pi$ to preserve interruptions, and such a $\pi$ is surjective.  Unfortunately, the requirement that interruptions must be preserved here isn't quite there yet.  This restriction is easy to add.
+
+For the sake of simplicity, we will keep the notation consistent throughout this paper: we will assume the following conditions:
+
+\begin{itemize}
+\item The morphisms are homotopic.
+\item The interruptions preserve the inclusion.
+\item The equations are all surjective.
+\end{itemize}
+
+Let us first review these assumptions:
+
+\begin{lemma}
+Let $\nu$ be a partial function defined by $f
+\end{document}
+_{S_i} = g_{S_i}$ for every $i$, and let $\left({s_0,\ldots,s_{n-1}}\right)_{i\in I(s)}$ be a sequence of points.  Then:
+
+\begin{itemize}
+\item $\nu(s_i\cap f_{T_i}) = \nu(s_i)$.
+\item $\nu(f_{S_i}\cap g_{T_i}) = \nu(g_{S_i})$.
+\item $\nu(f_{S_i}) = \nu(f_{S_i}\cap g_{T_i})$ for every $i$.
+\item $\nu(\nu(f_{S_i})) = \nu(\nu(f_{S_i}))$.
+\end{itemize}
+
+In addition, we have that:
+
+\begin{itemize}
+\item $\nu$ is a partial function: $\nu(s_0,\ldots,s_{n-1}) = \nu(\xi_0,\ldots,\xi_n)$.
+\item $\nu$ preserves interruptions: if

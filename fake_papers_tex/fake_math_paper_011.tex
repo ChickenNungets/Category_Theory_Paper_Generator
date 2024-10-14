@@ -1,0 +1,244 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{Topological Manifolds: A Categorical Perspective}
+\author{Max Vazquez}
+\maketitle
+
+
+\begin{abstract}
+    In this paper we introduce the concept of a topological manifold and study its general characterizations in terms of continuous topological spaces. Then, we present several recent results showing that most general examples are topological manifolds with continuous space topology, but many others have non-topological manifolds whose topology is more complicated than continuous topological spaces. We also describe how the properties of continuous topological spaces can be used to relate these examples to their topological counterparts. 
+\end{abstract}
+
+\section{Introduction}
+In our current practice of studying and modeling the dynamics of systems, the objects being studied may span from a physical system, such as an accelerometer or a robot arm, to an artificial human being, such as a human robotic system or a neural network. However, it is unclear when such an object will arise, since both are finite spaces \cite{Moser2008}. It has thus become important for us to define a \textit{topological manifold}, which is a discrete space that is the intersection of two infinite spaces (see Figure \ref{fig:M2M}). Indeed, there is no reason why any object should not be considered a topological manifold, except possibly because the space itself may appear to not exist. We do not take the argument that an object should always form a topological manifold; instead, we use the following approach:
+\begin{enumerate}[(i)]
+    \item We assume that all relevant finite topological spaces are topological manifolds.
+    \item Any finite space is continuous and hence can be described by a space itself. Therefore, we set $\mathcal{P} := [0,\infty]$ to be the space of points on the line $[0,\infty]$.
+    \item All continuous spaces are continuous in the above setting.
+    \item We set $\Omega \mathcal{P} := [\left(\sup\{f\vert \varphi(f)=0\right},\left(\inf\{f\vert f\neq0\right)\right)\right]$ to be the (possibly non-positive) open interval containing all continuous spaces.
+    \item If $\Omega \mathcal{P}$ is closed under limits and colimits, then the continuous spaces $\mathcal{C}(n)$ satisfy an equivalence relation as well.
+    \item If $m$ is a continuous measure, then any continuous space $A \to B$ is equivalently a topological space $M \to N$, where $M$ is closed under $p$-limits (in general, we say $p$-limits) if for every $a \in A$ with respect to some $B$, $ba=a$, and if for every $x \in M$ with respect to a topological space $N$, $px=0$, then there exists a point $y \in N$ such that $m(y) = x$.
+\end{enumerate}
+
+For convenience, let us denote the continuous spaces $(\mathcal{C}(n))_{n \ge 0}$ by $c_n^+$, and $c_n^-$; for $n \ge 0$, we denote the continuous spaces $(\mathcal{C}(0))_{n < 0}$ by $c_0^+$ and $c_0^-$; respectively. Note that all continuous spaces $A \to B$ are equivalently spaces $M \to N$, where $M$ is a closed subset of $A$ and $N$ is a closed subset of $B$. Furthermore, for any continuous space $A$, we can consider $\widetilde{A}^+$ and $\widetilde{A}^-$ as the subspaces of $A$ containing all continuous subsets and all continuous sets, respectively. We will discuss below how this approach allows for the construction of topological manifolds whose topology is more complex than continuous topological spaces. 
+
+\subsection*{The Basic Definitions}
+The set of continuous spaces over a discrete space $X$ can be thought of as a category, with morphisms given by functions $f : X \to Y$ making a morphism between spaces between them, and identity morphisms being constant functions. The operations of categories allow us to understand the composition and intersections of morphisms, and even to perform elementary operations like addition and multiplication over arbitrary sets. As illustrated in Figure \ref{fig:M2M}, a space $X$ consists of pairs $(x_k, \sigma_k)_{k \ge 0}$, where each $\sigma_k$ is a sequence of functions from $X$ to a continuous space $c_\sigma(x_k)$.
+
+Note that the morphisms of a continuous space may also be defined explicitly as sequences of functions from a continuous space to itself. These function must preserve the directionality of the arrows between adjacent elements of the sequence, i.e., $f(y)(z) = g(z)(x)$ and $g(x)(z) = h(y)(x)$, for all $x,y,z \in X$. This implies that a continuous space $A \to C$ is called a \textit{continuous map} if its $\mathbb{R}^n$ mapping space $M \to N$ is a continuous map of continuous spaces $A \to C$. We now demonstrate several basic definitions, namely the continuous maps, continuous maps, continuous maps and continuous functions. Given a continuous map $A \to B$, we can construct the set of continuous maps $c_{X,Y}(A,B)$, where $X \subseteq B$ is any subset. Since each continuous map takes points of the domain of the continuous map to points of the codomain, this means that any continuous map can be viewed as a continuous map with a particular codomain. The continuous maps $\mathrm{Pr}_{X,Y} : (\mathcal{C}({\{X\}}), {\{y\}}) \to ({\{X\}},\{\ell\})$ and $c_{X,Y}$ are analogous to the continuous maps $\mathrm{Pr}_{X,Y} : \mathcal{C}(\{X\}) \to \mathcal{C}(\{X\}),$ and $c_{X,Y}: \mathcal{C}(\{X\}) \to \mathcal{C}(\{Y\})$ in \cite{MacLane94}, respectively. Finally, we show that a continuous function $f : X \to Y$ is called a \textit{continuous composite} if, for any continuous space $D$, $f\circ c_{X,Y} : D \to B$ has the same direction as $f$ if for all $x \in X$, $\ell \in c_{X,Y}(x,b)$ and $y \in Y$ where $b \in D$, the composition is equal to $\ell \circ f(y)$.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.57\textwidth]{fig_3d.jpg}
+\caption{Cartesian space of points.}
+\label{fig:M2M}
+\end{figure}
+
+% \subsection*{The Continuity of Points}
+% Let $X$ and $Y$ be continuous spaces. Then, each continuous map makes a continuous map out of continuous spaces. In other words, $Y \cong \mathrm{Pr}_X(c_n)$ for $n \ge 0$. For a continuous map $f : X \to Y$, if $x_0,...,x_n \in X$, then $f(x_0)... f(x_n) = y$ for $y \in Y$; and if $(u_0,...,u_n) \in {\mathcal{C}(0)}$, then $f(u_0)... f(u_n) = 0$. On the other hand, if $(v_0,...,v_n) \in {\mathcal{C}(0)}$, then $f(v_0)... f(v_n) = 0$; and if $x,y \in X$, then $f(x)... f(y) = 0$ if and only if $f(x)... f(y) \neq 0$. Now, suppose that $\{f_0(x_0),...,f_n(x_n)\}$ is a continuous subspace of $X$. We know from Proposition \ref{prop:continuity_of_points} that $\{f_i(x_0),...,f_j(x_n)\}$ is continuous, since each $f_i$ is continuous. So, we have a continuous map $c_{X,Y}(A,B)$ defined by the following diagram
+\begin{equation}\label{diagram:continuity_maps}
+\begin{tikzpicture}[scale=0.6]
+    \filldraw[fill=white!50] (-1, 0) circle (.05cm); 
+    \filldraw[fill=white!50] (1, 0) circle (.05cm);
+    \foreach \x in {0...1}
+        {\foreach \y in {0...1}
+            {\coordinate (\coordname{point}*\x+\coordname{point}*\y) at ($(0,\x) + (\x,0)$);}
+            \draw[->] (\coordname{point}*\x+\coordname{point}*\y) -- ++(-\x,-\y);}
+    }
+    %\draw[thick, red] (1,.5).. controls +(.75,.75) and +(.75,-.75).. ++(-0.75,-0.75);
+    \node at (0,.25) {$X$};
+    \node at (.25,0) {$Y$};
+    \draw (0,.25) node[above] {$f_0$};
+    \draw (1,.25) node[below] {$f_1$};
+    %\node[red] at (-.3,-.3) {$x_0,...,x_n$};
+\end{tikzpicture}
+\end{equation}
+where the dots represent the points of the domain of $f$, while the boxes represent the points of the codomain. The points of the domain of $f$ are given by the continuous maps $f_0 : \mathcal{C}(\{0\}) \to \mathcal{C}(\{0\})$ and $f_1 : \mathcal{C}(\{1\}) \to \mathcal{C}(\{1\})$. Since $f_0$ and $f_1$ are continuous maps, $c_{X,Y}(A,B)$ defines the space of continuous maps $c_{X,Y}(A,B)$ from $A$ to $B$. This makes sense because of continuity of $f$, as we illustrate in Figure \ref{fig:continuity_map_3}. In addition to showing that the continuous map $c_{X,Y}(A,B)$ extends the continuous map $c_{X,Y}(A,B)$ of $\{0\}$ to $Y$, it also shows that it extends the continuous maps $c_{X,Y}(A,B)$ of $X$ to $Y$. If $f$ is continuous, then for any continuous map $f' : X' \to Y'$ and any continuous space $B$, we have an isomorphism of continuous spaces $c_{X',Y'}(f(A),f'(B)) \simeq c_{X,Y}(A,B)$. Thus, by definition of $c_{X,Y}(A,B)$, one can see that $c_{X,Y}(A,B)$ defines the continuous map $c_{X,Y}(A,B)$ from $A$ to $B$. 
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{fig_continuity_map_3.png}
+\caption{$f \in c_{X,Y}(A,B)$ and $f' \in c_{X',Y'}(f(A),f'(B))$.}
+\label{fig:continuity_map_3}
+\end{figure}
+
+As illustrated in Figure \ref{fig:continuity_map_3}, the isomorphism $c_{X,Y}(A,B) \simeq c_{X,Y}(A,B) = c_{X,Y}(A,B)$ is an explicit description of the continuous composite $c_{X,Y}(A,B) = c_{X,Y}(A,B) + c_{X',Y'}(f(A),f'(B))$, due to the fact that $c_{X,Y}(A,B)$ does not depend on the continuous composite $f(A) \to f'(B)$. Similarly, the fact that $c_{X,Y}(A,B)$ does not depend on $f'$ is exactly what tells us that $c_{X,Y}(A,B)$ is continuous. Moreover, if $f: X \to Y$ is continuous, then it must make a continuous map $f': X' \to Y'$ from $X$ to $Y'$, so that
+$$c_{X',Y'}(f(A),f'(B)) = c_{X,Y}(A,B).$$
+Since $f'$ satisfies continuity, this implies that the continuous composite $c_{X,Y}(A,B)$ does not depend on $f'$, so it forms a continuous composite $c_{X,Y}(A,B) + c_{X,Y}(A,B) = c_{X,Y}(A,B)$, as desired. 
+
+Therefore, the continuous composite $c_{X,Y}(A,B) + c_{X,Y}(A,B)$ defines a continuous map $c_{X,Y}(A,B)$. Moreover, this map follows from $c_{X,Y}(A,B)$ extending continuously to $Y$, as shown in Figure \ref{fig:continuity_map_4}. On the other hand, for any continuous space $B$, we get $c_{X,Y}(A,B) \to B$, because $Y$ is continuous. Moreover, if $f: X \to Y$ is continuous, then by \cite{Wood1976}, it is also continuous; therefore, by taking the left adjoint of the continuous map $f$, we can also take the right adjoint of the continuous map $f$ to get the right adjoint of $f$.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.5\textwidth]{fig_continuity_map_4.png}
+\caption{Right adjoint of $f$.}
+\label{fig:continuity_map_4}
+\end{figure}
+
+We have demonstrated the basic definitions of continuous maps, continuous composite, and continuous map. We can also show that a continuous function $f: X \to Y$ is continuous composite if and only if it is continuous composite with a single continuous function. We first prove that a continuous function $f: X \to Y$ is continuous composite, but note that for any continuous function $f$ and any continuous space $A$, $f\circ c_{X,Y} : A \to B$ is continuous iff $f$ is continuous composite with a continuous function. By the second part of Theorem \ref{thm:continuous_functions_composite}, the continuous composite $c_{X,Y}(A,B) + c_{X,Y}(A,B) = c_{X,Y}(A,B)$ is continuous. Hence, we can conclude that a continuous function $f: X \to Y$ is continuous composite.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.85\textwidth]{fig_continuity_function_composite.png}
+\caption{Continuous composite of a continuous function.}
+\label{fig:continuous_function_composite}
+\end{figure}
+
+Let $\{f_0(x_0),...,f_n(x_n)\}$ be a continuous subspace of $X$. Then, we have a continuous function $g: Y \to X$ by taking the $n$-fold pullback
+\begin{align*}
+(x_0_0,...,x_0_{n-1},x_1_0,...,x_1_{n-1},...,x_n_0,...,x_n_{n-1}) & \longrightarrow X, \\
+\mathrm{pullback}^n_{f_0(x_0),...,f_n(x_n)} & \longrightarrow f(x_0)... f(x_n)
+\end{align*}
+which is continuous if and only if $\{f_i: Y \to X\}_{i = 0}^n$ is continuous. Therefore, we have that $\{f_0(x_0),...,f_n(x_n)\} \simeq X$. Since $f_i$ is continuous, the continuous composite $f_0(x_0),...,f_n(x_n)$ is continuous as well, since
+$$
+f_i(x_0_0)... f_i(x_n_0) +... + f_i(x_n_{n-1})... f_i(x_0) = f_i(x_0_0)... f_i(x_n_0) + f_i(x_n_{n-1})... f_i(x_0),
+$$
+and so
+$$
+f_0(x_0_0)... f_0(x_n_0) +... + f_n(x_n_{n-1})... f_0(x_0) = f_0(x_0_0)... f_n(x_0).
+$$
+
+\subsection*{Continuous Maps}
+Given continuous maps $A \to B$, we call $A$ and $B$ \textit{continuous maps} with common domain. Recall from Proposition \ref{prop:continuous_maps_domain} that a continuous map $A \to B$ is continuous iff $A$ and $B$ are continuous maps with common domain.
+
+Similarly, continuous functions can also be obtained by constructing a continuous map $c_{X,Y} : A \to B$ from $A$ to $B$. Moreover, each continuous map $c_{X,Y}$ defines a continuous function $c_{X,Y} : A \to B$.
+
+The continuous functions and continuous maps define categories in \cite{Moser1986}, as illustrated in Figure \ref{fig:category_continuous_maps_continuum}. It is worth noting that for each continuous map $f : A \to B$, we have the following equivalent descriptions:
+\begin{itemize}
+    \item The continuous map $f_0 : A \to A$, where $\mathrm{pr} := \{f_0(x_0),...,f_n(x_n)\}$.
+    \item The continuous function $f : \mathrm{pr} \to A$, where $\mathbf{F} := \{f_0(x_0),...,f_n(x_n)\}$ and $\mathrm{pr'} := \{g_0(w_0),...,g_n(w_n)\}$, such that $fg_i = 0$ for $0 \le i \le n$.
+    \item The continuous composite $c_{X,Y} : \mathrm{pr} \times \mathrm{pr'} \to A$, such that $f = c_{X,Y} \circ \mathrm{pr'}$.
+\end{itemize}
+These are the most common types of continuous functions, which we outline in Table \ref{table:continuous_functions}. The remaining ones are examples of continuous maps which we describe separately. 
+
+\begin{table}
+    \centering
+    \caption{Equivalence classes of continuous functions}
+    \label{table:continuous_functions}
+    \begin{tabular}{|c | c |}
+        \hline
+        Continuous Function     & Equivalent Map            \\
+        \hline
+        $c_{X,Y} : \mathrm{pr} \times \mathrm{pr'} \to A$    & $\mathrm{Pr}_{X,Y}$         \\
+        $c_{X,Y} : A \to B$   & $c_{X,Y}(A,B) \to B$       \\
+        $c_{X,Y}: \mathcal{C}(X) \to \mathcal{C}(Y)$ & $\{\bullet\}$                  \\
+        $c_{X,Y}: A \to B$       & $c_{X,Y}(A,B)$          \\
+        $c_{X,Y} : \mathrm{Pr}_{X,Y} \to Y$        & $\widetilde{A}^+ \to \widetilde{B}^+$   \\
+        $c_{X,Y} : \{\bullet\} \to B$           & $c_{X,Y}(A,B)$              \\
+        $c_{X,Y} : X \to Y$               & $c_{X,Y}(A,B)$                \\
+        \hline
+    \end{tabular}
+\end{table}
+
+% \subsection*{Continous Functions}
+% While continuous functions are still very useful for describing continuous composite transformations between continuous composite transformations, they are much more complex to write down. Therefore, we turn to continuous functions. We need a generalization of the continuous functions of \cite{Kassel1991}. In this case, we expect that $Y$ and $Z$ are continuous spaces and that $f: Y \to Z$ is continuous. Otherwise, we cannot apply $c_{X,Y}$ directly to get a continuous map from $A$ to $B$. Instead, we need a continuous function which is continuous composite with a continuous function $g : X \to Y$ such that $f = g \circ c_{X,Y}$. Such a continuous function is often referred to as the \textit{continious composite of $f$} (or simply as \textit{co-composite} of $f$). The first way to describe continuous composite transformations in a more convenient way is using the continuous composite of $f$.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{fig_continuous_composite.png}
+\caption{Continuous composite of a continuous function.}
+\label{fig:continuous_composite}
+\end{figure}
+
+One way to describe continious composite transformations is by defining a continuous function $f' : Y \to Z$ via a continuous function $g : X \to Z$. For example, if $g = c_{X,Y}: A \to B$, we can describe $f' : Y \to Z$ by writing $f' = c_{Y,Z}$ to denote $f \circ c_{Y,Z}$. If $g = \frac{1}{n}$, we have that $c_{Y,Z} = c_{Y,Z} = c_{X,Y} = c_{Y,Z} \circ c_{X,Y}$. However, since $g$ is continuous, it is also continuous composite with another continuous function $h : X \to Z$ such that
+$$h = c_{X,Z} \circ \mathrm{pr} = \sum_{i = 0}^n g_i \circ f_i.$$
+Then $h \circ f$ is continuous as well. Let us also write the sum of continuous composite of $g_i$ into $h$ to make clear that this is indeed continuous composite transformation. This makes clear that $f'$ is continuous composite with a continuous composite transformation $f' \circ h$ whenever $f$ and $h$ are continuous composite.
+
+We now show how to define continuous functions, by taking a categorical perspective towards continuous composite transformations and continuous functions. One key idea in order to give a meaning to continuous composite transformations and continuous functions in a way that is intuitive to our reader is the following observation. Consider the diagram
+\begin{equation}\label{diagram:continuous_composite}
+\begin{tikzpicture}[scale=.4]
+    \filldraw[fill=white!50] (-1, 0) circle (.05cm); 
+    \filldraw[fill=white!50] (1, 0) circle (.05cm);
+    \foreach \x in {0...1}
+        {\foreach \y in {0...1}
+            {\coordinate (\coordname{point}*\x+\coordname{point}*\y) at ($(0,\x) + (\x,0)$);}
+            \draw[->] (\coordname{point}*\x+\coordname{point}*\y) -- ++(-\x,-\y);}
+    }
+    \node at (0,.25) {$X$};
+    \node at (.25,0) {$Y$};
+    \node at (-.5,-.5) {$Y$};
+    \node at (0,.5) {$X$};
+    \node at (.5,1) {$X$};
+    %\draw (0,.25) node[above] {$f_0$};
+    \draw (0,.5) node[right] {$f_0$};
+    \draw (0,.25) node[above] {$g_0$};
+    %\node[red] at (-.3,-.3) {$x_0,...,x_n$};
+\end{tikzpicture}
+\end{equation}
+It is natural to ask whether $f$ and $g$ are continuous composite transformations. To answer this question, we need to identify the continuous function $g_0 : Y \to X$ with a continuous function $h : X \to Y$ such that $fh = f$, and more generally, if $h$ is continuous composite with another continuous function $h'$ then $h$ is continuous composite with $h'$ as well.
+
+Firstly, recall that the continuous function $g$ is continuous composite with $f$ through the map $g_0 \colon A \to B$. Since $g_0$ is continuous, there exists a continuous map $h : X \to A$ such that $fh = f$. Now consider the diagram 
+\begin{equation}\label{diagram:continuous_composite_part_1}
+\begin{tikzpicture}[scale=0.6]
+    \filldraw[fill=white!50] (-1, 0) circle (.05cm); 
+    \filldraw[fill=white!50] (1, 0) circle (.05cm);
+    \foreach \x in {0...1}
+        {\foreach \y in {0...1}
+            {\coordinate (\coordname{point}*\x+\coordname{point}*\y) at ($(0,\x) + (\x,0)$);}
+            \draw[->] (\coordname{point}*\x+\coordname{point}*\y) -- ++(-\x,-\y);}
+    }
+    \node at (0,.25) {$X$};
+    \node at (.25,0) {$Y$};
+    \node at (-.5,-.5) {$Y$};
+    \node at (0,.5) {$X$};
+    \node at (.5,1) {$X$};
+    \draw (0,.25) node[above] {$f_0$};
+    \draw (0,.5) node[right] {$f_0$};
+    \draw (0,.25) node[above] {$g_0$};
+    \draw (0,.5) node[right] {$g_0$};
+    %\draw (1,.5) node[right] {$g_1$};
+    \draw (0,-.25) node[above] {$h_0$};
+    \draw (0,-.5) node[below] {$h_0$};
+    \draw (0,-.25) node[above] {$h'_0$};
+    \draw (0,-.5) node[below] {$h'_0$};
+    \node[red] at (-.3,-.3) {$x_0,...,x_n$};
+\end{tikzpicture}
+\end{equation}
+Here we see that we can define $h'$ as $h' = h \circ f$. We want to see whether $h$ is continuous composite with $h'$, however, since continuous composite with $\partial f$ gives us another continuous composite $g' : X \to Y$ such that $f' = gh'$, we cannot just apply $h$ to obtain $h'$; instead, we need to apply $h' \circ g'$ to obtain $h$ as well. Since the continuous composite of $h$ with the continuous composite $g'$ gives us a continuous composite transformation $h' \circ g' : X \to Y$ and $f'$ is continuous composite with $h' \circ g'$ to yield another continuous composite transformation $h'' : X \to Y$ such that $fh = f$; we can check that $fh = h''$. We have proved that the continuous composite of $f$ with $g'$ gives us a continuous composite transformation and $f'$ is continuous composite with $h''$.
+
+\begin{lemma}\label{lemma:discrete_continuous_composite}
+    If $f: X \to Y$ is continuous composite with $g: Y \to Z$, then $f$ is continuous composite with $g$ as well.
+\end{lemma}
+\begin{proof}
+    Let $\gamma : Y \to Z$ be a continuous function of discrete spaces. Since $g$ is continuous, there exists a continuous map $h : X \to Y$ such that $fh = g$, and we have already identified $h = c_{X,Y} : A \to B$. We wish to find a continuous function $h'$ such that $fh = g$ and that $g$ is continuous composite with $h'$, and more specifically, $\partial{h'} = h \circ f$.
+    
+    To do this, we use that we can view $X$ as a discrete space and observe that we can view $g(y)$ as a continuous function on $Y$. This implies that we can view $Y$ as a discrete space and observe that we can view $gf(y)$ as a continuous function on $Y$. Then, using that the continuous function $gf$ is continuous composite with $g(y)$, we can view the continuous composite $h' = h \circ f$ as a continuous composite transformation $h'' = h' \circ g$. Finally, the continuous function $h''$ is continuous composite with $h_0$ to obtain $h'$. Finally, we have established the desired result.
+\end{proof}
+
+However, as seen in Lemma \ref{lemma:discrete_continuous_composite}, using the continuous composite of $f$ gives us a continuous composite transformation and $f$ is continuous composite with $g$ as well. Therefore, if we want to express $f$ as a continuous composite transformation then we need to work with continuous functions.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.4\textwidth]{fig_continuous_composite_lemma.png}
+\caption{Continuous composite of a continuous function.}
+\label{fig:continuous_composite_lemma}
+\end{figure}
+
+% In this section, we construct a categorical perspective for continuous composite transformations and continuous functions. We first discuss some basic facts about continuous composite transformations. We then consider the continuous composite of a continuous function.
+
+\subsection*{Discrete to Continuous Composition}
+Recall that a continuous map $f: X \to Y$ can be written as a continuous composite of continuous functions
+$$f_{0} \circ h := g_{0} \circ f_{1}$$
+for continuous functions $h : X \to Y$ and continuous functions $g_0 : X \to X$ and $g_1 : X \to X$. Now, if $h$ and $g_0$ are continuous, we could have $g_{0} = h$ to obtain the desired continuous composite transformation $f_{0} \circ h : X \to Y$. However, by proving that a continuous composite of continuous functions is continuous we deduce that continuous composite transformations are continuous as well, and hence, we have a continuous composite of continuous functions. 
+
+To see this, we will start by showing that $\mathrm{pr} := \{f_0(x_0),...,f_n(x_n)\}$ is continuous. That is, we know that the continuous map $f_0 : A \to A$ is continuous and there exists a continuous map $f' : A \to A$ such that $f_0 \circ f' = f$. This allows us to identify $f_0: A \to A$ and $f'$ as discrete maps. Let us note that the discrete map $f_0 : A \to A$ is continuous and that the continuous composite $f_0 \circ f$ is continuous. Next, let us consider the continuous composite transformation $\gamma : Y \to Y$ and consider the continuous composite of $f_0 : A \to A$ with a continuous composite $f' : A \to A$ as in the figure below:
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.65\textwidth]{fig_continuous_composite_transformation_discrete_continuous.png}
+\caption{$f_0: A \to A \to A$ and
+\end{document}
+ $\partial{f} : A \to A \to A$.}
+\label{fig:continuous_composite_transformation_discrete_continuous}
+\end{figure}
+The continuous composite $\gamma$ provides a continuous composite of continuous composite transformations. Let us note that the continuous composite of a continuous composite transformation is continuous as well, which makes us able to identify $f$ and $f'$. Hence, we see that $f_0$ is continuous composite with $f'.$
+
+Next, we consider the continuous composite of $f_0 : A \to A$ and $f' : A \to A$ with $g_0 : X \to X$ and $g_1 : X \to X$, as in the figure below:
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.75\textwidth]{fig_continuous_composite_transformation_discrete_continuous_2.png}
+\caption{$f_0 \circ f' : A \to A \to A$ and $g_0 : X \to X \to X$.}
+\label{fig:continuous_composite_transformation_discrete_continuous_2}
+\

@@ -1,0 +1,160 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{On The Monoindal Endofunctor In Sparse Categories}
+\author{Max Vazquez}
+\maketitle
+
+
+We are now in the flesh of the topic of studying a mono-endofunctor in an arbitrary category of spaces with possibly zero homogeneous (and possibly no zero vertical) structures.
+The simplest kind of monoidal category that we will consider is the \textit{monoidal category} $\Vect$. 
+For this example, let us assume that the monoid structure on a monoidal category has the right-lifting property and that it contains a collection of functions whose values are injective and surjective, called \textit{surjections}. In particular, these functions are the horizontal and vertical composition maps induced by the action of $J$. Now, there are many choices for the vertical monoidals to be. The left one, which allows to define a monoidal functor in any category and, hence, without a choice of vertical monoids, is called \textit{the neutral monoidal functor}, and is known as the \textit{identity monoidal functor} or simply called the \textit{neutral monoidal functor}. To better understand their properties, we first recall what they do under our chosen context:
+
+A category has at least two types of objects and two types of arrows. These are usually denoted with $O$ and $C$, respectively. However, the vertical arrows of such a category have more general definition. That is, if $\alpha:\beta\rightarrow C$ and $\gamma:\delta\rightarrow B$ are arrows in a category $\A$ with vertical arrows $\alpha_*,\gamma_*$, then so is the composite arrow $\alpha+\gamma.$ For example, if $\A=\Vect$, the arrows are $(v,\sigma):(0,\varphi)\rightarrow (0,\psi)$ where $\sigma$ is given by a function $\varphi$, while $\alpha_{(0,\varphi)}:=(0,\varphi)\rightarrow 0$ is the identity map and $\alpha_{\psi}:=(-1,\psi)\rightarrow (0,\varphi)$ is the negation operator. 
+
+
+What is important in the discussion is that, once again, the arrows can be of different kinds in the same category. This means that if the natural transformation $\theta:\alpha+\gamma\rightarrow \alpha' + \gamma'$ exists in such a way, then these are two arrows in the same category, but actually different ones. So, in order to make our case into a concrete example, let us consider that the category of spaces $\Vec$ of vectors is represented by its category of objects $\Vec(0,1)$ and arrows $\Vec((v),(w))=(v+w),(v,-w)$. Now, $\Vec$ has two types of arrows: a vector $v\in \Vec(0,1)$ is always an object of $\Vec$, whereas a vector $v=(v_x),(v_y)\in\Vec((v_x), (v_y))$ consists of a pair of elements $v=(v_x,v_y)$ satisfying that: $v_x^2+v_y^2=1$, $v_xy=v_yx$ and that all $(v_x,v_y)$ are distinct from $v$ itself. One could choose to associate such pairs with the same element $(v,(v_x,v_y))$. Note that this example is also consistent with the fact that $\Vec$ does not have any identity arrows. 
+
+But the problem in a category of spaces in which all the objects are not equal is that each pair of objects induces a new arrow; we cannot go from the pair $(\id,u)$ to the pair $(u,v)$. Furthermore, $\Vec(0,1)$ is only a single object of $\Vec$. 
+So, we get a situation that makes this an even more complex example than the example $\Vec$. 
+In other words, the type of arrows $\Vec(0,1)$ has multiple types. There are many possible ways to represent objects in this category, depending on whether $\Vec$ is a small category or a large category, and we will discuss them in future examples. However, we say that a category has enough objects (and thus enough arrows) when it satisfies the following conditions: 
+\begin{itemize}
+    \item Every arrow from any object to itself admits a unique solution to be an identity arrow. 
+    \item Let $\A$ be a category with a finite number of objects. Then every object of $\A$ satisfies the axiom that every pair of arrows $\alpha:(0,x)\rightarrow(0,y)$ and $\beta:(0,y)\rightarrow(0,x)$ satisfy that 
+    \[
+    \alpha+\beta=0
+    \]
+    for all $x,y\in \Ob(\A).
+    \item A certain set of arrows among all objects of $\A$ is a bijection. 
+\end{itemize}
+That is, every object of $\A$ is uniquely determined by two or more sets of arrows of $\A$. We write $n$ for the cardinality of the sets. If $\A$ is such that $\dim n\geq 3$, then any two objects of $\A$ that are the same on the set of all $i$-th set are identified as being equivalent. 
+
+Now, let $\A$ be a category with enough objects to have a bijection between some sets of arrows and every object of $\A$. Suppose that each object of $\A$ has been identified by a certain set of arrows, for instance by a set $\{0,1\}^{\times n}$ consisting of pairs of elements of $n$-tuples $(x_i,y_i)\in \{0,1\}^n$. We know that in this category every object of $\A$ corresponds to a set of pairs $(x_i,y_i)\in \Ob(\A)^n$, and that every pair of objects is uniquely determined by two sets of arrows that can be written in terms of those elements. In other words, the size of the set of objects is increasing with the increase of $n$. Hence, every object of $\A$ corresponds to a set of objects, and any two equivalent objects correspond to the same pair of objects. Now, we want to show that for any $X,Y\in \A$, if $X=Y$ and $f: X\rightarrow Y$ is an object, then the pair of arrows $(X,f)=(Y,1_Y)$ is a bijection. Since $X=Y$ and $f: X\rightarrow Y$ is an object, it follows that $f(x_i)=f(y_j)$ for every $x_i,y_j\in \Ob(\A)^n$. But that is not true in general. Indeed, if two objects $A,B\in \A$ have the same set of arrows, then either they correspond to the same pair of objects or they have the same set of pairs of arrows. In general, a category with enough objects is said to have \textit{enough equations} and that a category that satisfies those equations is said to be \textit{monologically closed}. 
+
+Now, using this we can make precise the results about a given example of $\Vec$. Firstly, suppose that $\A$ has enough objects. Then for any object $A\in \A$, the pair $(A,1_A)$ and $(1_A,A)$ are compatible as a set of arrows in $\A$. So, $A$ has an object of $\A$, and since $\A$ has enough objects, every object has at least one compatible arrow. And this means that $A$ is connected. It is easy to see that $A=1_A$ and $A^{-1}=A$. So, $1_A\in\Ob(\A)$. Next, suppose that $1_A\not=A$. So, $A$ is disconnected, meaning that $1_A\neq A$ (this happens in many examples). This means that $A$ has non-unique morphisms, i.e., a pair $(a_i,a_i')$ of a family of maps $a_i\colon A\rightarrow A$ and $a_i'\colon A\rightarrow A'$ such that $a_i\circ1_A=a_i'$ for all $i$. As before, we write $n$ for the length of this family. Moreover, $\Ob(\A)^n$ is a subcategory of $\Ob(\A)$ generated by the family of families $(a_i')_i$, i.e., $a_i'\colon A\rightarrow A'$ such that $a_i\circ1_A=a_i'$ for all $i$. Notice that every object of $\A$ is uniquely determined by $A$ and these pairs have the same set of arrows as $A$, thus having the same cardinality. So, since $A$ has an object $A$, this implies that $A$ has at least one compatible arrow $(A,1_A)$. 
+
+Now, the set of compatible arrows in $\A$ and the set of incompatible ones in $\A$ must coincide, otherwise $A$ is a non-unique object in $\A$. Therefore, every object $A\in \A$ has at least one incompatible arrow $(1_A,A)$ because every such pair is an equivalence in $\A$. Thus, every pair $(a_i,a_i')\in\Ob(\A)^n$ is an equivalence, where $a_i\circ1_A=a_i'$ is a pair of compatible arrows. Thus, $(A,1_A)\in \Ob(\A)^n$ is an equivalence for all $A\in \A$, i.e., every pair $(a_i,a_i')$ is an equivalence in $\A$. Finally, $A=A^{-1}$ and the set of pairs of incompatible arrows in $\A$ is given by the following family of pairs $(a_i',a_i'')\in\Ob(\A)^n$, which coincides with the $n$ distinct families $(a_i)_i$ and $(a_j)_j$. It follows that $A$ is connected. Thus, $A=1_A$. 
+
+
+Now, we need to check whether it is possible to describe a monoid in $\Vec$ from a category. Let us start by recalling that a monoid is an object of a category and a monoid structure is a collection of maps, all of which are invertible, so that every arrow induces another arrow in the category. We note that, by construction, every monoid in the category of sets of functions $\Func(\R,\R)$ factors through its underlying category of functions $\Func(\R,\R)$, and that there is a commutative diagram:
+\[
+\begin{tikzcd}[column sep = 1cm,row sep=1.5cm,ampersand replacement=\&]
+    \Func(\R,\R) \ar[d,"\Delta"] \& (\Func(\R,\R))^\op \ar[d, "\gamma_\bullet"'] \\
+    \Func(\R,\R) \ar[r,"\gamma_!"] \& \Func(\R,\R).  
+\end{tikzcd}
+\]
+Here, $\Delta$ acts on the domain and codomain by taking a constant value for all points inside the region bounded by the two arrows. Notice that the domain and codomain of $\Delta$ are precisely the codomain and domain of the map $-\cdot\colon \Func(\R,\R)\rightarrow\Func(\R,\R)$; thus, there are no identities in the domain and codomain. Now, we know that the composite $\Delta\circ\gamma_\bullet$ maps all points inside $\Func(\R,\R)\subseteq \Func(\R,\R)^{\op}$. This means that, since every arrow of $\Func(\R,\R)$ is a composition, we can see that for every function $\rho\colon \Delta^{op}\rightarrow\R$ and every point $v\in\Func(\R,\R)^{\op}$, we obtain a composition $\rho\circ\gamma_!\circ v\in\R$, that is, that $\rho(1_V)=v$. From this, we obtain the desired result. 
+
+As a consequence of this remark, for any function $\lambda\colon \R\rightarrow\Func(\R,\R)$ that maps any point inside $\Func(\R,\R)$ to the constant value $0$, we can take $0$ as a domain and a function $\lambda\circ\Delta^{op}$ as the codomain. When $\Lambda=\Delta\circ\lambda$, we have a monoid $\Lam_{\Gamma}$ in the category $\Vec$ described in the previous remark. 
+
+
+
+More generally, let us consider a category $\A$ and a family of maps $\lambda_i\colon\Ob(\A)\rightarrow\A$ in $\A$ over the elements of some set $\{0,1\}^{\times n}$. Define the composite $\Sigma_{n}:\{0,1\}^{\times n}\rightarrow\A$ as follows: $s\mapsto s_0+s_1$, $t\mapsto t_0+$t_1$, and $v\mapsto v_0\cdot v_1$ for all $s_i,t_i,v_i\in\{0,1\}^n$ satisfying that:
+\begin{itemize}
+    \item $t_i s_i=s_i$ for all $i$,
+    \item $s_i v_i=v_i s_i$ for all $i$,
+    \item $s_ix_i=v_i x_i$,
+    \item $t_ix_i=x_i t_i$. 
+\end{itemize}
+Then this family $\{s_i\}_{i\in\{0,1\}^n}=\{0,1\}^{\times n}$ constitutes a family of functions $\{\gamma_i\}_{i\in\{0,1\}^n$. Now, suppose that $n=1$, so that there are no other non-trivial functions $\lambda_i$ in $\A$ and that $n\geq 2$. We have seen above that the domain of $\gamma_1$ is given by the family of $1$'s, so the domain of $\gamma_0$ is simply the same family of $0$'s. Therefore, $\{s_i\}_i$ constitute a family of functions $\{\Lambda_{i+1}\}_{i\in\{0,1\}^n=\{0,1\}^{\times n}$. 
+
+Let us note that, under the definitions as above, the composite $\Sigma_{n}:\{0,1\}^{\times n}\rightarrow\A$ is indeed a monoid. Moreover, for each family $\{s_i\}_{i\in\{0,1\}^n$, we define the monoid $\Lam_i$ such that $\Lam_i$ is the composition of the composite $\Sigma_{i+1}:\{0,1\}^{\times n}\rightarrow\A$ and the composite $\Sigma_{i}:\{0,1\}^{\times n}\rightarrow\A$ as follows: $s\mapsto s_0+s_1$, $t\mapsto t_0+$t_1$, and $v\mapsto v_0\cdot v_1$ for all $s_i,t_i,v_i\in\{0,1\}^n$. When $\{s_i\}_i=\{0,1\}^{\times n}$ then we define $0$ as the domain and $\Lam_0$ as the codomain of $\Sigma_{0}:\{0,1\}^{\times n}\rightarrow\A$. Now, it remains to prove that the identity monoid $\{0,1\}^{\times n}$ is a monoid. By construction, the family $\{\lambda_i\}_{i\in\{0,1\}^n=\{0,1\}^{\times n}$ is well-defined and the identity family $\{0,1\}^{\times n}$ is well-defined. It follows that $\Lam_1$ is defined by the family $\{\sigma_i\}_{i\in\{0,1\}^n$ as follows: $\sigma_i(0)=0$, $\sigma_i(1)=\lambda_i(1)$, and $\sigma_i(s)=\lambda_i(s)$. Furthermore, $\{\sigma_i\}_{i\in\{0,1\}^n$ is a family of functions $\{\Lambda_{i+1}\}_{i\in\{0,1\}^n=\{0,1\}^{\times n}}$ that are well-defined for all $i\geq 1$. This completes the proof of the identity monoid $\{0,1\}^{\times n}$ being a monoid. 
+
+Now, we consider how to describe a monoid in the category of functions $S$, where we require that we have an induction rule: for any family $\{s_i\}_i$, we define $\lambda_i$ as follows: $\lambda_i(0)=0$, $\lambda_i(1)=\gamma_i(0)$, and $\lambda_i(s)=\gamma_i(s)$. 
+
+Let $X$ be an object of $\A$. Then, for any function $\rho\colon\A^{op}\rightarrow\R$ over $X$, define the map $\rho\circ\Sigma_n\colon X\rightarrow\R$ as the composition $\rho\circ\gamma_n$. The composition $\rho\circ\Sigma_n\circ\lambda_n$ is well-defined by the definition of $\Lam_n$: 
+
+\[
+\begin{tikzcd}[column sep = 1cm,row sep=1.5cm,ampersand replacement=\&]
+    S^1\ar[r,"\Delta"]&\R\ar[r,"\Gamma"]&\R^{op}\\
+    \A^{op}\ar[r,"\rho"swap]&\{s_i\}_{i\in\{0,1\}^n}\ar[r,"{\lambda_i}"swap]&\{\lambda_i\}_{i\in\{0,1\}^n}. 
+\end{tikzcd}
+\]
+By definition of $\R\oplus\R$ and the definitions of $\Sigma_n$ and $\lambda_n$ above, we obtain the following composition of maps $\rho\circ\Sigma_n\circ\lambda_n$: 
+
+\[
+\begin{tikzcd}[column sep = 1cm,row sep=1.5cm,ampersand replacement=\&]
+    S^1\ar[r,"\Delta"]&\R\ar[r,"\Gamma"]&\R\oplus\R\ar[r,"\Sigma_{n}"swap]&\{\gamma_i\}_{i\in\{0,1\}^n}\ar[r,"{\gamma_i}"swap]\ar[ru,"\gamma_0"swap]&\\
+    \A^{op}\ar[r,"\rho"swap]&\{s_i\}_{i\in\{0,1\}^n}\ar[r,"{\lambda_i}"swap]\ar[ru,"\lambda_1"swap]&
+    \R\oplus\R\ar[ru,"\lambda_0"swap]&
+\end{tikzcd}
+\]
+The above equation shows that $\rho\circ\Sigma_n\circ\lambda_n$ is a map of functions between the category $\A$ and the category $S^{n-1}$ as shown in Figure~\ref{fig:monoind_fig}. Note that this map $S\leftarrow S$ is surjective because $\rho$ is well-defined and $S$ has finite limits. Conversely, given a map of functions $\rho\colon S^{op}\rightarrow\R$, the diagram of above commutes and $\rho\circ\Sigma_n$ is a map of functions between the category of objects of $S$ and the category $S^{n-1}$. Here, $\Sigma_{n-1}$ describes the limit map of functors $S\rightarrow S^{\op}$. 
+
+Suppose that $n$ is large enough that $\{0,1\}^{\times n}$ is large enough to justify such a induction rule. Then, for any family $\{s_i\}_i$ in the category of functions $S$, we have a family $\{\lambda_i\}_{i\in\{0,1\}^n}$ that satisfies the following equality of maps: 
+
+\[
+\begin{tikzcd}[column sep = 1cm,row sep=1.5cm,ampersand replacement=\&]
+    S^1\ar[r,"\Delta"]&\R\ar[r,"\Gamma"]&\R^{op}\ar[r,"\Sigma_{n+1}"]&\{\Gamma\}_{i+1}\ar[r,"\{\lambda_i\}_{i\in\{0,1\}^n}"swap]\\
+    S^2\ar[r,"\Delta"]&\R\oplus\R^{op}\ar[r,"\Sigma_{n}"swap]&\{\Sigma_n\}_{n\geq 2}\ar[r,"\Sigma_{n+1}"swap]&\\
+    \A^{op}\ar[r,"\rho"swap]&S^n\ar[r,"\lambda_0"swap]\ar[ru,"\lambda_1"swap]&S^{n+1}\ar[ru,"\lambda_2"swap]
+\end{tikzcd}
+\]
+To prove the inductive step of proving that $\{s_i\}_i$ forms a family of functions over the set $\{0,1\}^{\times n}$, first observe that we have $\{\Lambda_{i+1}\}_{i\in\{0,1\}^n=\{0,1\}^{\times n}}$ as a family of maps: $\{\lambda_i\}_{i\in\{0,1\}^n}$. First, we note that for any family of functions $\{s_i\}_i$ over the set $\{0,1\}^{\times n}$ and any $\lambda\colon\R\rightarrow\R$, we obtain a family of functions $\{\sigma_i\}_{i\in\{0,1\}^n}$ as follows: $\sigma_i(0)=0$, $\sigma_i(1)=\lambda_i(0)$, and $\sigma_i(s)=\lambda_i(s)$. 
+
+By definition, if the set $\{0,1\}^{\times n}$ is large enough to justify such an induction rule, then $\{\lambda_i\}_{i\in\{0,1\}^n}$ is a family of maps $\{\Lambda_{i+1}\}_{i\in\{0,1\}^n=\{0,1\}^{\times n}}$. Thus, we may proceed using the inductive formula to form a monoid $\{\sigma_i\}_{i\in\{0,1\}^n=\{\lambda_i\}_{i\in\{0,1\}^n}$ that has the following properties: 
+
+\begin{enumerate}
+\item For every $i,j\geq 1$ and any $\sigma\colon 1\rightarrow S^{n+1}$ with $\lambda_{i}\circ\sigma=0$, we define $\sigma_i$ to be given by the map $\sigma\circ\{\Lambda_{i+1}\}_{i\in\{0,1\}^n}$.
+
+\item For any $\lambda\colon\R\rightarrow\R$ with $\sigma\circ\{\lambda_{0}\}=0$, we define $\lambda_0$ to be given by $\lambda$. We use the definition of $\R\oplus\R$ and the definitions of $\Sigma_{n+1}$ and $\lambda_n$ above to show that $\{\lambda_i\}_{i\in\{0,1\}^n$ is well-defined for all $i\geq 1$. Then $\{\lambda_i\}_{i\in\{0,1\}^n=\{\sigma_i\}_{i\in\{0,1\}^n}$ holds for all $i$.
+
+\item For any $\gamma\colon\Delta^{op}\rightarrow S^{n+1}$, we define $\gamma_0$ to be given by the composite $\gamma\circ\Lambda_{1}$; then for each $s,t\in S^{n+1}$ and for any $v,w\in\Delta^{op}$ we have $v\circ\sigma=w\circ\lambda$ and $\sigma_i\circ\gamma$ is the composition of $\sigma$ and $\gamma$. Finally, we define $\{\sigma_i\}_{i\in\{0,1\}^n=\{\gamma_i\}_{i\in\{0,1\}^n}$ to be a family of maps: $\{\sigma_i\}_{i\in\{0,1\}^n=\{\gamma_i\}_{i\in\{0,1\}^n}$. Moreover, since $\lambda_0=0$, we have $\{\lambda_1\}_{0\}=0$.
+
+\item For any $\lambda\colon\R\rightarrow\R$ with $\sigma\circ\{\lambda_{0}\}=0$, we define $\lambda_0$ to be given by $\lambda$. We use the definition of $\R\oplus\R$ and the definitions of $\Sigma_{n+1}$ and $\lambda_n$ above to show that $\{\lambda_i\}_{i\in\{0,1\}^n$ is well-defined for all $i\geq 1$. Then $\{\lambda_i\}_{i\in\{0,1\}^n=\{\sigma_i\}_{i\in\{0,1\}^n}$ holds for all $i$.
+
+\item If $k<n$ is sufficiently large, we use the inductive formula for $k+1$ to define a sequence of families: 
+$\{\sigma_i\}_{i\in\{0,1\}^n=\{\gamma_i\}_{i\in\{0,1\}^n}$. Moreover, $\{\sigma_i\}_{i\in\{0,1\}^n=\{\gamma_i\}_{i\in\{0,1\}^n}$ holds for all $i$ (since $\{\lambda_i\}_{i\in\{0,1\}^n=\{\sigma_i\}_{i\in\{0,1\}^n}$ holds for all $i$).  
+
+\item Otherwise, the same calculation proceeds in all steps except that we only calculate the induction on $i+1$. 
+\end{enumerate}
+
+By the assumption of large sizes, these properties can be proven directly in $\R$.
+
+Next, we construct the monoid $\Lam$ that has the properties of a monoid in the category of functions $S$ for the case $n=1$. Assume that $n=1$. Then, the diagram of the identity monoid in $S$, with the $n+1$ variable inserted, is shown in Figure~\ref{fig:monoind_fig}. Let $\Lambda_1$ be the family $\{\lambda_1\}_1$. The domain of $\{\lambda_1\}_{0\}=0$ is simply the family of functions $\{\lambda_1\}_1$. Then, for any $s\in S^1$ and any $v\in S^{n+1}$, we define $\lambda_1$ to be the identity function over $\{s\}$, which sends all the vertices of $\{s\}$, including the vertex corresponding to the unit object $0$ in $\{0\}$ to $1$. 
+
+Then, we can consider a monoid structure in a larger category $\A$. We can start by describing the domain of $\{\lambda_i\}_{i\in\{0,1\}^n}$. For any function $\rho\colon\A^{op}\rightarrow\R$ over $X$, we define the map $\rho\circ\Lambda_n\colon X\rightarrow\R$ as the composition $\rho\circ\lambda_n$. The composition $\rho\circ\Lambda_n\circ\sigma_i\circ\gamma_i\circ\tau_i\circ\Lambda_{i+1}\circ\gamma_i$ is well-defined by the definition of $\{\lambda_i\}_{i\in\{0,1\}^n=\{\sigma_i\}_{i\in\{0,1\}^n}$ that were used in the construction of $\{\Lambda_{i+1}\}_{i\in\{0,1\}^n=\{\sigma_i\}_{i\in\{0,1\}^n}$ above. Here, we consider a family of families of functions over $\{0,1\}^{\times n}$ and an element $\sigma_i$ as below: $\sigma_i(0)=0$, $\sigma_i(1)=1$, and $\sigma_i(s)=s$. Let $\Gamma'$ be a family $\{t_i\}_{i\in\{0,1\}^n}$ as shown below: $\gamma_i(s)=0$ for all $s\in\{0,1\}^n$, and $\gamma_i(t)=1$ for all $t\in\{0,1\}^n$. Then, we obtain the following map of functions: 
+
+\[
+\begin{tikzcd}[column sep = 1cm,row sep=1.5cm,ampersand replacement=\&]
+    S^1\ar[r,"\Delta"]&\R\ar[r,"\Gamma"]&\R^{op}\ar[r,"\Lambda_{n+1}"swap]&\{\Gamma\}_{i+1}\ar[r,"\{\lambda_i\}_{i\in\{0,1\}^n}"swap]\\
+    S^2\ar[r,"\Delta"]&\R\oplus\R^{op}\ar[r,"\Sigma_{n}"swap]&\{\Sigma_{n-1}\}_{n\geq 2}\ar[r,"\Sigma_{n+1}"swap]&\\
+    \A^{op}\ar[r,"\rho"swap]&\{0\}\ar[r,"\{\sigma_1\}_{0}\circ\sigma_0"swap]&S^n\ar[r,"\{\lambda_0\}_{0}\circ\sigma_1"swap]&S^{n+1}\ar[r,"\{\lambda_2\}_{0}\circ\sigma_2"swap]\\
+    X\ar[r,"{\rho\circ\Lambda_n}"swap]\ar[ru,"\tau_0"swap]&X\ar[r,"{\sigma_0}"swap]&S^{n}\ar[r,"{\rho\circ\Lambda_n\circ\sigma_1}"swap]&S^{n+1}\ar[ru,"\tau_1"swap]&
+\end{tikzcd}
+\]
+This clearly defines the map of functions $\{\sigma_i\}_{i\in\{0,1\}^n=\{\gamma_i\}_{i\in\{0,1\}^n}$ that we would like to define for the induction. 
+
+Note that the induction on $i$ amounts to the following comparison of maps: 
+
+\[
+\begin{tikzcd}[column sep = 1cm,row sep=1.5cm,ampersand replacement=\&]
+    S^1\ar[r,"\Delta"]&\R\ar[r,"\Gamma"]&\R^{op}\ar[r,"\Lambda_{n+1}"swap]&\{\Gamma\}_{i+1}\ar[r,"\{\lambda_i\}_{i\in\{0,1\}^n}"swap]\\
+    S^2\ar[r,"\Delta"]&\R\oplus\R^{op}\ar[r,"\Sigma_{n}"swap]&\{\Sigma_{n-1}\}_{n\geq 2}\ar[r,"\Sigma_{n+1}"swap]&\\
+    \A^{op}\ar[r,"\rho"swap]&\{0\}\ar[r,"\{\sigma_1\}_{0}\circ\sigma_0"swap]&S^n\ar[r,"\{\lambda_0\}_{0}\circ\sigma_1"swap]&S^{n+1}\ar[r,"\{\lambda_2\}_{0}\circ\sigma_2"swap]\ar[ru,"\tau_0"swap]&\\
+    X\ar[r,"{\rho\circ\Lambda_n}"swap]&X\ar[r,"{\sigma_0}"swap]&S^{n}\ar[r,"{\rho\circ\Lambda_n\circ\sigma_1}"swap]&S^{n+1}\ar[ru,"\tau_1"swap]&
+\end{tikzcd}
+\]
+In other words, we have the following inductive equation: 
+
+\[
+\sigma_i\circ\tau_1(s)s=0, \quad\text{for all }i>0, \quad \text{and} \quad s=t\text{ for all }t\in\{0,1\}^n
+\]
+For any $i$, the preceding equation can be reduced to the following inequality: 
+
+\begin{align*}
+    \sigma_i(s)&=t\sigma_i(t) \\
+    &=1\sigma_i\\
+     &=t\lambda_i(s)
+\end{align*}
+
+To prove the existence of the $\Lam$ structure for larger categories,
+\end{document}
+ we will proceed as in the case of $\Lam_1$. Here, we redefine the domain of $\{\lambda_i\}_{i\in\{0,1\}^n=\{\sigma_i\}_{i\in\{0,1\}^n}$ and define the codomain of $\{\sigma_i\}_{i\in\{0,1\}^n=\{\gamma_i\}_{i\in\{0,1\}^n}$ as follows:
+
+\[
+\begin{tikzcd}[column sep = 1cm,row sep=1.5cm,ampersand replacement=\&]
+    S^1\ar[r,"\Delta"]&\R\ar[r,"\Gamma"]&\R^{op}\ar[r,"\Lambda_{n+1}"swap]&\{\Gamma\}_{i+1}\ar[r,"\{\lambda_i\}_{i\in\{0,1\}^n}"swap]\\
+    S^2\ar[r,"\Delta"]&\R\oplus\R^{op}\ar[r,"\Sigma_{n}"swap]&\{\Sigma_{n-1}\}_{n\geq 2}\ar[r,"\Sigma_{n

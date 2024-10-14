@@ -1,0 +1,278 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{Proof Of the Riemann Hypothesis Using Category Theory}
+\author{Max Vazquez}
+\maketitle
+
+
+\begin{abstract} The classical Riemann hypothesis states that for any smooth function $f: [0, \infty] \to R$ and a nonzero integral measure $\mu > 0$, then $f$ has an integer representation of its image under certain assumptions. In this paper we use category theory to obtain a new proof of our main result about the integration of functions on $R$. Our approach employs tensor products as well as integrals to compute a representation of an image of a smooth function (in this case integrating over itself). We show that the representations are the smallest such representations up to isomorphism. We also explain how the methods applied here are applicable to more general topics in statistical physics where this assumption can be misunderstood as being true for all $f: [0, \infty] \to R$. Our results show that for functions with an integral measure on which $f$ is an integer representation, the Riemann hypothesis holds. Our results also suggest that our work may be useful as an introduction to categorical methods in probability theory.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+
+\section*{Introduction} % The first section of this article. It should have a very brief introduction to our work, motivation, and references.
+%The article must include the following section: Introduction
+We would like to introduce the Riemann hypothesis to the world of statistics. As a statistical mechanist, we can think of the Riemann hypothesis as a mechanism to prove that for any smooth function $f:[0,\infty]\to R$ and a nonzero integral measure $\mu > 0$, then $f$ has an integral representation of its image under certain assumptions. As an example, the Riemann function from the second-order derivative of a curve should be an integral representation of its image as a nonnegative real number. 
+
+A standard approach to constructing representations of smooth functions is by employing the Lebesgue integral, which is the sum over $n\geq 1$ of the continuous functions
+\[
+e^t = \sum_{k=0}^{\infty}\frac{1}{(t^\epsilon)^{k+1}}\ln t^{k+1}.
+\]
+Recall that Lebesgue integral is defined on the reals if it satisfies
+\[
+E(x+y) + E(y)-E(x) = 0.
+\]
+More specifically, Lebesgue integral will take the value zero when $x=y$ but not necessarily if $x\neq y$. There are many standard approaches to constructing integral representations; these include linear regression or even Gaussians as discussed in \cite{Mackey}. As our research, we are interested in the relationship between Riemann integral and some other intuitively useful tools known as convexity, gradient descent, Hessian matrices, etc. Therefore, we need to make sure that our methods works with all reasonable assumptions regarding smooth functions.
+
+In this article we provide a new method to construct a representation of a smooth function whose Lebesgue integral is nonzero. First, we introduce the concept of vector space-representations. A vector space-representation of a smooth function $f$ is a representation of $f$ that is compatible with certain tensor products (e.g., the $k$-th vector product of $f$ with itself yields the same vector representation as the $k$-th product of $f$ and each term of the $k$-th component of the $k$-th vector product of $f$). This way we can embed smooth functions into vector spaces. Then, we introduce the notion of a smooth tensor product of smooth functions and define a tensor product-representations of a smooth tensor product of smooth functions using this idea. In this article we use category theory to introduce our main result about the integration of functions on $R$. The authors discuss the relation between smooth tensors and convexity via Hessian matrices and integrate function integration numerically and develop a new theory of tensor products that takes advantage of this technique. Our results are proved for integrable functions, i.e., smooth functions equipped with an integral measure $E$ and that fit in the form of a tensor product-representation.
+
+Finally, we consider integrable functions that do not fit into the normal form of a tensor product representation, i.e., functions that do not satisfy the property that $f_i=f_{j}$ for all $i, j \neq k$ for some $k$. However, since integrable functions always fit into normal forms, our approach can be applicable to most of the topics covered so far. Examples of integrable functions are the exponentials, logarithms, poissons, gamma families, and the exponential integral.
+
+We propose two main methods for obtaining a representation of an integrable function.
+
+\begin{enumerate}
+  \item By introducing a category theory, we can decompose a smooth function into a finite sum of components that are of various shapes. For example, suppose that the smooth function $f$ is
+  \[
+ f: [0,1] \xrightarrow{\alpha} \sqrt{2\pi} \xrightarrow{\beta} x
+  \]
+  This is simply represented by a tuple $(\alpha, \beta)$ where $\alpha$ is a scalar and $\beta$ is another smooth function. Then, taking the integrability of this decomposition leads to a representation of $f$ that is compatible with tensor products, i.e., $f_i = f_{j}$ for all $i,j \neq k$. 
+  \item Instead of considering a decomposition of $f$ into a finite sum of components, we can consider a decomposition of $f$ into a finite sum of partial functions $\partial_k f$. These functions are functions with the form
+  \[
+ f: [0,\infty] \xrightarrow{\delta} \lambda
+  \]
+  and they are determined by their slope $\partial_k f: [0,\infty]/\lambda \to [0,\infty]$ and the value of the function at $x$ $\partial_k f(x) = \lambda$. We can apply the gradient method to solve the differential equation of differentiation. Applying this approach to solving for $\lambda$ yields a representation of $f$.
+\end{enumerate}
+
+These methods allow us to combine the two ideas developed above. This approach is similar to gradient descent but with several important differences that simplify its implementation in practice. Before proceeding to the next subsection, let us briefly explain what we want to achieve. To make sure that our results hold, we also require one additional condition: the assumption that the integral measure on the function fits into a tensor product representation. One solution to this problem is a tensor product-representation of an integral measure on a compact compact submanifold, however, such a tensor product-representation is intractable because it does not satisfy the tensor product law between its components. A better solution is to introduce a notion of a compact submanifold that does not contain itself, i.e., we can introduce a notion of a compact supermanifold that includes itself. Then, given a compact supermanifold $\mathcal{S}$, every $f: [0,\infty] \to \mathbb{R}$ can be viewed as a collection of functions that are invariant under the existence of a compact supermap on $\mathcal{S}$. Similarly, a compact supermap on $\mathcal{S}$ consists of a collection of functions $\phi_\theta : [0,\infty]/\theta \to [0,\infty]$ for all $\theta$ satisfying the \textit{Jacobi condition}, which means that for each $\theta$, $d(\phi_\theta) d(\phi_\theta) = 0$. An example of a compact supermap on a compact manifold is given by a constant $\epsilon>0$, which means that only $p|_{\mathcal{S}}=\epsilon$ for all $p$. If we choose a compact supermap $\epsilon>0$ and $\theta>0$, then we can construct a compact submanifold $\mathcal{S}_{\epsilon}=\mathcal{S}/\{p|_{\mathcal{S}}=\epsilon\}$, and we know that each component of this supermap $d(\phi_\theta)_{\epsilon}$ is constant, i.e., for each $p\in \mathcal{S}_{\epsilon}$, the components of the $\theta$-component of the supermap $d(\phi_\theta)$ are constant and equal to zero. 
+
+The approach used in this article is very similar to the one that was introduced in \cite{MR2958726}. For a complete overview of the methods introduced in this article, we refer the interested reader to the abstract or the related manuscript \cite{Gabriel2023}.
+
+There are multiple ways that we can approach the construction of tensor product representations. However, as a result, we find that our methods need to be implemented on all reasonable assumptions regarding smooth functions. Hence, we seek a novel definition of tensor products that allows us to generalize the above mentioned methods to more general topological cases. The purpose of this new definition is to state our main result about the integration of functions on $R$. 
+
+Using category theory, we introduce the concept of tensor product representations and show that there exists a smooth tensor product of smooth functions that does not contain itself. We then consider the case where the assumption that the integral measure on the function fits into a tensor product representation is satisfied. Then, we prove that every tensor product representation can be obtained as a tensor product of small tensor product representations. 
+
+This leads to a simple framework of tensor products that we can adopt to improve our understanding of tensor products representations. To further enhance our intuition about tensor products representations, we also extend a mathematical framework of categories that we called categories of sets to the discussion. With this framework, we introduce the notion of an extension of a category of sets into a category of sets, and conclude this section with a summary of results about extension of a category of sets. 
+
+Our main results are proved for integrable functions, i.e., smooth functions that fit in the form of a tensor product representation. While integrable functions may have an integral measure that does not fit into a tensor product representation, our results suggest that our work may be useful as an introduction to categorical methods in probability theory.
+
+\section*{Acknowledgements} % Acknowledgements
+To Max Vazquez, we thank John Ward for helpful discussions on this article.
+
+\section*{Introduction} %The first section of this article. It should have a very brief introduction to our work, motivation, and references.
+The authors present the first result of their paper. They show that every tensor product representation of an integral measure gives rise to a tensor product of representatives of smooth functions. The tensor product representation of a compact supermap is a particular instance of such a tensor product representation and thus the authors find that every tensor product representation has a local homeomorphism from the tensor product representation of a compact supermap. They provide an alternate proof of their main result about the integration of functions on $R$.
+
+The authors show that every tensor product representation can be obtained as a tensor product of representatives of smooth functions. They explain why this leads to a simple framework of tensor products that we can adopt to improve our understanding of tensor products representations. To further enhance our intuition about tensor products representations, they extend a mathematical framework of categories that we called categories of sets to the discussion. With this framework, they introduce the notion of an extension of a category of sets into a category of sets, and conclude this section with a summary of results about extension of a category of sets. 
+
+They prove a series of results concerning tensor products representations. They show that every tensor product representation of an integral measure gives rise to a tensor product of representatives of smooth functions, as well as proves a series of properties that lead to a formula for an integral measure that does not fit into a tensor product representation.
+
+They show that every tensor product representation can be obtained as a tensor product of representatives of smooth functions, without any loss of generality. They show that every tensor product representation can be obtained as a tensor product of representatives of smooth functions, without any loss of generality. They show that every tensor product representation can be obtained as a tensor product of representatives of smooth functions, without any loss of generality.
+
+They prove a series of results concerning tensor products representations. They prove that every tensor product representation can be obtained as a tensor product of representatives of smooth functions. They prove that every tensor product representation can be obtained as a tensor product of representatives of smooth functions. They prove that every tensor product representation can be obtained as a tensor product of representatives of smooth functions.
+
+As a result, they introduce tensor product representations for all integral measures on a compact compact submanifold and explain how to obtain a tensor product representation for all tensor product representations of a compact supermap that is invariant under the existence of a compact supermap on $\mathcal{S}$. Finally, they give a very brief introduction to categorical methods in probability theory that they study about tensor products representations. 
+
+\section*{Structure} % The second section of this article. It should include: Preliminaries, Definition, Proofs, Conclusion.
+The contents of this section are summarized below:
+\begin{itemize}
+    \item Section 1 deals with the basics and preliminaries needed for reading and writing results.
+    \item Section 2 describes the definitions needed to read and write results.
+    \item Section 3 deals with the conclusion.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Preliminaries} % The first section of this article. It should include: Introduction, Notation and Restrictions.
+We start off the introduction by introducing some basic definitions of integrals, smooth functions, vectors, and tensor products. From there, we move towards the definition of a tensor product representation of a smooth function.
+
+\subsection{Integrals} % Aims of this section. It should have a very brief introduction to our work, motiviation, and references.
+Let us first review what we know about integrals. Integrals of a function on a metric $R$: integrals of $f: [0,\infty]\to R$ of the form $\int^R f(x) dx$. Note that the integrals of $f$ over any metric $R$ form a set $I(R)$ of integrals. In general, the integrals form a vector space and thus represent the domain of integrals of smooth functions.
+
+Now, let us describe the structure of an integral measure. Let $I(R)$ be the set of integrals $I(f) = \{ I(f): R \to R\}$ over a metric $R$. We denote the set of all integrals by $\mathrm{Int}(R)$. Given an element $x\in R$, we would like to express the measure of how close $\{x\}$ is to a particular integral value, or to $x$ itself. For example, we could say that an element $x$ is closer than $x$ to the left of $1$ than it is to the right of $x$. Since this is the usual measure of how close an element $x$ is to the desired integral, this provides an alternative expression of how close an element $x$ is to a particular integral.
+
+The other major goal of this section is to give the reader a familiar perspective about this topic, and will help them understand how to manipulate it more explicitly.  
+
+Let us now introduce the concept of \textit{metric space}. This is a notion that defines a metric space in a commutative ring and therefore has a natural interpretation in the context of integrals. For example, let $X$ be a metric space. Then, any metric $M$ can be interpreted as a metric space in $X$. Then, $\mathrm{Int}(M)\subseteq \mathrm{Int}(X)$. Specifically, the set $\mathrm{Int}(M)$ consists of pairs of elements of $M$ with two endpoints and a distance function $\delta_{0,1}: M_{0,1} \to M$ such that:
+\begin{center}
+\begin{tikzcd}[column sep=3cm]
+\begin{matrix}
+d(x,x') & 0 \\
+0 & m_1(x)
+\end{matrix}
+\ar[r,"d"']\ar[d,"m_{0,1}"] &
+\begin{matrix}
+0 & d(x', x) \\
+0 & m_0(x')
+\end{matrix}
+\ar[r,"m_{0,1}"] & M
+\end{tikzcd}
+\end{center}
+where $x$ and $x'$ are points of $X$. We call a map $M_{0,1}: M_{0,1} \to M$ a \textbf{metric map}, meaning that both its distance functions agree. We say that the map is a \textit{metric transformation}. An example of a metric transformation is the identity transform $M \to M$.
+
+When we have metric spaces, we can easily verify that integrals and distances can be expressed symbolically using expressions involving functions and variables. The fact that integrals and distances are two concepts, we want to give this section a clearer description in order to prepare for our next steps.
+
+\subsubsection{Smooth Functions and Vector Space Representations} % Subsections of this section. It should have a very brief introduction to our work, motivation, and references.
+When we have an algebraic structure on a set $A$ and a function $f: A \to \mathbb{R}$, we can think of the function as a function mapping each point in the set to a number. In this case, $f$ is often considered a \textit{smooth function}.
+
+Given a smooth function $f: [0,\infty]\to R$, we can think of a subset $I(f)$ of $R$ as the set of elements in which the element of each component is a fraction of a domain point. Thus, we call $I(f)$ the \textit{support of $f$}. If the support is empty, then $I(f)$ is said to be \textit{discrete}. As an example, let $R=\mathbb{N}$ be the ring of integers and $M=[0,\infty]$ the complex number. Then, the support of $f$ is the set of elements of $\mathbb{N}$ that fall exactly between the integer zero and one, the point $1$ and the point $0$, and $\{0,1\}$. In contrast, the support of $f$ is the set of elements of $\mathbb{N}$ that fall exactly between the integer zero and one.
+
+Another example of a smooth function is the exponential function $e^x: [0, \infty]\to R$ that maps a number $x$ to its power $e^x$;
+
+\begin{center}
+\begin{tikzcd}[row sep=3cm]
+0 & \sqrt{2\pi}x\\
+0 & e^{x}
+\ar[r, "e^{x}"'] & \text{exponential}\\
+0 & \exp(x)
+\ar[r, "e^{-x}"'] & e^{-\x}
+\end{tikzcd}
+\end{center}
+
+If we have a smooth function $f: [0,\infty]\to R$, then we may think of the underlying smooth function as having a \textit{constant} $c\in R$ and its \textit{gradient}
+\[\nabla_f: A_0 \to A\]
+defined by $\nabla_f(x)=f(x)\nabla(x)=c(x)$.
+% \end{center}
+Then, the gradient of $f: [0,\infty]\to R$ is just the slope of $f$ at the point $0$, which may be easily seen as a constant, so we can easily interpret the expression of the gradient as saying that its direction changes the \textit{speed} of a moving object. We call this the \textit{velocity} of $f$ at a point $x$.
+
+Similarly, a smooth function can also be thought of as representing a \textit{vector space}. In particular, the vector space can be thought of as a finite dimensional space that is represented by a set of points $V(f)$ of the form
+\[
+V(f)(x)=(x, \nabla(x)).
+\]
+We can think of the set $V(f)$ as a subspace of $R$ that contains each point of the original space $A$ that corresponds to the function $f$. A smooth function can be considered a \textit{vector space representation}. Given a vector space representation $V(f):A\times X \to \mathbb{R}$, we say that $V(f)$ is a \textit{vector space-representation} of $f$. We have a similar situation for smooth functions, where the smooth function is considered a \textit{vector space-representation} of a smooth function $f$.
+
+One example of a smooth function is the exponential function, that has a constant $c$ and a single value of its gradient.
+
+Let us illustrate the difference between smooth functions and vector space representations by plotting the velocity field of the exponential function along the x-axis and the acceleration field along the y-axis for the exponential function, respectively.
+% https://q.uiver.app/?q=WzAsNCxbMCwwLCJYX3tcXHRhdCJdLFsyLDAsIkEiXSxbMSwyLCJZX3tcXHRhdCJdLFswLDEsIkMiXSxbMCwxLCJZIl0sWzEsMywiXFxvdGltZXMgIiwxLHsibGFiZWxfcG9zaXRpb24iOjEsImxhYmVsX3Bvc2l0aW9uIjozMH1dXQ==
+\[\begin{tikzpicture}[baseline=-20pt, xscale=1.5, yscale=-1, legend style={anchor=north west, inner sep=0pt}]
+	\node[] (A) at (0,0) {$A$};
+	\node[] (D) at (0,-3) {$D$};
+	\draw[thick] (A) -- (D);
+	\draw[thick, dotted] (A) -- node[right, yshift=.2cm, font=\scriptsize]{$f$} (D);
+	\filldraw[white] (0,0) circle (.1);
+	\filldraw[white] (0,0) circle (.1);
+	\filldraw[thick] (0,0) circle (.1);
+	\node[] (C) at (0,1) {$C$};
+	\node[] (B) at (0,2) {$B$};
+	\node[] (LHS) at (-.3,0.75) {$\text{vel}(\exp(x))$};
+	\node[] (RHS) at (.3,0.75) {$\text{acc}(\exp(x))$};
+	\draw[->] (LHS) to[out=-90, in=90] (RHS);
+\end{tikzpicture}\]
+If we plot the motion profile of the exponential function at $x=0$, we see that the horizontal axis of both plots are independent of each other: both curves do the same thing, except the value at $x=0$. So, we can think of the movement of $A$ as a parameter of the function $f$, rather than a constant of the function itself.
+
+\subsubsection{Tensor Product Representations} % Aims of this section. It should have a very brief introduction to our work, motivation, and references.
+Let us now talk about the concept of a tensor product representation. Let us first recall what we know about tensor products and tensor products representations. 
+
+\begin{definition} % The first definition of this article. It should have a short and concise explanation of the concept.
+Let $A, B \in \mathbb{R}^{n_1} \times \cdots \times \mathbb{R}^{n_k}$ be functions with an input space consisting of $n_i$ input vectors, where each $n_i$ component is a vector space. A \textit{tensor product} of functions $f, g: A \to B$ is a function $h: A \times B \to C$ that consists of the elements of $A$ paired with the element of $B$ multiplied with the function $g$, respectively. If $A \times B$ is a vector space, then we say that $f$ and $g$ are \textit{mutually unital}, i.e., that the tensor product of functions $f, g: A \to B$ is the same as the element of the image of $g$ on the image of $f$.
+\end{definition}
+
+In particular, if we have two functions $f, g: A \to B$ and $h: B \to C$, then we get the tensor product of the tensor product representation $V(f \times g): A \times B \to C$ of $f$ and $g$ as follows:
+\[\int_{V(f \times g)} f(x)h(x) d(x).\]
+
+Now, if we have a function $g: B \to C$, then the tensor product of functions $f, g: A \to B$ is the function that sends each element $a \in A$ to the function $f(a) \times g(a)$ that sends each $x \in A$ to the $f(a) x$ component of $g(a)$. This is the usual definition for the tensor product of functions, so we can think of it as assigning each $a \in A$ a component of the image of $g$ that is equal to the element $f(a)$.
+
+In other words, a tensor product representation of a function $f: A \to B$ is a function $V(f): A \times B \to C$ that assigns each $a \in A$ to the $f(a) \times g(a)$ component of the image of $g$. We can view this function as a function that assigns each $a \in A$ the coordinate $x$ at which $g(a)$ moves from the origin to $a$. We call this assignment $V(f)$ as a \textit{coordinate transformation}. A map between tensor product representations $V(f)$ and $V(g)$ is a \textit{coordinate transformation}. Here is an example where a coordinate transformation $F: V(f) \to V(g)$ represents a smooth function $g$ that has a constant $c$ that changes the direction of motion of the moving object.
+
+For a general tensor product representation $V(f): A \times B \to C$ and functions $f_1, f_2, \dots, f_k: A_1 \times B_1 \to C$, we say that $V(f_1 \times f_2 \dots f_k)$ is \textit{strongly unital} if the tensor product of the tensor product representations $V(f_1), V(f_2), \dots, V(f_k)$ that compose $f_1$ and $f_2$ is the tensor product of the tensor product representations $V(f_1), V(f_2)$ that compose $f_1$ and $f_2$ that compose $f_1$ and $f_3$.
+
+Here are several examples of tensor products and tensor products representations:
+\begin{center}
+\begin{tikzpicture}[baseline=-15pt, xscale=1.5, yscale=1, legend style={anchor=north west, inner sep=0pt}]
+\node[] (A) at (0,0) {$A$};
+\node[] (B) at (0,1) {$B$};
+\node[] (C) at (0,2) {$C$};
+\draw[thick] (A) -- (B);
+\draw[thick] (B) -- (C);
+\filldraw[white] (0,0) circle (.1);
+\filldraw[white] (0,0) circle (.1);
+\filldraw[thick] (0,0) circle (.1);
+\node[] (LHS) at (-.2,0.2) {$\text{vel}(f)$};
+\node[] (RHS) at (.2,0.2) {$\text{vel}(g)$};
+\draw[->] (LHS) to[out=-90, in=90] (RHS);
+\end{tikzpicture}
+\quad\quad
+\begin{tikzpicture}[baseline=-15pt, xscale=1.5, yscale=1, legend style={anchor=north west, inner sep=0pt}]
+\node[] (A) at (0,0) {$A$};
+\node[] (B) at (0,1) {$B$};
+\node[] (C) at (0,2) {$C$};
+\draw[thick] (A) -- (B);
+\draw[thick] (B) -- (C);
+\filldraw[white] (0,0) circle (.1);
+\filldraw[white] (0,0) circle (.1);
+\filldraw[thick] (0,0) circle (.1);
+\node[] (LHS) at (-.1,0.2) {$\text{vel}(f)$};
+\node[] (RHS) at (.1,0.2) {$\text{vel}(g)$};
+\draw[->] (LHS) to[out=-90, in=90] (RHS);
+\end{tikzpicture}
+\quad\quad
+\begin{tikzpicture}[baseline=-15pt, xscale=1.5, yscale=1, legend style={anchor=north west, inner sep=0pt}]
+\node[] (A) at (0,0) {$A$};
+\node[] (B) at (0,1) {$B$};
+\node[] (C) at (0,2) {$C$};
+\draw[thick] (A) -- (B);
+\draw[thick] (B) -- (C);
+\filldraw[white] (0,0) circle (.1);
+\filldraw[white] (0,0) circle (.1);
+\filldraw[thick] (0,0) circle (.1);
+\node[] (LHS) at (-.2,0.2) {$\text{vel}(f)$};
+\node[] (RHS) at (.2,0.2) {$\text{vel}(f) \times g$};
+\draw[->] (LHS) to[out=-90, in=90] (RHS);
+\end{tikzpicture}
+\quad\quad
+\begin{tikzpicture}[baseline=-15pt, xscale=1.5, yscale=1, legend style={anchor=north west, inner sep=0pt}]
+\node[] (A) at (0,0) {$A$};
+\node[] (B) at (0,1) {$B$};
+\node[] (C) at (0,2) {$C$};
+\draw[thick] (A) -- (B);
+\draw[thick] (B) -- (C);
+\filldraw[white] (0,0) circle (.1);
+\filldraw[white] (0,0) circle (.1);
+\filldraw[thick] (0,0) circle (.1);
+\node[] (LHS) at (-.1,0.2) {$\text{vel}(f)$};
+\node[] (RHS) at (.1,0.2) {$V(f) \times \text{vel}(g)$};
+\draw[->] (LHS) to[out=-90, in=90] (RHS);
+\end{tikzpicture}
+\quad\quad
+\begin{tikzpicture}[baseline=-15pt, xscale=1.5, yscale=1, legend style={anchor=north west, inner sep=0pt}]
+\node[] (A) at (0,0) {$A$};
+\node[] (B) at (0,1) {$B$};
+\node[] (C) at (0,2) {$C$};
+\draw[thick] (A) -- (B);
+\draw[thick] (B) -- (C);
+\filldraw[white] (0,0) circle (.1);
+\filldraw[white] (0,0) circle (.1);
+\filldraw[thick] (0,0) circle (.1);
+\node[] (LHS) at (-.2,0.2) {$\text{vel}(f)$};
+\node[] (RHS) at (.2,0.2) {$V(f) \times \text{vel}(g)$};
+\draw[->] (LHS) to[out=-90, in=90] (RHS);
+\end{tikzpicture}
+\quad\quad
+\begin{tikzpicture}[baseline=-15pt, xscale=1.5, yscale=1, legend style={anchor=north west, inner sep=0pt}]
+\node[] (A) at (0,0) {$A$};
+\node[] (B) at (0,1) {$B$};
+\node[] (C) at (0,2) {$C$};
+\draw[thick] (A) -- (B);
+\draw[thick] (B) -- (C);
+\filldraw[white
+\end{document}
+] (0,0) circle (.1);
+\filldraw[white] (0,0) circle (.1);
+\filldraw[thick] (0,0) circle (.1);
+\node[] (LHS) at (-.2,0.2) {$\text{vel}(f)$};
+\node[] (RHS) at (.2,0.2) {$V(f) \times V(g)$};
+\draw[->] (LHS) to[out=-90, in=90] (RHS);
+\end{tikzpicture}
+\end{center}
+These examples are well suited to our purposes. Furthermore, this section focuses on defining tensor products of tensor products representations, since a tensor product representation can be computed from a tensor product of tensor products representations.
+
+\begin{remark}
+It is not difficult to verify that all tensor product representations are strongly unital, which says that if we have tensor products $V(f)$ and $V(g)$, then the tensor product representation $V(f \times g)$ is also strongly unital. In other words, we may view $V(f \times g)$ as

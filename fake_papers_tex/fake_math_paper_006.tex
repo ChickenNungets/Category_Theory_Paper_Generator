@@ -1,0 +1,166 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{Solving Every Open Problem In Math With Category Theory}
+\author{Max Vazquez}
+\maketitle
+
+
+% 0. Let $\mathbb{N}$ be the set of natural numbers. Then a number $n$ is an $\mathbb{N}$-set if and only if it is even, if and only if it is a \emph{$2$-tuple}, or if and only if each element of it is even.
+In this article, we take a very simple approach to solving every open problem in math, and we will talk about how category theory makes it easier and more efficient.
+As an introduction, let us say that there are two numbers $\omega,p$ such that $\omega+p\leq 6$, then one can easily compute $\omega^2+p^2\leq p$. This would be a non-trivial equation that cannot be reduced by category theory, but category theory allows us to build categories out of these equations:
+\[\left(\begin{array}{c|ccc}
+\Omega & \cdot & + \\
+p^2 & - & 0 \\
+\end{array}\right)\left(\begin{array}{c|ccc}
+1 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 0 \\
+\end{array}\right)=\left(\begin{array}{c|ccc}
+ 3 & 1 & 1 \\
+ 1 & 1 & 1 \\
+1 & 1 & 0 \\
+\end{array}\right).\]
+A similar algorithm would need to be applied for other open problems (like finding an even number). It seems like a rather easy task, though, so let us make it more efficient first. We will introduce the concept of \emph{iterated iterated iterated recursion}.
+
+Firstly, to make things concrete, consider the iterated iterated recursion that is already there in calculus:
+\[x = \frac{\sum_{i=1}^{k} x_i}{\sum_{j=1}^{m} y_j}\]
+With $x$ equal to the sum of its elements, we can use $\sum_i \sum_j x_i y_j$ to calculate $x$. It might be much more straightforward to compute $x$ using our iterated iteration method, which yields:
+\[x = x^{2} + x + 2x^{2} + \cdots.\]
+We could also use another algorithm to find $x$:
+\[x^{n} = \prod_{i=1}^{n} x_i.\]
+For any $k > n$, we have that:
+\[x^{k} = x^{k-1} \prod_{i=1}^{k-1} x_i^{k-1}.\]
+If we used an iterated iterated iterated iteration method with the sum formula instead of multiplication, we would get a new $x$ on the next pass, which is why category theory gives us such powerful tools.
+
+Iterated iterated iterated recursion turns out to be a very powerful tool that does not require any additional calculations. Firstly, let us define it. Given two numbers $x_0,x_1$ and $y_0,y_1$, we write $xy = (x_0y_0) + (x_1y_1)$ for the product of their elements; we call them \emph{times} of the same number. The definition follows the same construction as above. The function $xy = (x_0y_0) + (x_1y_1)$ then simply multiplies $x_0y_0$ by $x_1y_1$ and adds up all the results. We denote the final result as $x$.
+Now, given an iterated iterated iterated recursive function:
+\[f(x_0,x_1,\ldots,x_n) = \begin{cases} x_0 & \text{if $1 < k$ and } f(x_0,\ldots,x_{k-1}) = f(x_{k-1},\ldots,x_n)\\ x_n & \text{if } 1 < k = n.
+\end{cases}\]
+Then we may rewrite it in terms of times of numbers as:
+\[x = \sum_{k=1}^n f(x_1,\ldots,x_n).\]
+Then $x$ is the unique number that computes $x = \sum_{k=1}^n f(x_1,\ldots,x_n)$.
+Similarly, we could consider the function $g(x_0,x_1,\ldots,x_n) = g(x_0,\ldots,x_{k-1})$. Then we have that:
+\[g(x_0,\ldots,x_n) = \sum_{k=1}^n g(x_1,\ldots,x_k).\]
+And finally, since both $f(x_0,x_1,\ldots,x_n)$ and $g(x_0,\ldots,x_{k-1})$ are functions of $x$, we can simplify the definitions of $xy = (x_0y_0) + (x_1y_1)$ and $g(x_0,\ldots,x_{k-1})$ in the way they did before.
+\[xy = (x_0y_0) + (x_1y_1) + \sum_{k=1}^n f(x_1,\ldots,x_k) + \sum_{k=1}^n g(x_1,\ldots,x_k).\]
+The name ``iterated iterated iterated recursion'' comes from the fact that the result of iterated iterated iterated iterated recursion is always the same as it gets computed again. We can think of $xy$ as an example of this: $xy$ is a product of a product of three products, while $g(x_0,\ldots,x_{k-1})$ is a product of a product of three products, while $f(x_0,x_1,\ldots,x_n)$ is a product of a product of three products, and so on.
+
+We conclude the article by noting that many iterated iterated iterated recursive functions do not exist, but most of the iterated iterated iterated recursive functions form a group of the same type. However, even when $\omega^2+\pm3=\pm3\omega$, we cannot easily solve this equation using iterated iterated iterated iterated recursion because it involves computing $\omega^2+\pm3$ again. To remedy this, let us introduce a categorical approach.
+
+% A category is a collection of objects together with morphisms between them. Morphisms in a category between objects are called \emph{functors}:
+% \[ x : A \to B.\]
+% Let us say that $f : A \to C$ and $g : B \to D$ are functors, then we say that $f = g^\ast$ if we have $f \circ g^\ast = id_{C}$. As it happens that this is often the case, we will usually denote $f$ and $g$ as functors, and let us also refer to the domain and codomain of a functor as \emph{domain} and \emph{codomain}. For example, here are two examples of functors:
+% \[ x : A \to C,\]
+% \[ y : B \to D,\]
+% where $A$ and $B$ are sets and $C$ and $D$ are categories. These functors give rise to functors between sets, which we denote as:
+% \[ x \otimes y : A \times B \to C.\]
+% Also, the composition of functors is just the linear product of their codomains:
+% \[ f \otimes g : A \times B \to C,\]
+% where $(A \times B) \to C$ is the same as $(A \times B) \xrightarrow{\sim} A \times (B \times C)$. Note that every object in a category can also be thought of as a pair of objects:
+% \[ A \times B := (A, B).\]
+% And every functor between categories has a canonical identity:
+% \[ Id : A \times A \to A\]
+% We now come back to iterated iterated iterated recursion, introduced in \cite{RickardMoggi2005}, which has become so popular that people began thinking about iterated iterated iterated recursive functions instead of standard iterated iterated iterated recursive functions, because then it made sense.
+
+% % More precisely, you would say that $x \otimes y = (x \times y)^2$, where $x$ is an object of $C$, and $y$ is another object of $C$. That is, a functor from $C$ to $D$ that sends each object in $C$ to itself. There is nothing new in iterated iterated iterated iterated recursion. We already saw that it computes the sum of products in a set, and that it computes products of sums in a set without multiplying out the products. The main difference between iterated iterated iterated recursive functions and standard iterated iterated iterated recursive functions is that the former computes products in each variable independently, whereas the latter computes products once for the whole sum. This implies that in iterated iterated iterated iterated recursive functions, product variables can not be computed independently; only after summing the products does the product variable get computed independently.
+% % When you iterate over the same product variable, this product variable is computed once for each possible value of the original variable. Instead of computing the product variable in the same way multiple times, this product variable is computed only once, then summed over all possible values of $x$ and $y$, allowing the product variable to be computed independent of those values. This allows iterated iterated iterated iterated recursive functions to be used to calculate products in sets in the same way multiple times.
+% If there are no products involved in an iterated iterated iterated iterated recursive function, then it can be proven that it computes products in a single pass. By iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated recursive functions, we can consider iterated iterated iterated iterated iterated iterated iterated iterated iterated recursive functions.
+% Similarly, we can prove that iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated recursive functions are related to standard iterated iterated iterated iterated recursive functions. Iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated recursive functions are not related to standard iterated iterated iterated iterated recursive functions because iterated iterated iterated iterated recursive functions do not compute products in a single pass.
+
+% % % Let us consider two different ways to compute the solution of iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated recursive function:
+% % \begin{enumerate}[(a)]
+% % \item
+% % \[x = \sum_{i=1}^{n} (x_i \times (x_i+1)) + 2x_1\]
+% % \item
+% % \[x = \sum_{i=1}^{n} (x_i \times (x_i+1)) \]
+% % \end{enumerate}
+% % There are several important differences between these two versions:
+% % \begin{enumerate}[a]
+% % \item In the first version, the summands are in pairs and we start counting at 1, since multiplication is defined from left to right. In the second version, the summands are in triples and we count at 1. The same amount of work is required but the result is exactly the same: the sum of the products.
+% % \item For the first version, we only count how many factors we must divide by in order to compute $x$, and for the second version, we count how many factors we can divide by in order to compute $x$, and it takes slightly longer to compute $x$ because it requires dividing $x$ out into parts and then calculating the sum of products. This is much faster than the first option.
+% % \item If one of the summands is $1$ it becomes an equation, that is, it does not involve a product, and the calculation becomes almost instantaneous; the formula for iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated recursive functions is actually the same: $x = \sum_{k=1}^n f(x_1,\ldots,x_k)$. But note that this iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated recursive function.
+% % \end{enumerate}
+% % So by iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated recursive functions, iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated recursive functions.
+% We begin by defining some constants and algebraic structures:
+% \begin{equation*}
+% \varDelta = \mathbb{Q}\langle 0\rangle_{\ge 0}\subseteq \left\{ \delta | \delta \in S^1(\mathbb{Q})\right\}.
+% \end{equation*}
+% Here, $S^1(\mathbb{Q})$ denotes the set of all positive integer valued complexes equipped with a binary operation.
+% For convenience, we also use the following notation:
+% \[x^{(1)} = \left\{ x| x \in S^1(\mathbb{Q}) \right\}\]
+% \[y^{(1)} = \left\{ y| y \in S^1(\mathbb{Q}) \right\} \cup \{ +, - \},\]
+% where we always assume that $S^1(\mathbb{Q})$ is closed under unary operations. Here $+$ denotes the product of a complex number and $-$ denotes the negative of it. This notation appears in a lot of literature, although it is not particularly useful for our purposes.
+% Another important constant is $\omega^{(1)} = \omega\langle -1\rangle_{\ge 0}$. This constant is even more important for us, and we say that $\omega^{(1)}$ is called the \emph{prime number generator}. We call $\omega^{(1)}$ called the prime number, because it represents a primitive field in an iterated iterated iterated iterated recursive function.
+%
+% % \begin{align*}
+% % & \left\langle 0\rangle_{\ge 0} \\
+% % & \subseteq S^1(\mathbb{Q}) \\
+% % & \left\{(0, 0)\right\}\\
+% % & \subseteq S^2(\mathbb{Q}) \\
+% % & \left\{(0, 1)\right\}\\
+% % & \subseteq S^3(\mathbb{Q}) \\
+% % & \left\{(0, 1)\right\}\\
+% % & \cdots
+% % \end{align*}
+% % And therefore we have that:
+% % \begin{align*}
+% % & \left\langle 0\rangle_{\ge 0} \\
+% % & = \left\langle 0\rangle_{\ge 0, 1}\right\\
+% % & = \left\langle 0\rangle_{\ge 0, 2}\right\\
+% % & = \left\langle 0\rangle_{\ge 0, 3}\right\\
+% % & = \left\langle 0\rangle_{\ge 0, 4}\right\\
+% % & \cdots
+% % \end{align*}
+% %
+% \begin{equation*}
+% \end{equation*}
+% We will be going with the notation $\omega^{(1)} = 1_S$, for $S$ a finite field.
+
+% Let us look at the solutions to iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated iterated recursive functions (see \cite[Section~II]{BrownLack1974}):
+%
+% \begin{enumerate}
+%   \item
+%      \[ \left\langle 0, -1\rangle_{\ge 0} = 0. \qedhere \]
+%  \item
+%      \[ \left\langle 0, -1\rangle_{\ge 1} = 1. \qedhere \]
+%  \item
+%      \[ \left\langle 0, -2\rangle_{\ge 0} = 2. \qedhere \]
+%  \item
+%      \[ \left\langle 0, 1\rangle_{\ge 0} = 0. \qedhere \]
+%  \item
+%      \[ \left\langle 1, 1\rangle_{\ge 1} = 1. \qedhere \]
+%  \item
+%      \[ \left\langle 2, 1\rangle_{\ge 1} = 2. \qedhere \]
+%  \item
+%      \[ \left\langle 2, 2\rangle_{\ge 1} = 8. \qedhere \]
+%  \item
+%      \[ \left\langle 2, 3\rangle_{\ge 1} = 24. \qedhere \]
+%  \item
+%      \[ \left\langle 3, 3\rangle_{\ge 1} = 277. \qedhere \]
+%  \item
+%      \[ \left\langle 3, 4\rangle_{\ge 1} = 25027. \qedhere \]
+%  \item
+%      \[ \left\langle 4, 5\rangle_{\ge 1} = 4205127. \qedhere \]
+%  \item
+%      \[ \left\langle 5, 5\rangle_{\ge 1} = 23860093645. \qedhere \]
+%  \item
+%      \[ \left\langle 5, 6\rangle_{\ge 1} = 6215032196241. \qedhere \]
+%  \item
+%      \[ \left\langle 6, 7\rangle_{\ge 1} = 2932883086019335. \qedhere \]
+%  \item
+%      \[ \left\langle 7, 8\rangle_{\ge 1} = 25077674302623735. \qedhere \]
+%  \item
+%      \[ \left\langle 8, 9\rangle_{\ge 1} = 7267910525593179765. \qedhere \]
+%  \item
+%      \[ \left\langle 9, 9\rangle_{\ge 1} = 5677553239979024534209. \qedhere \]
+%  \item
+%      \[ \left\langle 9, 10\rangle_{\ge 1} = 151745473194731440255404579. \qedhere \]
+%  \item
+%      \[ \left\langle 10, 11\rangle_{\ge 1} = 52706833106262499224395351183. \qedhere \]
+%  \item
+%      \[ \left\langle 11, 12\rangle_{\ge 1} = 1963425972975641109958624974669341928482977310283679594509070869992170909208522064906436035797300995028120767579031588277659141793324008096697146420140966932866708543798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992
+\end{document}
+780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918820130284098467738992780067905084533798809891882013028409846773899278006790508453379880989188201302840984677389927800679050845337988098918

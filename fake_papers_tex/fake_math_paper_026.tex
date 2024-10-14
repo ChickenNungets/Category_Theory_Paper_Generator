@@ -1,0 +1,226 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{Proof Of the Riemann Hypothesis Using Category Theory}
+\author{Max Vazquez}
+\maketitle
+
+
+In this paper, we prove that a Banach group is equivalent to a subgroup of a group if and only if there exist some non-isomorphic correspondences in terms of their canonical open subgroups. The first part of this proof consists of constructing an \emph{equivalence theory} on groups such that each group can be described as a subgroup of another via equivalence classes. This is then used to construct a notion of subgroups of groups using the results of \cite{Winkler2020}.  In the second part of the proof, we introduce new category theories for groups and prove it is equivalent to the theory of \emph{equivalence groups} which consists of the following facts: 
+\begin{enumerate}[(i)]
+\item \emph{(C)} An equivalence class of two groups is isomorphic (up to equivalence classes) iff they are mutually isomorphic (and so have finite compositions). 
+\item \emph{(D)} A subgroup of a group is isomorphic to an equivalence class of two other groups. 
+\end{enumerate}
+We prove (D) and (C) by studying the theory of a category theory for equivalence groups. We start with our general setup for equivalence groups and move on to the category theory required to construct the proofs of our results. 
+
+
+A \emph{subgroup of two groups $\G_0 \times \G_1$} has been defined by Pearce \cite[Definition 3.26]{pearce:homological_geometry}. Its notation is the same as usual (although we make use of the standard notation for subgroups). 
+
+Let $\C$ be an arbitrary category. For a subgroup $\G$, we will denote its components via $k_j$. An equivalence class is a triple $(x,y,u)$ where $u \in k_j(x)$ is a mutual inverse of the equivalence class element $u$.  
+
+Given two sets $X$ and $Y$, we define a collection of functions from $X$ to $Y$ via
+\[
+f: X \to Y
+\]
+such that $f^* x = y$ if and only if $f(x) \in y$, that is,
+\[
+f(x) = f^*x.
+\]
+This defines a functor $X \to Y$. Note that the function $X \to Y$ is not necessarily a natural transformation as the category of abelian groups does not have invertible identity elements. In particular, $X$ may not be an object of $Y$, while the composition of two objects gives an object of $Y$.
+
+For any object $f: X \to Y$, we say that $f$ is a \emph{morphism} if $f^*=id$ or $f^* x = f(x)$. To obtain a set of morphisms $\{ f_i: X \to Y \}_{i \in I}$, one defines
+\[
+f_i := f: X \to Y
+\]
+where $I$ is a set and $f_i$ satisfies $f_{i+1}(x) = f_{i}(x)^*$ for every $x \in X$ (and similarly for $x$ being an object of $Y$). A collection of morphisms $\{ f_i: X \to Y \}_{i \in I}$ is said to be a \emph{coequalizer} if they satisfy the equation that for any $x \in X$ we have
+\[
+f_{i+1}(x)^* \neq 0.
+\]
+In this way, a coequalizer is a natural transformation with respect to the inclusion $X \subseteq Y$. Note that an element in $k_j(x)$ is either an identity element or a mutual inverse of the corresponding element of $X$; there is no ambiguity. When $f$ is the identity element, one simply takes the identity. If $f$ is a mutual inverse of some identity element, then we take $f$ in the image of $id$; otherwise, we take the coimage of some mutual inverse element. We call $f$ a \emph{$f$-equivariant map} if $f_*(x) = y$ implies $x = y$.
+
+The identity element can be represented explicitly in a category by the data of its associated set $k_j(x)$. Let $\mathcal{S}_j : J \to X$ be the forgetful functor sending an element of $J$ to its corresponding element of $k_j(x)$. Then we define the collection of maps $\{ s_j: J \to X \}_{j \in J}$ in a category $\mathcal S$ via the following description: 
+\[
+s_j: J \to X = \{ i | j_i \in J \}. 
+\]
+It is a natural transformation and a coequalizer if and only if for all $j \in J$, there exists $i \in J$ and a $f_i$ satisfying 
+\[
+s_{j+1}(f_i)(i) = f_{j+1}(f_i)(i),
+\]
+where $f_i$ is any $f: J \to Y$. A map of categories $\phi: C \to D$ consists of a pair of functors $\phi_0 : K \to M$ and $\phi_1 : K' \to N$, together with a natural transformation $\phi^\prime: \Delta^{N'} \to \Delta^{M'}$, which is a coequalizer if and only if for all $X \in C$, the morphism 
+\[
+\phi^\prime(\phi_1(X)) := \phi(\phi_0(X)).
+\]
+Note that $\phi$ does not necessarily give rise to a natural transformation in a category theories but it does when applied to equivalence groups.  
+
+We now discuss some properties of equivalence groups. We begin with an easy definition. Any (non-identity) subgroup $\G \subseteq \G_n$ of a group $\G_n$ is isomorphic to the largest possible quotient of $\G$ by each factor of the form $g^{-1}$. Let $\G_q$ be the quotient of $\G_n$ by factors of $q$. It follows that for each element $x$ of $\G_q$, we have $\G_q(x) = \G_q^{-1} \subseteq \G$ via the above construction.  Furthermore, since $k_j$ is essentially surjective on a subgroup, it follows that if $\G_q \subseteq \G$, then for any $j$, $j_1 +... + j_q = q$, which implies that $j$ and $j'$ are disjoint subgroups of $\G_q$. 
+
+The following result makes sense if $\G_q \subseteq \G$, as is the case if $q=1$: 
+
+\begin{theorem}\label{th:Riemann}
+    Given a subgroup $\G \subseteq \G_n$, for all $j \in J$, $\G_j \cong \G$. 
+\end{theorem}
+
+We will now use these results to prove our main theorem: 
+
+\begin{theorem}\label{th:Riemann1}
+	Given an equivalence class of two groups $G_0 \times G_1$, one of its open subgroups $\G_0 \times \G_1$ is equivalent to a subgroup of $\G_0$ and a subgroup of $\G_1$ in degree $q$. 
+\end{theorem}
+
+\subsection*{Acknowledgements} Our work was supported by NSF Grant No. 1919855. NSF grants IIS-1717472, IIS-1818532, and ISST 2016-0286. These funds were used in conjunction with the NSF Science and Technology Development Office under contract DE-SC0015642. The authors are grateful to Johns Hopkins University, UCLA and Carnegie Mellon University for helpful discussions during the initial stages of this project. 
+
+Our explanations regarding this work were partially supported by NSF grant DMS-1945573 and by the Joint Research Council of Canada (grant PRCC/2-2017-00410).
+
+\section{Basic Setup}
+The category theories used in this paper will be referred to as category theories for equivalence groups.  The goal of this section is to give a brief introduction to the category theories for equivalence groups and apply them to the example of a subgroup of a group.  Once we understand the concepts involved in a category theory, we will see how to get into the category theory for equivalence groups through a process of dualizability. 
+
+We will start by recalling some basic definitions from group theory.  We will recall the category theories for categories and functors from categories to categories. We will also talk about the homotopy categories of categories. Then we explain how the functors from categories to categories provide us with a categorical treatment of homotopy groups and how they relate to the category theory for categories (Lurie, Stefanich, and Vilas). Finally, we will discuss the notions of quotients and quotients in various categories. 
+
+\subsection{Categories}
+An \emph{abstraction} of a category $k$ consists of an underlying set $k$ and the structure maps and relations that form the structure of the category $k$. Let $k$ denote the category whose objects are pairs $(k_a, k_b)$ and morphisms between these are relations called \emph{profunctors} $f: k_a \to k_b$. Profunctors arise naturally as the result of applying different profunctors to the same source and target, and consequently, we say that $f: k_a \to k_b$ is a \emph{morphism} if the following hold: 
+\begin{itemize}
+\item For all $a \in k_a$, $fa$ is an element of $k_b$.
+\item For all $a, b \in k_a$, $fb$ is an element of $k_b$ and $fa \circ fb$ is an element of $k_b$.
+\end{itemize}
+When $k = C^\infty$, we say that $k$ is a \emph{closed} category.
+
+There are several other types of categories known in the literature.  One type, we refer to as the classical category, has a single object and every morphism from one object to another is a homomorphism. Another, we refer to as the \emph{simplicial category}, has a single object and every morphism from one object to another is a pullback. Finally, we mention that, in a setting of interest, such as groups or vector spaces, the simplicial category is closed, so that, in other words, we could write $k \cong C^\infty$.   Finally, the category of rings is the simplest example of an abstractions of an infinite category of rings. 
+
+These abstractions allow us to define a category theory for the group algebra of an infinite category. However, once one makes sense of the notions of an abstraction, there is always a corresponding category theory for groups, which we will refer to as the group theory for groups.  A key difference between groups and groups is that they do not have invertible identity elements, but more generally a group should satisfy certain assumptions (i.e., the action of a certain unit over a group must be surjective, and that actions of certain multiplication are injective).  The key difference in the language of groups is that they can have a non-injective operation.  For example, two distinct groups $G$ and $H$ should satisfy the relation $g \cdot h = g * h$. As discussed in Section \ref{sec:subgroups}, a subgroup of $G$ is a family of elements in $G$ consisting of elements of $G$ such that:
+\begin{itemize}
+\item For each $g \in G$, $gh = g$ for all $h \in G$. 
+\item There exist at most one element $r \in G$ satisfying $rg = 1$, for all $g \in G$. 
+\item For any element $g \in G$ and every other element $h \in G$, $gh \wedge hg = 1$. 
+\end{itemize}
+If we choose a non-injective operation on $G$ to act on $h$ before performing the operation on $g$, then we are going to perform the same operation on $g$ and $gh$.
+
+To understand group theory for groups in general, one needs to learn to think about subgroups in terms of open subgroups. In order for our aim to motivate a generalization, let us start by describing a group as a subgroup of itself. 
+
+Recall from Definition \ref{def:group} a group $G$ consisting of two elements $e_1$ and $e_2$ with multiplication: 
+\[
+e_1 \cdot e_2 = e_1 * e_2
+\]
+or equivalently, 
+\[
+e_1 \cdot e_2 \cdot e_2 = e_1^2 + e_2^2 - e_1 * e_2.
+\]
+To extend this multiplication to a product, let $e_1 \prod e_2$ be defined as 
+\[
+e_1 \cdot e_2 = e_1^*e_2.
+\]
+To extend this definition to an additive operation, let $e_1 + e_2$ be defined as 
+\[
+e_1 \cdot e_2 = e_1^*e_2 + e_2^*e_1,
+\]
+where $e_1^*e_2 = (e_1e_2)^*$ and $e_1^*e_2 + e_2^*e_1 = (e_1 + e_2)^*$. Similarly, let $e_1^*$ and $e_2^*$ be defined by taking the projection onto both sides. We call $e_1^*$ and $e_2^*$ the \emph{normalizers} of the operation. 
+
+Now let $G$ be a group. One needs to find a \emph{open} subgroup of $G$ that contains every element of $G$. If $G$ is the group $\mathbb Z$, the open subgroup $Z$ is just a single element $Z_1$, because it cannot be multiplied inductively, even though it contains every element $Z_2$. In other words, one cannot use any of the operations $+, \star, *$, or $e_*$, for computing products of a non-zero element of $G$, without violating the property that $e_*e_*e_* \cdot e_1 = 1$. 
+
+One could go a long way by using a notion of induction. Let us describe a group inductively. Suppose $G = G_1 \cup G_2$. Then there is exactly one open subgroup of $G$ called the \emph{union}.  More precisely, the union consists of all elements of $G_1 \cup G_2$ together with those of $G_1$ and $G_2$. Therefore, given $e_1 \in G_1$, $e_1 \cdot e_1 = e_1 \cdot (e_1+e_1)$, giving $e_1 \cdot (e_1+e_1)=e_1e_1$ and thus we can compute products of $e_1$ using the products $e_1^*e_1$ and $e_1^*e_1 + e_1^*e_1$. On the other hand, the union of two open subgroups $G_1, G_2$ is simply $G_1\cup G_2$ due to the fact that $G_1 \cap G_2 = \emptyset$ and thus there is only one element of $G_1\cup G_2$, and the elements of $G_1$ and $G_2$ together are mutually exclusive. So we can consider the product $G_1 \cdot G_2$ as follows: 
+\[
+e_1^*e_1 + e_2^*e_2 = e_1e_1 + e_2e_1e_2 + e_1*e_2^*e_2 = (e_1+e_2)e_1e_1e_2 + e_1e_2e_2.
+\]
+Because the operation $+, \star, *$ and $e_*$ are such that $(e_1+e_2)e_1e_1e_2 = (e_1e_1+e_2e_2)e_1e_1e_2$, we need only find an element $e \in G_1 \cup G_2$ with such that $e\cdot e = e$ in $G_1 \cup G_2$.  This shows that $e \notin G_1 \cup G_2$ implies that $e_1 \notin G_1$ and $e_2 \notin G_2$. We denote this element by $\mu$. After a little thought, we might want to restrict our attention to the element $\mu$.  To avoid confusion, let us write $\mu^*$ instead. To find elements $\mu^*$ of $G_1 \cup G_2$ with such that $e\cdot e^*=\mu$, one uses the same notions that the norm of a ring or $R$-vector space is computed as in Definition \ref{def:norm} and the operation $e_1 + e_2$ on $R$.  But this time we want to use the normalizers of $+, \star, *$, and $e_*$. We will use the notation 
+\[
+\mu^*: G_1 \cup G_2 = \{e_1^*e_1 + e_2^*e_2 \mid e\cdot e^*=\mu \}.
+\] 
+To find elements of $G_1 \cup G_2$ with such that $e_1e_1e_2 + e_2e_2e_1$ is equal to $e$, one can use the same logic as in Definition \ref{def:norm}, except that we replace $e^*$ by $e_*$.  It remains to check that $e \cdot e^* = \mu$.  We do this using Lemma \ref{lem:properties_normalizer}: 
+\[
+(e_1e_1 + e_2e_2)\cdot e^* = e^* + e_1^*e_2 + (e_1e_2 + e_2e_1)^*e = \mu + (e_1 + e_2)^*e,
+\]
+which shows that $e \cdot e^* = \mu$. Therefore, $e \cdot e^* = \mu^*$. We have found a unique element $\mu'$ of $G_1 \cup G_2$ such that $e \cdot e^* = \mu'$, hence $e \in G_1 \cup G_2$. The element $\mu'$ acts in the opposite direction, because the union of two subgroups $G_1, G_2$ is just the union of their intersection. We conclude that the element $\mu'$ acts on $G_1$ and $G_2$ so that $\mu'$ is in both $G_1$ and $G_2$. We denote the element $\mu' : G_1 \cup G_2$ as $\mu: G_1 \cup G_2$. This element acts on the union as follows: 
+\[
+e \cdot e^* = \mu^* + \left((e_1e_1 + e_2e_2)e^*\right)^*,
+\]
+which yields $e \cdot e^* = \mu'.$ 
+Now let $G_0 \cup G_1 \cup G_2$ be the union of all elements of $G_1 \cup G_2$ acting on $G_0$.  Since $G_0$ is a group, we have $G_0 \cdot G_1 \cdot G_2 = G_0 \cdot (G_1 + G_2)$. 
+
+Now, we want to find a subgroup $G$ such that $G \cdot G_0 \cong G_0$. However, there are multiple possible subgroups $G_1 \cup G_2$. Let $G = G_0 \cup G_1 \cup G_2$. If there is no open subgroup $G_0$ contained in $G$ then $G_0$ must be the same as $G$. By the previous lemma, there are precisely two possible choices of $G_0$, and therefore $G_0$ must be contained in $G$. Since $G_0$ is an open subgroup, we need to find an element of $G$ such that $G_0 \cdot G = G$.  
+
+First, we compute
+\[
+G_1 \cdot (G_1 + G_2) = G_1 \cdot G_0 \cdot (G_1 + G_2).
+\] 
+Then, we know that
+\[
+(G_1 + G_2)^*G = (G_1)^*G + (G_2)^*G = G,
+\]
+so we can compute $G_0 \cdot (G_1 + G_2) = G_0 \cdot G_1 \cdot (G_1 + G_2)$, which tells us that $G_0 \cdot (G_1 + G_2) = G$.
+
+So, given $G$ we can find an element of $G_0$ with $G_0 \cdot G = G$, and the latter element determines the $G$ that we will define.  If we set $G = G_1$, $G_0 = \{\mu\}$ and $\mu = \mu_1 = \mu_2$, then the previous example yields $G = G_1 \cup G_2$. 
+
+Conversely, if we set $G = G_1 \cup G_2$, $G_0 = \{\mu\}$ and $\mu = \mu_1 + \mu_2$, then $G_0 \cdot (G_1 + G_2) = G$.  Now if we take $G = G_1$, then this means that $G_0 \cdot G = \{\mu\}$ and $\mu$ must be the same as $\mu_1 + \mu_2$.
+
+From the above discussion, we can deduce that $G$ acts on $G_0$ in two ways. The first, given $G_0$ and $G_1$, we can swap elements of $G_0$ and $G_1$ and then act on $G_0$ using $G_1$ as the domain, while acting on $G_0$ using $G_0$ as the codomain. The second, given $G$ and $G_1$, we act $G_1$ on $G_0$ and then act $G$ on $G_0$ using $G_0$ as the domain. These two actions play the same role in this example.  We proceed using $G_0$ as the domain and then $G_0$ as the codomain.
+
+The concept of a group acting on $G_1$ and then acting on $G_0$ using $G_0$ as the domain is called \emph{unital}.  Such a group can be thought of as an element of the ring $R = \bigoplus_{i \in I} G_i$. The elements of $R$ have the same action, just swapped. When the action is unitary, then there is only one element of $R$ called the \emph{unit}. We call $R$ the \emph{ring associated to $G$}.  This action on $R$ is called the \emph{action of $G$ on $R$.   
+
+Let us consider the situation in which we are working with groups as objects and have a map $f: G_1 \to G_0$. The act of $G_1$ on $G_0$ is induced from the map $f$ by first using $f$ on the domain element $G_0$ to get $G_0$ as the domain and then the unit of $R$ on the codomain element $G_1$ using $G$ as the domain.  We write $G \mapsto f^{-1}(G)$. Here $G$ is an element of $G_0$.  Then, by the previous lemma, $G_1 \cdot (G_1 + G_2) = G_1 \cdot G_0 \cdot (G_1 + G_2)$, which means that $G$ acts as the sum of the $G$ in $G_1$ and $G_1$ in $G_0$ using $G$ as the domain and $G$ as the codomain. It is worth noting that if $f$ is a morphism between two elements $g$ and $h$, then
+\[
+f^{-1}(g) + f^{-1}(h) = (g + h)f^{-1}
+\]
+holds whenever there is a $h$ in $G_1$ such that $f^{-1}(g) + f^{-1}(h) = g$.
+
+Since $G_0$ is an open subgroup of $G$, we have a function $f: G_1 \to G_0$ that can be made into an action of $G$ on $R$. We will usually denote this map by $f$. We can now consider the following diagram.
+\begin{equation*}
+\xymatrix@C=5pc{
+G_0 \ar@{|->}[d] & G_0 \cdot G_1 \ar@{|->}[d]^{f}\\
+G_1 \ar[r] & G_0
+}
+\end{equation*}
+Here $G$ is an element of $G_0$.  Because the $G$ is in the domain, it acts as the product of two elements of $G_0$.  Since the $G_1$ acts on the $G_0$ as well, the $G_1$ acts as the product of two elements of $G_0$, hence we end up having two elements in $G_0$ each acting on the $G_1$ in the opposite order.  Moreover, we can rearrange the diagram in the following way to make it clearer.
+
+\begin{equation*}
+\xymatrix@C=5pc{
+G_0 \ar@{|->}[d]_{\mu}& G_1 \ar@{|->}[d]^{f}\\
+G_0 \cdot G_1 \ar@{|->}[r] & G_0
+}
+\end{equation*}
+Here $G$ acts as the product of two elements of $G_0$.  Then, since we already know that $\mu$ acts as the product of two elements of $G_0$, we can directly rearrange the diagram.  
+By the previous example, we now have a map $G_0 \to G_1 \cdot G_2$ from $G_0$ to $G$. This allows us to perform the operations $+, \star$, and $e_*$. These actions are independent and must be compatible with each other.
+
+We summarize the discussion in this example using the above diagram: 
+\[
+G = \bigoplus_{i \in I} G_i.
+\]
+As a corollary, we saw that the $G_0$ acts as the product of two elements of $G_0$ using $G_1$ as the domain and then acts on $G_0$ using $G_0$ as the codomain.  Hence, by definition, $G_0 \cdot G$ acts as the product of two elements of $G$.  
+
+In general, we can formulate our results in a much more general context. For any group $G$, one can define an element of $G$ via a function. For example, if $G = G_1 \cup G_2$ is the product of two elements of $G$, then 
+\[
+g \cdot h = g * h
+\]
+means that we can take $g$ and $h$ and multiply them by the product of two elements of $G_0$. We can also rearrange the diagram so that the first two lines of the diagram commute.  The rest of the equations relate to the products. For example, if $G = G_1$ is a group with $e_1 + e_2$ acting on $G_0$, then 
+\[
+(e_1 + e_2)g = g * e_1 + g * e_2.
+\]
+Similarly, if $G = G_2$ is a group with $g^*g$ acting on $G_0$, then 
+\[
+(g^*g)g = g * g^*.
+\]
+
+Once we have a category theory for groups, we can make use of the categories of categories and functors to model our results.  First, we define the category of categories which consists of the categories of objects and morphisms in a category $\C$. The objects of this category are pairs $(\C_c, \Hom_\C(\C_c, \C_d))$ where $c$ is an object of $\C$ and $d$ is an object of $\C$. Similarly, morphisms are pairs $(\Hom_\C(\C_c, \C_d), f)$ where $c$ is an object of $\C$ and $d$ is an object of $\C$ and $f$ is a morphism in $\C$. It is a pair $(\C_c, \Hom_\C(\C_c, \C_d))$ if and only if there is an object $c$ of $\C$ and an object $d$ of $\C$ and a morphism $f$ in $\C$ such that 
+\begin{align*}
+\Hom_{\C}(\C_c, \C_d)([c], d) = f, & d\in \Hom_{\C}(\C_c, \C_d)(c, d),\\
+\Hom_{\C}(\C_c, \C_d)(d, c) = f
+\end{align*}
+where the second equality follows from the definition of a morphism. 
+
+Next, we define the category of functors from categories. First, we introduce the category of functors and the category of profunctors, and show that they are functors from categories to categories. 
+
+Suppose $F: \C \to \D$ is a functor from categories. Recall that $\Hom_\C(\C_c, \C_d)$ is the subcategory of $\Hom_\C(\C_c, \D)$ spanned by the morphisms $f: c \to d$ in $\C$ that are also morphisms in $\D$ (it is denoted $c\Rightarrow d$). This is denoted $\Hom_\C(\C_c, F(\C_c))$. We can define the category of functors $F: \C \to \D$ inductively by adding a morphism $(f, f'): (\C_c, \Hom_\C(\C_c, \C_d)) \to (\C'_c, \Hom_\C(\C'_c, \C'_d))$ where $c$ is an object of $\C$, $d$ is an object of $\D$, and $f: c \to d$ is a morphism of $\C$ to $\C'$ in $\C$. Similarly, we can add a morphism $(f', f'')$ where $d$ is an object of $\D$ and $f$ is a morphism of $\D$ to $\D'$ in $\D$.  Then $F$ induces a functor $F': \C'\to \D'$ such that $(\C'_c, F'(F')(f))$ is a morphism of categories between the two categories.  Similarly, we can add a morphism $(f'', f''')$ where $d$ is an object of $\D$ and $f$ is a morphism of $\D$ to $\D''$ in $\D$.  Then $F'$ induces a functor $F''': \C''\to \D''$ such that $(\C''_c, F'''(F''')(f'))$ is a morphism of categories between the two categories.  
+
+We can rearrange the diagram of categories of categories as follows.
+
+\begin{equation*}
+\xymatrix@C=5pc{
+\C \ar[d]\\
+\C\ast
+\end{document}
+\C
+}
+\end{equation*}
+
+We are now ready to define category theory for groups. Before we start, let us note that, in category theory, objects of a category $k$ are elements of $k$ (also called the \emph{objects}) while morphisms $k \to k'$ are functors $k \to k'$. In other words, the objects and morphisms of a category $k$ correspond to functors from $k$ to $k$.  In fact, if $k$ is an abstractions of an infinite category $\mathcal C$, we can define the category of objects $k \in \mathcal C$, whereas if $k$ is the abstractions of a finite category, we can define the category of functors $k \in \mathcal C$ into another category.  However, in general, a category is not necessarily an infinite category.  Also, not all categories are finite. The category theory for groups is the subject of interest in our article, and we shall assume here that it is finite.  
+
+The next result is a special case of the classical result that describes a morphism in a category in a special sense. Let $\C$ be a category

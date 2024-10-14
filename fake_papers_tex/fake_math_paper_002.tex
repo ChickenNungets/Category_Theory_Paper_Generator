@@ -1,0 +1,173 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{Co-Algebras: Why Do They Exist?}
+\author{Max Vazquez}
+\maketitle
+
+
+\begin{abstract}
+We examine the relationship between Co-Algebras and the
+homotopy theory of higher homology.
+Co-algebras are defined in terms of a partial
+exponential algebra as we do with Co-Koszul
+Co-algebras. They arise from the coherent homology of the co-Koszul complex. 
+The homotopy theory is then shown to be inherently very different from the homology theory of a cohomological algebraic theory. In particular, it does not provide a canonical connection between co-algebras and the homological theory of a cohomological algebraic theory.
+Moreover, for a co-algebra $A$, only the homotopy theory can be viewed as a subcategory of the category of Algebraic Topologies, hence the homotopy theory of an algebraic theory does not belong to the category of algebraic topologies. This will lead us to explain why all coalgebras are related by some non-trivial relation. 
+
+Our main result is that co-algebras are not equivariant
+in the sense that they do not preserve isomorphisms.
+We show that these are precisely the Koszul duals for
+the co-Koszul complex. Then we establish what happens when $A$ has finitely many connected components (i.e.~if $A$ has infinitely many connected components).  We prove this by showing that if $A$ is also finite dimensional then $\Hom_\coalg(A,\One)$ is equivalent to zero. Finally, we investigate the relationship between co-algebras and other homotopy categories.
+
+\end{abstract}
+
+\section{Introduction}
+Let $A \in \mathrm{Alg}_\infty$ be a cohomological algebraic theory.
+Its full description is given by its co-Koszul complex $C_{\infty}$ defined in Figure~\ref{fig:2}. The homology spectrum of $C_{\infty}$ is the fundamental group of the algebraically closed compactification of the category of compact objects. Its algebraic structure $(A,I_0)$ is called the algebraic topology of the algebraic theory $A$.
+A natural question posed is whether the co-Koszul complex exists or not.
+This is at odds with the fact that the co-Koszul complex $C_{3}^{C_{\infty}}$ is a special class of algebras known as the co-Koszul complex of an abelian category: in this case, the Koszul dual complex is again the co-Koszul complex of its algebraic Koszul dual, but this time restricted to the co-Koszul complex of an abelian category. It remains unclear whether such algebras exist in general.
+In a cohomological algebraic theory, co-algebras are often related to their homotopies using certain relations, i.e.~such as that of a finite algebraic topology, where the co-Koszul complex is the co-homology complex. However, even when using a finite algebraic topology, the co-Koszul complex is often not a complete algebraic Koszul complex as shown in Example~\ref{fig:3}.
+
+If $A$ was infinite dimensional, then it would have been possible for $A$ to have $n$-modules over an $n$-dimensional space in order to construct its co-Koszul complex. For example, any topological space is a finite dimensional abelian group, which is one of the many examples of infinite dimensional abelian groups of general dimension up to equivalence. In this way, it would appear to be possible for $A$ to have $k$-modules over an $k$-dimensional space $X$ and then construct a co-Koszul complex $C_{3}^{X}$, as long as $k<3$.
+However, these examples were rarely studied in detail by mathematicians in the literature. 
+
+To bridge the gap between co-algebras and the co-Koszul complex, we introduce Co-Algebraic Topologies and define Co-Algebras using the generalized power series from the coherent homology theory of a cohomological algebraic theory. From now on, $A$ denotes a cohomological algebraic theory and let $A$ denote its full description. Let us recall some important concepts regarding the homology spectrum and algebraic topology:
+\begin{itemize}
+    \item The homology spectrum of $C_{\infty}$ is the fundamental group of the algebraically closed compactification of the category of compact objects. 
+    \item The algebraic topology of the algebraic theory $A$ is then a class of compact objects $\mathcal{U}(A)$.
+    \item An object of $\mathcal{U}(A)$ is a cochain sequence of $k$-modules $M_j$ of dimension $k$; there are cochains of $k$ modules for $j=1$ to $k$. These are \emph{cohomological} cochain sequences of $k$-modules with respect to the topology of $\mathcal{U}(A)$, with $C_{3}^{A}$ being the coKoszul complex of the cohomology functor $\Hom(-,-)$ from~\cite{Nakayama1995}.  
+    \item If $C_{3}^{A}$ is isomorphic to the cohomology complex of the coKoszul complex of an abelian category $\cat{A}$ then $\mathcal{U}(A)$ is equivalent to the compact objects in $\cat{A}$.
+\end{itemize}
+Let $A$ be a cohomological algebraic theory and consider its co-Koszul complex $C_{3}^{A}$. As explained above, every cochain sequence of $k$-modules in $\mathcal{U}(A)$ has a universal cohomological cochain sequence. We call this the \emph{universal} cohomological cochain sequence corresponding to the cochain sequence of $k$-modules in $A$. That is, if we take $A=\mathrm{Topo}^{\cat{A}}$, we get a universal cohomological cochain sequence for all compact objects $B$ of $\cat{A}$, and let $F:\cat{A}\rightarrow A$ be a map of categories. Let $C^{\infty}_{3}$ be the coKoszul complex defined as follows: 
+\[
+C^{\infty}_{3} = C_{\infty}^\circ (F)^*_{16}\,,
+\]
+where $(F)^*$ denotes the composition of cohomology functors.
+
+An algebraic topology $E$ on an abelian category $\cat{A}$ is also a class of compact objects whose underlying compact object of each homology complex is an object in $\cat{A}$. An object $B$ of $\cat{A}$ is said to be a \emph{compact extension} of $A$ if it lies in an isometric image of $C^{\infty}_{3}$, which is again a compact object of $\cat{A}$ and so is a compact object of $E$. A compact extension $f:B\rightarrow B'$ of $A$ is a morphism of compact extensions of $A$ that is a surjection. Therefore, by definition, $f$ is a cochain morphism of $k$-modules of dimension less than $3$ (see Corollary~\ref{cor:extension}).
+
+One can see the analogous result to determine whether a compact object $C\in\mathcal{U}(A)$ has a universal cohomological cochain sequence (since any compact extension can be written as a cochain morphism of $k$-modules), or whether the cohomology complex of a coKoszul complex coincides with a category (see Example~\ref{fig:3}).
+Note that our results do not rely on any further assumption about $C^{\infty}_{3}$. Instead, it relies on the fact that the cohomology functors $\Hom(-,-)$ are constant. More generally, we assume that there exists a constant map $F:\cat{A}\rightarrow A$ that maps any compact extension into an infinite dimensional space $\bar{X}$. Since we are working with finite abelian groups, it is enough to assume that any cohomology functor $F$ preserves infinitely many connected components. When the latter holds, our results will allow us to determine if the homology spectrum of the co-Koszul complex coincides with the category $\cat{X}_{\infty}$ defined by taking the compact objects in $\cat{X}_{\infty}$. Note that since we will be working with abelian categories, this assumption alone cannot guarantee that the homology spectrum of $C_{\infty}$ coincides with the category $\cat{A}$.
+
+The proof of our main theorem states the following:
+\begin{thm}
+    The Co-Algebras of a cohomological algebraic theory are unique up to equivalence.
+\end{thm}
+\begin{proof}
+    The category of algebraic topology $\mathrm{Topo}^{\cat{A}}$ is the \emph{coKoszul dual} of the co-Koszul complex. More precisely, $\mathrm{Topo}^{\cat{A}}$ is the coKoszul complex of the cohomology functor $\Hom(-,-)$ from~\cite{Nakayama1995}. Now, in order to construct the Co-Algebras, we start with the category $\mathrm{Topo}^{\cat{A}}$ and define an algebraic topology $E$ on $\mathrm{Topo}^{\cat{A}}$, defined as follows: 
+    \begin{itemize}
+        \item A compact object $B$ of $\cat{A}$ is a \emph{compact extension} of $\cat{A}$ if it lies in an isometric image of $C^{\infty}_{3}$. 
+        \item Any compact extension of $\cat{A}$ is a surjective morphism.
+    \end{itemize}
+    Now, we first set up the category $\cat{X}_{\infty}$. Given an object $X$ of $\cat{A}$, we take the cohomology complex $\Bar{Z}X$ associated to it (see Figure~\ref{fig:1}). We define the category of compact extensions of $X$ as follows: 
+    \[
+    \mathcal{X}^{\infty}_{\mathrm{ext}}(X)=\{f:X\rightarrow X'\mid\text{$f$ is a surjection}\}.
+    \]
+    The functor $F:\cat{A}\rightarrow \mathrm{Topo}^{\cat{A}}$ defined on objects as above takes the image of $F$ under the compact extensions and makes them isomorphic to $X$. Then, we have the functor $G:\cat{A}\rightarrow\cat{X}_{\infty}$ defined on objects as above, taking the image of $F$ under the compact extensions and making them isomorphic to $X$. We define the category of compact extensions of $X$ as follows: 
+    \[
+    \mathcal{X}^{\infty}_{\mathrm{ext}}(X)=\{f:X\rightarrow X'\mid\text{$f$ is a cochain morphism of $k$-modules of dimension less than $3$}\}.
+    \]
+    Note that in order to make the above categories are similar we need that there is a constant map $F:\cat{A}\rightarrow A$ defined on objects as above. 
+    By Lemma~\ref{lemma:cokoszulcomplex}, $\cat{X}_{\infty}$ coincides with the category $\cat{X}_{\infty}^{C_{\infty}}$, where $C_{\infty}$ is the co-Koszul complex of a category $\cat{A}$, defined in Section~\ref{sec:cohomology}. Thus, the two categories are in bi-equivalence with each other.
+
+    Now, we proceed in reverse order by setting up $\cat{A}$ and an algebraic topology $E$. Since $\mathrm{Topo}^{\cat{A}}$ is the coKoszul dual of the co-Koszul complex, any compact extension of $\cat{A}$ lies in an isometric image of $C^{\infty}_{3}$. So, by Example~\ref{exa:exttopo}, we can take $E$ to be the algebraic topology of a cohomological algebraic theory $\mathrm{Topo}^{\cat{A}}$. 
+
+    With our setup, the Co-Algebras of $\mathrm{Topo}^{\cat{A}}$ are simply the cochains of $k$-modules over $A$, with $k$-modules in dimension less than or equal to $3$. 
+    For an algebraic topology $E$, we must show that the Co-Algebras of $\mathrm{Topo}^{\cat{A}}$ are uniquely determined by the Co-Algebras of the cohomological algebraic theory. One can define the same cochain as before using $H^3_{\infty}$ instead of $\Hom(-,-)$ on $\cat{A}$, thus allowing us to identify the Co-Algebras by comparing their image. First of all, note that $H^3_{\infty}$ assigns a number $\mathbb{Z}[\mathrm{ext}]$ to each isometric image of $C^{\infty}_{3}$. This number is the number of compact extensions of $A$. Since $\mathcal{X}^{\infty}_{\mathrm{ext}}$ is a symmetric monoidal category, there is a tensor product $H^3_{\infty}(A,B)=H^3_{\infty}(A\times B,C_{\infty})$. There exists a unique Co-Algebraic Topology $E'=E^{\perp}$ with $E'$ defined as follows: 
+    \begin{itemize}
+        \item A compact object $D$ of $\cat{A}$ is a \emph{compact extension} of $\cat{A}$ if it lies in an isometric image of $C^{\infty}_{3}$. 
+        \item Any compact extension of $\cat{A}$ is a surjection.
+        \item Any surjective morphism is a compact extension.
+    \end{itemize}
+    A compact extension of $\cat{A}$ is a surjection as well. Thus, we obtain the following diagram: 
+    \[
+    \xymatrix{
+            &C^{\infty}_{3}\ar@/^/[l]_-{H^3_{\infty}&&&\cat{A}\ar@{-->}[u]^{G}&\\
+            D\ar@{<->}[ru]_-{f}&& &\cat{X}_{\infty}&
+    }.
+    \]
+    Since the homology complex of a coKoszul complex coincides with a category, the rightmost square commutes. The bottom row commutes because the rightmost column is a pullback. Hence, $G$ preserves compact extensions. We conclude that the leftmost row commutes, and therefore the desired equality holds.
+    
+    Conversely, given a Co-Algebraic Topology $E'$ with $E'$ defined as above, we first consider the algebraic Koszul complex of a category $\cat{A}$. Then the homology spectrum of $C_{3}^{A}$ coincides with $\cat{A}$. But, since both categories are isometric images of $C^{\infty}_{3}$ and $\mathcal{X}^{\infty}_{\mathrm{ext}}$ are symmetric monoidal, the cohomology complex is again isometric images of $C^{\infty}_{3}$ and $\mathcal{X}^{\infty}_{\mathrm{ext}}$. The tensor product $H^3_{\infty}(A,B)$ is again the image of $G$ on $H^3_{\infty}(A\times B,C_{\infty})$. Now, note that this image is again a surjective functor of $\cat{A}$ from the compact extension of $\cat{A}$ to $A\times B$. In particular, the map $G$ preserves surjective morphisms. Therefore, the image of $G$ gives rise to a compact extension of $A\times B$. This is a compact extension of $A\times B$ and thus satisfies the same conditions of the Co-Algebraic Topology $E'$ as above.
+\end{proof}
+
+From now on, we will consider the category $\cat{X}_{\infty}$ in terms of the cohomology complex of a coKoszul complex of a category $\cat{A}$. In this sense, all Co-Algebras will appear to exist up to equivalence, without any further assumptions. To prove the main theorem, we first give a few explicit statements about the homology spectrum of $C_{3}^{A}$. This proves Our Main Theorem. In the following section, we show that all coalgebras of a cohomological algebraic theory are uniquely determined by the Co-Algebras of its cohomology complex (and this is proved by Proposition~\ref{prop:co-alg-is-unique}). Next, we study the relationship between co-algebras and higher homology. The Co-Algebras of a cohomological algebraic theory are naturally related by means of certain relations. We then review the relationship between co-algebras and other categories. We briefly sketch the main motivation for the present work and the main result.
+
+\subsection{Generalization: Infinite Dimensional Topologies}
+One advantage of the concept of an algebraic topology is that it describes a global structure. In particular, a finite algebraic topology is itself a global structure, whereas a finite algebraic topology with respect to a particular global structure may not be an algebraic topology. In fact, although there are cases in which an algebraic topology is in fact a global structure, one has not yet considered such situations. For instance, some global structures are related by natural equivalences and such a structure will not be referred to as a \emph{global algebraic topology}. For the purpose of our work, we can refer to the category of abelian groups $\mathbb{R}\times \mathbb{Q}$ as a global algebraic topology, which is just a special case of a finite algebraic topology with respect to a particular global algebraic topology. The same holds true for topological spaces, which is the second most common global algebraic topology.
+
+Let us suppose that we know some of these global structures. We will be interested in a finite algebraic topology $A$ with respect to such a global structure $B$. Recall that the cohomology spectrum of $C_{3}^{A}$ is the fundamental group of the cohomology complex of the coKoszul complex of an abelian category $\cat{A}$, but the cohomology complex of a coKoszul complex is also known as the cohomology complex of a category $\cat{A}$ in the more recent work of Nakayama--Tachikawa--Taniaki~\cite{Nakayama1995,Nakayama1998}.
+
+\subsubsection{Finite Algebraic Topologies}
+There is an alternative formulation of the co-Koszul complex and homology of an abelian category based on finite cohomology and finite algebraic topology. Indeed, as explained below, if the cohomology complex of $\cat{A}$ is finitely generated then the co-Koszul complex is also finitely generated. 
+
+\paragraph{Cohomology Complexes}
+For finite abelian categories, the cohomology complex of a category $\cat{A}$ is the category $\cat{H}(\cat{A})$. Its cohomology complex is defined by first giving the \emph{cohomology group}
+\[
+\mathrm{Coh}(\cat{A}):=H^0(\cat{A})\,.
+\]
+Given an element $g\in H^0(\cat{A})$ there are an arbitrary number of isometric images $K_g^{0,m}$ of $\cat{A}$ as follows:
+\begin{enumerate}
+    \item The \emph{image} of $g$, i.e.~the objects $K_g^{0,0}$.
+    \item The \emph{coimage} of $g$, i.e.~the elements $g^{(1)}$ in $H^1(\cat{A})$.
+\end{enumerate}
+Recall from Remark~\ref{rem:cohcomplex} that the identity map is an identity map between the coimage and image. Then, for any finite cohomology group $H$ there are a finite number of elements of the cohomology group. For example, the cohomology group $\mathrm{Coh}(AB)=H^0(BA)+H^1(BB)-H^0(AB)$. This group has one generator and there are no $g^{(1)}$ generators. In particular, $\mathrm{Coh}(BA)=0$ and $\mathrm{Coh}(BB)=0$ (i.e.~elements of the cohomology group are called isometric images of $\cat{A}$). Hence, the cohomology group can be interpreted as a finite dimensional topological group.
+
+It is easy to see that if a finite cohomology group is not necessarily finitely generated, then the cohomology complex of an abelian category is not necessarily finitely generated either. Some examples are as follows:
+\begin{enumerate}
+    \item If $\cat{A}$ has finite cohomology groups, then the cohomology complex is not necessarily finitely generated; however, if $\cat{A}$ is of finite type then the cohomology group $\mathrm{Coh}(A)$ must be finitely generated (see Example~\ref{exa:2ndab}), and thus the cohomology complex can be described as a finitely generated extension of $\cat{A}$.
+    \item If $\cat{A}$ has finite cohomology groups, then it is not possible to construct an infinite dimensional group like the one obtained from finite algebraic groups up to equivalence (see Example~\ref{exa:infdim}). Indeed, it appears to be impossible to construct an abelian group up to equivalence if the only generator is an infinite dimensional vector space. In this case the cohomology complex of $\cat{A}$ is also not finite dimensional.
+    \item If $\cat{A}$ has finite cohomology groups, then it is possible to construct the cohomology complex of a category $\cat{A}$ in $r+1$ dimensions via the cohomology functor $\Hom(-,-)^{r-1}$, where $r$ is the rank of the category $\cat{A}$. However, this does not ensure that the cohomology complex is always finitely generated. More explicitly, when the cohomology functor $\Hom(-,-)^{r-1}$ sends an object $B$ of $\cat{A}$ to a vector space $\mathbf{X}_r$ equipped with an object of cohomology, the cohomology functor $\Hom(-,-)^{r-1}$ does not preserve finite cohomology (e.g.~not induced by the Yoneda embedding). In particular, the cohomology complex does not have an exact structure, and so its homology spectrum cannot be considered as a finite group. On the other hand, if $C$ is any object of $\cat{A}$, then the cohomology complex is finitely generated if and only if $C$ is generated by a finite number of cohomology elements. Moreover, since the cohomology complex of an abelian category is not necessarily finitely generated, the exact structure of the cohomology complex cannot be used to define the exact structure of the homology complex.
+\end{enumerate}
+We shall discuss in Proposition~\ref{prop:fincohom} what guarantees the existence of the cohomology complex of an abelian category is a finitely generated extension of a category (and this property can be verified directly from the properties of the homology complex of a coKoszul complex).  
+
+\paragraph{Homological Complexes}
+A cohomology complex is a \emph{homotopy category} if it admits a \emph{homotopy group} that is finitely generated. If an object of an abelian category is a homotopy category, then it becomes an exact structure of a homotopy category, which corresponds to a \emph{homotopy group}. When $\cat{A}$ is of finite type, this means that the cohomology of an object of $\cat{A}$ is a finite cohomology group. Similarly, given a cohomology group, there are finite number of elements of the homology group. This implies that, if the cohomology group of an object of $\cat{A}$ is finitely generated, then the homology complex of an object of $\cat{A}$ is finitely generated too.
+
+If $\cat{A}$ is of finite type, the cohomology complex of a coKoszul complex is also finitely generated. Indeed, a coKoszul complex can be constructed using the cohomology functor from Example~\ref{exa:2ndab}, using a generalized power series expansion. In particular, there exists a commutative ring $R$ and a cohomology group $G$ on $R$. If $G$ is finitely generated, then the homology complex of the coKoszul complex associated to $G$ is finitely generated. Moreover, in this case, the exact structure on the cohomology complex provides an exact structure on the homology complex. We shall explain in \S\ref{subsect:cohcomplex} what guarantees that the cohomology complex is a finitely generated extension of a coKoszul complex. 
+
+\paragraph{Homological Complexes: Generality}
+There are various other examples of abelian categories with finite cohomology groups. For the purpose of our work, we will only focus on a few specific examples. For the others, we will mention how the cohomology complex of a coKoszul complex can be shown to be equivalent to the homology spectrum of a coKoszul complex.
+
+\subsubsection{Infinite Dimensional Topologies}
+Consider an abelian category $\cat{A}$ with finite cohomology groups $\mathcal{H}_{\infty}(\cat{A})$, i.e.~cohomology groups having minimal generators. A generalized power series expansion allows us to define a cohomology complex with finite cohomology groups by replacing the commutative ring $R$ with a field $\mathbb{Z}$ such that $\mathcal{H}_{\infty}(\cat{A})=\mathbb{Z}^{\mathrm{ext}}$. An algebraic topology $E$ on an abelian category $\cat{A}$ is then a class of compact objects whose underlying compact object of each homology complex is an object of $\cat{A}$. An object $B$ of $\cat{A}$ is said to be a \emph{compact extension} of $A$ if it lies in an isometric image of $C^{\infty}_{3}$, which is again a compact object of $\cat{A}$ and so is a compact object of $E$. An algebraic topology $E$ with respect to $\cat{A}$ is then a class of compact objects whose underlying compact object of each homology complex is an object of $\cat{A}$. A compact extension $f:B\rightarrow B'$ of $A$ is a morphism of compact extensions of $A$ that is a surjection. Therefore, by definition, $f$ is a cochain morphism of $k$-modules of dimension less than $3$ (see Corollary~\ref{cor:extension}).
+
+Here is an analogous statement for finite abelian categories. Consider a finite cohomology group $\mathrm{Ext}(\cat{A})$ on $\cat{A}$, and replace the field $\mathbb{Z}$ with an abelian group $\cat{G}_{\infty}$ and the field $\mathbb{Z}^{ext}$ with an abelian group $\mathrm{Coh}(\cat{A})$. 
+
+\paragraph{Cohomology Complexes}
+When the field $\mathbb{Z}$ is an abelian group, then the cohomology complex of $\cat{A}$ is the category $\cat{H}(\cat{A})$. Its cohomology complex is defined by first giving the \emph{cohomology group}
+\[
+\mathrm{Coh}(\cat{A}):=H^0(\cat{A})\,.
+\]
+Given an element $g\in H^0(\cat{A})$ there are an arbitrary number of isometric images $K_g^{0,m}$ of $\cat{A}$ as follows:
+\begin{enumerate}
+    \item The \emph{image} of $g$, i.e.~the objects $K_g^{0,0}$.
+    \item The \emph{coimage} of $g$, i.e.~the elements $g^{(1)}$ in $H^1(\cat{A})$.
+\end{enumerate}
+Recall from Remark~\ref{rem:cohcomplex} that the identity map is an identity map between the coimage and image. Then, for any finite cohomology group $H$ there are a finite number of elements of the cohomology group. For example, the cohomology group $\mathrm{Coh}(AB)=H^0(BA)+H^1(BB)-H^0(AB)$. This group has one generator and there are no $g^{(1)}$ generators. In particular, $\mathrm{Coh}(BA)=0$ and $\mathrm{Coh}(BB)=0$ (i.e.~elements of the cohomology group are called isometric images of $\cat{A}$). Hence, the cohomology group can be interpreted as a finite dimensional topological group.
+
+An algebraic topology $E$ with respect to $\cat{A}$ is then a class of compact objects whose underlying compact object of each homology complex is an object of $\cat{A}$. An object $B$ of $\cat{A}$ is said to be a \emph{compact extension} of $A$ if it lies in an isometric image of $C^{\infty}_{3}$, which is again a compact object of $\cat{A}$ and so is a compact object of $E$. An algebraic topology $E$ with respect to $\cat{A}$ is then a class of compact objects whose underlying compact object of each homology complex is an object of $\cat{A}$. A compact extension $f:B\rightarrow B'$ of $A$ is a morphism of compact extensions of $A$ that is a surjection. Therefore, by definition, $f$ is a cochain morphism of $k$-modules of dimension less than $3$ (see Corollary~\ref{cor:extension}). 
+
+There are several examples of abelian categories with finite cohomology groups. For the purpose of our work, we will only focus on the last of them. For the others, we will mention how the cohomology complex of a coKoszul complex can be shown to be equivalent to the homology spectrum of a coKoszul complex.
+
+\subsubsection{Abelian Groups}
+Let us consider the examples discussed above, namely the abelian groups $\mathbb{Z}$ and $\mathbb{Q}$, respectively. For example, the cohomology complex of a coKoszul complex can be computed as follows: 
+\begin{align*}
+    C^{\infty}_{3} &= \bigoplus_{n=1}^{\infty} R^n \left(A\otimes\dots\otimes A\right)\,,
+\end{align*}
+where $R^n$ is the Ring of Euler functions and $A\in\mathbb{Z}^n$ is an abelian group.
+
+If $A$ is a finite abelian group, then there is an algebraic Koszul complex with an algebraic topology ${\rm Algn}_{\infty}^{\mathcal{G}}(\cat{A})$.  Then the algebraic topology of the algebraic Koszul complex of a coKoszul complex is again the cohomology complex of the coKoszul complex associated to the algebraic Koszul complex of an abelian category $\cat{A}$ (see Proposition~\ref{prop:algebraicKoszul}). In particular, if $\cat{A}$ has finite cohomology groups and $A$ is an abelian group, then the algebraic topology is a class of compact objects whose underlying compact object of each homology complex is an object of $\cat{A}$. An object $B$ of $\cat{A}$ is said to be a \emph{compact extension} of $A$ if it lies in an isometric image of $C^{\infty}_{3}$, which is again a compact object of $\cat{A}$ and so is a compact object of $E$. An algebraic topology $E$ with respect to $\cat{A}$ is then a class of compact objects whose underlying compact object of each homology complex is an object of $\cat{A}$. A compact extension $f:B\rightarrow B'$ of $A$ is a morphism of compact extensions of $A$ that is a surjection. Therefore, by definition, $f$ is a cochain morphism of $k$-modules of dimension less than $3$ (see Corollary~\ref{cor:extension}).
+
+Recall that $A$ is called a cochain ring if there exists a chain ring homomorphism $R_A:\mathbb{R}\rightarrow A$. Let $A$ be a cochain ring.  It turns out that $C^{\infty}_{3}
+\end{document}
+$ is a generalization of the cohomology complex associated to an algebraic Koszul complex of an abelian category $\cat{A}$, where the Ring $R_{C^{\infty}_{3}}$ is determined by the Ring $R_{A}$. In this sense, for a ring $R$ with a base field $k$, $R_{A}$ acts on the cohomology complex by acting on each term on the left by some polynomial representation of $R$ (see Definition~\ref{def:ringcok}). To summarize this process we will work with finite abelian groups.
+
+\subsubsection{Ring Cohomology Complexes: Generalized Power Series Expansion}
+We next consider the generalized power series expansion of the cohomology complex of an abelian category $\cat{A}$ (see Definition~\ref{def:powerseriesexpansion}) where the ring $R$ determines the Ring $R_{C^{\infty}_{3}}$. As previously mentioned, we first describe the Ring $R$ for cochain rings, which plays an important role in our analysis.
+
+\paragraph{Normal Forms}
+For a cochain ring $R$, $R_0=1$, and

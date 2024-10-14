@@ -1,0 +1,156 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{Proof Of the Riemann Hypothesis Using Category Theory}
+\author{Max Vazquez}
+\maketitle
+
+
+\tableofcontents
+
+\section*{Introduction}
+In this paper we study a mathematical theory called category theory, which is one of the leading areas of mathematics. Among many of its major applications in computer science and physics, category theory has become a fundamental tool for various other fields such as quantum mechanics or topological invariance, among others. In our recent work, we show that, by utilizing classical analysis, we can characterize all physical phenomena present in matter. The key idea behind the present work is to first characterize some simple quantum systems (such as the classical Hilbert space $H^*_{2\times 2}$) using the standard classification technique; then we show that certain classical systems (e.g. the Moore-Penrose system) have no equivalence class; we then extend this result to provide a way to characterize every classical Hilbert space. This construction will not only characterize the most basic systems, but it also will find all possible classifications. By combining the above results with category theory, we can prove an important generalization of the Riemann hypothesis. The main goal of this article is to demonstrate how our approach could be applied to characterizing all physical phenomena in matter, instead of just two examples (such as the Moore-Penrose system) when working with categories. This paper was motivated by a student's interest in understanding higher dimensional quantum field theories, so it is worthwhile to point out that our approach does not apply to higher dimensions other than two.
+
+\subsection{Background on Quantum Field Theories}
+The physics community, known as the $\bullet$-category $\mathbf{A}$, has made an appearance recently in the works of quantum field theorists to study the nature and behavior of phenomena in matter, as well as their structure and their behaviour under certain conditions. For example, the 1-dimensional TQFT $H^*$ of any topological order can be described using the 1-categorical analysis discussed in \cite{Freed:2005,Freed:2007}. It is crucial to understand the physics behind these field theories, but we do not want to talk about their history at this time. Instead, we are going to talk about a new, simpler and more rigorous account. Here, we would like to first review some basic concepts about categorical calculus and quantum mechanics, and then focus our attention on classical and quantum field theories.
+
+\subsubsection{Categorical Calculus}
+There are many excellent resources on categorical calculus, such as \cite{Johnson:1976,McDermott:1983}, \cite{Bennett:1993}, \cite{Lambert:1993}, \cite{Mills:1996}, and \cite{Witten:2004}. For us, we would like to highlight three features that make categorical calculus so powerful and practical: category theory and its model structures.
+
+\paragraph{Category Theory.} The key feature of categorical calculus is the idea that one may describe certain types of objects and morphisms of certain types. This allows one to think of a morphism of a given type as a function from one object to another. A key concept in category theory is the definition of a category. A category comprises objects and a set of morphisms which satisfy a few relations. The most important classes of categories used today include those relating sets or groups. To put things into perspective, a category is simply a set equipped with a set of morphisms, so a group can be thought of as a category equipped with the relation that two elements are mutually related if they belong to the same class. There are many examples of categorical definitions of categories, including a very useful example of a category consisting of objects and morphisms of a single type, i.e. a singly linked list, a category equipped with a single object and a single morphism between them, and a category composed entirely of pairs of objects, morphisms between them, and relations between these objects. It is worthnoting that every set has a category in a similar fashion. Note that a category does not necessarily exist, as there are no equations needed to define its composition. However, when there are no other constraints involved, a category can still carry meaning.
+
+One advantage of the categorical perspective compared to the typical methodology of model theory is that one can consider non-linear models for objects, morphisms, and relations by considering several different models for a single object. Moreover, once we determine whether two models fit together based on the relationship between them, then one can combine them to produce a combined model. This allows one to think of categories as models of other objects (see Example \ref{example:Singly linked lists}). This also allows one to take inspiration from category theory, and see models of other objects as compositional patterns between each other. In summary, categories play a large role in mathematics, including modeling the history of matter, its chemical and physical origins, and a variety of other topics. 
+
+\paragraph{Model Structures.} Another advantage of categorical calculus is the ability to take inspiration from category theory. However, it is important that one uses a model structure. This model structure helps one incorporate several categories and their related relations into a single overall category, which is the main tool to use in defining new categories. A model structure defines whether one can add or remove objects from a category. This model structure can be thought of as the role of a right adjoint (or left adjoint), and allows one to treat categories and objects separately. For example, one might ask why the identity functor should be added to the category $\mathbf{Set}$. One could see the reason being that one expects all objects to be objects, so adding an identity functor would impose a condition that an element must be equal to itself. It follows that adding the identity functor should not interfere with the assumption that an element must be equal to itself, which is exactly what the identity functor is supposed to do. In order to illustrate this further, consider any one-element list, which is just a pair $(x,\ell)$ of an element $x$ and the number of items it contains $n$. Then the list should look like $(x,\ell)=((x,1),(y,2))$, since they are mutually related. 
+
+For example, consider the category $\mathbf{Set}$. In addition to adding and removing elements from sets, there are also categories $\mathbf{Cat}=\left\{1,2,3,\ldots\right\}$, $\mathbf{Fin}=\{0,1,\ldots\}$, $\mathbf{Pos}=\{+,-\}\subset\mathbb{N}$, and $\mathbf{R}$ consisting of the natural numbers, $0\leq r<r+\infty$. As before, every element of $\mathbf{Set}$ can be interpreted as an object in $\mathbf{Set}$. However, in $\mathbf{Set}$ it does not matter, what happens when we attempt to combine the category $\mathbf{Cat}$ with the category $\mathbf{Pos}$. We can think of the category $\mathbf{Pos}$ as a model of the relation between the positive integers, and therefore a combination of categories would appear to be a linear model, because the category structure does not enforce any relation between the positive integers. In contrast, the category structure ensures that the relation between the negative integers is respected by all objects. Furthermore, in $\mathbf{Set}$ objects can not be combined directly. Similarly, in $\mathbf{Cat}$ we need to ensure that an element is an integral number up to an infinite power, however, in $\mathbf{Pos}$ we need to ensure that all objects are whole numbers up to the maximal power of the positive integer.
+
+\subsubsection{Quantum Field Theory}
+The physics community is now becoming increasingly interested in ways to describe the nature and behaviour of the real world in terms of photonics. In particular, quantum field theories (QFTs) are widely used to describe the state of matter. The idea behind a QFT is to give rise to a system where the states are mapped to each other through a physical interaction, usually via electronic communication or a machine learning algorithm. In other words, a QFT describes the state of matter in the simplest form possible. These can be represented in the following form: 
+\begin{equation}\label{eq:example:qft}
+\begin{tikzcd}[ampersand replacement=\&]
+\mathbf{Hom}(I,Y) \&\& I \boxtimes Y \arrow["f", shift left=1em, shift right=1em] \\
+\mathbf{Hom}(X,Z) \&\& X \boxtimes Z \arrow["k", shift left=1em, shift right=1em] \\
+\mathbf{Hom}(W,V) \&\& W \boxtimes V \arrow["p", shift left=1em, shift right=1em]
+\end{tikzcd}
+\end{equation}
+where $I$ and $Y$ are the identity objects and $X,W,V$ are the systems under consideration. An important property of these systems is that the $i^{th}$ term in this diagram is equal to $1$ if $i=0$ and $0$ otherwise. Thus, each object has an action which depends on the objects they interact with. One obvious way to view QFTs as systems of matrices, in which the states of different objects depend on each other, is by thinking of them as systems of functions from a matrix to a scalar. The resulting function maps a system to the corresponding sum of the states of all its interacting objects.
+
+Indeed, we can think of a QFT as describing a map from a matrix to a scalar in which the row and column vectors of the matrix are mapped to the objects which are involved in the QFT. When thinking about a QFT as a system of functions over a matrix, we find ourselves dealing with two important consequences: 
+\begin{itemize}
+    \item First, what if the system of functions over a matrix were to interact with multiple other objects? We cannot relate the states of these objects using the vector operations described in this diagram: 
+    \begin{equation*}
+        \begin{tikzcd}[ampersand replacement=\&, sep=small]
+            & I \boxtimes X \arrow["f", shift left=1em, shift right=1em] \arrow["j_X"', shift left=1em, shift right=1em] \arrow["\beta_1", shorten >=0.75cm, shorten <=0.75cm]\&  \\
+            X \boxtimes Y \arrow["k", shift left=1em, shift right=1em] \arrow["\beta_2", shorten >=0.75cm, shorten <=0.75cm] \& X \boxtimes Z \arrow["p", shift left=1em, shift right=1em] 
+        \end{tikzcd}
+    \end{equation*}
+    This means that the first term in the diagram does not depend on the objects $X,Y,Z$. We cannot relate the states of these objects without applying a second map to the output matrix, such as the tensor product in \eqref{eq:tensor product matrix}, which we call the \textbf{\textit{diagonal}} operation \cite{Janelidze:2011}, which reduces the dimensionality of the system of functions by one. This is a problem in general. Secondly, what if we wanted to consider interactions of all sorts of systems over a matrix? We could think of the diagonal in \eqref{eq:tensor product matrix} as a special case of the \textbf{\textit{coherence}} operation \cite{Janelidze:2011} applied to the output matrix, which takes advantage of the fact that both inputs and outputs are a matrix, and therefore reduces the dimensionality of the system of functions by one. However, there are many problems with using diagonals as input/output maps to model systems. In practice, these diagonals have been replaced by arbitrary 1-state operators, such as the Hadamard and Orthogonal unitary matrices, respectively.
+    \item Secondly, a QFT is often seen as a system of functions from a matrix to a single scalar. If $T$ is a matrix that has a particular value on certain indices, we can think of $T$ as describing a system of functions that maps from the state of an object to a scalar. This means that the states of all objects in a QFT map to a single scalar even though the QFT itself does not take any input or produce any output. Indeed, a situation can occur in which a QFT acts as a model for the \textbf{\textit{superposition}} operation \cite{Kapranov:2020} (which we discuss later). The superposition of two Hamiltonians described in \eqref{eq:superposition} is defined in terms of the superposition of the states of the two Hamiltonians. Note that while the two hamiltonians we are trying to describe in \eqref{eq:superposition} are not equal, one is able to obtain the desired superposition. However, when we try to find this scalar, we cannot find one for each Hamiltonian; this is because the QFT is acting like the superposition of two hamiltonians instead of one. We have shown that this problem is particularly problematic in situations involving three or more hamiltonians in the Hamiltonian. In the simplest example, when we try to find the scalar representing the superposition of a system involving two Hamiltonians, we can find no scalar for each Hamiltonian. This problem is particularly hard for higher-order systems involving many Hamiltonians. 
+\end{itemize} 
+With the above issues in mind, it is difficult to avoid having to specify every single system in the diagram in the form of a matrix. For example, the diagram \eqref{eq:example:qft} requires a state to be described by four different matrices (one for each state) each representing the 1-state operator on the respective objects in $X$. We can reduce this problem to one by specifying a single matrix $T$ that describes the relation between states and objects in an easy way. For example, say that the matrix $T$ represents the $\sigma_1$ term describing the action of the 1-state operator on the $x,y,z$ system. Then the state vector for $t=(x,y,z,1)$ in \eqref{eq:example:qft} becomes $t=(x,y,z,1)\cdot T=(x,y,z,1)\cdot(x,y,z,1)\cdot T= t=(x,y,z,1)\cdotT=(x,y,z,1)\cdot(y,z,1)\cdot T= t=(x,y,z,1)\cdot T=(x,y,z,1)\cdot T=(xy,yz,1)$, where the summation is performed by taking the dot product of each row of the input matrix, which again has a single component, $t=(x,y,z,1)\cdot T= t=(x,y,z,1)\cdot T=(x,y,z,1)\cdot T=(x,yz,1)$, and the summation is performed by taking the dot product of each column of the input matrix, which also has a single component, $t=(x,y,z,1)\cdot T=(x,y,z,1)\cdot T=(xz,zx,1)$, and the summation is performed by taking the dot product of each row of the input matrix, which again has a single component, $t=(x,y,z,1)\cdot T=(x,yz,1)\cdot T=(yz,zx,1)$, and the summation is performed by taking the dot product of each column of the input matrix, which again has a single component, $t=(xyz,zx,1)\cdot T=(zx,zy,1)\cdot T=(zx,zy,1)$, and the summation is performed by taking the dot product of each row of the input matrix, which again has a single component, $t=(yz,zx,1)\cdot T=(z,yz,1)\cdot T=(yz,zx,1)$, and the summation is performed by taking the dot product of each column of the input matrix, which again has a single component, $t=(z,z,yz)\cdot T=(z,yz,z)\cdot T=(z,z,z)$, and the summation is performed by taking the dot product of each column of the input matrix, which again has a single component, $t=(z,yz,1)\cdot T=(z,zx,1)\cdot T=(z,zx,1)\cdot T=(z,z,zx)\cdot T=(z,z,zx)$. This leads to the following diagram:
+\begin{equation*}
+    \begin{tikzcd}[ampersand replacement=\&, sep=small]
+        \mathbf{Hom}(I,X) \&\& I \boxtimes X \arrow["f", shift left=1em, shift right=1em] \arrow["j_X"', shift left=1em, shift right=1em] \arrow["\beta_1", shorten >=0.75cm, shorten <=0.75cm]  \& \mathbf{Hom}(I,Y) \&\& I \boxtimes Y \arrow["f'", shift left=1em, shift right=1em] \arrow["k", shift left=1em, shift right=1em] \arrow["\beta_2", shorten >=0.75cm, shorten <=0.75cm]  \\
+        & I \boxtimes Z \arrow["p", shift left=1em, shift right=1em] \& X \boxtimes Z \arrow["p'"', shift left=1em, shift right=1em]  \& & I \boxtimes V \arrow["p''", shift left=1em, shift right=1em] \& X \boxtimes V \arrow["p'''"', shift left=1em, shift right=1em] 
+    \end{tikzcd}
+\end{equation*}
+This diagram shows that the system of functions on an input matrix $T$ is completely specified by a matrix $T$ whose rows represent different systems involved in the diagram, and whose columns represent different inputs to these systems. We have now introduced a mathematical theory that will make the above two diagrams easier to read.
+
+In summary, there are two main motivations for building the foundational foundation for quantum field theories in \S \ref{section:categorical overview}: 
+\begin{enumerate}
+    \item To provide intuition behind categorical calculus. With category theory in place, it should be straightforward to understand the theory behind a quantum field theory.  
+    \item To introduce a mathematical theory that will allow one to explore higher-dimensions in a very natural manner, in which we will always assume all objects and morphisms lie in a single category rather than in different ones.
+\end{enumerate} 
+For a deeper understanding of the foundational principles behind this mathematical theory, we recommend reviewing Chapter \ref{chapter:category theory}. For detailed explanations of all mathematical results we will employ, including the proof of the Riemann Hypothesis and a series of numerical applications, please refer to \cite{MaxVazquez:2023}. Since the presentation of category theory is heavily inspired by category theory, we will mostly work in a higher category of categories and their related relations. One note for the reader is that when we say that a category $\mathcal{C}$ consists of objects $x, y$ and morphisms $g: x \to y$, we mean that there exists a unique morphism $x \to y$ such that $xy = g(x)$, thus guaranteeing that every object and every morphism except the identity are objects. The notation for a morphism is also extended to account for both left and right adjoints. For instance, a left adjoint means that we have a map from $x \to y$ inducing a functor $\mathcal{C} \rightarrowtail \mathcal{C}$, and a right adjoint means that we have a map from $y \to x$ inducing a functor $\mathcal{C} \rightarrowtail \mathcal{C}$. 
+
+The categories we will work with are $\mathbf{Set}$ and $\mathbf{Cat}$. As a reminder, let us briefly explain how these two categories work. 
+\begin{definition}[Set]
+    A \textbf{set} $\mathcal{S}$ consists of elements $x, y, z \in \mathcal{S}$, and a collection of \textbf{morphisms} $f \in \mathcal{S} \to y$ such that $fx = f(x) = y$.
+    Given a set $\mathcal{S}$ and a morphism $f : x \to y$, we denote by $\mathcal{S}_{\text{morph}}$ the set of $y$-indexed copies of $f$, and we write $\mathcal{S}_{+} := \{f : x \to y \mid f(x) \neq 0\}$, $\mathcal{S}^\ast := \{f : x \to y \mid f(x) = 0\}$, and $\mathcal{S}^+ := \{f : y \to x \mid f(x) \neq 0\}$, as explained in Definition \ref{def:morphisms}.
+\end{definition} 
+
+The category $\mathbf{Set}$ has a couple of useful properties. First, every set has a singleton element (i.e. a nonempty set). Second, every element of $\mathbf{Set}$ has a unique value. Consequently, all sets can be described as sets in the same way. Let us show this fact. Let $S$ be a set and $v \in S$. Recall that $\{0,1\}$ is the collection of all possible values. Then $S$ has a unique element $0 \in S$. On the other hand, if we drop the $0$ element and replace $v$ with an element $x \in S$ with $v=f(x)$ for some $f : x \to 1$, then $f(x)$ will have a distinct value whenever it occurs. In other words, for any element $x$ in $S$, the formula $\exists g \in S_{+} \text{ such that } fx = g(x)$ holds. In summary, we are saying that $S$ has a unique element, and it can be understood as the same thing as saying that $S$ has a single element.
+
+\begin{proposition}[Singleton Set]
+    A singleton set $\mathcal{S}$ is a set and it has a single element.
+\end{proposition}
+
+\begin{proof}
+    Let $x \in S$ be a single element. By definition, $x$ is a singleton. Hence, it satisfies $fx = y$. Therefore, $S$ has a single element. Now, observe that $\{x,y\}$ is the collection of possible $x$-indexed elements of $S$ and $y$-indexed elements of $S$ satisfying that $xy = f(x)$ whenever $f$ exists and it does not involve $x$. By construction, $x \in S_{+}$, and hence also $\{x,x\} \in S$. Finally, note that $\{0\} \in S$, since $0$ is a singleton.
+\end{proof}
+
+Let $A$ be a set. Then the category $\mathbf{Set}$ is a category equipped with a set of morphisms $A \times A \rightarrowtail A$ (that is, an object $a \in A$ has a unique morphism $a \times a \rightarrowtail a$) and the following relation:
+\begin{equation}\label{eq:relation a set}
+    a \times a \simeq f(a) \text{ whenever } f : a \to b
+\end{equation}
+This relation is central to the definition of the class of functions on a set.
+
+To see why we need to take a set $A$ into account in the definition of functions on $A$, we need to clarify the relationship between the category of morphisms $A \times A \rightarrowtail A$ and the category of functions on $A$. A \textbf{morphism} $f : a \to b$ in $\mathbf{Set}$ is a function such that there is some map $a \to f(b)$ in the category $\mathbf{Set}$. A morphism $f : a \to b$ in $\mathbf{Set}$ is called \textbf{surjective} if for any other $b' \in A$ such that $af = af'$, it holds. In other words, $f$ is surjective if $f$ is injective. 
+A \textbf{function} $f : A \to B$ in $\mathbf{Set}$ is an object in $\mathbf{Set}$ such that every morphism in $\mathbf{Set}$ admits a unique map $f(a) \to b$ where $a \in A$ and $b \in B$. Any two functions $f : A \to B$ and $g : B \to C$ in $\mathbf{Set}$ are said to be \textbf{equivalent} if, for any $b \in B$ such that $fg = gf = gb$, it holds. In other words, $f$ and $g$ are equivalent if they are inverses of each other.
+
+Suppose $f : a \to b$ is a morphism in $\mathbf{Set}$. Then $a \simeq f(b)$ is equivalent to $\exists g \in S_{+} \text{ such that } af = fg(x)$ whenever $x \in S$, and hence there is some element $x'$ in $S$ such that $af = g(x')$ whenever $f$ is surjective. The latter statement follows immediately by the definition of surjectivity. In other words, a surjection from a set to itself is a function. Hence, $\mathbf{Set}$ is a category in which the objects are sets, the morphisms are functions on the objects, and the relation is the universal property.
+
+\begin{lemma}[Category Equipped with a Single Object]
+    If a set $A$ is a singleton, then the category $\mathbf{Set}$ is a category with a single object $A$ and a single morphism $A \times A \rightarrowtail A$.
+\end{lemma}
+
+\begin{proof}
+    Let $A$ be the singleton set $0$. Then $\mathbf{Set}$ is essentially a singleton category with one object, namely $A$, and one morphism $A \times A \rightarrowtail A$. It remains to show that $A$ is a set. Since $0 \in A$, it suffices to check that $f : A \to A$ is injective. It is enough to show that it is surjective. But $f$ is surjective by definition of a surjection.
+\end{proof}
+
+\begin{lemma}[Category of Sets and Functions on It]
+    Every category $\mathcal{C}$ equipped with a set of morphisms $A \times A \rightarrowtail A$ is a category.
+\end{lemma}
+
+\begin{proof}
+    A category is equivalent to a set, hence an element $x \in A$ implies $x \in A_{+}$. From Lemma \ref{lem:singleton set}, every element of $\mathbf{Set}$ is a singleton. Consequently, a category with a single object and a single morphism, and the relation from Lemma \ref{eq:relation a set} is equivalent to the universal property of the category.
+\end{proof}
+
+We can easily see from this lemma that the category $\mathbf{Set}$ is equivalent to the category of sets. To understand this difference, consider the following example.
+\begin{example}[Superposition and Identity Function on Set]
+    Consider the set $\mathcal{S}$ described in \eqref{eq:example:qft} that we previously explained about. Let $T$ be a matrix that has a particular value on certain indices. Then $T$ is a system of functions from a matrix to a single scalar, and hence every state of the matrix will be mapped to the scalar representing the superposition of the objects that the system of functions descends from. However, the system of functions will still map to a scalar representing the superposition of the objects that $T$ descends from, even though $T$ is not itself a function. Moreover, the mapping function $T \mapsto (\exists g \in S_{+} \text{ such that } tf = g(x))$ that descends from $f(x)$ is not a function, since it does not map each row of $T$ to any other row, even though the row $x$ is still in $T$.
+\end{example}
+
+\begin{remark}
+    If we consider the category $\mathbf{Cat}$ defined in Example \ref{example:cat}, then $\mathbf{Cat}$ is a category, which means that every object is a singleton. Similarly, the category $\mathbf{Cat}$ has a set of morphisms $A \times A \rightarrowtail A$ (that is, an object $a \in A$ has a unique morphism $a \times a \rightarrowtail a$) and the following relation:
+    \begin{equation}\label{eq:relation cat}
+        a \times a \simeq f(a) \text{ whenever } f : a \to b
+    \end{equation}
+    In particular, $\mathbf{Cat}$ has the same relations as $\mathbf{Set}$, and the universal property of $\mathbf{Cat}$ is a similar universal property of $\mathbf{Set}$. Thus, $\mathbf{Cat}$ is a category equipped with a set of morphisms $\mathcal{S}$ and such that the relation described above is equivalent to the universal property of $\mathbf{Cat}$. 
+\end{remark}
+
+Since $\mathbf{Cat}$ has a single object $A$, the category $\mathbf{Cat}$ is equivalent to the category of sets, since every element in $\mathbf{Cat}$ corresponds to the same object in $\mathbf{Set}$.
+
+For any other category $\mathcal{C}$ equipped with a set of morphisms $A \times A \rightarrowtail A$, we need to consider how the objects in $\mathcal{C}$ map to the same objects in $\mathbf{Set}$. This is accomplished by considering the identity morphism $\id_A : A \rightarrowtail A$, which is the unique element in $\mathbf{Set}$, that sends every object in $\mathcal{C}$ to itself. For any $B$ in $\mathcal{C}$, we can define an $\alpha_B : B \rightarrowtail A$ by sending each object in $B$ to itself:
+\[
+    \begin{tikzcd}[ampersand replacement=\&, sep=small]
+        & B \arrow["\alpha_B"', shift left=1em, shift right=1em]  \\
+        A \arrow[dashed,"A \times B"] \&\& A \times B
+    \end{tikzcd}
+\]
+This morphism from the identity element $A$ in $\mathbf{Cat}$ to $A$ in $\mathbf{Set}$ makes the following diagram commute:
+\begin{equation*}
+    \begin{tikzcd}[ampersand replacement=\&, sep=small]
+        \mathbf{Set} \arrow[swap,"\id_{A}"] \arrow["f"'] \&\& \mathbf{Cat} \\
+        & A \arrow[shift left=1em, shift right=1em]
+    \end{tikzcd}
+\end{equation*}
+When considering categories $\mathbf{C} = \left\{1,2,\ldots,n\right\}$, $\mathbf{Cat}$ has $n+1$ morphisms, and every other morphism is $1$-one. We call these $n+1$-morphisms the \textbf{computadic objects} of $\mathbf{Cat}$ because they perform computations in an $n$-category. We could also interpret the category $\mathbf{Cat}$ as the computational objects in some higher category of categories and their related relations. 
+
+We already mentioned that when a category is an object, every object in a category is equivalent to the same object in a set, which is the category of all finite sets. It turns out that any category with a single object $A$ has a unique morphism $1 \to A$ which is the identity function. As shown in Example \ref{example:singly linked lists}, every element of $\mathbf{Cat}$ is a finite set. However, the existence of such a morphism does not guarantee that the identity morphism exists as a morphism in a category equipped with a set of morphisms. Moreover, even though the existence of the identity morphism does not guarantee that every object in $\mathbf{Cat}$ has a unique morphism, it is possible that more than one object has a morphism to itself. In particular, in the category $\mathbf{Cat}$ defined in Example \ref{example:Cat}, the identity morphism exists as a morphism in $\mathbf{Cat}$ which also maps every object $a \in A$ to itself.
+
+\begin{proposition}[Computadic Objects]
+    Every category $\mathcal{C}$ equipped with a set of morphisms $A \times A \rightarrowtail A$ is an object in a category $\mathcal{C}$.
+\end{proposition}
+
+\begin{proof}
+    Let $f : x \to y$ be a morphism in a category $\mathcal{C}$. We need to show that the composite $x \boxtimes y$ also is a morphism in $\mathcal{C}$.
+\end{document}
+ If this is true, it follows from \ref{eq:relation a set} that $fx = f(x) = y$. The composite $x \boxtimes y$ is the same thing as $fx = f(x) \otimes 1 = y$. Hence, by the uniqueness property of the category, $x \boxtimes y$ must also be a morphism in $\mathcal{C}$. Hence, we have shown that every object in $\mathcal{C}$ is equivalent to the same object in a set. The identity morphism exists because every object in $\mathcal{C}$ is an object in a set, and every object in $\mathcal{C}$ is also a morphism. Hence, by the previous proposition, $\mathbf{Cat}$ is an object in a category $\mathbf{Cat}$ equipped with a set of morphisms. Thus, this proposition holds.
+\end{proof}
+
+The category $\mathbf{Cat}$ can be considered as a computational objects in a higher category of categories, and the relation described in \eqref{eq:relation cat} can be described by the relation induced by the coherence relation of an object of $\mathbf{Cat}$.
+

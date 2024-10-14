@@ -1,0 +1,178 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{Functorialization Of Higher Topos And Their Geometry}
+\author{Max Vazquez}
+\maketitle
+
+
+\section*{Introduction} 
+Topological spaces are highly versatile objects which can take different forms and are often referred to as \emph{topological spaces}. These have been recognized by many groups of mathematicians over the last decade \cite{Vazquez:2009}. However, one of the major challenges for understanding these spaces is that in order to understand them well, they must be geometrically defined. For example, a space that takes values in an $n$-dimensional vector space has a geometric structure, so that each point is given an index called a $n$-vector. However, the space we consider here does not have such geometric structure. In this paper we will see how to define topological spaces so that they can be geometrically defined without the need to have a geometric structure at all times. We will then extend a previously-proven fact about topological spaces, namely that topological spaces are equivalent to normal spaces, and prove that it can also be extended to arbitrary (non-normal) spaces via the functorial definition.  We will use this extension of the previous result to give a new definition of topological spaces which takes values in normal spaces. 
+
+A notable benefit of the notion of topological spaces, which was introduced and proved by Dijkstra in the 1950s, is that it has a natural extension to general sets and even other types of spaces with known geometric structures, see for instance \cite{Dijkstra:1968,Drucker:1967}, which were studied independently. In this article we introduce topological spaces with a geometric structure given explicitly via a certain map from $\mathbb{R}$ to itself. Then we will explain its geometry in a formulation which does not require any algebraic constructions. More specifically, we will show that there is only one topological space that satisfies certain conditions and is equivalent to another using the topological space theory we introduce. This gives a mathematical intuition for the mapping space of the topology, as well as why we choose to view topological spaces as special cases of normal spaces. In addition, we will also briefly discuss the use of topological spaces for the study of graph topology in the next section. 
+
+
+\subsection*{Motivation} 
+When working with a space $(X,\otimes,\cdot)$, it is usually desirable to work in terms of subspaces instead of complete topological spaces. A common way to define such maps is to consider the category of subspaces indexed by a space $(\Omega,\cup,\times)$, where each object $x\in X$ is equipped with a family of elements $\{y_i\}_{i\in I}$ and a function $\theta : \cup \subseteq x \to \{x_{y_i}\}_{y_i\in I}$. The set $\cup$ is interpreted as the union of sets, while $\times$ is interpreted as the cartesian product. Such maps can be understood simply as pairs $(x,\{y_i\})$, where $x$ is the underlying element of $X$ and $\{y_i\}_{i\in I}$ are the elements of $x$ together with the elements $y_i$.  It can easily be shown that the above discussion holds in any category. As usual, however, it may be more convenient to think in higher categories since we can now easily talk about their geometries. Let us start with the simplest possible example, the space of real numbers, which we denote by $\R^*$. Its geometric structure consists of a pair $(0,1)$, which is the Cartesian product. Let's recall the familiar formula for calculating the sum of two functions on a subset of the set of continuous functions in $\R^*$. 
+\begin{equation*}
+    z(x_1,x_2):=\sum_{\substack{\ell\in I\\ x_2<x_1+\ell}} x_1
+\end{equation*}  
+Let us consider a family of functions $f=(f_1,\ldots,f_n)\in (\Omega,\cup,\times)$. When $I$ is small enough and $f_1<\cdots<f_n$, then $f$ is an integral part of a composite function $f_1(x)=f_1(f_2(x))=\cdots f_n(x)=f(x).$ In the case that $f$ is a product of multiple sums $f=(g_1,\ldots,g_k)\in (\Omega,\cup,\times)$. Consider a sequence 
+$$f = g_1g_2\ldots g_k \in \text{C}(x)\times^{\ast} y \text{ }$$
+where $g_j\in y$ are chosen such that $x\in g_1,g_j\in x$, respectively. If $f$ is the sum of two sums of functions of the same domain $g_i\in \text{C}(x)\times^{\ast} y$ then $g_j=f_i$ for $i,j\neq k$; if $f$ is the sum of two products of functions then $f=g_1\times g_2$; if $f$ is a sum of two sums of functions and the function being added has no limits then $f=g_1\cap g_2$.  
+
+When $f_1,f_2$ are discrete functions, then $f$ is defined as follows. 
+\begin{align*}
+    z(x_1,x_2)&=\int^{x_1\times x_2}f(t)dt \\
+     &=\int^{x\in X} z(x,x) f(x)dt
+\end{align*}
+Here $\int^{\cdot} dt$ stands for the Euler characteristic of the integration formulas. Here the second integral comes from the second component of $f(t)dt$ and the first integral comes from integrating over $x$, i.e., the integration formula reads as follows, 
+\begin{align*}
+    \int^{t\in T}z(\cdot,t)f(t)dt= \int^{x\in X}z(x,x)f(x)dt 
+\end{align*}
+Now, when $T$ is finite, there is always some unique finite sequence of integrals of $f$, $t\in T.$  Therefore, the Euler characteristic of this formula can be replaced by a simple rule of summation of $f(t)$ for all $t\in T.$ In summary, $f(t)=\sum_{x\in X} z(x,t)f(x)$ for all $t\in T.$   
+
+
+
+
+\section{Defining topological spaces} 
+We define topological spaces similarly to normal spaces using the following formulation, where $\mathbb{Z}$ stands for the base ring $\mathbb{Z}=\{0,\dots,n\}$, while $\mathbb{R}$ denotes the ring of rational numbers. We let $X:\mathbb{Z}^*$ denote the space that consists of the $n$-vectors having the coefficients in the domain range from $0$ to $n$. The space is said to take values in an $n$-dimensional vector space. An $n$-vector is a tuple $(v_1,\ldots,v_n) \in \R^n$ satisfying $v_i\leq v_{i+1}$ for every $1\leq i\leq n$, or equivalently $v_i>0$ for every $i$.  An $n$-space is just a $n$-dimensional vector space whose dimension is equal to $n$. 
+
+
+
+Given a non-zero value of an element $x\in X$, a space can be regarded as an $n$-dimensional vector space with the restriction of an $n$-dimensional vector to the image of $X$. In other words, if we are given a non-zero value of an element $x$, then $x$ is the product of some elements of $X$, in some sense. Let us call the restriction of an $n$-dimensional vector to $X$ the restriction of $x$ to $X$.  In particular, $x=(v_1,\ldots,v_n)$ is regarded as an $n$-vector in $X$, while $x\in X^*=(\mathrm{tr}(v_1),\mathrm{tr}(v_2),\ldots,\mathrm{tr}(v_n))$ is regarded as an $n$-vector in $X$ which lies in the image of $X$. Furthermore, $x\in X^*$ is denoted by $x$ and $x^*=(x,\cdot)$ is denoted by $x^\dagger$. This interpretation allows us to write $x^*=x\in X$.  One can interpret the restriction of an element $x$ to $X$ like this: 
+$$x\in X^* :=\left(\mathrm{tr}(v_1),\mathrm{tr}(v_2),\ldots,\mathrm{tr}(v_n)\right), $$
+where $\mathrm{tr}(v_i)=(|v_i|, |v_i|)$ for every $i\in I$. Similarly, let $\{x_i\}_{i\in I}$ be the elements of $x$, and $x\in X^{*}=(\mathrm{tr}(x_1),\mathrm{tr}(x_2),\ldots,\mathrm{tr}(x_n))$ be the restriction of an $n$-vector to $X$. In other words, if $x_i=(v_i)$ for every $i\in I$ then $\{x_i\}$ is an $n$-vector in $X$. Then, if $x\in X^{*}$, then $x$ is regarded as an $n$-vector in $X$.  Note that we have the $n$-vector in $X^*$ which corresponds to the $n$-vector in $X$. Thus, the $n$-vector in $X^*$ should correspond to the $n$-vector in $X$, which is a proper subspace of $X$. 
+
+
+The fact that elements in the restriction of an element $x$ to $X$ are the same as the corresponding elements of an original vector $x$ is very helpful. For example, let $x=(v_1,\ldots,v_n)$ be an $n$-vector in a $n$-dimensional vector space. Let $y=(w_1,\ldots,w_m)$ be an $m$-vector in an $m$-dimensional vector space. The element $y$ is the sum of $w_1$, $\cdots$, $w_m$, where the elements are vectors in the original space $x$. This interpretation is easy to visualize: 
+$$ y\in X = (x,\sum_{i=1}^m w_i),$$
+where the parenthesis represent the multiplication operation and the sum represents the sum operation. It is easy to check that the sum of $w_1$ and $\cdots$, $w_m$ is exactly equal to the product of $w_1$ and $w_2$, $\cdots$, $w_m$ respectively. So, the multiplication operation acts only on the sum and yields the element $y$.  In particular, this multiplication operation induces a bijection between the elements of $x$ and $y$. Indeed, we have $x\sim x+\sum_{i=1}^m w_i$ iff $x$ is equal to the sum of $x$ and the product of $w_i$, i.e., $x\sim \sum_{i=1}^m w_i+\sum_{i=1}^m w_i$. By the assumption that the elements of $x$ are exactly the elements of the original space $x$, it follows that $x$ and $y$ are equal.
+
+More generally, suppose that $(X,\otimes,\cdot)$ is a symmetric monoidal category. The restriction of an element $x$ to $X$ becomes an $n$-vector in $(X,\otimes,\cdot)$. A map $(x):\mathbb{Z}^{n}\to X$ is an $n$-dimensional vector space if it is a bijection between $\mathbb{Z}^n$ and $X$, i.e., for every $i\in \mathbb{Z}^n$ and every element $y$ in $X$, the map $(x):=x^*\to y$ factors through the identity map and sends each vector in $\mathbb{Z}^n$ to $y$. A subspace $X'\subseteq X$ is called a \emph{reduced subspace} if it is a projection map onto $X$. Since $(X,\otimes,\cdot)$ is a symmetric monoidal category, we can identify an $n$-vector in $(X,\otimes,\cdot)$ with an $n$-dimensional vector in $X$. Together with the previous observation that multiplication is an operation on $n$-dimensional vectors, we get that there is a bijective correspondence between $n$-vectors in $(X,\otimes,\cdot)$ and $n$-dimensional vectors. Thus, a $n$-vector $x:\mathbb{Z}^n\to X$ in $(X,\otimes,\cdot)$ is regarded as an $n$-dimensional vector in $X$ if it is an element of $X$, which is equivalent to the following:
+$$ x:(x^*)^*\in X$$
+In other words, we consider the inclusion $\mathbb{Z}^n\hookrightarrow X$ as an element of $X$ and define the $x^*=\left(x^*\right)^*\in X$ as the identity map on the element $x$.  A reduced subspace $X'$ is called an \emph{open subspace} if it contains every point of $X$. 
+
+\subsection{Construction of the topology of a topology} 
+As mentioned above, a normal space $X$ is equivalent to a $n$-dimensional vector space $X:=X^*$, viewed as a normal subspace of $X$. The restriction map of an element $x\in X^*$ to $X$ acts on the product. Hence, there is a bijective correspondence between $\{x^*\}_{x^*}\in X^*$ and $X$ such that:
+\begin{itemize}
+  \item If $x^*=x\in X$, then $\bigvee_{i=1}^n x^*=x\in X$.
+  \item If $x^*=x\in X$ and $y^*=y\in Y$, then $\bigvee_{i=1}^n x^*=\bigvee_{i=1}^n y^*=\bigvee_{i=1}^n x^*+y^*$ in $X$.
+\end{itemize}
+If $(X,\otimes,\cdot)$ is a symmetric monoidal category, then the bijection between $X^*$ and $X$ is uniquely determined by:
+\begin{itemize}
+  \item If $x^*=x$ is an element of $X$, then $x^*\in X$.
+  \item If $x^*=x\in X$ and $y^*=y\in Y$, then $x^*\bigvee_{i=1}^n y^*=\bigvee_{i=1}^n x^*+y^*$ in $X$.
+\end{itemize}
+In this article, we focus on the case of a symmetric monoidal category, but our discussion could be applied to any category. Indeed, if $A:\mathbb{K}^n\to A$ is a morphism in a monoidal category $A$, then $\bigvee_{i=1}^n x^*=x$ in $A$ if and only if $x^*\in A$ for every $x^*$.  Indeed, $\bigvee_{i=1}^n x^*=\bigvee_{i=1}^n x\circ A$, which is the composition map of $A$.  Moreover, if the morphism $f:A\to B$ is an isomorphism, then the map $\bigvee_{i=1}^n x^*=x$ in $B$ implies that $\bigvee_{i=1}^n f^{-1}(\bigvee_{i=1}^n x^*)=f^{-1}(x)$, which implies that $x\in B$. Moreover, if $\{f^{-1}(x_1),\ldots,f^{-1}(x_m)\}_{i=1}^n x_i\in A$ is a chain complex of degree zero, then it is an $n$-dimensional complex. Moreover, if $x$ is a chain complex in $\mathbb{Z}^n$ then $x\in A$ if and only if the chain complex is homogeneous in degree zero. 
+
+For example, suppose that $\mathbb{N}$ is the base ring of the integers, and let $X\coloneqq\mathbb{N}^*$. It is clear that $\{x^*\}_{x^*}$ is an open subspace of $X$. Let $Y\coloneqq\mathbb{N}\setminus\{0\}$. Then $Y$ is open since it is closed under the multiplication. Then $X$ is not open since the elements $x^*=x$ are not projective in $X$. 
+
+Now let $f:Y\to X$ be a morphism in $A$. Recall that a morphism $f:Y\to X$ is said to be an \emph{$A$-equivariant} if $f(0)=f^{-1}(0)=f(1)=f^{-1}(1)$. If the morphism $f$ is an equivalence, then it is an $A$-equivariant $f$ in $A$, i.e., $f(0)=0=0=f^{-1}(0)=1=f^{-1}(1)$. In other words, $f$ is an equivalence of finite type. 
+
+Assume that $Y$ is an $A$-subset of $X$. Then $\bigvee_{i=1}^n x^*=\bigvee_{i=1}^n f^{-1}(x^*)$ for every $x^*:\mathbb{Z}^n\to X$. In other words, $x^*\in X$ if and only if $x^*=\bigvee_{i=1}^n f^{-1}(x^*)$. It follows that $\bigvee_{i=1}^n x^*=\bigvee_{i=1}^n f^{-1}(x^*)$. Also, if $x\in A$ then $\bigvee_{i=1}^n x^*=\bigvee_{i=1}^n x$. This shows that $(Y,\otimes,\cdot)$ is a normal subcategory of $(X,\otimes,\cdot)$. 
+ 
+Let $(B,\otimes,\cdot)$ be a bimodule in $(X,\otimes,\cdot)$, which means that $X$ is a finite $A$-subset. Then $\{b^*:\mathbb{Z}^{n}\to B\}_{b^*}\in B$. By Theorem~\ref{topsofwenough}, $B$ is a $n$-dimensional subspace of $X$. It follows that $B$ is an $A$-subset of $X$. Finally, if $b^*=b$ is an element of $B$ then $\bigvee_{i=1}^n x^*=\bigvee_{i=1}^n b^*$. This completes the construction of a $n$-dimensional subspace $B$ of $X$ by considering $B$ as a bimodule. A standard observation is that if a subset of $X$ is isomorphic to the image of the corresponding $A$-subset $B$, then so is the corresponding $A$-subset $B$. 
+
+We note that by Theorem~\ref{topologysimplenormal} there is a single $n$-dimensional subspace $Y$ of $X$ that is an open subspace and therefore an $A$-subset of $X$. In particular, if we are given $x^*=x$ in $X$ and $f:Y\to X$ is an $A$-equivariant morphism, then $f$ is the $n$-dimensional $A$-subset containing the point $f^{-1}(0)=0$ in $X$. The condition $x^*=\bigvee_{i=1}^n f^{-1}(x^*)$ ensures that the quotient $f^{-1}(x^*)\in Y$ of the equivalence $f$ makes sense, hence $x^*\in X$ as well.  
+
+Suppose that $f:Y\to X$ is an equivalence, i.e., $f(0)=f^{-1}(0)=f(1)=f^{-1}(1)$. Then $f(0)=0=f^{-1}(0)=f(1)=f^{-1}(1)$. Since $f$ is $A$-equivariant, then $f(1)=0$ in the quotient and hence $f^{-1}(x^*)=f(0)=0$. As a result, $\bigvee_{i=1}^n f^{-1}(x^*)=f^{-1}(x^*)$ and $f^{-1}(x^*)$ is an $A$-equivariant $f$ in $A$, i.e., $\bigvee_{i=1}^n f^{-1}(x^*)=f^{-1}(x^*)=1$ in the quotient. We have shown that $f$ is an equivalence if and only if $f$ is $A$-equivariant. 
+
+Now, suppose that $(A,\otimes,\cdot)$ is a monoidal category. Then the structure map 
+$$y:(x^*)^*\to y$$
+is an $n$-dimensional vector map between $n$-dimensional subspaces. Therefore, the diagram below commutes. 
+\[\xymatrix{ & {\overline{x^*}\otimes\overline{x^*}\otimes\overline{x^*}}\ar[r]\ar@{-->}[d] & {x^*\otimes x^*}\ar@{-->}[d]\\& x^*\ar@{-->}[r] & y\ar@{-->}[u] }\]
+Since the division $y=x^*\otimes x^*$, we can apply the action of $(\mathbb{Z}^{n})^{n+1}$ on $x$ to obtain $x^*\in x$, and thus $y$ is an $n$-dimensional vector map. In other words, if we are given $x^*=x$ and $y^*=y$ in $X$ such that $x^*\in X$ and $y^*\in Y$ and we have an $A$-equivariant morphism $f:Y\to X$, then $y=f^{-1}(y^*)$. This completes the construction of a subspace $Y$ in $(X,\otimes,\cdot)$ by considering $Y$ as a monoidal bimodule. We observe that if $x^*=x$ is an $n$-dimensional vector in $X$, then it is regarded as an $n$-dimensional vector in $Y$. Moreover, if $b^*=b$ is an $n$-dimensional vector in $B$ then $\bigvee_{i=1}^n x^*=\bigvee_{i=1}^n b^*$. 
+
+\subsection{Proposition: Topology of normal subspaces.} 
+It is important to keep in mind that the subspaces considered in the previous sections do not necessarily exist, as one would expect. As explained in Section~\ref{Subspacetobeconsidered}, some examples might include points of a finite dimensional $n$-vector space that are not regular in some sense. One such example is the space of points of the hyperplane. Note that the subspace of points of the hyperplane is equivalent to the euclidean plane $XY^*\subseteq XZ^*\subseteq XYZ^*$ (see Figure~\ref{fig:example:hyperplane}), where $Y$ is open and $Z$ is closed. 
+
+Let us briefly describe the subspaces involved in this example. First, consider the following diagram: 
+
+\begin{center} 
+\includegraphics[scale=1.2]{figure-12.png}
+\end{center}
+
+Considering both $X^*$ and $Y^*$ as a basis for $f$, we see that the region on the left of the diagram commutes as follows. 
+
+\begin{center} 
+\includegraphics[scale=0.95]{figure-13.png}
+\end{center}
+
+On the right hand side of the diagram, note that the image of $X^*=\{(x^*,y^*),\ (x^*,0),\ (0,x^*),\ (0,0)\}$ in $A$ is equal to the image of $B=Y^*$ of $f$. Notice that the region on the left of the diagram commutes as follows:
+
+\begin{center} 
+\includegraphics[scale=0.95]{figure-14.png}
+\end{center}
+
+Indeed, since $f$ is an $A$-equivariant morphism, there exists an $A$-subset $B$ of $X$ such that $f^{-1}(y^*)=\bigvee_{i=1}^n x^*$. Then the region on the left of the diagram commutes as follows:
+
+\begin{center} 
+\includegraphics[scale=0.95]{figure-15.png}
+\end{center}
+
+Next, we show that if $f:Y\to X$ is an $A$-equivariant $f:Y\to B$ and if $x^*=x$ is an $n$-dimensional vector in $X$, then $x^*=(x,\cdot)$ belongs to the $B$ induced by $f$, i.e., if we are given $x'=x\in B$, then $x'$ is a direct quotient of $x$ with the map $\overline{x^*}:x^*\to x$. 
+
+
+\subsection{Example: Hyperplane} 
+Recall that the hyperplane can be thought of as the euclidean plane $YX^*\subseteq ZX^*\subseteq XYZ^*$. Now, assume $X\coloneqq\mathbb{N}$. The point $x^*=x$ is in $X$ if and only if $x^*(0)=0=x^*(1)=0$, where $x^*(z)=xy^*(z)$ for every $z\in Z$. 
+
+Now, let $f:YX^*\to XZ^*$ be a morphism in $A$. Then there exists an $A$-subset $B$ of $X$ such that $f^{-1}(yx^*)=yx^*\bigvee_{i=1}^n x^*$, where $x^*:\mathbb{N}^{n+1}\to X$ denotes the canonical map. Then the diagram below commutes: 
+
+\begin{center} 
+\includegraphics[scale=0.85]{figure-22.png}
+\end{center}
+
+On the right hand side of the diagram, note that the image of $X^*=(\{(0,x^*),\ x^*(0),\ (0,0)\}$ in $A$ is equal to the image of $B=YZ^*$ of $f$.  There exists an $A$-subset $Y'$ of $YZ^*$ such that $f^{-1}(y^*)=y'^*\bigvee_{i=1}^n x^*$, where $x^*:\mathbb{N}^{n+1}\to X$ denotes the canonical map. The region on the left of the diagram commutes as follows: 
+
+\begin{center} 
+\includegraphics[scale=0.95]{figure-23.png}
+\end{center}
+
+It follows that $f^{-1}(y^*)=\bigvee_{i=1}^n x^*$ is the corresponding $A$-subset of $Y'$ as in the above diagram. 
+
+As a result, $f^{-1}(x^*)=yx^*\bigvee_{i=1}^n x^*$, where $x^*:\mathbb{N}^{n+1}\to X$ denotes the canonical map. Note that the image of $B=YZ^*$ of $f$ is equal to the image of $Y'$ of $f^{-1}(yx^*)=\bigvee_{i=1}^n x^*$. It follows that the $B$ induced by $f$ is equivalent to the equivalence class of points in the image of $B$ of $f$. In other words, $B$ is the equivalence class consisting of all the points of the image of $B$ of $f$. 
+
+Thus, the point $x^*=x$ belongs to the $B$ induced by $f$ in the following sense: if we are given $x'=x\in B$, then $x'$ is a direct quotient of $x$ with the map $\overline{x^*}:x^*\to x$. We have seen that $B$ is the equivalence class consisting of the points of the image of $B$ of $f$, and hence $B$ is a bimodule in $(X,\otimes,\cdot)$. We also obtained the following observations. 
+
+\subsubsection{Normality} 
+One of the main benefits of using topological spaces for studying graph topology is that it allows to treat the space as a finite group, i.e., $X$ is a finite group.  Using the fact that $f:YX^*\to XZ^*$ is an $A$-equivariant morphism, we have that $y'=y\in B$ for $f$ if and only if $y'=(y,\cdot)$ belongs to $B$.  Thus, if $y'\in B$, then $y'$ lies in $B$. 
+
+\subsubsection{Anterior and posterior} 
+Some applications of topological spaces for graphs are the study of graph topology, as well as several generalizations of graph topology (for example, in the study of graph isomorphism classes) as the proof of the graph theory of De Witt \cite{DeWitt:1966}. It is interesting to consider two fundamental properties of graphs: the property that each vertex is adjacent to all its adjacent vertices, the property that all edges lie in a circle. In this paper, we will look at these properties as special cases of the latter. In fact, since the former has already been considered in the introduction and that the latter is also a generalization of the circle property in general, we will refer to the definition of $B$ as a special case of $f$. 
+
+First, note that the adjacency relation is defined on $Y^*$ and $X^*$, while the radius is defined on $Y$ and $X$: 
+
+\begin{align*}
+    d_{ij}:=|\{y_i,\ y_j\}|\\
+    r_{ij}:=|\{xy_i,\ xz_j\}|
+\end{align*}
+In fact, we will define the adjacency relation on $Y^*$ and $X^*$ as follows: 
+
+\begin{center} 
+\includegraphics[scale=0.95]{figure-26.png}
+\end{center}
+
+Notice that $d_{ij}=d_{ji}-d_{ji}$ in the diagram above, and $r_{ij}=r_{ji}-r_{ji}$ as in the diagram above. The point $x^*=x$ belongs to $B$ if and only if $x^*(0)=0$ for every $x^*(z)=xy^*(z)$ for every $z\in Z$. Thus, if $x\in B$, then $x^*\in B$ for every $x^*:\mathbb{Z}^{n+1}\to X$. In other words, if $y'$ lies in $B$, then $y'^*\in Y^*$ belongs to $B$ as well. The latter property holds because $f$ is $A$-equivariant. 
+
+In summary, we have the following main theorem. 
+
+\begin{theorem}[Graph topology in general] \label{graphtopology}
+Let $(A,\otimes,\cdot)$ be a finite abelian group. Suppose that $X$ is a finite $A$-subset of $\mathbb{Z}^{n+1}$. Then $X$ is a $n$-dimensional subspace of $\mathbb{Z}^{n+1}$ and hence has the topology of a finite group. 
+\end{theorem}
+
+This theorem extends to the case of any abelian group, but we will restrict ourselves to finite abelian groups in this paper. Moreover, we will use the special cases of the adjunction between $X$ and $Y$ in Definition~\ref{adjunction} to determine a universal property of graphs. We will use this property extensively in Section~\ref{Section5} where we will give some practical examples of how to consider graph topology in this way. 
+
+\begin{remark} \label{remark:topologicalspacesareregular}
+Every space $X$ is a normal subspace of itself whenever it is a normal subspace in $
+\end{document}
+\mathbb{Z}^*$. If $X$ is a regular space, then $X$ is also a normal subspace of itself. Moreover, this is true for any normal subspace $X$, since we have the following characterisation: 
+\begin{enumerate}
+    \item $X^*$ is a normal subspace of itself if and only if $X$ is a subspace of $X^*$. 
+    \item $X^*$ is a normal subspace of itself if and only if the elements of $X^*$ are isomorphic to $0$ for every $x^*:\mathbb{Z}^{n+1}\to X$. 
+\end{enumerate}
+In other words, $X$ is a normal subspace of itself if and only if it is $n$-dimensional in some sense. 
+
+Note that there is no generalization of the notion of regularity for any kind of topological space as long as we consider it as a regular space. In other words, $Y^*$ is a finite $A$-subset of $\mathbb{Z}^{n+1}$ if and only if $Y^*$ is a finite $A$-subset of $\mathbb{Z}^

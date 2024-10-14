@@ -1,0 +1,114 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{The Sheaffification of Finite Groups}
+\author{Max Vazquez}
+\maketitle
+
+
+\section*{Acknowledgments}
+This research was supported by an NBER Grant Number ``F0624352'', a $1$-year study grant number ``F0678983'' and an ANR Award Number ``R72214''. The authors would also like to thank the anonymous referee, Professor Wen Tang for his helpful comments. We also thank all that contributed to this paper in any form including but not limited to other researchers who have contributed to our research. 
+
+
+We are grateful to Max Vazquez for making this work possible at the time of writing, and to Nathaniel Shannon for her support through the use of a high-resolution screen capture. 
+
+\section{Introduction}
+In 1967, <NAME> \cite{Frey1967} studied sheaves on finite groups and sheaves for finite $n$-linear orders. The main motivations for this approach were the interest in developing methods for sheaf theoretic computations with these data. Since then however, some interest has emerged in computing the sheafification of finite groups; it is easy to see why this concept is useful, as shown in the following figure. In particular, we see that the most important and important results (see also \cite{Hovey1996b}) involve working with the sheafification of finite groups. 
+
+\begin{figure}[h]
+    \includegraphics[scale=0.35]{figure/sheaf1967.png}
+    \caption{Example of sheaf computations for finite groups. Note that the most important result for finite groups is the one involving finite orders (the second line), whereas the first line involves finite $m$ linear orders, where $m = 2^r$. } 
+    \label{fig:sheaf607}
+\end{figure}
+
+One of the reasons is that sheaf computations can be conducted using the classical $n$-dimensional group representations of finite groups as well as higher-dimensional algebraic representations of finite groups. However, when attempting to compute the sheafization of finite groups using the group representation of finite groups, the difficulty arises due to the fact that the group representations of finite groups do not have proper coherence maps. Furthermore, this difficulty prevents us from obtaining group representations of finite groups more generally than they are currently used to. For example, taking the representation of the automorphism group $\Aut(G)$ corresponding to the finite group $G$, one obtains its corresponding representation of an automorphism group $\Aut_G(G)$. Therefore, if we try to take as input the group representations of finite groups, which do not have proper coherence maps, we must obtain more general representations of finite groups. This necessitates a change of perspective for this topic. As we will explain in Section \ref{sec:sheaff_of_groups}, we seek to provide a systematic approach to the sheafization of finite groups which avoids such difficulties. 
+
+
+
+Section \ref{sec:sheaff_of_groups} aims at providing a systematic way to obtain sheafizations of finite groups based on their group representations, namely via the sheafifying of finite groups defined in Section \ref{sec:sheafify}. In \cite{Hovey1996b}, Hovey reformulated the sheafification problem in terms of groups and found that the most natural approximation to the $n$-dimensional $Bousfield--Tambara--Shah algebras$ of $\Aut_G(G)$ is obtained via the sheafifying of finite groups. However, it remains to be known whether this technique fails to give the most natural result as shown in \cite{Hovey1996b}, or if there exists a better approach for sheafifying finite groups. One of the main advantages of using group representations to obtain sheaf theories of finite groups is that the sheaf of a finite group is the same as its sheaf representation, meaning that there are no problems in using group representations to obtain a sheaf theory of finite groups. Furthermore, one could argue that there are already many approaches to the sheafification of finite groups (as discussed in previous sections). To sum up, we believe that the current approach does not provide sufficient grounds to justify a new approach for sheafizing finite groups and is thus worth considering in future work.  
+
+\section{Preliminaries}\label{sec:preliminaries}
+
+Let $k$ be a field and let $V_k(\mathbb{Q})$ denote the vector space of $k$-vectors. For each finite group $G$, define the \textbf{group actions}
+\[
+A: V_k(\mathbb{Q}) \otimes G \to G,  
+\]
+where the inner product is defined via matrix multiplication. For every finite $m \in \Z$, define the matrix action
+\[
+M: M_{m}^{k, k} \to M_{m},   
+\]
+where $(M_{m}^{k,k})_{i, j}$ are the elements of the $m \times m$ matrix whose entries are given by $\overline{1}_{i, j} := e^{-\frac{2\pi i}{m}}$ and $\overline{0}_{i, j} := \begin{cases} 0 & \text {if } 0 < i \leq j \leq m \\ \frac{2\pi i - \sqrt{2}}{\sqrt{2}m} & \text {else } \end{cases}$, where the outer entry $(1+i)^j \cdot M_{j, j} = e^{-j^2}$. 
+
+\begin{defi} \label{def:finiteness}
+Let $G$ be a finite group and let $E = \left\{ e^{(ix)}_{j} \mid i \in I,\ j \in J \right\}$ be an $E \in V_k(\mathbb{Q})^m$, where $I$ and $J$ are non-empty sets. An element $e \in E$ called an $e$-weighting for $G$ is called a $G$-weighting for $E$ if it is equal to $\overline{1}_{i, i}e + \overline{0}_{i, i}e^2$ for every $i \in I$. Recall that $e \cdot x + y = e$ implies that $x + y = e$ for all $x,y \in V_k(\mathbb{Q})$. 
+
+The \textbf{finiteness} of $E$ is then defined by $\Fin(E) := \left\{ e \mid e \in E \right\}$, where the union is over all $e \in E$ satisfying the finiteness property. We say that a finitely generated $V_k(\mathbb{Q})$-module $M$ is called a \textbf{$V_k(\mathbb{Q})$-finite module} if $M \in V_k(\mathbb{Q})^{m}$. If $X$ and $Y$ are two $V_k(\mathbb{Q})$-finite modules, then $X + Y = M$ implies that $X = M$ and $Y = M$. The set of $V_k(\mathbb{Q})$-finite modules over an abelian group is denoted by $\FPMod(G)$.
+\end{defi}
+
+
+
+If $G$ is a finite group, then the identity $1 \in G$ is the only element of its group action $A_1$, because $1 = A_1(1) = A_1(1) = 1$, and similarly, the zero element $0 \in G$ is the only element of its group action $A_0$, since $0 = A_0(0) = A_0(0) = 0$. Similarly, the identity $1 \in V_k(\mathbb{Q})^{0}$ is the only element of its matrix action $M_{0,0}$ because $0 = M_{0,0}(0) = 0 = M_{0,0}(1)$. The finiteness condition is essentially equivalent to saying that every element of an $E$-weighting is necessarily a $G$-weighting for an $E$-object. This means that we can formally extend the finiteness condition for finite groups to include the finiteness conditions for finite objects in the sense of Definition \ref{def:finiteness}. 
+
+
+
+
+
+
+For finite groups, we typically consider the \textbf{matrix of finite $n$-linear orders}:
+\[
+M_{n}^{k, k} = \begin{pmatrix}
+e^{\frac{2\pi n \pi k}{n!}}, & 0, &  0,\\
+0, e^{\frac{2\pi n \pi k}{n!}}, & 0, & -e^{\frac{2\pi k}{n}},\\
+0, 0, e^{\frac{2\pi n \pi k}{n!}}, & -e^{\frac{2\pi k}{n}}, \\
+0, 0, 0, e^{\frac{2\pi k}{n}}.
+\end{pmatrix}.
+\]
+
+
+
+
+Recall that the multiplication $e^{\frac{2\pi i}{m}}\cdot M_{i, j} = \begin{cases} e^{\frac{2\pi i + \sqrt{2}i}{n!}}, & 0 < i \leq j \leq m \\ 0 & \text { else }. \end{cases}$ is the matrix action of $m \times m$ matrices with entries given by $\overline{0}_{i, j} = 1_{i, j} - e^{-j^2}$ and $\overline{1}_{i, j} = e^{-\frac{2\pi i}{m}}$ for every $i \in \{ 1,\dots, m\}$, and the identity matrices with entries $\overline{1}_{i, i} = 1_{i, i}$ and $\overline{0}_{i, i} = 0_{i, i}$ for every $i \neq j$ and every $i \neq i+1$. Recall that $e^(-n) = 1 \neq e^n$ for $n > 0$, so $M_{n}^{k,k} = e^{\frac{2\pi n \pi k}{n!}}$.
+
+Using this notation, we may define a notion of $\Aut_{G}(G)$ as follows:
+\begin{definition}
+Let $G$ be a finite group. Then the \textbf{$V_k(\mathbb{Q})$-action on $E$}, $\Aut_{G}(G)$, of an $E \in V_k(\mathbb{Q})^{m}$ is defined by 
+\[
+\Aut_{G}(G)(e): V_k(\mathbb{Q})^{m} \otimes G \to V_k(\mathbb{Q})^{m}.
+\]
+Let $\phi$ be a weighting for $E$ and let $A: V_k(\mathbb{Q}) \otimes E \to E$ be a matrix of finite $n$-linear orders. Then the \textbf{$V_k(\mathbb{Q})$-action on $\phi$} on $\Aut_{G}(G)$ is defined by 
+\[
+\Aut_{G}(G) (\phi)(e) = \sum_{i=1}^m A_{i, i}e + \sum_{j=i+1}^m A_{i, j}e^2 = \sum_{j=1}^m \overline{1}_{i, j} \phi(e) + \sum_{j=i+1}^m \overline{0}_{i, j} \phi(e^2).
+\]
+Furthermore, the composition of $A_{i, j} \circ \phi$ with the identity matrix $A_{i, i} = \id_E$ defines an $E$-weighting on $E$, and similarly composition with the identity matrix defines an $E$-weighting on $\phi$. 
+\end{definition}
+
+
+
+
+
+
+
+
+Since the elements of the sheafifying are almost always simple representations, there is a clear relationship between the identity representations and the sheafifying, which was just defined. For finite groups, however, this relation does not exist. However, one might hope to obtain the same result when working with the group representations of finite groups instead. Indeed, while the definition above does define a new notion of sheafifying, it does not completely define the notion of sheafifying itself. This is due to the difficulty of finding suitable representations of finite groups (see \cite{Bourke1967}). However, one may find an appropriate choice of representations to get away with working with sheaf theories. Specifically, if we choose to work with the representations of finite groups and apply the sheafify function, this will produce the correct sheaf theories of finite groups. Therefore, our goal in Section \ref{sec:sheaf_of_groups} is to develop a systematic way to derive appropriate representations of finite groups via the sheafifying of finite groups. In order to do this, we need to make precise a few observations. 
+
+The first observation is that we cannot define the elements of $\Aut_{G}(G)$ via matrix multimultiplying them with $\phi$, without observing the $V_k(\mathbb{Q})$-action on $\phi$ on the matrix $\Aut_{G}(G)$. If we define $A: V_k(\mathbb{Q}) \otimes E \to E$ as defined in Section \ref{def:finiteness}, the resulting matrices do not preserve the $V_k(\mathbb{Q})$-action on $\phi$ on them, and vice versa. To make matters worse, defining $A$ ourselves would not preserve the $V_k(\mathbb{Q})$-action on $\phi$ on them either. Instead, one might wish to simply express $\phi$ as a composition of the $V_k(\mathbb{Q})$-actions on $\phi$, so that $A$ is not affected by the $V_k(\mathbb{Q})$-action on $\phi$. One can achieve this by defining a representation of $\phi$ via $V_k(\mathbb{Q})$-representations, which would allow us to do matrix multiplies without losing the $V_k(\mathbb{Q})$-action on $\phi$. To further complicate matters, let $X$ and $Y$ be two $V_k(\mathbb{Q})$-representations of $\phi$, and consider what they will look like after applying the matrix $\Aut_{G}(G)$ to them. This is often referred to as the \textbf{Koszul duality} of the $V_k(\mathbb{Q})$-representation of $\phi$. Then both the representations would look like the same, as the $V_k(\mathbb{Q})$-representations $(X_{1}, X_{2}), (Y_{1}, Y_{2})$ satisfy $X_{1} + Y_{1} = X_{2}$ and $Y_{1} + X_{2} = Y_{2}$. This is because both $X$ and $Y$ are in Koszul duality. Therefore, we would expect that the representation $(X_{1}, X_{2})$ and $(Y_{1}, Y_{2})$ are different representations of $G$, so that they should be considered separately. 
+
+Another consequence of how matrix multiplication is performed in the case of finite groups, is that we do not need a special form of the matrix of finite $n$-linear orders to define the $V_k(\mathbb{Q})$-representation of $\phi$. For example, if $E = \{ e^{(ix)}_{j} \mid i \in I,\ j \in J\}$ is an $E \in V_k(\mathbb{Q})^m$, then the matrix of finite $n$-linear orders is easily determined as $M_{n}^{k, k} = \begin{pmatrix}
+e^{\frac{2\pi n \pi k}{n!}}, & 0, &  0,\\
+0, e^{\frac{2\pi n \pi k}{n!}}, & 0, & -e^{\frac{2\pi k}{n}},\\
+0, 0, e^{\frac{2\pi n \pi k}{n!}}, & -e^{\frac{2\pi k}{n}}, \\
+0, 0, 0, e^{\frac{2\pi k}{n}}.
+\end{pmatrix}$. One could ask whether this representation corresponds to $G$ or $M$. As illustrated below, it does not seem so:
+\begin{figure}[ht]
+\[
+\includegraphics[scale=0.6]{figure/matrix_sheafifying.png}
+\]
+\caption{An illustration of how the Koszul duality holds for finite groups. Here the leftmost column is of type $G$ and the rightmost column is of type $M$, and the representation corresponding to the $G$ column is written out in the lower part of Figure. } 
+\label{fig:matrix_sheafifying}
+\end{figure}
+
+As illustrated in \cref{fig:matrix_sheafifying}, in both cases, the Koszul duality of $(X_{1}, X_{2})$ and $(Y_{1}, Y_{2})$ yields different representations of $G$. Therefore, it would appear that, unlike when the representations of finite groups are fixed by $X$ and $Y$, they can still be determined independently of $G$. In addition, it is possible to define $\phi$ directly via the representation of finite groups $M$, and the elements of the matrix of finite $n$-linear orders $M$ can be defined as $A_{ij} = e^{2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\
+\end{document}
+pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1)^{i} \sqrt{2\pi i/n} e^{(2\pi \sqrt{-1}/n \left( \sum_{i=1}^{n} (-1

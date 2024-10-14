@@ -1,0 +1,246 @@
+
+\documentclass[a4paper,reqno,oneside]{article}
+\pdfoutput=1
+\include{mathcommands.extratex}
+\begin{document}
+\title{Proof Of the Riemann Hypothesis Using Category Theory}
+\author{Max Vazquez}
+\maketitle
+
+
+\section*{Abstract} 
+We use category theory to study the theory of bialgebraic structures in general categories and construct a novel proof of the Riemann hypothesis for the Bousfield--Vietoris construction. The key idea is that we define a commutative ring $R$ with one action on $\mathbb{C}$ that acts as the right unit, and extend it to a category, and then show that there exist coherence equations between all possible permutations of bialgebraic structures on $R$.  This leads us to find many useful consequences of our main results: for example, one can construct a new construction of the Bousfield--Vietoris construction using the monoidal category of $R$-modules. In particular, this will allow us to prove a new generalization of Eilenberg--Moore and Newton's equation (see \cite{emnew}), which is an invariant in almost any closed algebraic structure. Finally, the equivalence of categories given by $(X_A,\alpha_A)$ and $(Y_B,\beta_B)$ gives rise to a diagrammatic interpretation of both structures and provides another perspective on the notion of a bialgebraic structure on a category. This approach can also be used to find other interesting results about symmetric algebraic structure on a category, such as a construction for symmetric groups and a version of Eilenberg--Moore and Newton's equation that takes into account the symmetry. 
+
+The abstract paper was prepared in partial fulfillment of requirements~\ref{requirements:abstract} and~\ref{requirements:introduction}. There are several revisions available that can be found at~\cite{max2023category}, but the most recent revision is suitable for submission. 
+
+
+
+%%% Beginning of section %%
+\section*{Introduction}  
+\label{sec:introduction} 
+A bialgebraic structure, or \textbf{bialgebraic structure} on a category $X$, is an object in a symmetric monoidal category $M(X)$. We can think of bialgebraic structures as the analogue of an \textit{operad} in the sense that they provide a more abstract notion of an operad than the operations that operate on the objects themselves. A bialgebraic structure has many important applications in areas such as algebraic topology, algebraic mathematics, and quantum mechanics (see e.g.~\cite{emerie2008algebraic}). Among others, the Riemann--Hilbert transform~\cite{riemannhilbert} can be seen as a bialgebraic structure over any category by taking its bimodule; the Lipschitz transformation~\cite{lipschitz} can be seen as a bialgebraic structure over any category by taking its tensor product; the Cech--Frobenius property~\cite{cecenhof} can be viewed as a bialgebraic structure by extending the notion of bimodules to categories; the Yoneda lemma~\cite{yonedayymm} can be seen as a bialgebraic structure through the use of the Yoneda functor, and more generally, in a different direction, the notion of an equivalence can be understood via the Galois connection. For the purposes of the present paper, we take $M(X)=R(X)$, where $R$ is a commutative ring. A bialgebraic structure may be regarded as a special case of a $R$-module as follows: every $R$-module is equipped with a bialgebraic structure defined by the left action of $R$ on itself, and the right unit has trivial Lipschitz inverse and $R$-unit action on itself. Every bialgebraic structure on a category is similarly determined by the left action of that category, but we also consider a formal version in terms of tensor products and Lipschitz maps.
+
+There are several standard examples of bialgebraic structures on various categories: 
+\begin{itemize}
+    \item[$($\bullet$)$] The Bousfield--Vietoris structure on a category $X$:  Given a $R$-module $X$ on a category $X$, we call $X$ the {\it Bousfield--Vietoris category} of $X$ in the sense that it consists of all objects in $X$ equipped with a bialgebraic structure induced by the left unit and the right unit of $R$. One can think of the Bousfield--Vietoris category as simply representing the Bousfield--Vietoris theory over some abelian group. It is in fact not quite a category, because it lacks a product structure, but it is still a category, thanks to a few modifications made by Kapranov~\cite{kapranov}. 
+    \item[$($\bullet$)$] The subcategory of modules over a field $\ZZ$: the Bousfield--Vietoris structure on the category of vectors in the field $\ZZ$ is closely related to the $R$-module structure on the category of finite dimensional rings $R$ over a field $\ZZ$. The $R$-module structure on the category of finite dimensional rings $R$ over a field $\ZZ$ is called the Bausend--Gaitsen--Jones $R$-module structure, though the Bausend--Gaitsen--Jones $R$-module structure is simpler to understand: instead of being a symmetric monoidal category, it is a symmetric monoidal category enriched in a $R$-module category $\Mod(R)$, and hence can be thought of as a tensor category rather than a symmetric monoidal category. We note that these two structures of interest have been studied separately elsewhere: see \cite{bakery1976tensor} and \cite{brinco1973cohomology} for details.
+    \item[$($\bullet$)$] The Bousfield--Vietoris structure on the category of algebras over a field $k$: the Bousfield--Vietoris structure on the category of groups over a field $k$ is again closely related to the Brauer--Vietoris structure on the category of modules over a field $k$. The Brauer--Vietoris structure on the category of modules over a field $k$ is known to be a well-known bialgebraic structure and is equivalent to the Bousfield--Vietoris structure on the category of algebras over a field $k$. 
+    \item[$($\bullet$)$] The Bousfield--Vietoris structure on the category of finite dimensional rings $R$ over a field $k$: the Bousfield--Vietoris structure on the category of finitely generated finitary algebraic varieties over $R$ is again closely related to the Brauer--Vietoris structure on the category of finitely generated algebraic varieties over $R$ (see e.g.~\cite{cockett1984finitely,cockett1988finite,rouget2013cohomological,rouget2020charac}, together with the discussion above). The Brauer--Vietoris structure on the category of finitely generated algebraic varieties over $R$ is known to be a well-known bialgebraic structure and is equivalent to the Bousfield--Vietoris structure on the category of finite dimensional rings $R$ over a field $k$. 
+\end{itemize}
+The purpose of our paper is to show that these three bialgebraic structures form a commutative ring. We first recall the fundamental properties of bialgebraic structures that we need to know to be able to understand the bialgebraic structure of our interest, including the Yoneda lemma, Brauer--Vietoris structure, and Brauer--Vietoris category. Then we discuss a number of main results from this paper that we want to be able to use for the proof of our main result. The first result of this paper will show how the Brauer--Vietoris category is a bialgebraic structure on the category of modules over a field. The second result of this paper will show that the Yoneda lemma is an invariant in almost all bialgebraic structures. The third result of this paper will give a formal description of bialgebraic structure as an algebra morphism, and in particular, it will allow us to construct a new Brauer--Vietoris construction using the monoidal category of $R$-modules. 
+
+
+We start by introducing basic definitions and terminology. Before we talk about the bialgebraic structure in the context of categories, let us recall a few concepts that are essential in understanding our results. We refer the reader to~\cite{caramello2023monoidal} and~\cite{kapranov2020twisted} for additional background material.   
+ 
+\medskip  
+\subsection*{Basic Definitions}
+In Section~\ref{sec:bialgebraicalnotions}, we review basic definitions and terminology that will be needed throughout this article.  
+\medskip  
+
+% Bring in the necessary packages.  
+%\usepackage[utf8]{inputenc}  
+\usepackage{amsmath}  
+\usepackage{amssymb}  
+\usepackage{tikz-cd}  
+
+
+For a monoidal category $\mathcal{C}$, the associated symmetric monoidal category $\mathcal{S}(\mathcal{C})$ is defined to be as follows: 
+\begin{itemize}
+    \item Each object of $\mathcal{S}(\mathcal{C})$ is equipped with a left action $L \colon X \to M(X)$ and a right action $R \colon M(X) \to X$; this is a functor $M \colon \mathcal{C} \to \mathcal{S}(\mathcal{C})$. 
+    \item Let $F \colon X \to Y$ be a natural transformation of categories. For each object $x \in X$, $F(x) \in Y$; since all $F$ are natural transformations, $F$ sends objects of $X$ to objects of $Y$. 
+    \item Given objects $x$ and $y$ of $\mathcal{C}$, we have $\Hom_\mathcal{C}(x, y) = F^{-1}\left(\underbrace{(x, \id, \id)}_{\text{left}}, x \right) \otimes F^{-1}\left((y, \id, \id), y\right)$. The following relations hold:  
+    \begin{enumerate}
+        \item \[ 
+            \Hom_\mathcal{C}(f, g) \cong \Hom_\mathcal{C}(F^{-1}\left(f, x\right), F^{-1}\left(g, y\right))
+            \] 
+        \item \[
+            \Hom_\mathcal{C}(f, g) \circ F_{*} = F_{*}\circ F^{-1}
+            \]
+        \item [\underline{\textnormal{Conservation of identities}}} If $f = id$ and $g = id$, then \[ F\left( f, f \right) = F_{*}\left(f,f \right) \]
+    \end{enumerate}
+\end{itemize}  
+
+
+
+
+\medskip  
+\subsection*{Main Results}
+Our main results will use the bialgebraic notions described above. We begin by defining $R$-modules on a category $X$ equipped with a bialgebraic structure $(X_A,\alpha_A)$ on it. The monoidal category $\Mod(R)$ defines the category $\Mod^{\op}(R)$ of $R$-modules and functors as usual. For the bialgebraic structure to be fully defined on a category $X$ we need to take into account only those objects $x \in X$ that carry a certain amount of information about a $R$-module, e.g. that the $R$-module carries a left $R$-module structure, a right $R$-module structure, or even a counit of a $R$-module structure (note that the right unit of a $R$-module structure does not necessarily uniquely determine a left $R$-module structure). For example, consider the category $\Cat_{R}$ of rings with associativity and multiplication as functors $R(X) \to R(Y)$. To put this picture into perspective, we write the left and right actions of this structure as $(L_R,R_R) \coloneqq (R,\Id)_{X}$. These are the unit and the counit of the coassociative multiplication, respectively, and correspond precisely to the coaction of the right unit on the left and on the right respectively. Thus, the counit and the unit of the coassociative multiplication define a bialgebraic structure on $\Cat_{R}$. Similarly, if one considers the category $\Set$ of sets as functors $S(X) \to S(Y)$, the bialgebraic structure is the $R$-module structure on the category of sets. 
+ 
+Now let $\mathcal{C}$ be a symmetric monoidal category, and let $M \colon \mathcal{C} \to \mathcal{S}(\mathcal{C})$ be a functor. Since all bialgebraic structures on a symmetric monoidal category are isomorphic to functors, there exists a natural equivalence 
+\[ \widehat{\mathcal{S}}\left(\mathcal{C},\mathcal{S}(\mathcal{C})\right) \iso \mathcal{S}_{\mathrm{fp}}(M)\]
+between the categories $\mathcal{S}_{\mathrm{fp}}(M)$ and $\mathcal{S}_{\mathrm{fp}}(M)$. It makes sense to view the functors $\mathcal{C} \to \mathcal{S}^{\mathrm{fp}}(\mathcal{C})$ as being the endofunctors of $M$ (cf.~Remark~\ref{rem:enoughendfunctors}). We then have that there exists a natural isomorphism:
+\[ \mathrm{End}(\mathcal{S}_{\mathrm{fp}}(M)) \iso \widehat{\mathcal{S}}^{\mathrm{fp}}(\mathcal{C},\mathcal{S}(\mathcal{C}))\] 
+between the categories $\mathrm{End}(\mathcal{S}_{\mathrm{fp}}(M))$ and $\mathcal{S}_{\mathrm{fp}}(M)$. This implies that the natural isomorphisms \eqref{eqn:mainlemma} and \eqref{eqn:mainlemma2} commute with the following identity
+\[
+(\mathrm{End}(\mathcal{S}_{\mathrm{fp}}(M))\iso\mathcal{S}^{\mathrm{fp}}(\mathcal{C})\iso \mathrm{End}(\mathcal{C})
+\]
+where $\mathrm{End}$ denotes the endofunctor and $\mathcal{S}^{\mathrm{fp}}$ denotes the full subcategory of $\mathrm{End}$ spanned by the functors on the category level that preserve (up to isomorphism) the counits and units, respectively. The former category corresponds to the endofunctor $R$ while the latter category corresponds to the full subcategory of functors preserving counits and units that only preserve coactions of counits and counits. As mentioned previously, the category $\Mod^{\op}(R)$ is a symmetric monoidal category and so the pair $(M,L_R) \in \mathrm{End}(\mathcal{S}_{\mathrm{fp}}(M))$ uniquely defines a bialgebraic structure on $\mathcal{S}^{\mathrm{fp}}(\mathcal{C})$. Let $C(X)$ denote the category of functors of $X$. To define the bialgebraic structure on $C(X)$, we must first define the unit and the counit of the coassociative multiplication. 
+
+We use the counit and unit of the coassociative multiplication in the definition of the coassociative multiplication as the coaction of the right unit on the left and of the left unit on the right respectively (see \eqref{eqn:counitandunit}). Then, the following equation holds for the coaction and the unit
+\[
+\Hom_\mathcal{C}(C(X), C(Y)) \iso (\mathcal{S}^{\mathrm{fp}}(M))\left(\bigoplus_{n \geq 0}\Bigl\{x^n \in C(X)^n : \sum_{i=0}^{n-1} x^i = \bigoplus_{j=0}^{n-1} y^j\Bigr\},\right).
+\]
+By applying the unit of the coassociative multiplication on the left to the coaction of the right unit on the right we get the equation (\eqref{eqn:unitcounitcounit}). Since $\mathbf{Ext}\left(C(X),C(Y)\right)$ is exactly the coproduct of functors on $X$ over $Y$, this is the same as saying that the coproduct of the actions of the counit and of the unit equals zero. 
+
+
+\medskip
+
+Next we define $R$-modules on the category $\Cat_{R}$. For each object $R$-module $X$ in $\Cat_{R}$ and each arrow $f \colon X \to Y$ in $\Cat_{R}$ as in Definition~\ref{defn:ringmodules}, we define a corresponding object $X_{f}$ and a morphism $f_{X_{f}}$ in $\Cat_{R}$. Notice that the arrows of $\Cat_{R}$ are in bijection with the morphisms of $\Cat_{R}$ that are defined as follows: 
+\begin{itemize}
+    \item Let $f \colon X \to Y$ be a map in $\Cat_{R}$. The arrow $f_{X_{f}}$ should be the unique map that is sending $R$-modules to $R$-modules; in other words, $f_{X_{f}}$ should be an invertible square in $\Cat_{R}$ of $R$-modules. 
+    \item Let $f \colon X \to Y$ be a map in $\Cat_{R}$. The map $f_{X_{f}}$ should be given by the left composite of the arrow $f_{Y}$ along the inclusion $U$ in $\Cat_{R}$. 
+    \item Let $f \colon X \to Y$ be a map in $\Cat_{R}$. The map $f_{X_{f}}$ should be the unique map that is sending $R$-modules to $\Id_Y$. 
+\end{itemize}
+
+Moreover, a morphism of $R$-modules is a square in $\Cat_{R}$ with the following square in $\Cat_{R}$ commuting up to homotopy:
+\[\begin{tikzcd}[column sep = large]
+X_{f} & Y \\
+X_{f'} & Y'
+\arrow["f", from=1-1, to=2-1]
+\arrow["f'", from=1-1, to=1-2]
+\arrow["{f_{X_{f'}}}"', from=1-2, to=2-2]
+\arrow["f", from=2-1, to=2-2]
+\end{tikzcd}\]
+where $X_{f'}$ is defined as the left composite of the morphism $Y'$ along the inclusion $U$ in $\Cat_{R}$. Similarly, a morphism of $R$-modules is the same as a map of $R$-modules that is being sent by the counit of the coassociative multiplication to the unit of the coassociative multiplication. 
+
+
+\medskip  
+
+Using this definition we are now ready to prove our main result. First we need to introduce a commutative ring $R$ as the right unit of a bialgebraic structure $(X_A,\alpha_A)$ on $X$. We choose $R = \mathbb{C}$ (we note that $\mathbb{C}$ is a commutative ring). However, we do not want $R$ to be a commutative ring in the sense that the $\alpha_A$ part of $(X_A,\alpha_A)$ is nonzero. 
+This situation arises when we ask to combine bialgebraic structures together, for example:
+\begin{equation} \label{eqn:mainlemma}
+    \begin{tikzcd}[column sep = small]
+        X_{f} & X_{g} \\
+        X'_{f'} & X'_{g'}
+        \arrow[""{name=0, anchor=center, inner sep=0}, "{f_{X_{f'}}}"]
+        \arrow[""{name=1, anchor=center, inner sep=0}, "{f_{X_{g'}}}", shift right=5]
+        \arrow["\Delta", from=1-1, to=2-1]
+        \arrow["\rho"', from=2-1, to=2-2]
+        \arrow[""{name=2, anchor=center, inner sep=0}, "{g_{X'_{f''}}}"{description}, draw=none, from=0, to=1]
+    \end{tikzcd}
+\end{equation} 
+If $f \neq g$ then $f_{X_{f'}} \neq g_{X'_{f''}}$. Therefore, it would be nice to combine these bialgebraic structures. The main difficulty arises in deciding whether to combine $X_{f}$ and $X'_{f'}$. 
+
+This problem will manifest itself when we define the structure $(X_A,\alpha_A)$ on $X$ and $X'$ and their respective $R$-modules in $\mathcal{S}^{\mathrm{fp}}(\mathcal{C})$. We do this because a $R$-module has an additional structure that is automatically taken into consideration when we apply the bialgebraic structure on a $R$-module, i.e. $\alpha_A \cdot \circ \Lambda$ (see \eqref{eqn:unitandcounit}); the unit of the coassociative multiplication will be automatically taken into account when we apply the bialgebraic structure on a $R$-module (cf.~Definition~\ref{defn:ringmodules}).  
+
+To solve this issue, we introduce a new notation that allows us to deal with this problem without having to worry about adding additional data to the $R$-module structure $(X_A,\alpha_A)$ on $X$ and $X'$. This will be called a \textbf{bimodule structure}, or just a \textbf{bimodule}. 
+
+\begin{defn}
+    Let $\mathcal{C}$ be a symmetric monoidal category. A bimodule structure is an object in $\mathcal{S}^{\mathrm{fp}}(\mathcal{C})$. 
+    An arrow $f \colon X \to Y$ is a map of $R$-modules that is being sent by the counit of the coassociative multiplication to the unit of the coassociative multiplication. 
+
+\end{defn} 
+
+
+
+
+For bimodule structures, the unit and the counit are replaced by the coaction and the counit respectively, respectively, of the counit and of the counit respectively. So we have
+\begin{align*}
+    \Hom_\mathcal{C}(f,f') &= \Hom_\mathcal{C}(R^{X_{f'}}, R^{X_{f}}) \\
+    &= \Hom_\mathcal{C}(R^{X_{f'}}, R^{X_{g'}} ) \\
+    &= \Hom_\mathcal{C}(R^{X_{f'}}, R^{X_{g'}} ).
+\end{align*}
+
+
+Using these definitions, the main goal of this paper is to show that there exists a natural isomorphism \eqref{eqn:mainlemma2} from $\mathcal{S}_{\mathrm{fp}}(M)$ to $\mathrm{End}(\mathcal{C})$ given by the following formula
+\[
+(\mathrm{End}(\mathcal{S}_{\mathrm{fp}}(M)) \iso\mathcal{S}^{\mathrm{fp}}(\mathcal{C})\iso \mathrm{End}(\mathcal{C})
+\]
+which makes sense because in the above equation, $C(X)$ and $C(Y)$ are just functors between categories (that is, a bimodule structure on a category is equivalent to a morphism of categories); and similarly, it makes sense that the coproduct of the counit and of the unit is indeed equal to zero. 
+
+
+We notice that the $R$-module structure that we define on $C(X)$ and $C(Y)$ can be regarded as a morphism of $R$-modules over $X$ and $Y$ as opposed to a $R$-module that carries a structure that is automatically taken into account when we apply the bialgebraic structure on $X$ and $Y$; in other words, a bimodule structure. The reason for this difference is because bimodule structures are easier to work with in general. 
+
+Thus, we now proceed to build the bialgebraic structure on the category of modules over a field, and then to show how it can be related to our goal.
+
+\subsubsection*{General Formulae}
+
+Let $\mathcal{C}$ be a symmetric monoidal category. A bimodule structure is an object in $\mathcal{S}^{\mathrm{fp}}(\mathcal{C})$. 
+An arrow $f \colon X \to Y$ is a map of $R$-modules that is being sent by the counit of the coassociative multiplication to the unit of the coassociative multiplication. 
+
+\begin{itemize}
+    \item For every $R$-module $X$ in $\Cat_{R}$, we define a $R$-module $\langle X \rangle$ on $X$ by setting 
+    \[
+        \langle X \rangle \coloneqq \bigoplus_{x \in X} R^{X_{x}}
+    \] 
+    and for every arrow $g \colon Y \to Z$ in $\mathcal{C}$,
+    \[
+        \langle g \rangle \coloneqq R^{g_{Y}} \circ \Lambda_{Z}. 
+    \]
+
+    \item For every arrow $f \colon X \to Y$ in $\mathcal{C}$, we define a morphism of $R$-modules as the following diagram in $\mathcal{S}^{\mathrm{fp}}(\mathcal{C})$: 
+    \[\begin{tikzcd}[column sep = large]
+    X_{f} & Y \\
+    \langle X \rangle \arrow[""{name=0, anchor=center, inner sep=0}, "{\langle f \rangle}"'] \arrow[""{name=1, anchor=center, inner sep=0}, "{\langle \id \rangle}"'{description}, draw=none, from=0, to=1]
+    \end{tikzcd}\]
+
+Note that the morphisms of $R$-modules are not functors since the counit and the unit are not in $\mathcal{S}^{\mathrm{fp}}(\mathcal{C})$, but rather the actions of counits and of units. For this reason, we do not have to take into account the $R$-modules. 
+    
+\item Since we do not want $R$ to be a commutative ring, we need a new commutative ring $\mathbb{C}$ that is the unit and the counit. Furthermore, we need to define an additional structure on $\mathbb{C}$ called the coassociative unit $u \colon \mathbb{C} \to X_{f}$ in order to combine bialgebraic structures with $\mathbb{C}$. Since $R$ is a commutative ring, $u$ and the unit of the coassociative multiplication are clearly equivalent. But $u$ and the coassociative unit are defined differently from the unit of the coassociative multiplication. That is, both $u$ and the coassociative unit are obtained from the coassociative unit in the bimodule structure and the unit of the coassociative multiplication in the unit of the coassociative multiplication.  This will manifest later on. 
+
+    \item For every $R$-module $X$ in $\mathcal{S}^{\mathrm{fp}}(\mathcal{C})$, we define $X_{u}$ by $\langle u \rangle$ since it is obtained by concatenating a sequence of identities with a morphism of $R$-modules. Hence we need to take into account all morphisms of $R$-modules that are being sent by the counit of the coassociative multiplication to the unit of the coassociative multiplication. 
+
+    Note that the following diagram in $\mathcal{S}^{\mathrm{fp}}(\mathcal{C})$ shows that $u$ is given by the left action of $R$ on the identity: 
+    \[\begin{tikzcd}[column sep = large]
+    \mathbb{C} & X_{f} \\
+    X_{f'} & X_{f}
+    \arrow[""{name=0, anchor=center, inner sep=0}, "{u}"']
+    \arrow[""{name=1, anchor=center, inner sep=0}, "{X_{f'}}"', shift left=4]
+    \arrow["{\langle u \rangle}", from=1-1, to=2-1]
+    \arrow["{\langle g_{X_{f'}} \rangle}", from=2-1, to=2-2]
+    \arrow["{\langle f \rangle}"', from=1-1, to=1-2]
+    \arrow["\rho", from=2-1, to=2-2]
+    \arrow["\Delta"', from=1-2, to=2-2]
+    \arrow["\alpha"', from=1-1, to=2-1]
+    \arrow["\Lambda"', from=1-2, to=2-2]
+    \arrow["\Lambda'", from=1-1, to=1-2]
+    \end{tikzcd}\]
+
+
+In Section~\ref{sec:ringmodules}, we briefly review and discuss $R$-modules in $\mathcal{S}^{\mathrm{fp}}(\mathcal{C})$. We end this section with the following definition: 
+
+\begin{defn}
+    Let $f \colon X \to Y$ be a map in $\mathcal{C}$ and $X_{f} \in \mathcal{S}^{\mathrm{fp}}(\mathcal{C})$ be the $R$-module obtained from $f_{X_{f}}$. We call the $R$-module $(X_{f},\alpha_{X_{f}})$ an \textbf{bimodule} of $X$ under the $R$-module structure on $X$ as the following diagram: 
+    \[\begin{tikzcd}[column sep = large]
+    X_{f} & Y \\
+    \langle X_{f} \rangle \arrow[""{name=0, anchor=center, inner sep=0}, "{\langle f \rangle}"'] \arrow[""{name=1, anchor=center, inner sep=0}, "{\langle \id \rangle}"'{description}, draw=none, from=0, to=1]
+    \end{tikzcd}\]
+    This definition gives a natural way of obtaining the same $R$-module $(X_{f},\alpha_{X_{f}})$ with the coaction and unit of the coassociative multiplication as in the previous definition: 
+    \begin{equation} \label{eqn:definerightunit}
+        \begin{tikzcd}[column sep = small]
+            X_{f} & X_{g} \\
+            X'_{f'} & X'_{g'}
+            \arrow[""{name=0, anchor=center, inner sep=0}, "{f_{X_{f'}}}"']
+            \arrow[""{name=1, anchor=center, inner sep=0}, "{g_{X'_{f''}}}"', shift right=5]
+            \arrow["\Delta", from=1-1, to=2-1]
+            \arrow["\rho", from=2-1, to=2-2]
+            \arrow["\Delta"', from=1-2, to=2-2]
+            \arrow["\alpha"', from=1-1, to=2-1]
+            \arrow["\lambda"', from=1-2, to=2-2]
+            \arrow["\Lambda"', from=1-1, to=1-2]
+        \end{tikzcd}
+    \end{equation}
+\end{defn} 
+
+\begin{prop} \label{prop:definition}
+    Let $\mathcal{C}$ be a symmetric monoidal category. A bimodule structure is an object in $\mathcal{S}^{\mathrm{fp}}(\mathcal{C})$. 
+    An arrow $f \colon X \to Y$ is a map of $R$-modules that is being sent by the counit of the coassociative multiplication to the unit of the coassociative multiplication. 
+    Moreover, if $f \neq g$, then $f_{X_{f'}} \neq g_{X'_{f''}}$. 
+\end{prop}
+
+\begin{proof}
+    By \ref{lem:definerightunit}, there exists an isomorphism between $(X_{f},\alpha_{X_{f}})$ and $(X_{g},\alpha_{X_{g}})$ that makes the following diagram commute: 
+    \[\begin{tikzcd}[column sep = large]
+    X_{f} & Y \\
+    X_{g} \arrow[""{name=0, anchor=center, inner sep=0}, "{f_{X_{g}}}"'] \arrow[""{name=1, anchor=center, inner sep=0}, "{g_{X'_{
+\end{document}
+f''}}}"', shift right=5]
+    \arrow["\Delta", from=1-1, to=2-1]
+    \arrow["\rho", from=2-1, to=2-2]
+    \arrow["\Delta"', from=1-2, to=2-2]
+    \arrow["\alpha"', from=1-1, to=2-1]
+    \arrow["\lambda"', from=1-2, to=2-2]
+    \arrow["\Lambda"', from=1-1, to=1-2]
+    \end{tikzcd}\]
+    Since $f \neq g$, it follows that $f_{X_{f'}} \neq g_{X'_{f''}}$. Since the morphism $\langle f \rangle$ is of the form $R^{g_{Y}} \circ \Lambda_{Z}$ where $Z$ is a finite dimensional Ruler system, there exists a morphism of $R$-modules of the form $R^{g_{Y} \circ R^{U_{Z}}} \circ \Lambda_{Z}$ where $U_{Z}$ is the induced universal homomorphism of $R$-modules
