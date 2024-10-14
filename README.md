@@ -19,6 +19,6 @@ Everything described below is implemented in Fake_Paper_Generator.ipynb.
 
 ### Fine-Tuning and Inference
 
-- **Model Fine-Tuning:** The fine-tuning process leverages LoRA (Low-Rank Adaptation), which reduces the number of trainable parameters from 1.14 billion to just 5.55 million. This makes training more efficient and achievable on a single A100 GPU, with one epoch taking approximately two hours.
+- **Model Fine-Tuning:** The fine-tuned model is hosted on [huggingface](https://huggingface.co/Maxva/mathpaper/blob/main/README.md). The fine-tuning process leverages LoRA (Low-Rank Adaptation), which reduces the number of trainable parameters from 1.14 billion to just 5.55 million. This makes training more efficient and achievable on a single A100 GPU, with one epoch taking approximately two hours.
 
 - **Text Generation:** To generate coherent multi-page papers, I carefully tweaked the inference parameters (temperature, top-k, and top-p sampling). Papers are generated in chunks of 256 tokens at a time, where the model's output is fed back into the next generation step. In the final iteration, a Fill-in-the-Middle suffix of \end{document} is added to ensure the LaTeX can be compiled into a proper PDF.
